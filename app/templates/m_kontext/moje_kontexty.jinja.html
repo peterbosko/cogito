@@ -1,0 +1,105 @@
+{% extends "_main.jinja.html" %}
+
+{% block title %} Zoznam uložených kontextov {% endblock %}
+
+{% block main %}
+    <div class="container padding-topCogito-Menu odsadeny-container">
+    {% if search_term %}
+        <h1>Zoznam mojich kontextov obsahujúcich reťazec : {{search_term}}</h1>
+    {% else %}
+        <h1>Zoznam mojich kontextov :</h1>
+    {% endif %}
+
+    <br/>
+    {% if kontexty %}
+        {% for k in kontexty %}
+                <div class="card card-body bg-light marginbottom20">
+                    <div class="row">
+                        <div class="col-sm-8 marginbottom10">
+                            <h2><a class="kontext-link" href="{{ url_for("kontext.kontexty")+k.id|string}}">{{k.nazov }} </a></h2>
+                        </div>
+                        <div class="col-sm-4 marginbottom10">
+                            <div class="float-right">
+                                {% if k.mam_prava() %}
+                                <button type="button" onclick="ZmazKontext({{k.id}});" class="btn btn-cogito marginbottom5"><i class="fa fa-trash"></i> Zmazať</button>
+                                {% endif %}
+                                <button type="button" onclick="DopytujKontext({{k.id}});" class="btn btn-cogito marginbottom5"><i class="fa fa-question"></i> Otázky</button>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <p> {{ k.text | truncate(560) }} </p>
+                        </div>
+                    </div>
+                </div>
+        {% endfor %}
+
+        <nav aria-label="Page navigation" style="margin-top:20px">
+        <ul class="pagination pg-blue justify-content-center" style="margin-bottom: 0">
+        <li class="page-item  {% if not paginate.has_prev %}disabled{% endif %}">
+            <a  class="page-link" tabindex="-1" href="{{url_for("kontext.moje_kontexty", page=paginate.prev_num)}}">Predchádzajúca</a>
+        </li>
+        {%- for page in paginate.iter_pages() %}
+            {% if page %}
+                {% if page != paginate.page %}
+                    <li class="page-item"><a class="page-link" href="{{ url_for("kontext.moje_kontexty", page=page) }}"> {{page }} </a></li>
+                {% else %}
+                    <li class="page-item disabled"><a class="page-link" href="{{ url_for("main.uvod", page=page) }}">{{page }}</a> </li>
+                {% endif %}
+            {% else %}
+                <li class="page-item disabled"> <a class="page-link" href="{{ url_for("kontext.moje_kontexty", page=page) }}">...</a> </li>
+            {% endif %}
+        {%- endfor %}
+
+        <li class="page-item  {% if not paginate.has_next %}disabled{% endif %} marginbottom10">
+            <a  class="page-link" tabindex="-1" href="{{url_for("kontext.moje_kontexty", page=paginate.next_num)}}">Nasledujúca</a>
+        </li>
+        </ul>
+        </nav>
+
+    {% else %}
+        <p> Žiadne kontexty :( </p>
+    {% endif %}
+        <div class="col-xs-3">
+            <a class="btn btn-primary" style="margin: 0 0" id="btn_AddContext" href="{{ url_for("kontext.pridat_kontext") }}" role="button">Pridať kontext</a>
+        </div>
+    </div>
+</div>
+<script>
+    function DopytujKontext(id){
+        window.location.replace("{{url_for("kontext.dopytuj_kontext")}}"+"?kontext_id="+id);
+    }
+
+    function zmaz(id){
+        var result=AjaxMethods.getDataFromGetRequest('/zmaz_kontext/', id, '',
+            function (r){
+                if (r.status==responseOK){//OK vetva
+                    swal({ buttons: {},
+                               title  :  "Úspech",
+                               text   :  "Článok bol vymazaný",
+                               icon   :  "success"}).then(function(result) {
+                                                        window.location.replace("{{url_for("kontext.kontexty")}}");
+                                                      });
+                } else{
+                    swal({ buttons: {},
+                        title  :  "Chyba",
+                        text   :  r.error_text,
+                        icon   :  "error"});
+                }
+            });
+    }
+
+    function ZmazKontext(id){
+        swal({
+            title: "Potvrdenie",
+            text: "Naozaj zmazať kontext?",
+            icon: "warning",
+            buttons: ["Zrušiť","Zmazať"],
+            dangerMode: true,
+            }).then((willDelete) => {
+                if (willDelete) {
+                    zmaz(id);
+                }
+            });
+    }
+</script>
+{% endblock %}

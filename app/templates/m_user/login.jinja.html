@@ -1,0 +1,91 @@
+{% extends "_main.jinja.html" %}
+{% block title %}Prihlásenie do systému{% endblock %}
+{% block main %}
+<div class="container padding-topCogito-Menu" style="max-width:400px">
+<form id="LoginForm" class="text-center"  method="post">
+
+<div class="logRegForm">
+
+    <p class="h4">Prihlásenie</p>
+
+    <!-- Email -->
+    <div class="col-sm-12" style="margin-top:40px;">
+        <input type="email" id="defaultLoginFormEmail" name="email" class="form-control" placeholder="E-mail"
+               data-fv-row=".col-sm-12" data-fv-notempty="true" data-fv-notempty-message="Email je povinný" data-fv-emailAddress-message="Zadajte korektný email">
+    </div>
+
+    <br/>
+
+    <!-- Password -->
+    <div class="col-sm-12">
+        <input type="password" id="defaultLoginFormPassword" name="heslo" class="form-control" placeholder="Heslo" data-fv-row=".col-sm-12"
+               data-fv-notempty="true" data-fv-notempty-message="Heslo je povinné">
+    </div>
+
+    <br/>
+
+    <div class="d-flex justify-content-around">
+        <div>
+            <!-- Remember me -->
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
+                <label class="custom-control-label" for="defaultLoginFormRemember">Pamätať si</label>
+            </div>
+        </div>
+        <div>
+            <!-- Forgot password
+            <a href="">Zabudnuté heslo</a>
+            -->
+        </div>
+    </div>
+
+    <!-- Sign in button -->
+    <button class="btn btn-primary btn-block my-4" type="button" onclick="login(); return false;">Prihlásiť</button>
+
+    <!-- Register -->
+    <p>Nemáte účet?
+        <a href="{{url_for("user.registracia")}}">Registrácia</a>
+    </p>
+</div>
+</form>
+
+</div>
+
+<script>
+function login(){
+
+    var data={};
+    data.email=$("#defaultLoginFormEmail").val();
+    data.heslo=$("#defaultLoginFormPassword").val();
+    data.permanent=$("#defaultLoginFormRemember").prop('checked');
+
+    AjaxMethods.getDataFromPostRequest('{{url_for("user.login")}}', "", data, function(r){
+        if (r.status==responseOK){//OK vetva
+            swal({ buttons: {},
+                   title  :  "Úspech",
+                   text   :  "Boli ste úspešne prihlásený",
+                   icon   :  "success"}).then(function(result) {
+                                                location.reload();
+                                              });
+        } else{
+            swal({ buttons: {},
+                   title  :  "Chyba",
+                   text   :  r.error_text,
+                   icon   :  "error"});
+
+        }
+    });
+}
+
+$(document).ready(function() {
+    $('#LoginForm').formValidation();
+    $(window).keydown(function(event){
+        if(event.keyCode == 13) {
+            event.preventDefault();
+            return false;
+        }
+    });
+});
+
+</script>
+{% endblock %}

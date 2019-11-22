@@ -1,0 +1,52 @@
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <table class="table table-striped table-bordered" style="width:100%" id="zoznam_intencii_ramca">
+                    <thead>
+                        <tr>
+                            <th>Typ</th>
+                            <th>Predložka</th>
+                            <th>Gr. pád</th>
+                            <th>Sém. príznak</th>
+                            <th>Sém. pád</th>
+                            <th>Fl</th>
+                        </tr>
+                    </thead>
+                <tbody>
+                </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+<script>
+
+    function nacitajISP(){
+        $('#zoznam_intencii_ramca').DataTable().ajax.reload();
+    }
+
+    $("#zoznam_intencii_ramca").DataTable({
+        responsive: true,
+        serverSide: true,
+        processing: true,
+        searching: false,
+        language: {
+           url : "{{ url_for("static", filename="js/datatables_slovak.json") }}"
+        },
+        dom : '<<"row"<"col-sm-12"tr>><"row"<"col-lg-4 col-md-6"i><"col-lg-4 col-md-6"l><"col-lg-4 col-md-6"p>>>',
+        ajax: {
+            url : "{{ url_for("metadata.daj_intencie_ramca") }}",
+            data : function ( d ) {
+                d.ramec_id = '{{request.args.get("ramec_id")}}';
+            },
+        },
+        columns: [
+            { data: "typ" },
+            { data: "predlozka" },
+            { data: "pad" },
+            { data: "sem_priznak" },
+            { data: "sem_pad" },
+            { data: "fl" },
+        ],
+        });
+</script>
+

@@ -1,0 +1,108 @@
+{% extends "_main.jinja.html" %}
+{% block title %}Prihlásenie do systému{% endblock %}
+{% block main %}
+<div class="container padding-topCogito-Menu" style="max-width:400px">
+<form id="RegForm" class="text-center" data-fv-framework="bootstrap">
+
+<div class="logRegForm">
+
+    <p class="h4 mb-4">Registrácia</p>
+
+    <!-- First name -->
+    <div class="col-xs-12">
+        <input type="text" id="defaultRegisterFormFirstName" name="meno" class="form-control" placeholder="Meno" data-fv-row=".col-xs-12"
+        data-fv-notempty="true" data-fv-notempty-message="Meno je povinné">
+    </div>
+
+    <!-- Last name -->
+    <br>
+
+    <div class="col-xs-12">
+        <input type="text" id="defaultRegisterFormLastName"  name="priezvisko" class="form-control" placeholder="Priezvisko" data-fv-row=".col-xs-12"
+        data-fv-notempty="true" data-fv-notempty-message="Priezvisko je povinné">
+    </div>
+    <br>
+
+    <!-- E-mail -->
+    <div class="col-xs-12">
+        <input type="email" id="defaultRegisterFormEmail" class="form-control" placeholder="E-mail" name="email" data-fv-row=".col-xs-12"
+        data-fv-notempty="true" data-fv-notempty-message="Email je povinný" data-fv-emailAddress-message="Zadajte korektný email">
+    </div>
+    <br>
+
+    <!-- Password -->
+    <div class="col-xs-12">
+        <input type="password" id="defaultRegisterFormPassword" name="password" class="form-control" name="password" placeholder="Heslo" aria-describedby="defaultRegisterFormPasswordHelpBlock"
+        data-fv-row=".col-xs-12"
+        data-fv-notempty="true" data-fv-notempty-message="Heslo je povinné">
+    </div>
+    <br>
+
+    <!-- Password -->
+    <div class="col-xs-12">
+        <input type="password" id="defaultRegisterFormRepeatPassword" class="form-control" name="repeat_password" placeholder="Zopakujte heslo" aria-describedby="defaultRegisterFormPasswordHelpBlock"
+        data-fv-row=".col-xs-12"
+        data-fv-notempty="true" data-fv-notempty-message="Heslo je povinné"
+        data-fv-identical="true" data-fv-identical-field="password" data-fv-identical-message="Heslo a zopakovanie hesla musia byť zhodné"
+        >
+    </div>
+    <br>
+
+    <!-- Sign up button -->
+    <button class="btn btn-primary my-4 btn-block" type="submit" onclick="register(); return false;">Registrovať</button>
+
+</div>
+</form>
+</div>
+<script>
+function register(){
+    $('#RegForm').data('formValidation').validate();
+    var formIsVald = $('#RegForm').data('formValidation').isValid();
+
+    if (formIsVald) {
+    var data={};
+    data.id=0;
+    data.meno=$("#defaultRegisterFormFirstName").val();
+    data.priezvisko=$("#defaultRegisterFormLastName").val();
+    data.email=$("#defaultRegisterFormEmail").val();
+    data.heslo=$("#defaultRegisterFormPassword").val();
+    data.nove_heslo=data.heslo;
+    data.permanent=false;
+
+    AjaxMethods.getDataFromPostRequest('{{url_for("user.user_pridaj_zmen")}}', "", data, function(r){
+        if (r.status==responseOK){//OK vetva
+            swal({ buttons: {},
+                   title  :  "Úspech",
+                   text   :  "Používateľ bol úspešne vytvorený",
+                   icon   :  "success"}).then(function(result) {
+                                                window.location.replace("{{url_for("user.login")}}");
+                                              });
+        } else{
+            swal({ buttons: {},
+                   title  :  "Chyba",
+                   text   :  r.error_text,
+                   icon   :  "error"});
+
+        }
+    });
+    }
+    else{
+        swal({ buttons: {},
+                   title  :  "Chyba",
+                   text   :  "Chyba validácie. Skontrolujte červené položky",
+                   icon   :  "error"});
+    }
+}
+
+$(document).ready(function() {
+    $('#RegForm').formValidation();
+    $(window).keydown(function(event){
+        if(event.keyCode == 13) {
+            event.preventDefault();
+            return false;
+        }
+    });
+});
+</script>
+
+{% endblock %}

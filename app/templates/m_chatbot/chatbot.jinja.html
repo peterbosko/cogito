@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Cogito bot</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="https://unpkg.com/botui/build/botui.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/botui/build/botui-theme-default.css" />
+    <script src={{url_for("static", filename="js/jquery-3.3.1.min.js")}}></script>
+    <script src={{url_for("static", filename="js/main.js")}}></script>
+    <script src={{url_for("static", filename="js/sweetalert.min.js")}}></script>
+</head>
+    <style>
+      .botui-actions-text-submit{
+          display : none;
+      }
+    </style>
+
+<body>
+
+  <div class="botui-app-container" id="dopytovanie_kontextu">
+      <bot-ui></bot-ui>
+  </div>
+  <script src="https://cdn.jsdelivr.net/vue/latest/vue.min.js"></script>
+  <script src="https://unpkg.com/botui/build/botui.js"></script>
+  <script>
+
+    var botui = new BotUI('dopytovanie_kontextu');
+    var otazka = "";
+
+    botui.message
+      .bot('Víta Vás Cogito bot! Na úvod si prosím vyberte z nasledovného menu:')
+      .then(function () {
+        return botui.action.button({
+          delay: 1000,
+          addMessage: false, // so we could the address in message instead if 'Existing Address'
+          action: [{
+            text: 'Poskytnúť informácie o práci s dopytovaním',
+            value: 'info'
+          }/*, {
+            text: 'Pozrieť príklady úspešných otázok k tomuto kontextu',
+            value: 'priklady'
+          }*/, {
+            text: 'Položiť otázku',
+            value: 'otazka'
+          }]
+        })
+    }).then(function (res) {
+      if(res.value == 'info') {
+        botui.message.human({
+          delay: 500,
+          content: res.text
+        });
+        end();
+      } else if (res.value == 'otazka') {
+        botui.message.human({
+          delay: 500,
+          content: res.text
+        });
+        Odpovedz("Odpovedanie na otázky zatiaľ nie je implementované");
+      }
+    });
+
+    var Odpovedz = function (odpoved) {
+      botui.message
+        .bot({
+          delay: 0,
+          content: odpoved
+        })
+        .then(function () {
+          return botui.action.text({
+            delay: 0,
+            action: {
+              size: 23,
+              icon: 'question',
+              value: '',
+              placeholder: 'Otázka'
+            }
+          })
+        }).then(function (res) {
+            //data = {};
+            //data.otazka = res.value;
+            //data.kontext = parent.GetCKEditorHtml();
+//                Odpovedz("Ľutujem, ale odpovedanie na otázky zatiaľ nie je implementované");
+      /*
+            AjaxMethods.getDataFromPostRequest('{{url_for("chatbot.odpovedz_na_otazku")}}', "", data, function(r){
+                if (r.status==responseOK){//OK vetva
+                  Odpovedz(r.data);
+                } else{
+                    swal({ buttons: {},
+                       title  :  "Chyba",
+                       text   :  r.error_text,
+                       icon   :  "error"});
+
+                }
+            });*/
+
+        });
+    }
+
+  </script>
+
+  </body>
+
+</html>

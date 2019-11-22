@@ -1,0 +1,5 @@
+﻿cit_ach_1>kmen((ach , 1),nil,cit,cat(cit,cit)).:752:
+cit_ahoj_1>kmen((ahoj , 1),nil,cit,cat(pozdr,x)).:751:
+cit_bum_1>kmen((bum , 1),nil,cit,cat(zvuk,poh)).:445087:
+cit_hľa_1>kmen(('hľa' , 1),nil,cit,cat(vol,upoz)).:16617:
+cit_mňau_1>kmen(('mňau' , 1),nil,cit,cat(zvuk,zvuk)).:43772:

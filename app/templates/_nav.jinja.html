@@ -1,0 +1,86 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item
+        {% if url_for("main.uvod")==request.path %}
+            active
+        {% endif %}">
+        <a class="nav-link" href="{{ url_for("main.uvod") }}">Úvod</a>
+      </li>
+
+      <li class="nav-item dropdown
+        {% if url_for("sd.zoznam_slov") == request.path or url_for("sd.zoznam_pm") == request.path%}
+            active
+        {% endif %}">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Slová</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown04">
+          <a class="dropdown-item" href="{{ url_for("sd.zoznam_slov") }}">Zoznam slov</a>
+          <a class="dropdown-item" href="{{ url_for("sd.zoznam_pm") }}">Podstatné mená</a>
+          <a class="dropdown-item" href="{{ url_for("sd.zoznam_prid_m") }}">Prídavné mená</a>
+          <a class="dropdown-item" href="{{ url_for("sd.zoznam_zamena") }}">Zámená</a>
+          <a class="dropdown-item" href="{{ url_for("sd.zoznam_cislovky") }}">Číslovky</a>
+          <a class="dropdown-item" href="{{ url_for("sd.zoznam_prislovky") }}">Príslovky</a>
+          <a class="dropdown-item" href="{{ url_for("sd.zoznam_slovesa") }}">Slovesá</a>
+          <a class="dropdown-item" href="{{ url_for("sd.zoznam_predlozky") }}">Predložky</a>
+          <a class="dropdown-item" href="{{ url_for("sd.zoznam_spojky") }}">Spojky</a>
+          <a class="dropdown-item" href="{{ url_for("sd.zoznam_castice") }}">Častice</a>
+          <a class="dropdown-item" href="{{ url_for("sd.zoznam_citoslovcia") }}">Citoslovcia</a>
+          <a class="dropdown-item" href="{{ url_for("sd.zoznam_ostatne") }}">Ostatné</a>
+        </div>
+      </li>
+
+      <li class="nav-item dropdown
+        {% if url_for("kontext.kontexty") == request.path or url_for("kontext.moje_kontexty") == request.path%}
+            active
+        {% endif %}">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Kontexty</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+          <a class="dropdown-item" href="{{ url_for("kontext.kontexty") }}">Všetky kontexty</a>
+          {% if session['logged'] %}
+          <a class="dropdown-item" href="{{ url_for("kontext.moje_kontexty") }}">Moje kontexty</a>
+          {% endif %}
+        </div>
+      </li>
+      <li class="nav-item dropdown
+        {% if url_for("metadata.sp") == request.path or url_for("metadata.intencne_ramce") == request.path: %}
+            active
+        {% endif %}">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Metadáta</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+          <a class="dropdown-item" href="{{ url_for("metadata.sp") }}">Sémantické pády</a>
+          <a class="dropdown-item" href="{{ url_for("metadata.intencne_ramce") }}">Intenčné rámce</a>
+          <a class="dropdown-item" href="{{ url_for("metadata.sem_priznaky") }}">Sémantické príznaky</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown
+        {% if url_for("kontext.vsetky_unit_testy") == request.path%}
+            active
+        {% endif %}">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Unit testy</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown03">
+          <a class="dropdown-item" href="{{ url_for("kontext.vsetky_unit_testy") }}">Zoznam testov</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown
+        {% if url_for("user.login") == request.path or url_for("user.registracia") == request.path%}
+            active
+        {% endif %}">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Účet</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown02">
+          <a class="dropdown-item" href="{{ url_for("user.login") }}">Prihlásenie/odhlásenie</a>
+          <a class="dropdown-item" href="{{ url_for("user.registracia") }}">Registrácia</a>
+        </div>
+      </li>
+    </ul>
+
+      <form class="form-inline my-2 my-lg-0 topSearchForm" action="{{ url_for("kontext.kontexty") }}">
+        <input class="form-control mr-sm-3" type="text" name="search_term" placeholder="Hľadať v kontextoch"
+               aria-label="Search"
+               value="{% if search_term: %}{{search_term}}{%endif%}">
+        <button class="btn btn-cogito my-2 my-sm-0" type="submit">Hľadať</button>
+      </form>
+  </div>
+</nav>

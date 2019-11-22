@@ -1,0 +1,138 @@
+{% extends "_main.jinja.html" %}
+{% block title %}Ste prihlásený ako : {{user.meno }} {{user.priezvisko}}{% endblock %}
+{% block main %}
+<div class="container padding-topCogito-Menu" style="max-width:400px">
+<form id="ChangeRegForm" class="text-center" data-fv-framework="bootstrap" method="post">
+
+    <div class="logRegForm">
+
+    <p class="h4 mb-4">Ste prihlásený<br/><br/>Vaše osobné údaje:</p>
+
+    <input type="hidden" id="usrId" name="usrId" value="{{user.id}}"/>
+
+    <!-- First name -->
+    <div class="col-xs-12">
+        <input type="text" id="defaultRegisterFormFirstName" name="meno" class="form-control" placeholder="Meno" data-fv-row=".col-xs-12"
+        data-fv-notempty="true" data-fv-notempty-message="Meno je povinné" value="{{user.meno}}">
+    </div>
+
+    <!-- Last name -->
+    <br>
+
+    <div class="col-xs-12">
+        <input type="text" id="defaultRegisterFormLastName"  name="priezvisko" class="form-control" placeholder="Priezvisko" data-fv-row=".col-xs-12"
+        data-fv-notempty="true" data-fv-notempty-message="Priezvisko je povinné" value="{{user.priezvisko}}">
+    </div>
+    <br>
+
+    <!-- E-mail -->
+    <div class="col-xs-12">
+        <input type="email" id="defaultRegisterFormEmail" class="form-control" name="email" placeholder="E-mail" data-fv-row=".col-xs-12"
+        data-fv-notempty="true" data-fv-notempty-message="Email je povinný" data-fv-emailAddress-message="Zadajte korektný email" value="{{user.email}}">
+    </div>
+    <br>
+
+    <!-- Password -->
+    <div class="col-xs-12">
+        <input type="password" id="defaultRegisterOldPassword" class="form-control" name="old_password" placeholder="Staré heslo" aria-describedby="defaultRegisterFormPasswordHelpBlock"
+        data-fv-row=".col-xs-12">
+    </div>
+    <br>
+
+    <!-- Password -->
+    <div class="col-xs-12">
+        <input type="password" id="defaultRegisterFormPassword" class="form-control" name="password" placeholder="Nové heslo" aria-describedby="defaultRegisterFormPasswordHelpBlock"
+        data-fv-row=".col-xs-12">
+    </div>
+    <br>
+
+    <!-- Password -->
+    <div class="col-xs-12">
+        <input type="password" id="defaultRegisterFormRepeatPassword" class="form-control" name="repeat_password" placeholder="Zopakujte nové heslo" aria-describedby="defaultRegisterFormPasswordHelpBlock"
+        data-fv-row=".col-xs-12"
+        data-fv-identical="true" data-fv-identical-field="password" data-fv-identical-message="Heslo a zopakovanie hesla musia byť zhodné">
+    </div>
+    <br>
+
+    <!-- Sign up button -->
+    <button class="btn btn-primary btn-block" type="button" onclick="ZmenUsera(); return false;">Zmeniť údaje</button>
+    <br>
+
+    <!-- Sign up button -->
+    <button class="btn btn-cogito btn-block" type="button" onclick="logout();">Odhlásiť</button>
+
+    </div>
+</form>
+</div>
+<script>
+function ZmenUsera(){
+
+    $('#ChangeRegForm').data('formValidation').validate();
+    var formIsVald = $('#ChangeRegForm').data('formValidation').isValid();
+
+    if (formIsVald) {
+        var data={};
+        data.id=$("#usrId").val();
+        data.meno=$("#defaultRegisterFormFirstName").val();
+        data.priezvisko=$("#defaultRegisterFormLastName").val();
+        data.email=$("#defaultRegisterFormEmail").val();
+        data.heslo=$("#defaultRegisterOldPassword").val();
+        data.nove_heslo=$("#defaultRegisterFormPassword").val();
+
+        data.permanent=false;
+
+        AjaxMethods.getDataFromPostRequest('{{url_for("user.user_pridaj_zmen")}}', "", data, function(r){
+            if (r.status==responseOK){//OK vetva
+                swal({ buttons: {},
+                   title  :  "Úspech",
+                   text   :  "Používateľ bol úspešne zmenený",
+                   icon   :  "success"}).then(function(result) {
+                                                window.location.reload();
+                                              });
+            } else{
+                swal({ buttons: {},
+                   title  :  "Chyba",
+                   text   :  r.error_text,
+                   icon   :  "error"});
+
+            }
+        });
+    }
+    else{
+        swal({ buttons: {},
+                   title  :  "Chyba",
+                   text   :  "Chyba validácie. Skontrolujte červené položky",
+                   icon   :  "error"});
+    }
+}
+
+function logout(){
+    AjaxMethods.getDataFromGetRequest('{{url_for("user.odhlas_ma")}}', "", "", function(r){
+        if (r.status==responseOK){//OK vetva
+            swal({ buttons: {},
+                   title  :  "Úspech",
+                   text   :  "Boli ste úspešne odhlásený",
+                   icon   :  "success"}).then(function(result) {
+                                                location.reload();
+                                              });
+        } else{
+            swal({ buttons: {},
+                   title  :  "Chyba",
+                   text   :  r.error_text,
+                   icon   :  "error"});
+
+        }
+    });
+}
+$(document).ready(function() {
+    $('#ChangeRegForm').formValidation();
+    $(window).keydown(function(event){
+        if(event.keyCode == 13) {
+            event.preventDefault();
+            return false;
+        }
+    });
+});
+</script>
+
+{% endblock %}

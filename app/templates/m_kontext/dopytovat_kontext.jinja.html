@@ -1,0 +1,175 @@
+{% extends "_main.jinja.html" %}
+{% block title %}Kladenie otázok na kontext{% endblock %}
+{% block main %}
+
+<div class="container padding-topCogito-Menu odsadeny-container">
+    <div class="row">
+        <div class="col-sm-9">
+            <h1>Kladenie otázok na kontext:</h1>
+            <br/>
+            <div class="form-horizontal">
+            <form id="ContextForm" data-fv-framework="bootstrap" method="post">
+                <input type="hidden" name="kt_id" id="kt_id" value="{% if kontext: %}{{kontext.id}}{% else %}0{% endif %}"/>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <span class="col-xs-12">
+                            Názov kontextu:
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                         <input type="text" placeholder="Názov, pomocou ktorého kontext identifikujete" id="txtContextName" name="txtContextName" class="form-control" data-fv-row=".col-sm-12"
+                         data-fv-notempty="true" data-fv-notempty-message="Názov kontextu je povinný"
+                         value="{% if kontext: %}{{kontext.nazov}}{% endif %}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        &nbsp;
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <span class="col-xs-12">
+                            Obsah kontextu:
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                         <textarea rows="50" placeholder="Sem vložte slová - obsah kontextu" id="txtContext" name="txtContext" class="form-control" data-fv-row=".col-sm-12"
+                         data-fv-notempty="true" data-fv-notempty-message="Slová kontextu sú povinné"
+                         >{% if kontext: %}{{kontext.obsah}}{% endif %}</textarea>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+        <div id="chat-content" class="col-sm-3">
+            <iframe id="chat-frame" src="{{url_for("chatbot.chatbot")}}"></iframe>
+        </div>
+    </div>
+</div>
+
+<style>
+
+#chat-content {
+    background: white;
+    overflow: hidden;
+    width: 100%;
+    border: 1px solid #ccc;
+    margin-top:100px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    z-index: 1000;
+}
+
+#chat-content iframe {
+    border: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+</style>
+<script>
+
+function ZmenKontext(redirect){
+
+    $('#ContextForm').data('formValidation').validate();
+    var formIsVald = $('#ContextForm').data('formValidation').isValid();
+
+    if (formIsVald) {
+        var data={};
+        data.id=$("#kt_id").val();
+        data.nazov=$("#txtContextName").val();
+        data.obsah = CKEDITOR.instances['txtContext'].getData();
+        data.text= CKEDITOR.instances['txtContext'].document.getBody().getText();
+
+        AjaxMethods.getDataFromPostRequest('{{url_for("kontext.pridat_kontext")}}', "", data, function(r){
+            if (r.status==responseOK){//OK vetva
+                swal({ buttons: {},
+                   title  :  "Úspech",
+                   text   :  "Kontext bol úspešne pridaný/zmenený",
+                   icon   :  "success"}).then(function(result) {
+                                                $("#kt_id").val(r.data);
+                                                if (redirect)
+                                                    window.location.replace("{{ url_for("kontext.moje_kontexty") }}");
+                                              });
+            } else{
+                swal({ buttons: {},
+                   title  :  "Chyba",
+                   text   :  r.error_text,
+                   icon   :  "error"});
+
+            }
+        });
+    }
+    else{
+        swal({ buttons: {},
+                   title  :  "Chyba",
+                   text   :  "Chyba validácie. Skontrolujte červené položky",
+                   icon   :  "error"});
+    }
+}
+
+    function ChybaAkNepodporovanyBrowser(){
+
+        var isOpera=false;
+        var isChrome=false;
+        var isSafari=false;
+        var isFirefox=false;
+        var isEdge=false;
+        var isIE=false;
+        var isUnknown=false;
+
+        if((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) != -1 )
+        {
+            isOpera = true;
+        }
+        else if(navigator.userAgent.indexOf("Edge") != -1 )
+        {
+            isEdge = true;
+        }
+        else if(navigator.userAgent.indexOf("Chrome") != -1 )
+        {
+            isChrome = true;
+        }
+        else if(navigator.userAgent.indexOf("Safari") != -1)
+        {
+            isSafari = true;
+        }
+        else if(navigator.userAgent.indexOf("Firefox") != -1 )
+        {
+            isFirefox = true;
+        }
+        else if((navigator.userAgent.indexOf("MSIE") != -1 ) || (!!document.documentMode == true )) //IF IE > 10
+        {
+            isIE = true;
+        }
+        else
+        {
+            isUnknown = true;
+        }
+
+        if (!isFirefox&&!isEdge&&!isChrome&&!isOpera){
+              swal({ buttons: {},
+                      title  :  "Chyba",
+                      text   :  'Používate nepodporovaný prehliadač. Niektoré časti stránky nemusia korektne fungovať. Podporované sú Google Chrome, Mozilla Firefox, Microsoft Edge a Opera',
+                      icon   :  "error"})
+        }
+
+    }
+
+$(document).ready(function() {
+    ChybaAkNepodporovanyBrowser();
+    initCKEditorInstance('txtContext',350);
+    $('#ContextForm').formValidation();
+});
+</script>
+{% endblock %}

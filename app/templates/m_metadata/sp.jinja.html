@@ -1,0 +1,109 @@
+{% extends "_main.jinja.html" %}
+{% block title %}Sémantické pády{% endblock %}
+{% block main %}
+    <div class="container-fluid" style="padding-top:80px; margin-bottom:30px;">
+        <div class="row">
+            <div class="col-sm-3">
+                 <div class="well well-light">
+                      <div class="form-horizontal">
+                            <fieldset class="border p-2">
+                                <legend>Vyhľadávanie</legend>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <input id="txtFKod" class="form-control SearchOnChange SearchOnEnter" type="text" placeholder="Vložte kód pádu" aria-label="Search">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <input id="txtFNazov" class="form-control SearchOnChange SearchOnEnter" type="text" placeholder="Vložte názov pádu" aria-label="Search">
+                                    </div>
+                                </div>
+                            </fieldset>
+                       </div>
+                  </div>
+            </div>
+            <div class="col-sm-9">
+                <h1>Zoznam sémantických pádov</h1>
+                <table class="table table-striped table-bordered" style="width:100%" id="zoznam_padov">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Kód</th>
+                            <th>Názov</th>
+                            <th>Počet výskytov v intenciách</th>
+                            <th>Počet slovies</th>
+                        </tr>
+                    </thead>
+                <tbody>
+                </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+<script>
+
+    function spGridFormatter(data, type, row){
+        var i = "<li><a href='javascript:ZoznamIntencii(" + row.id + ",\""+row.kod+"\");' title='Zoznam intencií'><span class='fa fa-eye fa-sm'></span>&nbsp;Zoznam intencií</a></li>";
+        var s = "<li><a href='javascript:ZoznamSlovies(" + row.id + ",\""+row.kod+"\");' title='Zoznam slovies'><span class='fa fa-hands fa-sm'></span>&nbsp;Zoznam slovies</a></li>";
+
+        return gridButtonFormater(i+s, '', true);
+    }
+
+    function bindHladaj() {
+        $('.SearchOnEnter').keypress(function(event) {
+            if (event.keyCode == 13) {
+                nacitajSP();
+            }
+        });
+        $('.SearchOnChange').change(function(event) {
+            nacitajSP();
+        });
+    }
+
+    $(document).ready(function () {
+        bindHladaj();
+    });
+
+    function nacitajSP(){
+        $('#zoznam_padov').DataTable().ajax.reload();
+    }
+
+    function ZoznamIntencii(id, pad){
+        loadTemplateIntoModal('#defaultModal', 'Zoznam intencií sémantického pádu: '+pad, '{{url_for("metadata.intencie_sp")}}?sp='+id);
+    }
+
+    function ZoznamSlovies(id, pad){
+        loadTemplateIntoModal('#defaultModal', 'Zoznam slovies použitých so sémantickým pádom: '+pad, '{{url_for("metadata.slovesa_sp")}}?sp='+id);
+    }
+
+    $("#zoznam_padov").DataTable({
+        responsive: true,
+        serverSide: true,
+        processing: true,
+        searching: false,
+        language: {
+           url : "{{ url_for("static", filename="js/datatables_slovak.json") }}"
+        },
+        dom : '<<"row"<"col-sm-12"tr>><"row"<"col-lg-4 col-md-6"i><"col-lg-4 col-md-6"l><"col-lg-4 col-md-6"p>>>',
+        ajax: {
+            url : "{{ url_for("metadata.daj_sp") }}",
+            data : function ( d ) {
+                d.hladaj_kod = $('#txtFKod').val();
+                d.hladaj_nazov = $('#txtFNazov').val();
+            },
+        },
+        columns: [
+            { data: "id" ,
+                render: function(data, type, row){
+                    return spGridFormatter(data, type, row);
+                }
+            },
+            { data: "kod" },
+            { data: "nazov" },
+            { data: "pocet_intencii"},
+            { data: "pocet_slovies"},
+        ],
+        });
+</script>
+
+{% endblock %}

@@ -1,0 +1,278 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-horizontal">
+            <form id="UnitTestForm" data-fv-framework="bootstrap" method="post">
+                <input type="hidden" name="ut_id" id="ut_id" value="{% if unit_test: %}{{unit_test.id}}{% else %}0{% endif %}"/>
+                <div class="row">
+                    <label class="col-sm-2" for="prepend">
+                         Kontext :
+                    </label>
+                    <div class="col-sm-4">
+                        <select id="ddlKontext" name="ddlKontext" class="form-control" onChange="ZnovuNacitajKontext();">
+                            {% for k in kontexty %}
+                            <option value="{{ k.id }}">{{ k.nazov }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <label class="col-sm-2" for="prepend">
+                            Spustil:
+                    </label>
+                    <div class="col-sm-4">
+                        <input type="text" id="spustil" name="spustil" class="form-control"
+                               value="{{ datum_spustenia }} {{spustil}}"/>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:10px;">
+                    <label class="col-sm-2" for="prepend">
+                         Názov unit testu:
+                    </label>
+                    <div class="col-sm-4">
+                         <input type="text" placeholder="Identifikácia unit testu" id="txtUnitTestName" name="txtUnitTestName" class="form-control" data-fv-row=".col-sm-4"
+                         data-fv-notempty="true" data-fv-notempty-message="Názov unit testu je povinný"
+                         value="{% if unit_test: %}{{unit_test.nazov}}{% endif %}">
+                    </div>
+                    <label class="col-sm-2" for="prepend">
+                            Typ unit testu:
+                    </label>
+                    <div class="col-sm-4">
+                         <select id="ddlUnitTestTyp" name="ddlUnitTestTyp" class="form-control" data-fv-row=".col-sm-4">
+                             <option value="BODKY" {% if unit_test and unit_test.funkcia =="BODKY": %} selected {% endif %}>Bodky v číslach</option>
+                             <option value="R_VETY" {% if unit_test and unit_test.funkcia =="R_VETY": %} selected {% endif %}>Rozbor vety</option>
+                             <option value="OTAZKA" {% if unit_test and unit_test.funkcia =="OTAZKA": %} selected {% endif %}>Otázka</option>
+                         </select>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:10px;">
+                    <label class="col-sm-2" for="prepend">
+                        Poradie:
+                    </label>
+                    <div class="col-sm-4">
+                         <input type="text" placeholder="" id="txtUnitTestPoradie" name="txtUnitTestPoradie" class="form-control" data-fv-row=".col-sm-4"
+                            data-fv-notempty="true" data-fv-notempty-message="Poradie unit testu je povinné" pattern="^[0-9]*$" size="5" maxlength="5"
+                            data-fv-regexp-message="Prosím zadajte poradie unit testu"
+                            value="{% if unit_test: %}{{unit_test.poradie}}{% else %}0{% endif %}">
+                    </div>
+
+                    <label class="col-sm-2" for="prepend">
+                         Stav unit testu:
+                    </label>
+                    <div class="col-sm-4">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <button id="buttonSpustit" class="btn col-sm-12" onclick="SpustitUTAreloadnutStranku();"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:10px;">
+                    <div class="col-sm-12" style="text-align:center;">
+                            <button id='btn0' style="margin-top:5px;" class="btn btn-secondary" onClick="toggle('#unit_test_kontext', this, 'Obsah kontextu');"><i class="fa fa-plus"></i>&nbsp;Obsah kontextu</button>
+                            <button id='btn1' style="margin-top:5px;" class="btn btn-secondary" onClick="toggle('#unit_test_obsah', this, 'Zadanie unit testu');"><i class="fa fa-plus"></i>&nbsp;Zadanie unit testu</button>
+                            <button id='btn2' style="margin-top:5px;" class="btn btn-secondary" onClick="toggle('#unit_test_ocak', this, 'Očakávaný výsledok');"><i class="fa fa-plus"></i>&nbsp;Očakávaný výsledok</button>
+                            <button id='btn3' style="margin-top:5px;" class="btn btn-secondary" onClick="toggle('#unit_test_skut', this, 'Skutočný výsledok');"><i class="fa fa-plus"></i>&nbsp;Skutočný výsledok</button>
+                            <button id='btn4' style="margin-top:5px;" class="btn btn-secondary" onClick="toggle('#unit_test_rozdiel', this, 'Rozdielový dokument');"><i class="fa fa-plus"></i>&nbsp;Rozdielový dokument</button>
+                    </div>
+                </div>
+                <div id="unit_test_kontext" class="row nodisplay">
+                    <label class="col-sm-4" for="prepend">
+                            Kontext
+                    </label>
+                    <div class="col-sm-12">
+                             <textarea rows="3" placeholder="Sem vložte slová - obsah kontextu" id="txtUnitTestKontext" name="txtUnitTestKontext" class="form-control" data-fv-row=".col-sm-12">{% if unit_test: %}{{unit_test.kontext.obsah}}{% endif %}</textarea>
+                    </div>
+                </div>
+                <div id="unit_test_obsah" class="row nodisplay">
+                    <label class="col-sm-4" for="prepend">
+                            Zadanie
+                    </label>
+                    <div class="col-sm-12">
+                             <textarea rows="3" placeholder="Sem vložte slová - obsah otázky unit testu" id="txtUnitTest" name="txtUnitTest" class="form-control" data-fv-row=".col-sm-12">{% if unit_test: %}{{unit_test.zadanie}}{% endif %}</textarea>
+                    </div>
+                </div>
+                <div id="unit_test_ocak" class="row nodisplay">
+                    <label class="col-sm-4" for="prepend">
+                            Očakávaný výsledok
+                    </label>
+                    <div class="col-sm-12">
+                         <textarea rows="10" id="txtUnitTestOcakVysledok" name="txtUnitTestOcakVysledok" class="form-control" data-fv-row=".col-sm-12">{% if unit_test: %}{{unit_test.ocakavany_vysledok}}{% endif %}</textarea>
+                    </div>
+                </div>
+                <div id="unit_test_skut" class="row nodisplay">
+                    <label class="col-sm-4" for="prepend">
+                            Skutočný výsledok
+                    </label>
+                    <div class="col-sm-12">
+                         <textarea rows="10" id="txtUnitTestSkutocnyVysledok" name="txtUnitTestSkutocnyVysledok" class="form-control" data-fv-row=".col-sm-12">{% if unit_test: %}{{unit_test.skutocny_vysledok}}{% endif %}</textarea>
+                    </div>
+                </div>
+                <div id="unit_test_rozdiel" class="row nodisplay">
+                    <label class="col-sm-4" for="prepend">
+                            Rozdielový dokument
+                    </label>
+                    <div class="col-sm-12">
+                         <textarea rows="3" id="txtUnitTestRozdiel" name="txtUnitTestRozdiel" class="form-control" data-fv-row=".col-sm-12">{% if unit_test: %}{{unit_test.rozdiel}}{% endif %}</textarea>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+function SpustitUTAreloadnutStranku(){
+    var ut=$('#ut_id').val();
+    if (ut && ut>0){
+        SpustiUnitTest(ut);
+        PridatZmenitUnitTest(ut);
+    }else{
+       swal({ buttons: {},
+              title  :  "Chyba",
+              text   :  "Najskôr uložte unit test",
+              icon   :  "error"});
+    }
+}
+
+function toggle(id, that, title){
+    if ($(id).hasClass('nodisplay')){
+        $(id).removeClass('nodisplay');
+        $(that).html('<i class="fa fa-minus"></i>&nbsp;'+title);
+    }
+    else{
+        $(id).addClass('nodisplay');
+        $(that).html('<i class="fa fa-plus"></i>&nbsp;'+title);
+    }
+}
+
+function ZmenUnitTest(closeScreen){
+
+    $('#UnitTestForm').data('formValidation').validate();
+    var formIsVald = $('#UnitTestForm').data('formValidation').isValid();
+
+    if (formIsVald) {
+        var data={};
+        data.id=$("#ut_id").val();
+        data.kt_id=$('#ddlKontext').val();
+        data.nazov=$("#txtUnitTestName").val();
+        data.funkcia=$("#ddlUnitTestTyp").val();
+        data.poradie = $('#txtUnitTestPoradie').val();
+        data.zadanie = CKEDITOR.instances['txtUnitTest'].getData();
+
+        var ocakVyslEditor = CKEDITOR.instances['txtUnitTestOcakVysledok'];
+        if (ocakVyslEditor)
+            data.ocakavany_vysledok = ocakVyslEditor.getData();
+        else {
+            data.ocakavany_vysledok = $('#txtUnitTestOcakVysledok').val();
+        }
+
+        var skutocnyVyslEditor = CKEDITOR.instances['txtUnitTestSkutocnyVysledok'];
+        if (skutocnyVyslEditor)
+            data.skutocny_vysledok = skutocnyVyslEditor.getData();
+        else
+            data.skutocny_vysledok = $('#txtUnitTestSkutocnyVysledok').val();
+
+
+        AjaxMethods.getDataFromPostRequest('{{url_for("kontext.pridat_zmenit_unit_test")}}', "", data, function(r){
+            if (r.status==responseOK){//OK vetva
+                swal({ buttons: {},
+                   title  :  "Úspech",
+                   text   :  "Unit test bol úspešne pridaný/zmenený",
+                   icon   :  "success"}).then(function(result) {
+                                                $("#ut_id").val(r.data);
+                                                reloadUnitTests();
+                                                var $modal =  $('#ut_id').parents('.modal');
+                                                if (closeScreen) $modal.modal('hide');
+                                              });
+            } else{
+                   swal({ buttons: {},
+                       title  :  "Chyba",
+                       text   :  r.message_text,
+                       icon   :  "error"})
+            }
+        });
+    }
+    else{
+        swal({ buttons: {},
+                   title  :  "Chyba",
+                   text   :  "Chyba validácie. Skontrolujte červené položky",
+                   icon   :  "error"});
+    }
+}
+
+
+$(document).ready(function() {
+    $('#UnitTestForm').formValidation();
+
+    $('#ddlKontext').val('{{ kontext_id }}');
+    $('#ddlKontext').select2();
+
+    initCKEditorInstance('txtUnitTestKontext',300,'unit_test_kontext');
+    initCKEditorInstance('txtUnitTest',300,'unit_test_obsah');
+
+    if ($('#ddlUnitTestTyp').val()!="R_VETY"){
+        initCKEditorInstance('txtUnitTestOcakVysledok',300,'unit_test_ocak_vysledok');
+        initCKEditorInstance('txtUnitTestSkutocnyVysledok',300,'unit_test_skutocny_vysledok');
+    }
+    else{
+        delete CKEDITOR.instances['txtUnitTestOcakVysledok'];
+        delete CKEDITOR.instances['txtUnitTestSkutocnyVysledok'];
+    }
+
+    initCKEditorInstance('txtUnitTestRozdiel',300,'unit_test_rozdiel');
+
+    CKEDITOR.instances['txtUnitTestKontext'].CogitoEditorType = "kontext";
+
+    var $modal =  $('#ut_id').parents('.modal');
+
+    $modal.find('.btnCancel').removeClass('nodisplay');
+    var $btnSave = $modal.find('.btnSave').removeClass('nodisplay').html("<i class='fa fa-save'></i>&nbsp;Uložiť");
+
+    $btnSave.unbind("click");
+    $btnSave.click(function() {
+        ZmenUnitTest(true);
+    });
+
+    var status='{% if unit_test: %}{{unit_test.status}}{% else %}N{% endif %}';
+    $('#buttonSpustit').addClass(daj_ut_status_class(status)).html(daj_ut_status(status)+ ' - <i class="fa fa-bolt"></i> spustiť znova');
+    ZnovuNacitajKontext();
+
+});
+
+function ZmenKontext(redirect){
+    data = {};
+
+    data.id=$("#ddlKontext").val();
+    data.nazov=$("#ddlKontext option:selected").text();
+    data.obsah = CKEDITOR.instances['txtUnitTestKontext'].getData();
+    data.text= CKEDITOR.instances['txtUnitTestKontext'].document.getBody().getText();
+
+    AjaxMethods.getDataFromPostRequest('{{url_for("kontext.pridat_kontext")}}', "", data, function(r){
+                if (r.status==responseOK){//OK vetva
+                    swal({ buttons: {},
+                       title  :  "Úspech",
+                       text   :  "Kontext bol úspešne pridaný/zmenený",
+                       icon   :  "success"});
+                } else{
+                    swal({ buttons: {},
+                       title  :  "Chyba",
+                       text   :  r.error_text,
+                       icon   :  "error"});
+                }
+    });
+}
+
+    function NastavKontext(id){
+        AjaxMethods.getDataFromGetRequest('{{url_for("kontext.vrat_kontext")}}', '?id='+id, "", function(r){
+            if (r.status==responseOK){//OK vetva
+                CKEDITOR.instances['txtUnitTestKontext'].setData(r.data.obsah);
+            }
+        });
+    }
+
+    function ZnovuNacitajKontext(){
+        NastavKontext($('#ddlKontext').val());
+    }
+
+</script>

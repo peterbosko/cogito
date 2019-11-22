@@ -1,0 +1,63 @@
+{% extends "_main.jinja.html" %}
+{% block title %}Vítaj v Cogite, mysliacej platforme{% endblock %}
+{% block main %}
+      <div class="jumbotron" style="background-color:#e9ecef">
+        <div class="container">
+          <h1 class="display-3">Vitaj, som Cogito. </h1>
+          <p>Experiment s budovaním umelej inteligencie založenej na metadátach o svete.</p>
+          <p><a class="btn btn-primary btn-lg" href="{{url_for("main.popis")}}" role="button">Dozvedieť sa viacej</a></p>
+        </div>
+      </div>
+
+       <div class="container">
+          <div class="row">
+            {% if kontexty %}
+            {% for k in kontexty %}
+                <div class="col-md-3">
+                    <div class="uvod-clanok">
+                        <div class="inner-uvod-clanok">
+                            <h2>{{k.nazov}}</h2>
+                            <p>{{k.text | truncate(200)}}</p>
+                            <p><a class="btn btn-cogito" style="background-color:#6c757d" href="#" onclick="DopytujKontext({{k.id}});" role="button">Klásť otázky&raquo;</a></p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            {% else %}
+                <p> Žiadne kontexty :( </p>
+            {% endif %}
+          </div>
+       </div>
+
+
+    <nav aria-label="Page navigation example" style="margin-top:20px">
+    <ul class="pagination pg-blue justify-content-center">
+        <li class="page-item  {% if not paginate.has_prev %}disabled{% endif %}">
+            <a  class="page-link" tabindex="-1" href="{{url_for("main.uvod", page=paginate.prev_num)}}">Predchádzajúca</a>
+        </li>
+        {%- for page in paginate.iter_pages() %}
+            {% if page %}
+                {% if page != paginate.page %}
+                    <li class="page-item"><a class="page-link" href="{{ url_for("main.uvod", page=page) }}"> {{page }} </a></li>
+                {% else %}
+                    <li class="page-item disabled"><a class="page-link" href="{{ url_for("main.uvod", page=page) }}">{{page }}</a> </li>
+                {% endif %}
+            {% else %}
+                <li class="page-item disabled"> <a class="page-link" href="{{ url_for("main.uvod", page=page) }}">...</a> </li>
+            {% endif %}
+        {%- endfor %}
+
+        <li class="page-item  {% if not paginate.has_next %}disabled{% endif %}">
+            <a  class="page-link" tabindex="-1" href="{{url_for("main.uvod", page=paginate.next_num)}}">Nasledujúca</a>
+        </li>
+    </ul>
+    </nav>
+
+<script>
+
+    function DopytujKontext(id){
+        window.location.replace("{{url_for("kontext.dopytuj_kontext")}}"+"?kontext_id="+id);
+    }
+
+</script>
+{% endblock %}

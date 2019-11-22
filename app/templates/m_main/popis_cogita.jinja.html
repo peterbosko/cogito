@@ -1,0 +1,48 @@
+{% extends "_main.jinja.html" %}
+{% block title %}Popis platformy{% endblock %}
+{% block main %}
+      <div class="jumbotron" style="background-color:#e9ecef">
+        <div class="container">
+          <h1 class="display-4">Cogito. Inteligencia. Inteligencia tvorená a podporená metadátami o svete.</h1>
+          <p>&nbspLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis facilisis at augue in malesuada. Ut pretium turpis luctus lectus lobortis ultrices. Nunc et convallis eros. Donec leo metus, ultricies a erat sit amet, condimentum feugiat urna. Phasellus imperdiet tincidunt turpis. Quisque mollis elit quis quam dictum lobortis. Phasellus et nulla interdum, mattis tellus ut, placerat ex. Suspendisse ac ex quam. Sed mollis libero et turpis sodales, in euismod arcu varius. Donec at velit vitae lorem lacinia efficitur accumsan vel turpis. Phasellus vestibulum sagittis elit ac elementum. Cras congue lorem at nisl ornare, a vestibulum enim ultrices. Sed id augue non tellus bibendum molestie volutpat vitae nulla. Pellentesque vestibulum libero vitae rutrum aliquet. Nunc finibus sagittis congue.
+          </p><p>Donec non arcu rhoncus, sodales erat vel, auctor erat. Donec dapibus accumsan ex, et congue lectus mollis id. Nullam varius, dolor rhoncus tincidunt tincidunt, dolor urna tempor quam, nec congue diam mauris ac lacus. Nulla vel scelerisque nibh, nec tempor velit. Aliquam vel diam lorem. Aenean leo massa, dictum et posuere eget, finibus eu tortor. Donec posuere augue massa, eget convallis quam posuere vel.
+          </p><p>In eget arcu metus. Integer pharetra auctor ullamcorper. Praesent condimentum efficitur mauris, in aliquet ligula sagittis vel. Praesent erat augue, maximus vitae felis ut, pretium facilisis quam. Phasellus accumsan accumsan nunc eu commodo. Nulla ut tincidunt lacus. Curabitur ut efficitur erat. Donec luctus interdum mauris, tristique dictum quam scelerisque vel. Ut eu luctus velit. Nunc ex magna, dapibus laoreet tortor sit amet, egestas faucibus eros. Sed velit libero, elementum id posuere ut, condimentum ut felis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse porta sem non sem suscipit, eget dictum ante laoreet.
+          </p><p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque nisi est, cursus in pretium nec, scelerisque quis velit. Quisque quis ligula eu urna vestibulum tincidunt et at ante. Aliquam arcu ligula, viverra at pretium sed, congue eu lacus. Pellentesque hendrerit suscipit ultrices. Morbi bibendum ligula nulla, id scelerisque nunc egestas quis. Cras at maximus justo, vel ullamcorper leo.
+          </p><p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Morbi ultricies dui non faucibus pulvinar. Mauris mollis sem ut arcu egestas facilisis. Donec vulputate, elit eget pellentesque sodales, ante mauris accumsan nunc, a imperdiet tellus tellus scelerisque felis. Proin varius euismod suscipit. Praesent consequat lorem lorem, ut vehicula enim tincidunt sed. Maecenas iaculis feugiat tortor in sagittis. Curabitur mattis scelerisque turpis, id efficitur tellus ultrices ac. Donec auctor sapien felis, id mollis neque elementum at. Donec porta nisl at tellus malesuada facilisis.</p>
+            <!--
+          <p>Vitajte na portále, ktorý je zasvätený budovaniu inteligencie iným spôsobom ako len strojovým učením.</p>
+          <p>Strojové učenie formou neurónových sietí je oblasť, pomocou ktorej sa bude dať vyriešiť mnoho
+              problémov ľudstva.</p>
+          <p>Strojové učenie a jeho čiastočné úspechy najmä v oblasti spracovávania obrazu, odpútavajú všetku pozornosť
+              výskumníkov práve na výskum v AI ohľadom neurónových sietí.</p>
+          <p>Strojové učenie sa ovšem dá úspešne aplikovať iba v oblastiach, kde je možné použiť mechanizmy supervised
+              (dozorovaného) učenia.</p>
+          <p>Tj. v oblastiach, kde je možné pokusy prakticky nekonečne opakovať s malými zmenami parametrov, ktoré
+              viedli k výsledku - a výsledok správne vyhodnotiť z hľadiska objektívnej metriky, ktorá hodnotí úspešnosť
+              algoritmu.</p>
+          <p>Pokiaľ sa neobjaví nejaký zázračný algorimus, založený na iných princípoch ako supervised learning,
+            ktorý by využil existujúce dáta o ľudstve - napríklad formou stiahnutia textov z internetu, budú relatívne
+            i také na prvý pohľad jednoduché veci ako zmysluplný chatbot, ktorý by prešiel hlbokým viacnásobným
+              Turingovým testom nerealizovateľné.
+          </p>
+          <p>Toto je pokus, ísť na vec z opačného konca.</p>
+          <p>V prvej fáze sa budem snažiť vybudovať bota, ktorý bude vedieť
+              odpovedať na otázku z relatívne jednoduchých viet. Postupným zvyšovaním náročnosti a budovaním
+              komplexnejšieho algoritmu ale aj postupným pridávaním metadát, ktoré budú budovať na širokej databáze
+              všetkých možných slov slovenského jazyka, sa pokúsim vybudovať inteligenciu, ktorá bude schopná
+              porozumieť písanému textu v slovenčine. A takisto porozumieť širokému kontextu dát s ohľadom na metadáta.
+              Ak budem mať v metadátach popísané, že mačka je zviera, ktoré má štyri nohy, trup a hlavu, umožní mi
+              to realizovať oveľa širšie spektrum úloh obsahujúcich toto slovo ako keby som iba z neurónových sietí
+              mal nacvičené možné otázky ohľadom mačiek.
+          </p>
+          <p>Primárnym jazykom projektu je slovenčina - z hľadiska spracovania kontextov i z hľadiska vnútra -
+              programátorských konvencií. Cieľom je potencionálna pozitívna diskriminácia slovenských developerov.
+          </p>
+          <p>Držte mi palce.
+          </p>
+          <p>Peter Boško
+          </p>
+          -->
+        </div>
+      </div>
+{% endblock %}

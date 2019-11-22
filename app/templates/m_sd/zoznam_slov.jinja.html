@@ -1,0 +1,189 @@
+{% extends "_main.jinja.html" %}
+
+{% block title %} Zoznam všetkých slov {% endblock %}
+
+{% block main %}
+    <div class="container-fluid" style="padding-top:80px; margin-bottom:30px;">
+        <div class="row">
+            <div class="col-sm-3">
+                 <div class="well well-light">
+                      <div class="form-horizontal">
+                            <fieldset class="border p-2">
+                                <legend>Vyhľadávanie</legend>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <input id="txtFId" class="form-control SearchOnChange SearchOnEnter" type="text" placeholder="Vložte id slova" aria-label="Search">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <input id="txtFTvar" class="form-control SearchOnChange SearchOnEnter" type="text" placeholder="Vložte celý tvar slova" aria-label="Search">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <input id="txtFSD_ID" class="form-control SearchOnChange SearchOnEnter" type="text" placeholder="Vložte id slovného druhu" aria-label="Search">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <input id="txtFZakTvar" class="form-control SearchOnChange SearchOnEnter" type="text" placeholder="Vložte základný tvar" aria-label="Search">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <select id="ddlFDruh" class="SearchOnChange SearchOnEnter form-control">
+                                            <option value="" selected>Všetky</option>
+                                            <option value="POD_M">Podstatné mená</option>
+                                            <option value="PRID_M">Prídavné mená</option>
+                                            <option value="ZAMENO">Zámená</option>
+                                            <option value="SLOVESO">Slovesá</option>
+                                            <option value="PRISLOVKA">Príslovky</option>
+                                            <option value="CISLOVKA">Číslovky</option>
+                                            <option value="CITOSLOVCE">Citoslovcia</option>
+                                            <option value="CASTICA">Častice</option>
+                                            <option value="SPOJKA">Spojky</option>
+                                            <option value="PREDLOZKA">Predložky</option>
+                                            <option value="OSTATNE">Ostatné</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label><input id="cbAnotovane" class="SearchOnChange SearchOnEnter" type="checkbox" checked="checked">Iba slová s anotáciou</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <input id="txtFAnotacia" class="form-control SearchOnChange SearchOnEnter" type="text" placeholder="Vložte anotáciu slova">
+                                    </div>
+                                </div>
+                            </fieldset>
+                       </div>
+                  </div>
+            </div>
+            <div class="col-sm-9">
+                <h1>Zoznam slov</h1>
+                <table class="table table-striped table-bordered" style="width:100%" id="zoznam_slov">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Id</th>
+                            <th>Tvar</th>
+                            <th>Druh</th>
+                            <th>Zákl. tvar</th>
+                            <th>Rod</th>
+                            <th>Podrod</th>
+                            <th>Pád</th>
+                            <th>Číslo</th>
+                            <th class="none">Osoba</th>
+                            <th class="none">Čas</th>
+                            <th class="none">Spôsob</th>
+                            <th class="none">Stupeň</th>
+                            <th>Zvrat.</th>
+                            <th>Anotácia</th>
+                        </tr>
+                    </thead>
+                <tbody>
+                </tbody>
+                </table>
+                <p>
+                    <button type="button" class="btn btn-primary nodisplay" id="btnPridajSlovo" onclick="PridatSDaSlovo(0);"><i class="fa fa-plus"></i>&nbsp;Pridať nový slovný druh a slovo</button>
+                </p>
+            </div>
+        </div>
+    </div>
+<script>
+    function slovoGridFormatter(data, type, row){
+        var d = "<li><a href='javascript:PridatZmenitSD(" + row.sd_id + ");' title='Detail slovného druhu'><span class='fa fa-eye fa-sm'></span>&nbsp;Detail slovného druhu</a></li>";
+        var e = '';
+        var f = '';
+        var g = '';
+
+        if ('{{som_admin_slov()}}' == 'True'){
+            e = "<li><a href='javascript:PridatZmenitSD(" + row.sd_id + ");' title='Zmeniť slovný druh'><span class='fa fa-pencil-alt fa-sm'></span>&nbsp;Zmeniť slovný druh</a></li>";
+            f = "<li><a href='javascript:ZmazSlovo(" + row.id + ", function(){ nacitajSlova(); });' title='Zmazať slovo'><span class='fa fa-trash-alt fa-sm'></span>&nbsp;Zmazať slovo</a></li>";
+            g = "<li><a href='javascript:ZmazSlovnyDruh(" + row.id + ", function(){ nacitajSlova(); });' title='Zmazať celý slovný druh'><span class='fa fa-trash-alt fa-sm'></span>&nbsp;Zmazať celý slovný druh</a></li>";
+        }
+
+        return gridButtonFormater(d+e+f+g, '', true, "240px");
+    }
+
+    function PridatZmenitSD(id){
+        loadTemplateIntoLargeScreenModal('#defaultModal', 'largescreen', 'Zmena slovného druhu',
+        '{{url_for("sd.zmenit_sd")}}'+'?sd_id='+id);
+    }
+
+    function PridatSDaSlovo(id){
+        if (id==0){
+            loadTemplateIntoModal('#defaultModal', 'Pridanie slova','{{url_for("sd.pridaj_slovo_vyber_sd")}}');
+        }
+    }
+
+    function bindHladaj() {
+        $('.SearchOnEnter').keypress(function(event) {
+            if (event.keyCode == 13) {
+                nacitajSlova();
+            }
+        });
+        $('.SearchOnChange').change(function(event) {
+            nacitajSlova();
+        });
+    }
+
+    $(document).ready(function () {
+        bindHladaj();
+        if ('{{som_admin_slov()}}'=='True'){
+            $('#btnPridajSlovo').removeClass('nodisplay');
+        }
+    });
+
+    function nacitajSlova(){
+        $('#zoznam_slov').DataTable().ajax.reload();
+    }
+
+    $("#zoznam_slov").DataTable({
+        responsive: true,
+        serverSide: true,
+        processing: true,
+        searching: false,
+        language: {
+           url : "{{ url_for("static", filename="js/datatables_slovak.json") }}"
+        },
+        dom : '<<"row"<"col-sm-12"tr>><"row"<"col-lg-4 col-md-6"i><"col-lg-4 col-md-6"l><"col-lg-4 col-md-6"p>>>',
+        ajax: {
+            url : "{{ url_for("sd.daj_slova") }}",
+            data : function ( d ) {
+                d.hladaj_tvar = $('#txtFTvar').val();
+                d.hladaj_zak_tvar = $('#txtFZakTvar').val();
+                d.hladaj_druh = $('#ddlFDruh').val();
+                d.hladaj_iba_anotovane = $('#cbAnotovane').prop('checked');
+                d.hladaj_anotaciu = $('#txtFAnotacia').val();
+                d.hladaj_slovo_id = $('#txtFId').val();
+                d.hladaj_sd_id = $('#txtFSD_ID').val();
+            },
+        },
+        columns: [
+            { data: "id" , render: function(data, type, row){
+                                        return slovoGridFormatter(data, type, row);
+                                    }
+            },
+            { data: "id" },
+            { data: "tvar" },
+            { data: "slovny_druh" },
+            { data: "zak_tvar" },
+            { data: "rod" },
+            { data: "podrod" },
+            { data: "pad" },
+            { data: "cislo" },
+            { data: "osoba" },
+            { data: "cas" },
+            { data: "sposob" },
+            { data: "stupen" },
+            { data: "zvratnost" },
+            { data: "anotacia" },
+        ],
+        });
+</script>
+
+{% endblock %}

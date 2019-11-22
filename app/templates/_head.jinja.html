@@ -1,0 +1,17 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+{# CSS LINKS #}
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/allCss.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/main.css')}}?v=7">
+
+
+{# JS LINKS #}
+<script src="{{url_for('static', filename='js/allJS.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/main.js')}}?v=2"></script>
+<script src="{{url_for('static', filename='js/select2/select2.min.js')}}?v=5"></script>
+<script src='{{url_for("static", filename="ckeditor/ckeditor.js" )}}?v=F'></script>
+{{ fontawesome_html() }}
+
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
+

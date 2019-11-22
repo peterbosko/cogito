@@ -1,0 +1,21 @@
+<div id="treeDivId">
+</div>
+<script>
+    $(document).ready(function(){
+        BindAjaxTree();
+    });
+
+    function BindAjaxTree() {
+        $('#treeDivId').jstree({
+            'core' : {
+                'data' : {
+                    'url' : '{{url_for("metadata.daj_sem_strom")}}?sem_priznak={{request.args.get("sem_priznak", "")}}&smer={{request.args.get("smer", "")}}',
+                    'data' : function (node) {
+                        return { 'id' : node.id };
+                    },
+                    'type' : 'GET',
+                    'dataType' : 'json',
+                }
+            }});
+    }
+</script>

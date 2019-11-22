@@ -1,0 +1,18 @@
+﻿cas_aj_1>kmen((aj , 1),nil,cast,cat(vyt,zdor)).:499262:
+cas_akoby_1>kmen((akoby , 1),nil,cast,cat(uva,zvol)).:499265:
+cas_ale_1>kmen((ale , 1),nil,cast,cat(vyt,pribl)).:499271:
+cas_azda_1>kmen((azda , 1),nil,cast,cat(uva,opy)).:444113:
+cas_chvalabohu_1>kmen((chvalabohu , 1),nil,cast,cat(cit,klad)).:22336:
+cas_iba_1>kmen((iba , 1),nil,cast,cat(vyt,obm)).:499329:
+cas_iste_1>kmen((iste , 1),nil,cast,cat(hodn,ano)).:499334:
+cas_kdežeby_1>kmen(('kdežeby' , 1),nil,cast,cat(hodn,nie)).:499343:
+cas_kiež_1>kmen(('kiež' , 1),nil,cast,cat(uva,zel)).:27936:
+cas_najmä_1>kmen(('najmä' , 1),nil,cast,cat(zdor,ano)).:50001:
+cas_síce_1>kmen(('síce' , 1),nil,cast,cat(uva,pri)).:None:Chýba v db
+cas_takmer_1>kmen((takmer , 1),nil,cast,cat(mier,kraj)).:180122:
+cas_tiež_1>kmen(('tiež' , 1),nil,cast,cat(zahrn,x)).:181893:
+cas_vlastne_1>kmen((vlastne , 1),nil,cast,cat(vyt,vysv)).:200079:
+cas_vraj_1>kmen((vraj , 1),nil,cast,cat(hodn,asi)).:202096:
+cas_však_1>kmen(('však' , 1),nil,cast,cat(uva,pri)).:499480:
+cas_všakže_1>kmen(('všakže' , 1),nil,cast,cat(uva,pob)).:203357:
+cas_žiaľ_1>kmen(('žiaľ' , 1),nil,cast,cat(cit,zap)).:260542:

@@ -1,0 +1,253 @@
+{% extends "_main.jinja.html" %}
+
+{% block title %} Zoznam všetkých unit testov {% endblock %}
+
+{% block main %}
+
+    <div id="progressModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"></h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="bolZrusenyBehUnitTestov" value="0"/>
+                    <div id="myProgress">
+                        <div id="myBar" style="width:0%;">0%</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btnCancel" onClick="$('#bolZrusenyBehUnitTestov').val(1);" data-dismiss="modal">Zrušiť</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid" style="padding-top:80px; margin-bottom:30px;">
+        <div class="row">
+            <div class="col-sm-3">
+                 <div class="well well-light">
+                      <div class="form-horizontal">
+                            <fieldset class="border p-2">
+                                <legend>Vyhľadávanie</legend>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <select id="ddlFKontexty" class="SearchOnChange SearchOnEnter form-control">
+                                            <option value="" selected>Všetky kontexty</option>
+                                            {% for k in kontexty %}
+                                            <option value="{{ k.id }}">{{ k.nazov }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <select id="ddlFFunkcie" class="SearchOnChange SearchOnEnter form-control">
+                                            <option value="" selected>Všetky funkcie</option>
+                                            {% for f in funkcie %}
+                                            <option value="{{ f.funkcia }}">{{ f.funkcia }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <select id="ddlFStatus" class="SearchOnChange SearchOnEnter form-control">
+                                            <option value="" selected>Všetky stavy</option>
+                                            <option value="N">Nové</option>
+                                            <option value="M">Zmenené</option>
+                                            <option value="X">Chybné</option>
+                                            <option value="U">Úspešné</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label for="cbZobrazFarebne">Zobrazovať riadky farebne</label>
+                                        <input type="checkbox" id="cbZobrazFarebne" onclick="reloadUnitTests();"/>
+                                    </div>
+                                </div>
+                            </fieldset>
+                       </div>
+                  </div>
+            </div>
+            <div class="col-sm-9">
+                <h1>Zoznam všetkých unit testov</h1>
+                <table class="table table-striped table-bordered" style="width:100%" id="zoznam_vut">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Kontext</th>
+                            <th>Funkcia</th>
+                            <th>Názov unit testu</th>
+                            <th>Status</th>
+                            <th>Dátum posl. behu</th>
+                            <th>Spustil</th>
+                            <th>Unit test založil</th>
+                        </tr>
+                    </thead>
+                <tbody>
+                </tbody>
+                </table>
+                <div class="row" style="margin-top:20px">
+                    <div class="col-sm-12">
+                        <button class="btn btn-primary" onclick="PridajUT();"><i class="fa fa-plus"></i>&nbsp;Pridať unit test</button>
+                        <button class="btn btn-primary" onclick="SpustiVsetkyUT();"><i class="fa fa-bolt"></i>&nbsp;Spustiť všetky unit testy vyhovujúce filtrom</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+    function SpustiVsetkyUT(){
+        $('#bolZrusenyBehUnitTestov').val(0);
+        $('#progressModal').modal('show');
+        $('#myBar').html('0%');
+    }
+
+    function SpustiVsetkyUTSpusti(){
+        var data={};
+        data.kontext=$("#ddlFKontexty").val();
+        data.funkcia=$("#ddlFFunkcie").val();
+        data.status=$("#ddlFStatus").val();
+        var elem = document.getElementById("myBar");
+
+            AjaxMethods.getDataFromPostRequest('{{url_for("kontext.daj_zoznam_unit_testov_pre_filtre")}}', "", data, function(r){
+                if (r.status==responseOK){//OK vetva
+                    var arrayLength = r.data.length;
+                    var uspesnych = 0;
+                    for (var i = 0; i < arrayLength; i++) {
+                        var ok = SpustiUnitTest(r.data[i], null, true);
+                        if (ok){
+                            uspesnych++;
+                        }
+                        var perc=(((i+1)/arrayLength)*100).toFixed(2);
+                        $('#myBar').html(perc+'%');
+                        $('#myBar').width(perc+'%');
+                        if ($('#bolZrusenyBehUnitTestov').val()=="1")
+                            break;
+                   }
+
+                   if (uspesnych==arrayLength){
+                       swal({ buttons: {},
+                              title  :  "Úspech",
+                              text   :  'Unit testy zbehli OK.Počet úspešných/celkom: '+uspesnych+'/'+arrayLength,
+                              icon   :  "success"}).then(function(result) {
+                                                        elem.style.width = '0' + '%';
+                                                        $('#progressModal').modal('hide');
+                                                        reloadUnitTests();
+                                                      });
+                   }
+                   else{
+                      swal({ buttons: {},
+                            title  :  "Chyba",
+                            text   :  'V unit testoch bola chyba. Počet neúspešných/celkom :'+(arrayLength-uspesnych)+'/'+arrayLength,
+                            icon   :  "error"}).then(function(result) {
+                                                        elem.style.width = '0' + '%';
+                                                        $('#progressModal').modal('hide');
+                                                        reloadUnitTests();
+                                                      });
+                   }
+                } else{
+                    swal({ buttons: {},
+                       title  :  "Chyba",
+                       text   :  r.error_text,
+                       icon   :  "error"});
+                }
+            });
+    }
+
+    function unitTestGridFormatter(data, type, row){
+        var e = "<li><a href='#' onclick='PridatZmenitUnitTest(" + row.id + ");' title='Zmeniť unit test'><span class='fa fa-pencil-alt fa-sm'></span>&nbsp;Zmeniť unit test</a></li>";
+        var f = "<li><a href='#' onclick='ZmazUnitTest(" + row.id + ", function(){ reloadUnitTests(); });' title='Zmazať unit test'><span class='fa fa-trash-alt fa-sm'></span>&nbsp;Zmazať unit test</a></li>";
+        var c = "<li><a href='#' onclick='SpustiUnitTest(" + row.id + ", function(){ reloadUnitTests(); });' title='Spustiť unit test'><span class='fa fa-cogs fa-sm'></span>&nbsp;Spustiť unit test</a></li>";
+
+        return gridButtonFormater(e+f+c, '', true);
+    }
+
+    function bindHladaj() {
+        $('.SearchOnEnter').keypress(function(event) {
+            if (event.keyCode == 13) {
+                reloadUnitTests();
+            }
+        });
+        $('.SearchOnChange').change(function(event) {
+            reloadUnitTests();
+        });
+    }
+
+    $(document).ready(function () {
+        bindHladaj();
+        $('#ddlFKontexty').select2();
+        $('#ddlFFunkcie').select2();
+        $('#ddlFStatus').select2();
+        $('#progressModal').on('shown.bs.modal', function () {
+            SpustiVsetkyUTSpusti();
+        });
+
+    });
+
+    function reloadUnitTests(){
+        $('#zoznam_vut').DataTable().ajax.reload();
+    }
+
+    function unitTestStatusFormatter(data, type, row){
+        return daj_ut_status(data);
+    }
+
+    $("#zoznam_vut").DataTable({
+        responsive: true,
+        serverSide: true,
+        processing: true,
+        searching: false,
+        createdRow : function( row, data, dataIndex){
+            if ($('#cbZobrazFarebne').prop('checked'))
+                $(row).addClass(daj_ut_status_class(data['status']));
+        },
+        language: {
+           url : "{{ url_for("static", filename="js/datatables_slovak.json") }}"
+        },
+        dom : '<<"row"<"col-sm-12"tr>><"row"<"col-lg-4 col-md-6"i><"col-lg-4 col-md-6"l><"col-lg-4 col-md-6"p>>>',
+        ajax: {
+            url : "{{ url_for("kontext.daj_vsetky_unit_testy") }}",
+            data : function ( d ) {
+                d.funkcia = $('#ddlFFunkcie').val();
+                d.kontext = $('#ddlFKontexty').val();
+                d.status = $('#ddlFStatus').val();
+            },
+        },
+        columns: [
+            { data: "id" ,
+              render: function(data, type, row){
+                    return unitTestGridFormatter(data, type, row);
+              }
+            },
+            { data: "kontext" },
+            { data: "funkcia" },
+            { data: "nazov" },
+            { data: "status" ,
+              render: function(data, type, row){
+                    return unitTestStatusFormatter(data, type, row);
+              }
+            },
+            { data: "datum_posledneho_behu" },
+            { data: "spustac_posledneho_behu" },
+            { data: "autor_id" },
+        ]
+        });
+
+    function PridatZmenitUnitTest(id){
+        loadTemplateIntoLargeScreenModal('#defaultModal', 'largescreen', 'Zmeniť unit test',
+        '/pridat_zmenit_unit_test/?ut_id='+id);
+    }
+
+    function PridajUT(id){
+        loadTemplateIntoLargeScreenModal('#defaultModal', 'largescreen', 'Pridať unit test',
+        '/pridat_zmenit_unit_test/?ut_id=0');
+    }
+
+
+</script>
+
+{% endblock %}
