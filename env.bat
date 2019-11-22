@@ -1,2 +1,2 @@
 echo activating env
-c:\python\wcogito\venv\Scripts\activate.bat 
+c:\python\cogito\venv\Scripts\activate.bat 
