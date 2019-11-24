@@ -7,6 +7,3 @@ SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://'+USER+':'+PASSWORD+'@'+HOST+'/'+DB_N
 # &binary_prefix=true"
 
 SQLALCHEMY_TRACK_MODIFICATIONS = False
-
-# SERVER_NAME = "vyvoj.cogito.sk"
-

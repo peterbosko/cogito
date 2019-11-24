@@ -9,5 +9,6 @@ Inštalácia:
 5. Vytvorenie virtualneho environmentu s názvom venv.
 6. Pustenie virt env venv.
 7. Nainštalovanie všetkých packagov vo venv pip install -r requirements.txt
-8. Pustenie flask servera pomocou run.bat
-9. http://localhost/
+8. Vytvorenie súboru congig/config.py podľa templatu config.template.py 
+9. Pustenie flask servera pomocou run.bat
+10. http://localhost/

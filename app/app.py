@@ -13,7 +13,7 @@ flask_app = Flask(__name__)
 fa = FontAwesome(flask_app)
 
 flask_app.secret_key = b'\xa4\x07GU\x9a\x9f\x07\xe3\x7f\xf5v\xbcBx\xcf\xc7\xe0w\xbe\xcd>\xc9\r\x99'
-flask_app.config.from_pyfile("..\\configs\\development.py")
+flask_app.config.from_pyfile("..\\config\\config.py")
 
 flask_app.register_blueprint(main_blueprint)
 flask_app.register_blueprint(kontext_blueprint)

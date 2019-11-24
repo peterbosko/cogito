@@ -250,46 +250,6 @@ def serializuj_pole_slov(pole):
     return vysledok
 
 
-def serializuj_pole_slov(pole):
-
-    vysledok = ""
-
-    i = 0
-
-    for slovo in pole:
-        cl = "s"
-
-        if not slovo.je_v_slovniku:
-            cl = "n"
-
-        if slovo.je_viacej_v_slovniku and not slovo.bolo_vybrate:
-            cl = "m"
-
-        if slovo.neprekl_vyraz:
-            prilep = ""
-
-            if len(pole) > i + 1:
-                prilep = "&nbsp;"
-
-            if slovo.je_cislo:
-                vysledok += str(slovo.neprekl_vyraz) + prilep
-            else:
-                vysledok += slovo.neprekl_vyraz+prilep
-        else:
-            prilep = ""
-
-            if len(pole) > i+1:
-                if not pole[i+1].neprekl_vyraz or pole[i+1].je_cislo:
-                    prilep = "&nbsp;"
-
-            vysledok += "<span class='{cl}' sid='{id}'>{slovo}</span>".format(
-                slovo=slovo.tvar, id=slovo.id_slova, cl=cl)+prilep
-
-        i += 1
-
-    return vysledok
-
-
 def serializuj_pole_slov_do_anotacie(pole):
     vysledok = ""
 
