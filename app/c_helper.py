@@ -74,24 +74,3 @@ def formatuj_datum(dt):
     return ""
 
 
-"""def vyrob_korektne_html_z_editora(html):
-    obsah_p = pq(html).contents()
-
-    result = ""
-
-    for content in obsah_p.items():
-        if content.is_("span"):
-            result += vyrob_korektne_html_z_editora(content.outerHtml())
-        else:
-            text = daj_medzery_pred_specialne_znaky(content.text())
-
-            if pq(html).is_("span"):
-                cl = pq(html).attr("class")
-                sid = pq(html).attr("sid")
-                result += "<span class='{cl}' sid='{id}'>{slovo}</span>".format(slovo=pq(html).outerHtml(),
-                                                                                id=sid, cl=cl)
-            else:
-                result += "<p>{t}</p>".format(t=text)
-
-    return result
-"""

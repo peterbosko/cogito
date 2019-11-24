@@ -3,7 +3,7 @@ from flask import request
 from flask import render_template
 from datatables import DataTable
 from sqlalchemy import alias
-from app.service import *
+from app.c_service import *
 from app.main_helper import *
 import jsonpickle
 

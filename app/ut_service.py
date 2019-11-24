@@ -1,4 +1,4 @@
-from app.service import *
+from app.c_service import *
 
 
 def je_tag(slovo):

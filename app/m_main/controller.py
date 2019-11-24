@@ -2,7 +2,7 @@ from flask import Blueprint
 from flask import render_template
 from flask import request
 from app.db_models import Kontext
-from app.service import *
+from app.c_service import *
 
 main_blueprint = Blueprint("main", __name__)
 

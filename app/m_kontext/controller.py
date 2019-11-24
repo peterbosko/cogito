@@ -2,10 +2,11 @@ from flask import Blueprint
 from flask import render_template
 from flask import request
 from datatables import DataTable
-from app.service import *
-from app.unit_test import spusti_unit_test as sut
-from app.unit_test import spusti_unit_testy_kontextu as sutk
-from app.service import vrat_slovo as vs
+from app.c_service import *
+from app.kt_service import vrat_slovo as vs
+from app.kt_service import *
+from app.ut_service import spusti_unit_test as sut
+from app.ut_service import spusti_unit_testy_kontextu as sutk
 from sqlalchemy.exc import *
 import json
 
@@ -127,7 +128,7 @@ def daj_tvary_slova():
 
     response = CommonResponse()
 
-    response.data = sl_vrat_slova_zacinajuce_na(vyraz, presna_zhoda)
+    response.data = vrat_slova_zacinajuce_na(vyraz, presna_zhoda)
 
     return jsonpickle.encode(response)
 
@@ -139,7 +140,7 @@ def kontroluj_slova():
 
     response = CommonResponse()
 
-    response.data = kt_kontrola_slov_v_kontexte(data)
+    response.data = kontrola_slov_v_kontexte(data)
 
     return jsonpickle.encode(response)
 
@@ -151,7 +152,7 @@ def dopln_anotaciu():
 
     response = CommonResponse()
 
-    response.data = kt_vrat_ciste_slova_s_anotaciou(data)
+    response.data = vrat_ciste_slova_s_anotaciou(data)
 
     return jsonpickle.encode(response)
 
