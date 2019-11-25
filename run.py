@@ -22,6 +22,7 @@ def drop_views():
     drop_view('sem_hier_v')
     drop_view('sem_pad_v')
     drop_view('sd_sloveso_v')
+    drop_view('int_slovesa_v')
 
 
 def init_db(app):

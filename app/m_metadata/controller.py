@@ -179,14 +179,21 @@ def daj_slovesa_ir():
 
     ir = int(request.args.get("ramec_id", ""))
 
-    filtered = db.session.query(Sloveso)
+    filtered = db.session.query(IntencieSlovesaView)
 
-    filtered = filtered.filter(Sloveso.int_ramec_id == ir)
+    filtered = filtered.filter(IntencieSlovesaView.int_ramec_id == ir)
 
-    table = DataTable(request.args, Sloveso, filtered, [
+    table = DataTable(request.args, IntencieSlovesaView, filtered, [
             "zak_tvar",
             "zvratnost",
             "vid",
+            "popis",
+            "typ",
+            "predlozka",
+            "pad",
+            "sem_kod",
+            "sp_nazov",
+            "fl"
     ])
 
     return json.dumps(table.json())

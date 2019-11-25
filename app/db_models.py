@@ -549,3 +549,33 @@ class SlovesoView(db.Model):
     )
 
 
+class IntencieSlovesaView(db.Model):
+    __table__ = create_view(
+        name='int_slovesa_v',
+        selectable=sa.select(
+            [
+                sa.func.row_number().over(order_by=Sloveso.sd_id).label('id'),
+                Sloveso.sd_id.label('sd_id'),
+                SlovnyDruh.zak_tvar.label('zak_tvar'),
+                Sloveso.zvratnost,
+                Sloveso.popis,
+                Sloveso.vid,
+                Sloveso.int_ramec_id,
+                Intencia.typ,
+                Intencia.predlozka,
+                Intencia.pad,
+                Intencia.sem_priznak_id,
+                sa.select([Semantika.kod], from_obj=Semantika).where(Semantika.id == Intencia.sem_priznak_id)
+                    .label('sem_kod'),
+                Intencia.sem_pad_id,
+                sa.select([SemantickyPad.nazov], from_obj=SemantickyPad).where(SemantickyPad.id == Intencia.sem_pad_id)
+                    .label('sp_nazov'),
+                Intencia.fl,
+            ],
+            from_obj=Sloveso.__table__.join(SlovnyDruh, SlovnyDruh.id == Sloveso.sd_id).
+                outerjoin(Intencia, Intencia.int_ramec_id == Sloveso.int_ramec_id)
+        ),
+        metadata=db.Model.metadata
+    )
+
+
