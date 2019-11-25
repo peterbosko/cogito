@@ -554,7 +554,9 @@ class IntencieSlovesaView(db.Model):
         name='int_slovesa_v',
         selectable=sa.select(
             [
-                sa.func.row_number().over(order_by=Sloveso.sd_id).label('id'),
+                Intencia.id.label('id'),
+                # sa.func.row_number().over(order_by=[Sloveso.sd_id]).label('id'),
+                # Sloveso.sd_id.label('id'),
                 Sloveso.sd_id.label('sd_id'),
                 SlovnyDruh.zak_tvar.label('zak_tvar'),
                 Sloveso.zvratnost,
@@ -564,18 +566,17 @@ class IntencieSlovesaView(db.Model):
                 Intencia.typ,
                 Intencia.predlozka,
                 Intencia.pad,
-                Intencia.sem_priznak_id,
+                Intencia.sem_priznak_id.label('sem_priznak_id'),
                 sa.select([Semantika.kod], from_obj=Semantika).where(Semantika.id == Intencia.sem_priznak_id)
                     .label('sem_kod'),
-                Intencia.sem_pad_id,
+                Intencia.sem_pad_id.label('sem_pad_id'),
                 sa.select([SemantickyPad.nazov], from_obj=SemantickyPad).where(SemantickyPad.id == Intencia.sem_pad_id)
                     .label('sp_nazov'),
-                Intencia.fl,
+                Intencia.fl.label('fl'),
             ],
             from_obj=Sloveso.__table__.join(SlovnyDruh, SlovnyDruh.id == Sloveso.sd_id).
-                outerjoin(Intencia, Intencia.int_ramec_id == Sloveso.int_ramec_id)
+                join(Intencia, Intencia.int_ramec_id == Sloveso.int_ramec_id)
         ),
         metadata=db.Model.metadata
     )
-
 

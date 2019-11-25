@@ -42,16 +42,6 @@ def init_db(app):
             db.session.commit()
             print("user bosko was created")
 
-        usr_kacala = User.query.filter(User.email == "kacala.jan@gmail.com").first()
-
-        if not usr_kacala:
-            usr_kacala = User(email="kacala.jan@gmail.com", meno="Ján", priezvisko="Kačala", status="V",
-                              je_admin="A")
-            usr_kacala.nastav_heslo("profkacala")
-            db.session.add(usr_kacala)
-            db.session.commit()
-            print("user Kacala was created")
-
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:

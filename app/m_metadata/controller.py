@@ -183,6 +183,21 @@ def daj_slovesa_ir():
 
     filtered = filtered.filter(IntencieSlovesaView.int_ramec_id == ir)
 
+    sloveso = request.args.get("sloveso", "")
+
+    if sloveso:
+        filtered = filtered.filter(IntencieSlovesaView.zak_tvar.like(sloveso))
+
+    predlozka = request.args.get("predlozka", "")
+
+    if predlozka:
+        filtered = filtered.filter(IntencieSlovesaView.predlozka.like(predlozka))
+
+    gpad = request.args.get("pad", "")
+
+    if gpad:
+        filtered = filtered.filter(IntencieSlovesaView.pad == gpad)
+
     table = DataTable(request.args, IntencieSlovesaView, filtered, [
             "zak_tvar",
             "zvratnost",
@@ -196,7 +211,9 @@ def daj_slovesa_ir():
             "fl"
     ])
 
-    return json.dumps(table.json())
+    d = json.dumps(table.json())
+
+    return d
 
 
 @metadata_blueprint.route("/daj_slovesa_sp/", methods=["GET"])
