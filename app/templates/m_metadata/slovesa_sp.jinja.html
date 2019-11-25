@@ -1,12 +1,49 @@
     <div class="container-fluid">
         <div class="row">
+            <div class="col-sm-12" style="padding-top:10px; margin-bottom:10px;">
+                <button id="btnHladaj" class="btn btn-primary" type="button" onclick="btnHladaj();"><span class='fa fa-plus fa-sm'></span>&nbsp;Hľadaj</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="col-sm-12 nodisplay" style="padding-top:10px; margin-bottom:10px;" id="searchDiv">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <input id="txtFSloveso" class="form-control SearchOnChange SearchOnEnter" type="text" placeholder="Vložte sloveso" aria-label="Search">
+                        </div>
+                        <div class="col-sm-4">
+                            <input id="txtFPredlozka" class="form-control SearchOnChange SearchOnEnter" type="text" placeholder="Vložte predložku" aria-label="Search">
+                        </div>
+                        <div class="col-sm-4">
+                            <select id="ddlGPad" class="form-control SearchOnChange SearchOnEnter">
+                                <option value="">Všetky</option>
+                                <option value="Nom">Nom</option>
+                                <option value="Gen">Gen</option>
+                                <option value="Dat">Dat</option>
+                                <option value="Aku">Aku</option>
+                                <option value="Lok">Lok</option>
+                                <option value="Ins">Ins</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-sm-12">
                 <table class="table table-striped table-bordered" style="width:100%" id="zoznam_slovies_sp">
                     <thead>
                         <tr>
                             <th>Sloveso</th>
-                            <th>Zvratnosť</th>
+                            <th>Zvrat.</th>
                             <th>Vid</th>
+                            <th>Popis</th>
+                            <th>Typ</th>
+                            <th>Predložka</th>
+                            <th>Gr. pád</th>
+                            <th>Sém. príznak</th>
+                            <th>Intenčný rámec</th>
+                            <th>fl</th>
                         </tr>
                     </thead>
                 <tbody>
@@ -16,6 +53,37 @@
         </div>
     </div>
 <script>
+    $(document).ready(function () {
+        bindHladaj();
+    });
+
+    function btnHladaj(){
+        if ($('#searchDiv').hasClass('nodisplay')){
+            $('#btnHladaj').html("<span class='fa fa-minus fa-sm'></span>&nbsp;Hľadaj");
+            $("#searchDiv").slideToggle("slow").removeClass('nodisplay');
+        }
+        else{
+            if ($('#txtFSloveso').val() || $('#txtFPredlozka').val() || $('#ddlGPad').val()!= "" ){
+                nacitajSlovesaSP();
+            }
+            else{
+                $('#btnHladaj').html("<span class='fa fa-plus fa-sm'></span>&nbsp;Hľadaj");
+                $("#searchDiv").slideToggle("slow").addClass('nodisplay');
+            }
+        }
+    }
+
+
+    function bindHladaj() {
+        $('.SearchOnEnter').keypress(function(event) {
+            if (event.keyCode == 13) {
+                nacitajSlovesaSP();
+            }
+        });
+        $('.SearchOnChange').change(function(event) {
+            nacitajSlovesaSP();
+        });
+    }
 
     function nacitajSlovesaSP(){
         $('#zoznam_slovies_sp').DataTable().ajax.reload();
@@ -34,12 +102,22 @@
             url : "{{ url_for("metadata.daj_slovesa_sp") }}",
             data : function ( d ) {
                 d.sp = '{{request.args.get("sp")}}';
+                d.sloveso = $('#txtFSloveso').val();
+                d.predlozka = $('#txtFPredlozka').val();
+                d.pad = $('#ddlGPad').val()
             },
         },
         columns: [
             { data: "zak_tvar" },
             { data: "zvratnost" },
             { data: "vid" },
+            { data: "popis" },
+            { data: "typ" },
+            { data: "predlozka" },
+            { data: "pad" },
+            { data: "sem_kod" },
+            { data: "ir_nazov" },
+            { data: "fl" },
         ],
         });
 </script>

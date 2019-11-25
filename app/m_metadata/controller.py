@@ -211,9 +211,7 @@ def daj_slovesa_ir():
             "fl"
     ])
 
-    d = json.dumps(table.json())
-
-    return d
+    return json.dumps(table.json())
 
 
 @metadata_blueprint.route("/daj_slovesa_sp/", methods=["GET"])
@@ -222,15 +220,37 @@ def daj_slovesa_sp():
 
     sp = int(request.args.get("sp", ""))
 
-    zoznam_ir = db.session.query(Intencia.int_ramec_id).filter(Intencia.sem_pad_id == sp).distinct()
+    filtered = db.session.query(IntencieSlovesaView)
 
-    filtered = db.session.query(Sloveso).filter(Sloveso.int_ramec_id.in_(zoznam_ir))
+    filtered = filtered.filter(IntencieSlovesaView.sem_pad_id == sp)
 
-    table = DataTable(request.args, Sloveso, filtered, [
-            "zak_tvar",
-            "zvratnost",
-            "vid",
-    ])
+    sloveso = request.args.get("sloveso", "")
+
+    if sloveso:
+        filtered = filtered.filter(IntencieSlovesaView.zak_tvar.like(sloveso))
+
+    predlozka = request.args.get("predlozka", "")
+
+    if predlozka:
+        filtered = filtered.filter(IntencieSlovesaView.predlozka.like(predlozka))
+
+    gpad = request.args.get("pad", "")
+
+    if gpad:
+        filtered = filtered.filter(IntencieSlovesaView.pad == gpad)
+
+    table = DataTable(request.args, IntencieSlovesaView, filtered, [
+        "zak_tvar",
+        "zvratnost",
+        "vid",
+        "popis",
+        "typ",
+        "predlozka",
+        "pad",
+        "sem_kod",
+        "ir_nazov",
+        "fl"
+        ])
 
     return json.dumps(table.json())
 

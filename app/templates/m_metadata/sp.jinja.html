@@ -31,7 +31,7 @@
                             <th>Kód</th>
                             <th>Názov</th>
                             <th>Počet výskytov v intenciách</th>
-                            <th>Počet slovies</th>
+                            <th>Počet naviazaných slovies</th>
                         </tr>
                     </thead>
                 <tbody>
@@ -43,10 +43,10 @@
 <script>
 
     function spGridFormatter(data, type, row){
-        var i = "<li><a href='javascript:ZoznamIntencii(" + row.id + ",\""+row.kod+"\");' title='Zoznam intencií'><span class='fa fa-eye fa-sm'></span>&nbsp;Zoznam intencií</a></li>";
-        var s = "<li><a href='javascript:ZoznamSlovies(" + row.id + ",\""+row.kod+"\");' title='Zoznam slovies'><span class='fa fa-hands fa-sm'></span>&nbsp;Zoznam slovies</a></li>";
+        var i = "<li><a href='javascript:ZoznamIntencii(" + row.id + ",\""+row.kod+"\", \"" + row.nazov + "\");' title='Zoznam intencií'><span class='fa fa-eye fa-sm'></span>&nbsp;Zoznam intencií</a></li>";
+        var s = "<li><a href='javascript:ZoznamSlovies(" + row.id + ",\""+row.kod+"\", \"" + row.nazov + "\");' title='Zoznam slovies a ich intencií'><span class='fa fa-hands fa-sm'></span>&nbsp;Zoznam slovies a ich intencií</a></li>";
 
-        return gridButtonFormater(i+s, '', true);
+        return gridButtonFormater(i+s, '', true, '250px');
     }
 
     function bindHladaj() {
@@ -68,12 +68,12 @@
         $('#zoznam_padov').DataTable().ajax.reload();
     }
 
-    function ZoznamIntencii(id, pad){
-        loadTemplateIntoModal('#defaultModal', 'Zoznam intencií sémantického pádu: '+pad, '{{url_for("metadata.intencie_sp")}}?sp='+id);
+    function ZoznamIntencii(id, pad, nazov){
+        loadTemplateIntoModal('#defaultModal', 'Zoznam intencií sémantického pádu: '+pad+'-'+nazov, '{{url_for("metadata.intencie_sp")}}?sp='+id);
     }
 
-    function ZoznamSlovies(id, pad){
-        loadTemplateIntoModal('#defaultModal', 'Zoznam slovies použitých so sémantickým pádom: '+pad, '{{url_for("metadata.slovesa_sp")}}?sp='+id);
+    function ZoznamSlovies(id, pad, nazov){
+        loadTemplateIntoLargeScreenModal('#defaultModal', 'largescreen', 'Zoznam slovies sémantického pádu: '+pad+'-'+nazov, '{{url_for("metadata.slovesa_sp")}}?sp='+id);
     }
 
     $("#zoznam_padov").DataTable({

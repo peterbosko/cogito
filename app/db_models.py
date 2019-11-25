@@ -572,6 +572,10 @@ class IntencieSlovesaView(db.Model):
                 Intencia.sem_pad_id.label('sem_pad_id'),
                 sa.select([SemantickyPad.nazov], from_obj=SemantickyPad).where(SemantickyPad.id == Intencia.sem_pad_id)
                     .label('sp_nazov'),
+                sa.select([IntencnyRamec.kod], from_obj=IntencnyRamec).where(Intencia.int_ramec_id == IntencnyRamec.id)
+                    .label('ir_kod'),
+                sa.select([IntencnyRamec.nazov], from_obj=IntencnyRamec).where(Intencia.int_ramec_id == IntencnyRamec.id)
+                    .label('ir_nazov'),
                 Intencia.fl.label('fl'),
             ],
             from_obj=Sloveso.__table__.join(SlovnyDruh, SlovnyDruh.id == Sloveso.sd_id).
