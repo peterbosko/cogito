@@ -35,9 +35,12 @@ def daj_medzery_pred_specialne_znaky(text):
 
 
 def je_cislo(slovo):
+    slovo = slovo.replace('.', '')
+    slovo = slovo.replace(',', '')
+    return slovo.isdigit()
 
-    return slovo.replace('.', '', 1).isdigit()
-
+def obsahuje_cisla(text):
+    return any(char.isdigit() for char in text)
 
 def daj_cislo(slovo):
     if '.' in slovo:

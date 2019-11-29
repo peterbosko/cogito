@@ -7,7 +7,7 @@
 			if ( editor.fire( 'cogito-word-check' ) ) {
                 var data = {};
                 data.data = editor.getData();
-
+				
                 swal({ buttons: {},
                        title  :  "Kontrola",
                        text   :  'Prebieha kontrola textu...',
@@ -27,6 +27,17 @@
                             text   :  "Kontext bol skontrolovaný. Miera zvalidovaných slov: " + r.data.uspesnost+" %",
                             icon   :  "success"});
                         editor.setData(r.data.data);
+						
+						setTimeout(function(){
+							var all = editor.document.getElementsByTag( 'span' );
+
+							for (var i = 0, max = all.count(); i < max; i++) {
+								var el = all.$[i];
+								
+								el.setAttribute('ondblclick','load_slovo(this);');
+								el.setAttribute('onselectstart','return false;');
+							}	
+						}, 200)	
                     } else{
                         swal({ buttons: {},
                             title  :  "Chyba",

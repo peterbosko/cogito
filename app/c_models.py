@@ -30,6 +30,11 @@ class SlovoExport(object):
     zoznam_padov = None
     popis = None
     anotacia = None
+    sem_id = None
+    sufix = None
+    prefix = None
+    vzor = None
+    pocitatelnost = None
 
     def daj_popis(self):
         return "{slovny_druh} Pád: {pad} Číslo: {cislo} Osoba:{osoba}".format(slovny_druh=self.slovny_druh,
@@ -42,3 +47,4 @@ class SlovnyDruhExport(object):
     id = None
     zak_tvar = None
     druh = None
+

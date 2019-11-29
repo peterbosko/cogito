@@ -71,7 +71,7 @@ var AjaxMethods = {
         return res;
     }
 };
-
+/*
 function vrat_tooltip(s, slovo){
 
     var thtml = "";
@@ -209,6 +209,258 @@ function t(that){
         selector: true,
         html : true,
     });
+}
+*/
+
+function update_sid(that, row_id){
+	var sid = $(that).data('id');
+	var new_data = $(that).val();
+	
+	if(new_data.indexOf(":") >= 0) {
+		var data = new_data.split(':');
+		console.log(data);
+		$('p[data-row-id="'+row_id+'"] span[sid="'+sid+'"]').attr('sid',data[0]);
+		$('p[data-row-id="'+row_id+'"] span[sid="'+data[0]+'"]').text(data[1]);
+		$('p[data-row-id="'+row_id+'"] span[sid="'+data[0]+'"]').dblclick();
+	} else {
+		$('p[data-row-id="'+row_id+'"] span[sid="'+sid+'"]').attr('sid',new_data);
+		$('p[data-row-id="'+row_id+'"] span[sid="'+new_data+'"]').dblclick();
+	}
+}
+
+function prev_word(that){
+	var row_id = $(that).data('row-id');
+
+	$('#data-row-'+row_id).find('.active').prev().dblclick();
+}
+
+function next_word(that){
+	var row_id = $(that).data('row-id');
+	
+	$('#data-row-'+row_id).find('.active').next().dblclick();
+}
+
+function accept_word(row_id, sid){
+	var el = $('#data-row-'+row_id).find('.active');
+	
+	if(el.hasClass('s')){
+		el.removeClass('s').addClass('m').dblclick();
+	} else {
+		el.removeClass('m').removeClass('n').addClass('s').next().dblclick();
+	}	
+}
+
+function load_slovo(that){
+	var sid = $(that).attr('sid');
+	var slovo = $(that).text();
+	var row_id = $(that).parent().data('row-id');
+	var data = {};
+	var settings_row = $('#row-id-'+row_id);
+	settings_row.find('el').html('');
+	var cislo = {'J': 'Jednotné', 'M': 'Množné', 'P': 'Podmnožné'};
+	var class_type = 's';
+	
+	if($(that).hasClass('m')) {
+		class_type = 'm';
+	} else if($(that).hasClass('n')) {
+		class_type = 'n';
+	}
+	
+	$('span').removeClass('active');
+	$(that).addClass('active');
+	
+	var options;
+	settings_row.find('.setting-tvar').html('Tvar: ' + slovo + ' | ');
+	
+	/*** NACITAJ SLOVO DO OBJEKTU ***/
+	
+	AjaxMethods.getDataFromGetRequest('/vrat_slovo?sid=', sid+'&slovo='+slovo, '', function(response){
+		var obj = JSON.parse(response.data);
+		console.log('OBJ:');
+		console.log(obj);
+		if (obj){
+			
+			/*** NACITAJ VSETKY SLOVNE DRUHY PRE DANE SLOVO ***/
+			if(class_type == 's') {
+				settings_row.find('.setting-slovny_druh').html('Slovný druh: ' + obj.slovny_druh);
+			} else {
+				AjaxMethods.getDataFromAsyncGetRequest('/daj_tvary_slova?vyraz='+slovo, "", "", function(r){
+					if (r.status==responseOK){
+						data = r.data;
+						if(data.length > 0) {
+							var i;
+							options = '<select data-id="'+obj.id+'" onchange="update_sid(this, '+row_id+');">';
+							for (i = 0; i < data.length; i++) { 
+								var selected = '';
+								if (obj.id && obj.id == data[i].id) {
+									selected = 'selected=selected';
+								}
+								options = options + "<option value="+data[i].id+" "+selected+">"+data[i].slovny_druh+" - "+data[i].zak_tvar+"</option>";
+							}
+							var options = options + '</select> | ';
+						}
+					}
+					settings_row.find('.setting-slovny_druh').html('Slovný druh: ' + options);
+				});
+			}
+			if(obj.slovny_druh == "POD_M") {
+				if(obj.rod) {
+					settings_row.find('.setting-rod').html('Rod: ' + obj.rod + ' | ');
+					if(obj.rod == "M") {
+						if(obj.podrod) {
+							settings_row.find('.setting-podrod').html('Podrod: ' + obj.podrod + ' | ');
+						}	
+					}	
+				}
+				if(obj.vzor) {
+					settings_row.find('.setting-vzor').html('Vzor: ' + obj.vzor + ' | ');
+				}
+				if(obj.prefix) {
+					settings_row.find('.setting-prefix').html('Prefix: ' + obj.prefix + ' | ');
+				}
+				if(obj.sufix) {
+					settings_row.find('.setting-sufix').html('Sufix: ' + obj.sufix + ' | ');
+				}
+				if(obj.pocitatelnost) {
+					settings_row.find('.setting-pocitatelnost').html('Pocitatelnost: ' + obj.pocitatelnost + ' | ');
+				}
+				if(obj.anotacia) {
+					settings_row.find('.setting-anotacia').html('Anotácia: ' + obj.anotacia + ' | ');
+				}
+				if(obj.sem_id) {				
+
+					/*** NACITAJ SEMANTICKY PRIZNAK PRE DANE SLOVO SO SLOVNYM DRUHOM ***/
+					
+					AjaxMethods.getDataFromAsyncGetRequest('/daj_sem_priznak?sem_id='+obj.sem_id, '', "", function(r){
+						if (r.status==responseOK){
+							data = r.data;
+							console.log('Všetky semanticke priznaky:');
+							console.log(data);
+							settings_row.find('.setting-priznak_slova').html('Sémantický príznak: ' + data.kod + ' - ' + data.nazov + ' | ');
+						}
+					});
+				}
+				
+				if(class_type == 's') {
+					settings_row.find('.setting-slovny_druh').html('Slovný druh: ' + obj.slovny_druh);
+					settings_row.find('.setting-pad').html('Pád: ' + obj.pad);
+					settings_row.find('.setting-cislo').html('Číslo: ' + obj.cislo);
+					settings_row.find('.setting-odvodene').html('Odvodené od slov: ');
+				} else {
+					/*** NACITAJ VSETKY PADY PRE DANE SLOVO SO SLOVNYM DRUHOM ***/
+					
+					AjaxMethods.getDataFromAsyncGetRequest('/daj_vsetky_pady_slova?cislo='+obj.cislo, '&sd_id='+obj.sd_id, "", function(r){
+						if (r.status==responseOK){
+							data = r.data;
+					
+							if(data.length > 0) {
+								var i;
+								options = '<select data-id="'+obj.id+'" onchange="update_sid(this, '+row_id+');">';
+								for (i = 0; i < data.length; i++) { 
+									var selected = '';
+									if (obj.id && obj.pad == data[i].pad) {
+										selected = 'selected=selected';
+									}
+									options = options + "<option value="+data[i].id+":"+data[i].tvar+" "+selected+">"+data[i].pad+" - "+data[i].tvar+"</option>";
+								}
+								var options = options + '</select> | ';
+							}
+						}
+						settings_row.find('.setting-pad').html('Pád: ' + options);
+					});
+					
+					/*** NACITAJ VSETKY CISLA PRE DANY SLOVNY DRUH ***/
+					
+					AjaxMethods.getDataFromAsyncGetRequest('/daj_vsetky_cisla_slova?pad='+obj.pad, '&sd_id='+obj.sd_id, "", function(r){
+						if (r.status==responseOK){
+							data = r.data;
+							if(data.length > 0) {
+								var i;
+								options = '<select data-id="'+obj.id+'" onchange="update_sid(this, '+row_id+');">';
+								for (i = 0; i < data.length; i++) { 
+									var selected = '';
+									if (obj.id && obj.cislo == data[i].cislo) {
+										selected = 'selected=selected';
+									}
+									options = options + "<option value="+data[i].id+":"+data[i].tvar+" "+selected+">"+cislo[data[i].cislo]+"</option>";
+								}
+								var options = options + '</select> | ';
+							}
+						}
+						settings_row.find('.setting-cislo').html('Číslo: ' + options);
+					});
+					
+					/* CHYBAJU DATA V DB - dorobit prepojenie semantika - slovny druh
+					
+					AjaxMethods.getDataFromAsyncGetRequest('/daj_odvodene_od_slova?pad='+obj.pad, '&sd_id='+obj.sd_id, "", function(r){
+						if (r.status==responseOK){
+							data = r.data;
+							console.log(data);
+							if(data.length > 0) {
+								var i;
+								options = '<select data-id="'+obj.id+'" onchange="update_sid(this, '+row_id+');">';
+								for (i = 0; i < data.length; i++) { 
+									var selected = '';
+									if (obj.id && obj.cislo == data[i].cislo) {
+										selected = 'selected=selected';
+									}
+									options = options + "<option value="+data[i].id+":"+data[i].tvar+" "+selected+">"+cislo[data[i].cislo]+"</option>";
+								}
+								var options = options + '</select>';
+							}
+						}
+						settings_row.find('.setting-odvodene').html('Odvodené od slov: ' + from_words);
+					});
+					*/
+				}	
+			}
+			
+			if(class_type == 's') {
+				if(obj.popis) {
+					settings_row.find('.setting-popis').html('Popis: ' + obj.popis);
+				}	
+			} else {	
+				/*** NACITAJ VSETKY POPISY PRE DANE SLOVO ***/
+				
+				AjaxMethods.getDataFromAsyncGetRequest('/daj_vsetky_slova?vyraz='+obj.tvar, '', "", function(r){
+					if (r.status==responseOK){
+						data = r.data;
+						console.log('Všetky popisy slova:');
+						console.log(data);
+						if(data.length > 0) {
+							var i;
+							var counter = 0;
+							options = '<select data-id="'+obj.id+'" onchange="update_sid(this, '+row_id+');">';
+							for (i = 0; i < data.length; i++) { 
+								var selected = '';
+								if (obj.id && obj.id == data[i].id) {
+									selected = 'selected=selected';
+								}
+								//if(data[i].popis) {
+									options = options + "<option value="+data[i].id+":"+data[i].tvar+" "+selected+">"+data[i].popis+" - ID: "+data[i].id+"</option>";
+									++counter;
+								//}
+							}
+							var options = options + '</select> | ';
+						}
+						if(counter > 0) {
+							settings_row.find('.setting-popis').html('Popis: ' + options);
+						}
+					}
+				});
+			}
+		}
+	});
+	settings_row.find('.prev-word').html('<a href="#" onclick="prev_word(this);" data-row-id="'+row_id+'">Predchádzajúce slovo</a>');
+	settings_row.find('.next-word').html('<a href="#" onclick="next_word(this);" data-row-id="'+row_id+'">Nasledujúce slovo</a>');
+	
+	var save_name = 'Potvrdiť slovo';
+	if(class_type == 's') {
+		save_name = 'Upraviť slovo';
+	}
+	if(class_type != 'n') {
+		settings_row.find('.setting-accept_word').html('<a href="#" onclick="accept_word('+row_id+', '+sid+');" data-row-id="'+row_id+'" style="float: right;">'+save_name+'</a>');
+	}
 }
 
 function loadTemplateIntoModal(modalSelector, title, controlPath, fireMethod, methodParams) {
@@ -496,9 +748,38 @@ function loadNeededScriptsAndStyles(script, style, callback) {
             var all = CKEDITOR.instances[ckeditorName].document.getElementsByTag( 'span' );
             for (var i = 0, max = all.count(); i < max; i++) {
                 var el = all.$[i];
-                el.setAttribute('onmouseover','t(this);');
+				//el.setAttribute('onmouseover','t(this);');
+				//el.classList.remove("m");
+				//el.classList.remove("n");
+				//el.classList.remove("active");
             }
-    }
+	}
+	
+	function load_sematicke_pady(ckeditorName) {
+		/*** NACITAJ SEMANTICKY PAD PRE DANE SLOVO ***/
+		var all = CKEDITOR.instances[ckeditorName].document.getElementsByTag( 'span' );
+		for (var i = 0, max = all.count(); i < max; i++) {
+			var el = all.$[i];
+			var sid = el.getAttribute('sid');
+			if(sid) {
+				AjaxMethods.getDataFromAsyncGetRequest('/daj_sem_pad?sid='+sid, '', "", function(r){
+					if (r.status==responseOK){
+						var data = r.data;
+						console.log(sid);
+						console.log(data);
+						/*if(data.kod) {
+							$(el).tooltip({
+								placement: "top",
+								title: data.kod,
+								selector: true,
+								html : true,
+							});
+						}*/
+					}
+				});
+			}		
+		}		
+	}
 
     function pripojJavascripty(ckeditorName){
         var head = CKEDITOR.instances[ckeditorName].document.getHead();
@@ -511,12 +792,20 @@ function loadNeededScriptsAndStyles(script, style, callback) {
         var myscript5 = CKEDITOR.document.createElement( 'script', {
             attributes : {
                 type : 'text/javascript',
-                'src' : '/static/js/main.js'
+                'src' : '/static/js/main.js?='+Math.random()
                 }
         });
-
+		
+		var myscript6 = CKEDITOR.document.createElement( 'script', {
+            attributes : {
+                type : 'text/javascript',
+                'src' : '/static/js/jquery.nice-select.min.js'
+                }
+        });
+		
         head.append( myscript1 );
         head.append( myscript5 );
+        head.append( myscript6 );
     }
 
     function GetCKEditorHtml(ckeditorName){
@@ -525,14 +814,22 @@ function loadNeededScriptsAndStyles(script, style, callback) {
 
     function initCKEditorInstance(ckeditorName, h, toolbar){
 
-        CKEDITOR.addCss('.tooltip > .tooltip-inner { background-color: #000; color:#fff; }');
+		CKEDITOR.timestamp=Math.random();
+        
+		CKEDITOR.addCss('.tooltip > .tooltip-inner { background-color: #000; color:#fff; }');
 
-        CKEDITOR.addCss('span.m { background-color: #ffeec2; }');
+        CKEDITOR.addCss('span.no-select { -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }');
+        
+		CKEDITOR.addCss('span.active { background-color: #afe5ff !important;  padding: 4px;}');
+        
+		CKEDITOR.addCss('span.no-select:hover { cursor: pointer; }');
+		
+		CKEDITOR.addCss('span.m { background-color: #ffeec2; }');
 
         CKEDITOR.addCss('span.n { background-color: #ffaab2; }');
 
         CKEDITOR.addCss('span.s { background-color: #ffffff; }');
-
+		
         var tbar = [];
 
         if (!toolbar){
@@ -542,13 +839,13 @@ function loadNeededScriptsAndStyles(script, style, callback) {
         if (toolbar==="kontext"){
             tbar = [
         		{ name: 'document', items: [ 'Source' , '-' ,'Save'] },
-		        { name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo', '-', 'cogito-word-check', '-' ,'cogito-unit-test' , 'cogito-ut-list' , '-' , 'cogito-anotacia', '-' , 'cogito-rozbor'] },
+		        { name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo', '-', 'cogito-word-check', 'cogito-check-remove', '-' ,'cogito-unit-test' , 'cogito-ut-list' , '-' , 'cogito-anotacia', '-' , 'cogito-rozbor'] },
 	        ]
         }
         else {
             tbar = [
         		{ name: 'document', items: [ 'Source' , '-' ,'Save'] },
-		        { name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo', '-', 'cogito-word-check', '-' ] },
+		        { name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo', '-', 'cogito-word-check', 'cogito-check-remove', '-' ] },
 	        ]
         }
 
@@ -581,9 +878,22 @@ function loadNeededScriptsAndStyles(script, style, callback) {
             contentDom : function(event) {
                 pripojJavascripty(ckeditorName);
                 binduj_tooltip(ckeditorName);
+                //load_sematicke_pady(ckeditorName);
             },
           },
+		  //contentsCss : '/static/css/nice-select.css',
           toolbar: tbar,
+		  extraAllowedContent: '*[*]{*}(*)',
+		  allowedContent: {
+				div: {
+					classes: { 'settings-rows': true, 'settings-row': true }
+				},
+				el: {},
+				span: {},
+				b: {},
+				a: {},
+				select: {}
+		  },
         });
 
         CKEDITOR.instances[ckeditorName].CogitoEditorType = toolbar;

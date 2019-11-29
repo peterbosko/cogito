@@ -75,9 +75,10 @@ def vrat_slovo(slovo, ids=None):
 
     vysledok_slovo = SlovoVKontexte()
 
-    if slovo and je_cislo(slovo):
+    if slovo and obsahuje_cisla(slovo):
         vysledok_slovo.neprekl_vyraz = daj_cislo(slovo)
         vysledok_slovo.je_cislo = True
+        vysledok_slovo.tvar = slovo
         return vysledok_slovo
 
     je_upper = slovo[0] == slovo[0].upper()
