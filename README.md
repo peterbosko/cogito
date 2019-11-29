@@ -11,5 +11,6 @@ Inštalácia:
 7. Nainštalovanie všetkých packagov vo venv pip install -r requirements.txt
 8. Vytvorenie súboru config/config.py podľa templatu config/config.py.template
 9.  Nastavenie správnych hodnôt v súbore config.py
-10. Pustenie flask servera pomocou run.bat - v cmd v ktorom bolo predtym spustene env.bat
-11. http://localhost/
+10. Initializácia db - python run.py init_db
+11. Pustenie flask servera pomocou run.bat - v cmd v ktorom bolo predtym spustene env.bat
+12. http://localhost/
