@@ -95,13 +95,13 @@ class SlovnyDruh(db.Model):
         export.zak_tvar = self.zak_tvar
         export.typ = self.typ
         return export
-        
+
     def exportujSem(self):
         export = SlovnyDruhExport()
         export.id = self.id
         export.zak_tvar = self.zak_tvar
         export.typ = self.typ
-        if sem_priznak.id:
+        if self.sem_priznak.id:
             odvodene = SemHierarchia.query.filter(SemHierarchia.sem_id == sem_priznak.id)
         
         return export
@@ -170,6 +170,7 @@ class SlovnyDruh(db.Model):
         export.slova = Slovo.query.filter(Slovo.sd_id == self.id).all()
 
         return export
+
 
 class Sloveso(SlovnyDruh):
     __tablename__ = 'sd_sloveso'
@@ -567,7 +568,9 @@ class IntencieSlovesaView(db.Model):
         name='int_slovesa_v',
         selectable=sa.select(
             [
-                sa.func.row_number().over(order_by=Sloveso.sd_id).label('id'),
+                Intencia.id.label('id'),
+                # sa.func.row_number().over(order_by=[Sloveso.sd_id]).label('id'),
+                # Sloveso.sd_id.label('id'),
                 Sloveso.sd_id.label('sd_id'),
                 SlovnyDruh.zak_tvar.label('zak_tvar'),
                 Sloveso.zvratnost,
@@ -577,18 +580,21 @@ class IntencieSlovesaView(db.Model):
                 Intencia.typ,
                 Intencia.predlozka,
                 Intencia.pad,
-                Intencia.sem_priznak_id,
+                Intencia.sem_priznak_id.label('sem_priznak_id'),
                 sa.select([Semantika.kod], from_obj=Semantika).where(Semantika.id == Intencia.sem_priznak_id)
                     .label('sem_kod'),
-                Intencia.sem_pad_id,
+                Intencia.sem_pad_id.label('sem_pad_id'),
                 sa.select([SemantickyPad.nazov], from_obj=SemantickyPad).where(SemantickyPad.id == Intencia.sem_pad_id)
                     .label('sp_nazov'),
-                Intencia.fl,
+                sa.select([IntencnyRamec.kod], from_obj=IntencnyRamec).where(Intencia.int_ramec_id == IntencnyRamec.id)
+                    .label('ir_kod'),
+                sa.select([IntencnyRamec.nazov], from_obj=IntencnyRamec).where(Intencia.int_ramec_id == IntencnyRamec.id)
+                    .label('ir_nazov'),
+                Intencia.fl.label('fl'),
             ],
             from_obj=Sloveso.__table__.join(SlovnyDruh, SlovnyDruh.id == Sloveso.sd_id).
-                outerjoin(Intencia, Intencia.int_ramec_id == Sloveso.int_ramec_id)
+                join(Intencia, Intencia.int_ramec_id == Sloveso.int_ramec_id)
         ),
         metadata=db.Model.metadata
     )
-
 
