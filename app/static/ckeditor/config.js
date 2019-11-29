@@ -58,5 +58,5 @@ CKEDITOR.editorConfig = function( config ) {
 
 	// Dialog windows are also simplified.
 	config.removeDialogTabs = 'link:advanced';
-	config.extraPlugins = 'save,cogito-word-check,cogito-unit-test,cogito-ut-list,cogito-anotacia,cogito-rozbor';
+	config.extraPlugins = 'save,cogito-check-remove,cogito-word-check,cogito-unit-test,cogito-ut-list,cogito-anotacia,cogito-rozbor';
 };

@@ -1,0 +1,10 @@
+.settings-rows {
+	background: #f8f8f8;
+    border-top: 1px dashed #bcbcbc;
+    margin: 0 -20px;
+}
+
+.settings-row {
+	border-bottom: 1px dashed #bcbcbc;
+    padding: 5px 20px;
+}

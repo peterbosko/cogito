@@ -95,6 +95,16 @@ class SlovnyDruh(db.Model):
         export.zak_tvar = self.zak_tvar
         export.typ = self.typ
         return export
+        
+    def exportujSem(self):
+        export = SlovnyDruhExport()
+        export.id = self.id
+        export.zak_tvar = self.zak_tvar
+        export.typ = self.typ
+        if sem_priznak.id:
+            odvodene = SemHierarchia.query.filter(SemHierarchia.sem_id == sem_priznak.id)
+        
+        return export
 
     def exportujPlnySD(self):
         export = SDExport()
@@ -107,7 +117,7 @@ class SlovnyDruh(db.Model):
             export.rod = pm.rod
             export.podrod = pm.podrod
             export.sloveso_id = pm.sloveso_id
-
+            
             if pm.sloveso_id:
                 slov = Sloveso.query.get(pm.sloveso_id)
 
@@ -160,7 +170,6 @@ class SlovnyDruh(db.Model):
         export.slova = Slovo.query.filter(Slovo.sd_id == self.id).all()
 
         return export
-
 
 class Sloveso(SlovnyDruh):
     __tablename__ = 'sd_sloveso'
@@ -342,14 +351,18 @@ class Slovo(db.Model):
         export.sd_id = self.sd_id
         export.slovny_druh = self.SlovnyDruh.typ
         export.anotacia = self.anotacia
+        export.sem_id = self.SlovnyDruh.sem_priznak_id
+        export.sufix = self.SlovnyDruh.sufix
+        export.prefix = self.SlovnyDruh.prefix
+        export.vzor = self.SlovnyDruh.vzor
 
         if export.slovny_druh == "PREDLOZKA":
             predlozka = Predlozka.query.get(export.sd_id)
             export.zoznam_padov = predlozka.pady
 
         return export
-
-
+        
+        
 class UnitTest(db.Model):
     __tablename__ = 'kt_ut'
     __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8mb4', 'mysql_collate': 'utf8mb4_bin'}
@@ -554,9 +567,7 @@ class IntencieSlovesaView(db.Model):
         name='int_slovesa_v',
         selectable=sa.select(
             [
-                Intencia.id.label('id'),
-                # sa.func.row_number().over(order_by=[Sloveso.sd_id]).label('id'),
-                # Sloveso.sd_id.label('id'),
+                sa.func.row_number().over(order_by=Sloveso.sd_id).label('id'),
                 Sloveso.sd_id.label('sd_id'),
                 SlovnyDruh.zak_tvar.label('zak_tvar'),
                 Sloveso.zvratnost,
@@ -566,21 +577,18 @@ class IntencieSlovesaView(db.Model):
                 Intencia.typ,
                 Intencia.predlozka,
                 Intencia.pad,
-                Intencia.sem_priznak_id.label('sem_priznak_id'),
+                Intencia.sem_priznak_id,
                 sa.select([Semantika.kod], from_obj=Semantika).where(Semantika.id == Intencia.sem_priznak_id)
                     .label('sem_kod'),
-                Intencia.sem_pad_id.label('sem_pad_id'),
+                Intencia.sem_pad_id,
                 sa.select([SemantickyPad.nazov], from_obj=SemantickyPad).where(SemantickyPad.id == Intencia.sem_pad_id)
                     .label('sp_nazov'),
-                sa.select([IntencnyRamec.kod], from_obj=IntencnyRamec).where(Intencia.int_ramec_id == IntencnyRamec.id)
-                    .label('ir_kod'),
-                sa.select([IntencnyRamec.nazov], from_obj=IntencnyRamec).where(Intencia.int_ramec_id == IntencnyRamec.id)
-                    .label('ir_nazov'),
-                Intencia.fl.label('fl'),
+                Intencia.fl,
             ],
             from_obj=Sloveso.__table__.join(SlovnyDruh, SlovnyDruh.id == Sloveso.sd_id).
-                join(Intencia, Intencia.int_ramec_id == Sloveso.int_ramec_id)
+                outerjoin(Intencia, Intencia.int_ramec_id == Sloveso.int_ramec_id)
         ),
         metadata=db.Model.metadata
     )
+
 
