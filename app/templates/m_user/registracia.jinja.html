@@ -68,7 +68,11 @@ function register(){
     data.heslo=$("#defaultRegisterFormPassword").val();
     data.nove_heslo=data.heslo;
     data.permanent=false;
-    data.redirect='{{request.args.get("redirect")}}';
+
+    if ('{{request.args.get("redirect")}}'!="None")
+        data.redirect='{{request.args.get("redirect")}}';
+    else
+        data.redirect = '';
 
 
     AjaxMethods.getDataFromPostRequest('{{url_for("user.user_pridaj_zmen")}}', "", data, function(r){

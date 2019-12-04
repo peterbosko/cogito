@@ -30,7 +30,7 @@ def prihlas_ma():
     heslo = request.json["heslo"]
 
     red = ""
-    if request.json["redirect"] != "None":
+    if request.json["redirect"]:
         red = request.json["redirect"]
 
     permanent = bool(request.json["permanent"])
@@ -62,7 +62,7 @@ def user_pridaj_zmen():
     nove_heslo = request.json["nove_heslo"]
 
     red = ""
-    if request.json["redirect"] != "None":
+    if request.json["redirect"]:
         red = request.json["redirect"]
 
     response = CommonResponse()
