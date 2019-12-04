@@ -7,6 +7,12 @@ def vrat_pod_m(slovo, sufix):
         pm_objekty = PodstatneMeno.query.filter(PodstatneMeno.zak_tvar.like(slovo+"%")).\
             filter(PodstatneMeno.zak_tvar.like('%'+sufix))
 
+        b_sufix = True
+
+        if pm_objekty.count() == 0:
+            pm_objekty = PodstatneMeno.query.filter(PodstatneMeno.zak_tvar.like(slovo + "%"))
+            b_sufix = False
+
         slovo_id = None
         sql = ""
 
@@ -15,8 +21,10 @@ def vrat_pod_m(slovo, sufix):
         elif pm_objekty.count() == 0:
             sql = "Chýba v db"
         else:
-            sql = "SELECT sd.*,sd_pod_m.* FROM sd_pod_m JOIN sd ON sd.id=sd_pod_m.id WHERE zak_tvar LIKE '"+slovo+"%'" \
-                  " AND zak_tvar LIKE '%"+sufix+"'"
+            sql = "SELECT sd.*,sd_pod_m.* FROM sd_pod_m JOIN sd ON sd.id=sd_pod_m.id WHERE zak_tvar LIKE '"+slovo+"%'"
+
+            if b_sufix:
+                sql = sql + " AND zak_tvar LIKE '%"+sufix+"'"
 
         return slovo_id, sql
 
@@ -28,6 +36,12 @@ def vrat_prid_m(slovo, sufix):
         pr_objekty = PridavneMeno.query.filter(PridavneMeno.zak_tvar.like(slovo+"%")).\
             filter(PridavneMeno.zak_tvar.like('%'+sufix))
 
+        b_sufix = True
+
+        if pr_objekty.count() == 0:
+            pr_objekty = PridavneMeno.query.filter(PridavneMeno.zak_tvar.like(slovo+"%"))
+            b_sufix = False
+
         slovo_id = None
         sql = ""
 
@@ -37,7 +51,9 @@ def vrat_prid_m(slovo, sufix):
             sql = "Chýba v db"
         else:
             sql = "SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar " \
-                  "LIKE '"+slovo+"%' AND zak_tvar LIKE '%"+sufix+"'"
+                  "LIKE '"+slovo+"%'"
+            if b_sufix:
+                sql = sql + " AND zak_tvar LIKE '%"+sufix+"'"
 
         return slovo_id, sql
 
@@ -56,6 +72,13 @@ def vrat_sloveso(slovo, sufix, zvratnost):
             filter(Sloveso.zak_tvar.like('%'+sufix)).\
             filter(Sloveso.zvratnost == z)
 
+        b_sufix = True
+
+        if sl_objekty.count() == 0:
+            sl_objekty = Sloveso.query.filter(Sloveso.zak_tvar.like(slovo + "%")). \
+                filter(Sloveso.zvratnost == z)
+            b_sufix = False
+
         slovo_id = None
         sql = ""
 
@@ -66,10 +89,12 @@ def vrat_sloveso(slovo, sufix, zvratnost):
         else:
             if z:
                 sql = "SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar " \
-                      "LIKE '"+slovo+"%' AND zak_tvar LIKE '%"+sufix+"' AND zvratnost='"+z+"'"
+                      "LIKE '"+slovo+"%' AND zvratnost='"+z+"'"
             else:
                 sql = "SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar " \
-                      "LIKE '"+slovo+"%' AND zak_tvar LIKE '%"+sufix+"' AND ISNULL(zvratnost)=1"
+                      "LIKE '"+slovo+"%' AND ISNULL(zvratnost)=1"
+            if b_sufix:
+                sql = sql + " AND zak_tvar LIKE '%"+sufix+"'"
 
         return slovo_id, sql
 

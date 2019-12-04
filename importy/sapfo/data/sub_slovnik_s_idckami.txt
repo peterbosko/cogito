@@ -596,7 +596,7 @@ sub_staren_1>kmen((staren , 1),(star , 1),sub,cat([osoba],'',ena,'žena',poc)).:
 sub_starin_1>kmen((starin , 1),(star , 1),sub,cat([vec],'',ina,'žena',hrom)).:168647:
 sub_starinár_1>kmen(('starinár' , 1),(starin , 1),sub,cat([osoba],'','ár',chlap,poc)).:168648:
 sub_starinárstv_1>kmen(('starinárstv' , 1),('starinár' , 1),sub,cat([lok],'',stvo,'kráľovstvo',poc)).:168650:
-sub_stark_1>kmen((stark , 1),(star , 1),sub,cat([osoba],'',k,'vrchný',poc)).:None:Chýba v db
+sub_stark_1>kmen((stark , 1),(star , 1),sub,cat([osoba],'',k,'vrchný',poc)).:None:SELECT sd.*,sd_pod_m.* FROM sd_pod_m JOIN sd ON sd.id=sd_pod_m.id WHERE zak_tvar LIKE 'stark%'
 sub_starob_1>kmen((starob , 1),(star , 1),sub,cat([atb],'',oba,'žena',poc)).:168663:
 sub_starobinec_1>kmen((starobinec , 1),(star , 1),sub,cat([lok],'',inec,veniec,poc)).:168665:
 sub_starodievockosť_1>kmen(('starodievockosť' , 1),(starodievock , 1),sub,cat([atb],'','osť','kosť',poc)).:None:Chýba v db
@@ -680,7 +680,7 @@ sub_tlačiarstv_1>kmen(('tlačiarstv' , 1),('tlačiar' , 1),sub,cat([jav],'',stv
 sub_tlačidl_1>kmen(('tlačidl' , 1),('tlač' , 4),sub,cat([ins],'',dlo,'kráľovstvo',poc)).:182220:
 sub_tlačiv_1>kmen(('tlačiv' , 1),('tlač' , 1),sub,cat([vec],'',ivo,mesto,poc)).:182246:
 sub_tlačovin_1>kmen(('tlačovin' , 1),('tlač' , 1),sub,cat([vec],'',ovina,'žena',poc)).:489732:
-sub_trojičk_1>kmen(('trojičk' , 1),(tr , 1),sub,cat([osoba],'','ička',matka,poc)).:None:Chýba v db
+sub_trojičk_1>kmen(('trojičk' , 1),(tr , 1),sub,cat([osoba],'','ička',matka,poc)).:184586:
 sub_trojk_1>kmen((trojk , 1),(tr , 1),sub,cat([cis],'',ka,'čarodejka',poc)).:None:SELECT sd.*,sd_pod_m.* FROM sd_pod_m JOIN sd ON sd.id=sd_pod_m.id WHERE zak_tvar LIKE 'trojk%' AND zak_tvar LIKE '%ka'
 sub_trojkár_1>kmen(('trojkár' , 1),(trojk , 1),sub,cat([osoba],'','ár',chlap,poc)).:184600:
 sub_trojlístok_1>kmen(('trojlístok' , 1),((tr , 1),('lístok' , 1)),sub,cat([flor],'','',zlomok,poc)).:184621:
@@ -716,7 +716,7 @@ sub_veľkosť_1>kmen(('veľkosť' , 1),('veľk' , 1),sub,cat([atb],'','osť','ko
 sub_veľkovýrob_1>kmen(('veľkovýrob' , 1),(('veľk' , 1) , 'výrob' , 1),sub,cat([dej],'','','úloha',poc)).:None:SELECT sd.*,sd_pod_m.* FROM sd_pod_m JOIN sd ON sd.id=sd_pod_m.id WHERE zak_tvar LIKE 'veľkovýrob%' AND zak_tvar LIKE '%'
 sub_veľpieseň_1>kmen(('veľpieseň' , 1),('pieseň' , 1),sub,cat([dej],'veľ','','báseň',poc)).:197705:
 sub_veľryb_1>kmen(('veľryb' , 1),(ryb , 1),sub,cat([zviera],'veľ','','žena',poc)).:None:SELECT sd.*,sd_pod_m.* FROM sd_pod_m JOIN sd ON sd.id=sd_pod_m.id WHERE zak_tvar LIKE 'veľryb%' AND zak_tvar LIKE '%'
-sub_veľrybár_1>kmen(('veľrybár' , 1),('veľryb' , 1),sub,cat([osoba],'','ár',chlap,poc)).:None:Chýba v db
+sub_veľrybár_1>kmen(('veľrybár' , 1),('veľryb' , 1),sub,cat([osoba],'','ár',chlap,poc)).:197716:
 sub_viden_1>kmen((viden , 1),nil,sub,cat([dej],'','','vysvedčenie',poc)).:None:SELECT sd.*,sd_pod_m.* FROM sd_pod_m JOIN sd ON sd.id=sd_pod_m.id WHERE zak_tvar LIKE 'viden%' AND zak_tvar LIKE '%'
 sub_vidin_1>kmen((vidin , 1),(viden , 1),sub,cat([gnoz],'',ina,'žena',poc)).:198895:
 sub_viditeľnosť_1>kmen(('viditeľnosť' , 1),('viditeľn' , 1),sub,cat([atb],'','osť','kosť',poc)).:198898:
@@ -821,7 +821,7 @@ sub_zlatokop_1>kmen((zlatokop , 1),((zlat , 1) , kop , 1),sub,cat([osoba],'','',
 sub_zlatonosnosť_1>kmen(('zlatonosnosť' , 1),(zlatonosn , 1),sub,cat([atb],'','osť','kosť',poc)).:492674:
 sub_zlatotepec_1>kmen((zlatotepec , 1),((zlat , 1) , tepec , 1),sub,cat([osoba],'','',lovec,poc)).:None:SELECT sd.*,sd_pod_m.* FROM sd_pod_m JOIN sd ON sd.id=sd_pod_m.id WHERE zak_tvar LIKE 'zlatotepec%' AND zak_tvar LIKE '%'
 sub_zlatotepectv_1>kmen((zlatotepectv , 1),(zlatotepec , 1),sub,cat([jav],'',tvo,'kráľovstvo',poc)).:248127:
-sub_zlatov_1>kmen((zlatov , 1),(zlat , 2),sub,cat([atb],'',ov,mesto,poc)).:None:Chýba v db
+sub_zlatov_1>kmen((zlatov , 1),(zlat , 2),sub,cat([atb],'',ov,mesto,poc)).:None:SELECT sd.*,sd_pod_m.* FROM sd_pod_m JOIN sd ON sd.id=sd_pod_m.id WHERE zak_tvar LIKE 'zlatov%'
 sub_zlatovlásk_1>kmen(('zlatovlásk' , 1),(zlatovlas , 1),sub,cat([osoba],'',ka,'kráska',poc)).:248133:
 sub_zlatoň_1>kmen(('zlatoň' , 1),(zlat , 1),sub,cat([zviera],'','oň','jeleň',poc)).:None:SELECT sd.*,sd_pod_m.* FROM sd_pod_m JOIN sd ON sd.id=sd_pod_m.id WHERE zak_tvar LIKE 'zlatoň%' AND zak_tvar LIKE '%oň'
 sub_zliatin_1>kmen((zliatin , 1),(lia , 1),sub,cat([mat],z,ina,'úloha',poc)).:248369:
@@ -885,7 +885,7 @@ sub_ľubovoľnosť_1>kmen(('ľubovoľnosť' , 1),('ľubovoľn' , 0),sub,cat([atb
 sub_žen_0>kmen(('žen' , 0),nil,sub,cat([osoba],'','','žena',poc)).:None:SELECT sd.*,sd_pod_m.* FROM sd_pod_m JOIN sd ON sd.id=sd_pod_m.id WHERE zak_tvar LIKE 'žen%' AND zak_tvar LIKE '%'
 sub_ženb_1>kmen(('ženb' , 1),('žen' , 2),sub,cat([dej],'',ba,matka,poc)).:260287:
 sub_ženičk_1>kmen(('ženičk' , 1),('žen' , 0),sub,cat([osoba],'','ička',matka,poc)).:260291:
-sub_žensk_2>kmen(('žensk' , 2),('žen' , 0),sub,cat([osoba],'',sk,'ženská',poc)).:None:Chýba v db
+sub_žensk_2>kmen(('žensk' , 2),('žen' , 0),sub,cat([osoba],'',sk,'ženská',poc)).:None:SELECT sd.*,sd_pod_m.* FROM sd_pod_m JOIN sd ON sd.id=sd_pod_m.id WHERE zak_tvar LIKE 'žensk%'
 sub_ženušk_1>kmen(('ženušk' , 1),('žen' , 0),sub,cat([osoba],'','uška',matka,poc)).:260353:
 sub_ženáč_1>kmen(('ženáč' , 1),('ožen' , 1),sub,cat([osoba],'','áč',chlap,poc)).:260283:
 sub_ženích_1>kmen(('ženích' , 1),('žen' , 2),sub,cat([osoba],'','ích','černoch',poc)).:260292:

@@ -1,34 +1,34 @@
-﻿slo_b_1>kmen((b , 1),nil,sl,cat(103,'','',sa,nedok,'stáť',boj)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'b%' AND zak_tvar LIKE '%' AND zvratnost='sa'
-slo_bel_1>kmen((bel , 1),(biel , 1),sl,cat(140,'','ieť',nezv,nedok,'rozumieť',bel)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'bel%' AND zak_tvar LIKE '%ieť' AND ISNULL(zvratnost)=1
-slo_bel_2>kmen((bel , 2),(bel , 1),sl,cat(141,'','',sa,nedok,'rozumieť',bel)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'bel%' AND zak_tvar LIKE '%' AND zvratnost='sa'
-slo_bi_1>kmen((bi , 1),nil,sl,cat(125,'','',nezv,nedok,'piť',bij)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'bi%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+﻿slo_b_1>kmen((b , 1),nil,sl,cat(103,'','',sa,nedok,'stáť',boj)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'b%' AND zvratnost='sa' AND zak_tvar LIKE '%'
+slo_bel_1>kmen((bel , 1),(biel , 1),sl,cat(140,'','ieť',nezv,nedok,'rozumieť',bel)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'bel%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%ieť'
+slo_bel_2>kmen((bel , 2),(bel , 1),sl,cat(141,'','',sa,nedok,'rozumieť',bel)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'bel%' AND zvratnost='sa' AND zak_tvar LIKE '%'
+slo_bi_1>kmen((bi , 1),nil,sl,cat(125,'','',nezv,nedok,'piť',bij)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'bi%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_biel_2>kmen((biel , 2),(biel , 1),sl,cat(139,'','iť',nezv,nedok,'kúpiť',biel)).:446528:
 slo_cen_2>kmen((cen , 2),(cen , 1),sl,cat(94,'','iť',si,nedok,'robiť',cen)).:446643:
-slo_cestov_1>kmen((cestov , 1),nil,sl,cat(1,'','',nezv,nedok,'pracovať',cestuj)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'cestov%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_cestov_1>kmen((cestov , 1),nil,sl,cat(1,'','',nezv,nedok,'pracovať',cestuj)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'cestov%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_chc_0>kmen((chc , 0),nil,sl,cat(volmod,'','',nezv,nedok,'chcieť',chc)).:20920:
-slo_darov_1>kmen((darov , 1),nil,sl,cat(300,'','',nezv,oboj,'pracovať',daruj)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'darov%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_darov_1>kmen((darov , 1),nil,sl,cat(300,'','',nezv,oboj,'pracovať',daruj)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'darov%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_dievč_2>kmen(('dievč' , 2),('dievč' , 1),sl,cat(400,'','iť',nezv,nedok,'krášliť','dievč')).:452925:
-slo_div_3>kmen((div , 3),(div , 1),sl,cat(140,'','ieť',nezv,nedok,'rozumieť',div)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'div%' AND zak_tvar LIKE '%ieť' AND ISNULL(zvratnost)=1
+slo_div_3>kmen((div , 3),(div , 1),sl,cat(140,'','ieť',nezv,nedok,'rozumieť',div)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'div%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%ieť'
 slo_div_5>kmen((div , 5),(div , 4),sl,cat(104,'','iť',sa,nedok,'robiť',div)).:453060:
 slo_docestov_1>kmen((docestov , 1),(cestov , 1),sl,cat(10,do,'',nezv,dok,'pracovať',docestuj)).:262649:
-slo_dohor_1>kmen((dohor , 1),(hor , 1),sl,cat(33,do,'',nezv,dok,'vidieť',dohor)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'dohor%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_dohor_1>kmen((dohor , 1),(hor , 1),sl,cat(33,do,'',nezv,dok,'vidieť',dohor)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'dohor%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_dohoriev_1>kmen((dohoriev , 1),(dohor , 1),sl,cat(33,'','ievať',nezv,nedok,'čítať',dohoriev)).:2690:
 slo_dohovor_1>kmen((dohovor , 1),(hovor , 1),sl,cat(67,do,'',sa,dok,'robiť',dohovor)).:2728:
 slo_dohovor_2>kmen((dohovor , 2),(hovor , 1),sl,cat(60,do,'',nezv,dok,'robiť',dohovor)).:2722:
 slo_dokúp_1>kmen(('dokúp' , 1),('kúp' , 1),sl,cat(301,do,'',nezv,dok,'kúpiť','dokúp')).:3359:
-slo_dolet_1>kmen((dolet , 1),(let , 1),sl,cat(10,do,'',nezv,dok,'vidieť',dolet)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'dolet%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_dolet_1>kmen((dolet , 1),(let , 1),sl,cat(10,do,'',nezv,dok,'vidieť',dolet)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'dolet%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_dolia_1>kmen((dolia , 1),(lia , 2),sl,cat(6,do,'',nezv,dok,'kliať',dolej)).:3482:
-slo_doliet_1>kmen((doliet , 1),(liet , 1),sl,cat(1,do,'',nezv,dok,'čítať',doliet)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'doliet%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_doliet_1>kmen((doliet , 1),(liet , 1),sl,cat(1,do,'',nezv,dok,'čítať',doliet)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'doliet%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_doliev_1>kmen((doliev , 1),(dolia , 1),sl,cat(6,'','ievať',nezv,nedok,'čítať',doliev)).:3488:
-slo_dolieč_1>kmen(('dolieč' , 1),('lieč' , 1),sl,cat(122,do,'',nezv,dok,'kúpiť','dolieč')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'dolieč%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_dolieč_1>kmen(('dolieč' , 1),('lieč' , 1),sl,cat(122,do,'',nezv,dok,'kúpiť','dolieč')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'dolieč%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_dolám_1>kmen(('dolám' , 1),('lám' , 1),sl,cat(21,do,'',nezv,dok,'česať','dolám')).:3440:
 slo_donies_1>kmen((donies , 1),(nies , 6),sl,cat(3,do,'',nezv,dok,'niesť',dones)).:3942:
 slo_donáš_1>kmen(('donáš' , 1),(donies , 1),sl,cat(3,'','ať',nezv,nedok,'čítať','donáš')).:3923:
 slo_dopadn_1>kmen((dopadn , 1),(padn , 1),sl,cat(10,do,'',nezv,dok,'chudnúť',dopadn)).:4065:
 slo_dopadáv_1>kmen(('dopadáv' , 1),(dopadn , 1),sl,cat(10,'','ávať',nezv,nedok,'čítať','dopadáv')).:4047:
-slo_dopi_1>kmen((dopi , 1),(pi , 1),sl,cat(500,do,'',nezv,dok,'piť',dopij)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'dopi%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_dopoved_1>kmen((dopoved , 1),(poved , 1),sl,cat(60,do,'',nezv,dok,'brať',dopov)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'dopoved%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_doslad_1>kmen((doslad , 1),(slad , 1),sl,cat(139,do,'',nezv,dok,'robiť',doslad)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'doslad%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_dopi_1>kmen((dopi , 1),(pi , 1),sl,cat(500,do,'',nezv,dok,'piť',dopij)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'dopi%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_dopoved_1>kmen((dopoved , 1),(poved , 1),sl,cat(60,do,'',nezv,dok,'brať',dopov)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'dopoved%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_doslad_1>kmen((doslad , 1),(slad , 1),sl,cat(139,do,'',nezv,dok,'robiť',doslad)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'doslad%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_dospiev_1>kmen((dospiev , 1),(spiev , 1),sl,cat(60,do,'',nezv,dok,'čítať',dospiev)).:4939:
 slo_dostrieľ_1>kmen(('dostrieľ' , 1),('strieľ' , 1),sl,cat(125,do,'',nezv,dok,'čítať','dostrieľ')).:5109:
 slo_dotlač_1>kmen(('dotlač' , 1),('tlač' , 5),sl,cat(3,do,'',nezv,dok,'robiť','dotlač')).:5700:
@@ -37,28 +37,28 @@ slo_dovies_1>kmen((dovies , 1),(vies , 1),sl,cat(3,do,'',nezv,dok,'viesť',doved
 slo_dovádz_1>kmen(('dovádz' , 1),(dovies , 1),sl,cat(3,'','ať',nezv,nedok,'čítať','dovádz')).:6179:
 slo_dozvon_1>kmen((dozvon , 1),(zvon , 2),sl,cat(142,do,'',nezv,dok,'robiť',dozvon)).:None:Chýba v db
 slo_dozváň_1>kmen(('dozváň' , 1),(dozvon , 1),sl,cat(142,'','ať',nezv,nedok,'čítať','dozváň')).:None:Chýba v db
-slo_dočít_1>kmen(('dočít' , 1),('čít' , 1),sl,cat(60,do,'',nezv,dok,'čítať','dočít')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'dočít%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_dočít_1>kmen(('dočít' , 1),('čít' , 1),sl,cat(60,do,'',nezv,dok,'čítať','dočít')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'dočít%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_draž_1>kmen(('draž' , 1),(drah , 1),sl,cat(140,'','ieť',nezv,nedok,'rozumieť','draž')).:6936:
 slo_dreven_2>kmen((dreven , 2),(dreven , 1),sl,cat(140,'','ieť',nezv,nedok,'rozumieť',dreven)).:7096:
 slo_drevnat_2>kmen((drevnat , 2),(drevnat , 1),sl,cat(140,'','ieť',nezv,nedok,'rozumieť',drevnat)).:7111:
 slo_farb_3>kmen((farb , 3),(farb , 2),sl,cat(137,'','iť',nezv,nedok,'kresliť',farb)).:11128:
 slo_hemž_1>kmen(('hemž' , 1),nil,sl,cat(126,'','',sa,nedok,'kresliť','hemž')).:16317:
 slo_hmýr_1>kmen(('hmýr' , 1),nil,sl,cat(126,'','',sa,nedok,'kúpiť','hmýr')).:17228:
-slo_hnev_1>kmen((hnev , 1),nil,sl,cat(102,'','',sa,nedok,'chytať',hnev)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'hnev%' AND zak_tvar LIKE '%' AND zvratnost='sa'
-slo_hnev_3>kmen((hnev , 3),nil,sl,cat(122,'','',nezv,nedok,'chytať',hnev)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'hnev%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_hor_1>kmen((hor , 1),nil,sl,cat(33,'','',nezv,nedok,'vidieť',hor)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'hor%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_hnev_1>kmen((hnev , 1),nil,sl,cat(102,'','',sa,nedok,'chytať',hnev)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'hnev%' AND zvratnost='sa' AND zak_tvar LIKE '%'
+slo_hnev_3>kmen((hnev , 3),nil,sl,cat(122,'','',nezv,nedok,'chytať',hnev)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'hnev%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_hor_1>kmen((hor , 1),nil,sl,cat(33,'','',nezv,nedok,'vidieť',hor)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'hor%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_horárč_1>kmen(('horárč' , 1),('horár' , 1),sl,cat(400,'','čiť',nezv,nedok,'krášliť','horárč')).:263525:
-slo_hovor_1>kmen((hovor , 1),nil,sl,cat(60,'','',nezv,nedok,'robiť',hovor)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'hovor%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_hr_1>kmen((hr , 1),nil,sl,cat(121,'','',nezv,nedok,'chytať',hr)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'hr%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_hr_2>kmen((hr , 2),nil,sl,cat(210,'','',sa,nedok,'chytať',hr)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'hr%' AND zak_tvar LIKE '%' AND zvratnost='sa'
-slo_hr_3>kmen((hr , 3),nil,sl,cat(251,'','',nezv,nedok,'chytať',hr)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'hr%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_hovor_1>kmen((hovor , 1),nil,sl,cat(60,'','',nezv,nedok,'robiť',hovor)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'hovor%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_hr_1>kmen((hr , 1),nil,sl,cat(121,'','',nezv,nedok,'chytať',hr)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'hr%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_hr_2>kmen((hr , 2),nil,sl,cat(210,'','',sa,nedok,'chytať',hr)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'hr%' AND zvratnost='sa' AND zak_tvar LIKE '%'
+slo_hr_3>kmen((hr , 3),nil,sl,cat(251,'','',nezv,nedok,'chytať',hr)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'hr%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_hráv_1>kmen(('hráv' , 1),(hr , 1),sl,cat(121,'','ávať',nezv,nedok,'čítať','hráv')).:18735:
 slo_kamen_2>kmen((kamen , 2),('kameň' , 1),sl,cat(140,'','ieť',nezv,nedok,'rozumieť',kamen)).:26728:
 slo_kameňov_1>kmen(('kameňov' , 1),('kameň' , 1),sl,cat(122,'','ovať',nezv,nedok,'pracovať','kameňuj')).:26760:
 slo_knihov_1>kmen((knihov , 1),(knih , 1),sl,cat(60,'','ovať',nezv,nedok,'pracovať',knihuj)).:29111:
-slo_kop_1>kmen((kop , 1),nil,sl,cat(210,'','',nezv,nedok,'česať',kop)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'kop%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_kop_1>kmen((kop , 1),nil,sl,cat(210,'','',nezv,nedok,'česať',kop)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'kop%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_korunov_1>kmen((korunov , 1),(korun , 1),sl,cat(205,'','ovať',nezv,nedok,'pracovať',korunuj)).:31488:
-slo_kos_1>kmen((kos , 1),nil,sl,cat(22,'','',nezv,nedok,'robiť',kos)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'kos%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_kos_1>kmen((kos , 1),nil,sl,cat(22,'','',nezv,nedok,'robiť',kos)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'kos%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_kotv_2>kmen((kotv , 2),(kotv , 1),sl,cat(8,'','iť',nezv,nedok,'kresliť',kotv)).:31827:
 slo_kov_1>kmen((kov , 1),(ku , 1),sl,cat(20,'','',nezv,nedok,'chytať',kov)).:31850:
 slo_kradn_1>kmen((kradn , 1),nil,sl,cat(306,'','',nezv,nedok,'chudnúť',kradn)).:32073:
@@ -66,75 +66,75 @@ slo_kradn_2>kmen((kradn , 2),nil,sl,cat(1,'','',sa,nedok,'chudnúť',kradn)).:32
 slo_kraľov_1>kmen(('kraľov' , 1),('kráľ' , 1),sl,cat(400,'','ovať',nezv,nedok,'pracovať','kraľuj')).:32184:
 slo_krásn_2>kmen(('krásn' , 2),(pekn , 1),sl,cat(140,'','ieť',nezv,nedok,'rozumieť','krásn')).:32237:
 slo_krášl_1>kmen(('krášl' , 1),(pekn , 1),sl,cat(139,'','iť',nezv,nedok,'krášliť','krášl')).:32286:
-slo_krúž_1>kmen(('krúž' , 1),(kruh , 1),sl,cat(1,'','iť',nezv,nedok,'kúpiť','krúž')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'krúž%' AND zak_tvar LIKE '%iť' AND ISNULL(zvratnost)=1
+slo_krúž_1>kmen(('krúž' , 1),(kruh , 1),sl,cat(1,'','iť',nezv,nedok,'kúpiť','krúž')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'krúž%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%iť'
 slo_krúžkov_1>kmen(('krúžkov' , 1),('krúžok' , 1),sl,cat(420,'','ovať',nezv,nedok,'pracovať','krúžkuj')).:33486:
-slo_ku_1>kmen((ku , 1),nil,sl,cat(20,'','',nezv,nedok,'žuť',kuj)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'ku%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_ku_1>kmen((ku , 1),nil,sl,cat(20,'','',nezv,nedok,'žuť',kuj)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'ku%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_kupov_1>kmen((kupov , 1),nil,sl,cat(301,'','',nezv,nedok,'pracovať',kupuj)).:34143:
 slo_kupč_1>kmen(('kupč' , 1),(kupec , 1),sl,cat(400,'','čiť',nezv,nedok,'kresliť','kupč')).:34117:
 slo_kvitn_1>kmen((kvitn , 1),(kvet , 1),sl,cat(141,'','núť',nezv,nedok,'chudnúť',kvitn)).:34955:
 slo_kúp_1>kmen(('kúp' , 1),(kupov , 1),sl,cat(301,'','iť',nezv,dok,'kúpiť','kúp')).:34137:
 slo_kúzl_1>kmen(('kúzl' , 1),nil,sl,cat(210,'','',nezv,nedok,'krášliť','kúzl')).:34490:
 slo_lacn_3>kmen((lacn , 3),(lacn , 1),sl,cat(140,'','ieť',nezv,nedok,'rozumieť',lacn)).:35442:
-slo_let_1>kmen((let , 1),nil,sl,cat(1,'','',nezv,nedok,'vidieť',let)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'let%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_let_1>kmen((let , 1),nil,sl,cat(1,'','',nezv,nedok,'vidieť',let)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'let%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_letov_1>kmen((letov , 1),(let , 2),sl,cat(250,'','ovať',nezv,nedok,'pracovať',letuj)).:37044:
-slo_lia_1>kmen((lia , 1),nil,sl,cat(20,'','',nezv,nedok,'kliať',lej)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'lia%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_lia_2>kmen((lia , 2),nil,sl,cat(6,'','',nezv,nedok,'kliať',lej)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'lia%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_lia_3>kmen((lia , 3),(lia , 2),sl,cat(2,'','',sa,nedok,'kliať',lej)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'lia%' AND zak_tvar LIKE '%' AND zvratnost='sa'
-slo_lia_4>kmen((lia , 4),('prš' , 1),sl,cat(180,'','',nezv,nedok,'kliať',lej)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'lia%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_lia_5>kmen((lia , 5),nil,sl,cat(180,'','',nezv,nedok,'kliať',lej)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'lia%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_liet_1>kmen((liet , 1),(let , 1),sl,cat(1,'','ať',nezv,nedok,'čítať',liet)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'liet%' AND zak_tvar LIKE '%ať' AND ISNULL(zvratnost)=1
+slo_lia_1>kmen((lia , 1),nil,sl,cat(20,'','',nezv,nedok,'kliať',lej)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'lia%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_lia_2>kmen((lia , 2),nil,sl,cat(6,'','',nezv,nedok,'kliať',lej)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'lia%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_lia_3>kmen((lia , 3),(lia , 2),sl,cat(2,'','',sa,nedok,'kliať',lej)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'lia%' AND zvratnost='sa' AND zak_tvar LIKE '%'
+slo_lia_4>kmen((lia , 4),('prš' , 1),sl,cat(180,'','',nezv,nedok,'kliať',lej)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'lia%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_lia_5>kmen((lia , 5),nil,sl,cat(180,'','',nezv,nedok,'kliať',lej)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'lia%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_liet_1>kmen((liet , 1),(let , 1),sl,cat(1,'','ať',nezv,nedok,'čítať',liet)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'liet%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%ať'
 slo_lietav_1>kmen((lietav , 1),(liet , 1),sl,cat(1,'','avať',nezv,nedok,'čítať',lietav)).:37397:
 slo_liez_1>kmen((liez , 1),nil,sl,cat(1,'','',nezv,nedok,'niesť',lez)).:37416:
 slo_lieč_1>kmen(('lieč' , 1),nil,sl,cat(122,'','',nezv,nedok,'kúpiť','lieč')).:37331:
 slo_listov_2>kmen((listov , 2),(list , 3),sl,cat(210,'','ovať',nezv,nedok,'pracovať',listuj)).:37790:
-slo_lom_2>kmen((lom , 2),('lám' , 3),sl,cat(120,'','iť',nezv,nedok,'robiť',lom)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'lom%' AND zak_tvar LIKE '%iť' AND ISNULL(zvratnost)=1
+slo_lom_2>kmen((lom , 2),('lám' , 3),sl,cat(120,'','iť',nezv,nedok,'robiť',lom)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'lom%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%iť'
 slo_lom_3>kmen((lom , 3),(lom , 2),sl,cat(33,'','',sa,nedok,'robiť',lom)).:38212:
-slo_lov_1>kmen((lov , 1),nil,sl,cat(121,'','',nezv,nedok,'robiť',lov)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'lov%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_lov_3>kmen((lov , 3),nil,sl,cat(252,'','',nezv,nedok,'robiť',lov)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'lov%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_lov_1>kmen((lov , 1),nil,sl,cat(121,'','',nezv,nedok,'robiť',lov)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'lov%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_lov_3>kmen((lov , 3),nil,sl,cat(252,'','',nezv,nedok,'robiť',lov)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'lov%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_loďkov_2>kmen(('loďkov' , 2),('loď' , 1),sl,cat(250,'','ovať',sa,nedok,'pracovať','loďkuj')).:38027:
 slo_lám_1>kmen(('lám' , 1),nil,sl,cat(21,'','',nezv,nedok,'česať','lám')).:35890:
 slo_lám_2>kmen(('lám' , 2),('lám' , 1),sl,cat(32,'','',sa,nedok,'česať','lám')).:35896:
 slo_lám_3>kmen(('lám' , 3),nil,sl,cat(120,'','',nezv,nedok,'česať','lám')).:35890:
-slo_lásk_2>kmen(('lásk' , 2),('lásk' , 1),sl,cat(122,'','ať',nezv,nedok,'čítať','lásk')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'lásk%' AND zak_tvar LIKE '%ať' AND ISNULL(zvratnost)=1
-slo_m_1>kmen((m , 1),nil,sl,cat(600,'','',nezv,nedok,'chytať',m)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'm%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_mer_1>kmen((mer , 1),nil,sl,cat(120,'','',nezv,nedok,'chytať',mer)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'mer%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_met_1>kmen((met , 1),nil,sl,cat(3,'','',nezv,nedok,'chytať',met)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'met%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_milov_1>kmen((milov , 1),nil,sl,cat(100,'','',nezv,nedok,'pracovať',miluj)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'milov%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_milov_2>kmen((milov , 2),nil,sl,cat(100,'','',nezv,nedok,'pracovať',miluj)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'milov%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_lásk_2>kmen(('lásk' , 2),('lásk' , 1),sl,cat(122,'','ať',nezv,nedok,'čítať','lásk')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'lásk%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%ať'
+slo_m_1>kmen((m , 1),nil,sl,cat(600,'','',nezv,nedok,'chytať',m)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'm%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_mer_1>kmen((mer , 1),nil,sl,cat(120,'','',nezv,nedok,'chytať',mer)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'mer%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_met_1>kmen((met , 1),nil,sl,cat(3,'','',nezv,nedok,'chytať',met)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'met%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_milov_1>kmen((milov , 1),nil,sl,cat(100,'','',nezv,nedok,'pracovať',miluj)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'milov%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_milov_2>kmen((milov , 2),nil,sl,cat(100,'','',nezv,nedok,'pracovať',miluj)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'milov%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_mus_0>kmen((mus , 0),nil,sl,cat(potmod,'','',nezv,nedok,'vidieť',mus)).:46005:
 slo_môc_0>kmen(('môc' , 0),nil,sl,cat(posmod,'','',nezv,nedok,'môcť','môž')).:45085:
 slo_mál_2>kmen(('mál' , 2),('mál' , 1),sl,cat(0,'','iť',sa,nedok,'kúpiť','mál')).:39813:
 slo_mňauk_1>kmen(('mňauk' , 1),('mňau' , 1),sl,cat(143,'','kať',nezv,nedok,'chytať','mňauk')).:43779:
-slo_nadlet_1>kmen((nadlet , 1),(let , 1),sl,cat(4,nad,'',nezv,dok,'vidieť',nadlet)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'nadlet%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_nadlet_1>kmen((nadlet , 1),(let , 1),sl,cat(4,nad,'',nezv,dok,'vidieť',nadlet)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'nadlet%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_nafarb_1>kmen((nafarb , 1),(farb , 3),sl,cat(137,na,'',nezv,dok,'kresliť',nafarb)).:48935:
 slo_nahnev_1>kmen((nahnev , 1),(hnev , 1),sl,cat(102,na,'',sa,dok,'chytať',nahnev)).:49234:
 slo_nahnev_2>kmen((nahnev , 2),(hnev , 3),sl,cat(122,na,'',nezv,dok,'chytať',nahnev)).:49228:
 slo_nahovor_1>kmen((nahovor , 1),(hovor , 1),sl,cat(67,na,'',nezv,dok,'robiť',nahovor)).:49382:
 slo_nahovár_1>kmen(('nahovár' , 1),(nahovor , 1),sl,cat(67,'','ať',nezv,nedok,'čítať','nahovár')).:49388:
-slo_nahr_1>kmen((nahr , 1),(hr , 1),sl,cat(121,na,'',nezv,dok,'chytať',nahr)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'nahr%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_nahr_1>kmen((nahr , 1),(hr , 1),sl,cat(121,na,'',nezv,dok,'chytať',nahr)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'nahr%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_nahráv_1>kmen(('nahráv' , 1),(nahr , 1),sl,cat(121,'','ávať',nezv,nedok,'čítať','nahráv')).:49442:
 slo_nakupov_1>kmen((nakupov , 1),(kupov , 1),sl,cat(301,na,'',nezv,nedok,'pracovať',nakupuj)).:50643:
 slo_nakúp_1>kmen(('nakúp' , 1),(nakupov , 1),sl,cat(301,'','iť',nezv,dok,'kúpiť','nakúp')).:50637:
 slo_nalamov_1>kmen((nalamov , 1),(nalom , 1),sl,cat(22,'','ovať',nezv,nedok,'pracovať',nalamuj)).:51131:
-slo_nalet_1>kmen((nalet , 1),(let , 1),sl,cat(10,na,'',nezv,dok,'vidieť',nalet)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'nalet%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_nalia_1>kmen((nalia , 1),(lia , 2),sl,cat(6,na,'',nezv,dok,'kliať',nalej)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'nalia%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_naliet_1>kmen((naliet , 1),(liet , 1),sl,cat(120,na,'',nezv,dok,'čítať',naliet)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'naliet%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_nalet_1>kmen((nalet , 1),(let , 1),sl,cat(10,na,'',nezv,dok,'vidieť',nalet)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'nalet%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_nalia_1>kmen((nalia , 1),(lia , 2),sl,cat(6,na,'',nezv,dok,'kliať',nalej)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'nalia%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_naliet_1>kmen((naliet , 1),(liet , 1),sl,cat(120,na,'',nezv,dok,'čítať',naliet)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'naliet%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_nalietav_1>kmen((nalietav , 1),(nalet , 1),sl,cat(10,'','avať',nezv,nedok,'čítať',nalietav)).:51052:
 slo_naliev_1>kmen((naliev , 1),(nalia , 1),sl,cat(6,'','ievať',nezv,nedok,'čítať',naliev)).:50993:
 slo_nalod_1>kmen((nalod , 1),('loď' , 1),sl,cat(251,na,'iť',sa,dok,'robiť',nalod)).:51103:
 slo_nalom_1>kmen((nalom , 1),('lám' , 1),sl,cat(22,na,'iť',nezv,dok,'robiť',nalom)).:51125:
 slo_naloďov_1>kmen(('naloďov' , 1),(nalod , 1),sl,cat(251,'','ovať',sa,nedok,'pracovať','naloďuj')).:51109:
 slo_nalám_1>kmen(('nalám' , 1),('lám' , 1),sl,cat(20,na,'',nezv,dok,'česať','nalám')).:50861:
-slo_napad_1>kmen((napad , 1),(pad , 1),sl,cat(2,na,'',nezv,dok,'chytať',napad)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'napad%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_napad_2>kmen((napad , 2),(napadn , 2),sl,cat(92,'','ať',nezv,nedok,'chytať',napad)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'napad%' AND zak_tvar LIKE '%ať' AND ISNULL(zvratnost)=1
+slo_napad_1>kmen((napad , 1),(pad , 1),sl,cat(2,na,'',nezv,dok,'chytať',napad)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'napad%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_napad_2>kmen((napad , 2),(napadn , 2),sl,cat(92,'','ať',nezv,nedok,'chytať',napad)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'napad%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%ať'
 slo_napadn_1>kmen((napadn , 1),(napad , 1),sl,cat(2,'','núť',nezv,dok,'chudnúť',napadn)).:52075:
 slo_napadn_2>kmen((napadn , 2),nil,sl,cat(92,'','',nezv,dok,'chudnúť',napadn)).:52075:
 slo_napadn_3>kmen((napadn , 3),('napád' , 1),sl,cat(122,'','núť',nezv,nedok,'chudnúť',napadn)).:52075:
-slo_napi_1>kmen((napi , 1),(pi , 1),sl,cat(501,na,'',sa,dok,'piť',napij)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'napi%' AND zak_tvar LIKE '%' AND zvratnost='sa'
+slo_napi_1>kmen((napi , 1),(pi , 1),sl,cat(501,na,'',sa,dok,'piť',napij)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'napi%' AND zvratnost='sa' AND zak_tvar LIKE '%'
 slo_napln_1>kmen((napln , 1),(pln , 2),sl,cat(155,na,'',nezv,dok,'kresliť',napln)).:52571:
 slo_napád_1>kmen(('napád' , 1),nil,sl,cat(122,'','',nezv,nedok,'čítať','napád')).:52081:
-slo_narez_1>kmen((narez , 1),(rez , 1),sl,cat(22,na,'',nezv,dok,'česať','narež')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'narez%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_narez_2>kmen((narez , 2),(rez , 1),sl,cat(27,na,'',nezv,dok,'česať','narež')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'narez%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_narez_1>kmen((narez , 1),(rez , 1),sl,cat(22,na,'',nezv,dok,'česať','narež')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'narez%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_narez_2>kmen((narez , 2),(rez , 1),sl,cat(27,na,'',nezv,dok,'česať','narež')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'narez%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_nasmia_1>kmen((nasmia , 1),(smia , 1),sl,cat(101,na,'',sa,dok,'kliať',nasmej)).:54278:
 slo_nasnež_1>kmen(('nasnež' , 1),('snež' , 1),sl,cat(179,na,'',nezv,dok,'robiť','nasnež')).:None:Chýba v db
 slo_nastraš_1>kmen(('nastraš' , 1),('straš' , 1),sl,cat(115,na,'',nezv,dok,'robiť','nastraš')).:54735:
@@ -143,11 +143,11 @@ slo_nastrelov_1>kmen((nastrelov , 1),(nastrel , 1),sl,cat(120,'','ovať',nezv,ne
 slo_nastrieľ_1>kmen(('nastrieľ' , 1),('strieľ' , 1),sl,cat(120,na,'',nezv,dok,'čítať','nastrieľ')).:54839:
 slo_natier_1>kmen((natier , 1),(natr , 1),sl,cat(137,'','ať',nezv,nedok,'čítať',natier)).:55986:
 slo_natlač_1>kmen(('natlač' , 1),('tlač' , 1),sl,cat(60,na,'',nezv,dok,'robiť','natlač')).:55791:
-slo_natr_1>kmen((natr , 1),nil,sl,cat(137,'','',nezv,dok,'trieť',natr)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'natr%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_natr_1>kmen((natr , 1),nil,sl,cat(137,'','',nezv,dok,'trieť',natr)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'natr%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_nauč_1>kmen(('nauč' , 1),('uč' , 1),sl,cat(70,na,'',nezv,dok,'robiť','nauč')).:56140:
 slo_nauč_2>kmen(('nauč' , 2),('uč' , 2),sl,cat(71,na,'',sa,dok,'robiť','nauč')).:56146:
 slo_navies_1>kmen((navies , 1),(vies , 1),sl,cat(3,na,'',nezv,dok,'viesť',naved)).:56468:
-slo_navoň_2>kmen(('navoň' , 2),('voň' , 1),sl,cat(120,na,'',nezv,dok,'klaňať',navon)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'navoň%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_navoň_2>kmen(('navoň' , 2),('voň' , 1),sl,cat(120,na,'',nezv,dok,'klaňať',navon)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'navoň%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_navrát_1>kmen(('navrát' , 1),('vrát' , 1),sl,cat(10,na,'',sa,dok,'kúpiť','navrát')).:56787:
 slo_navádz_1>kmen(('navádz' , 1),(navies , 1),sl,cat(3,'','ať',nezv,nedok,'čítať','navádz')).:56474:
 slo_nies_3>kmen((nies , 3),nil,sl,cat(210,'','',nezv,nedok,'niesť',nes)).:60778:
@@ -158,10 +158,10 @@ slo_nies_7>kmen((nies , 7),(nies , 6),sl,cat(3,'','',sa,nedok,'niesť',nes)).:60
 slo_nos_1>kmen((nos , 1),(nies , 6),sl,cat(3,'','iť',nezv,nedok,'robiť',nos)).:61231:
 slo_nosiev_1>kmen((nosiev , 1),(nos , 1),sl,cat(3,'','ievať',nezv,opak,'čítať',nosiev)).:61237:
 slo_námorníč_1>kmen(('námorníč' , 1),('námorník' , 1),sl,cat(400,'','iť',nezv,nedok,'kúpiť','námorníč')).:51552:
-slo_obdarov_1>kmen((obdarov , 1),(darov , 1),sl,cat(303,ob,'',nezv,dok,'pracovať',obdaruj)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'obdarov%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_obdarov_1>kmen((obdarov , 1),(darov , 1),sl,cat(303,ob,'',nezv,dok,'pracovať',obdaruj)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'obdarov%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_obdarúv_1>kmen(('obdarúv' , 1),(obdarov , 1),sl,cat(303,'','úvať',nezv,nedok,'čítať','obdarúv')).:62075:
-slo_obel_1>kmen((obel , 1),(bel , 1),sl,cat(140,o,'',nezv,dok,'rozumieť',obel)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'obel%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_oblet_1>kmen((oblet , 1),(let , 1),sl,cat(4,ob,'',nezv,dok,'vidieť',oblet)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'oblet%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_obel_1>kmen((obel , 1),(bel , 1),sl,cat(140,o,'',nezv,dok,'rozumieť',obel)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'obel%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_oblet_1>kmen((oblet , 1),(let , 1),sl,cat(4,ob,'',nezv,dok,'vidieť',oblet)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'oblet%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_obletov_1>kmen((obletov , 1),(oblet , 1),sl,cat(4,'','ovať',nezv,nedok,'pracovať',obletuj)).:63855:
 slo_obrob_1>kmen((obrob , 1),('obráb' , 1),sl,cat(22,'','iť',nezv,dok,'robiť',obrob)).:64937:
 slo_obráb_1>kmen(('obráb' , 1),nil,sl,cat(22,'','',nezv,nedok,'čítať','obráb')).:64931:
@@ -169,16 +169,16 @@ slo_obšťastn_1>kmen(('obšťastn' , 1),('šťastn' , 1),sl,cat(139,ob,'iť',ne
 slo_obšťastňov_1>kmen(('obšťastňov' , 1),('obšťastn' , 1),sl,cat(139,'','ovať',nezv,nedok,'pracovať','obšťastňuj')).:66151:
 slo_ocen_1>kmen((ocen , 1),(cen , 1),sl,cat(80,o,'iť',nezv,dok,'robiť',ocen)).:67154:
 slo_odcestov_1>kmen((odcestov , 1),(cestov , 1),sl,cat(10,od,'',nezv,dok,'pracovať',odcestuj)).:68027:
-slo_odfarb_1>kmen((odfarb , 1),(farb , 3),sl,cat(137,od,'',nezv,dok,'kresliť',odfarb)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'odfarb%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_odfarb_1>kmen((odfarb , 1),(farb , 3),sl,cat(137,od,'',nezv,dok,'kresliť',odfarb)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'odfarb%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_odfarbov_1>kmen((odfarbov , 1),(odfarb , 1),sl,cat(137,'','ovať',nezv,nedok,'pracovať',odfarbuj)).:68593:
 slo_odkradn_1>kmen((odkradn , 1),(kradn , 2),sl,cat(10,od,'',sa,dok,'chudnúť',odkradn)).:69806:
 slo_odkúp_1>kmen(('odkúp' , 1),('kúp' , 1),sl,cat(301,od,'',nezv,dok,'kúpiť','odkúp')).:69976:
 slo_odlamov_1>kmen((odlamov , 1),(odlom , 1),sl,cat(26,'','ovať',nezv,nedok,'pracovať',odlamuj)).:70364:
-slo_odlet_1>kmen((odlet , 1),(let , 1),sl,cat(10,od,'',nezv,dok,'vidieť',odlet)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'odlet%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_odlet_1>kmen((odlet , 1),(let , 1),sl,cat(10,od,'',nezv,dok,'vidieť',odlet)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'odlet%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_odletov_1>kmen((odletov , 1),(odlet , 1),sl,cat(10,'','ovať',nezv,nedok,'pracovať',odletuj)).:70251:
 slo_odlia_1>kmen((odlia , 1),(lia , 1),sl,cat(20,od,'',nezv,dok,'kliať',odlej)).:70289:
 slo_odlia_2>kmen((odlia , 2),(lia , 2),sl,cat(6,od,'',nezv,dok,'kliať',odlej)).:70289:
-slo_odliet_1>kmen((odliet , 1),(odlet , 1),sl,cat(10,'','ať',nezv,nedok,'čítať',odliet)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'odliet%' AND zak_tvar LIKE '%ať' AND ISNULL(zvratnost)=1
+slo_odliet_1>kmen((odliet , 1),(odlet , 1),sl,cat(10,'','ať',nezv,nedok,'čítať',odliet)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'odliet%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%ať'
 slo_odlietav_1>kmen((odlietav , 1),(odlet , 1),sl,cat(10,'','avať',nezv,nedok,'čítať',odlietav)).:482523:
 slo_odliev_1>kmen((odliev , 1),(odlia , 1),sl,cat(20,'','ievať',nezv,nedok,'čítať',odliev)).:70295:
 slo_odliev_2>kmen((odliev , 2),(odlia , 2),sl,cat(6,'','ievať',nezv,nedok,'čítať',odliev)).:70295:
@@ -188,12 +188,12 @@ slo_odnáš_1>kmen(('odnáš' , 1),(odnies , 1),sl,cat(3,'','ať',nezv,nedok,'č
 slo_odpadn_1>kmen((odpadn , 1),(padn , 1),sl,cat(10,od,'',nezv,dok,'chudnúť',odpadn)).:71468:
 slo_odpadn_2>kmen((odpadn , 2),nil,sl,cat(210,'','',nezv,dok,'chudnúť',odpadn)).:71468:
 slo_odpadáv_1>kmen(('odpadáv' , 1),(odpadn , 1),sl,cat(10,'','ávať',nezv,nedok,'čítať','odpadáv')).:71462:
-slo_odpred_1>kmen((odpred , 1),(pred , 1),sl,cat(302,od,'',nezv,dok,'chytať',odpred)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'odpred%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_odrez_1>kmen((odrez , 1),(rez , 1),sl,cat(26,od,'',nezv,dok,'česať','odrež')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'odrez%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_odstraš_1>kmen(('odstraš' , 1),('straš' , 1),sl,cat(115,od,'',nezv,dok,'robiť','odstraš')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'odstraš%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_odpred_1>kmen((odpred , 1),(pred , 1),sl,cat(302,od,'',nezv,dok,'chytať',odpred)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'odpred%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_odrez_1>kmen((odrez , 1),(rez , 1),sl,cat(26,od,'',nezv,dok,'česať','odrež')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'odrez%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_odstraš_1>kmen(('odstraš' , 1),('straš' , 1),sl,cat(115,od,'',nezv,dok,'robiť','odstraš')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'odstraš%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_odstrel_1>kmen((odstrel , 1),(strel , 2),sl,cat(120,od,'',nezv,dok,'robiť',odstrel)).:73284:
 slo_odstrelov_1>kmen((odstrelov , 1),(odstrel , 1),sl,cat(120,'','ovať',nezv,nedok,'pracovať',odstreluj)).:None:Chýba v db
-slo_odtlač_1>kmen(('odtlač' , 1),('tlač' , 5),sl,cat(3,od,'',nezv,dok,'robiť','odtlač')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'odtlač%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_odtlač_1>kmen(('odtlač' , 1),('tlač' , 5),sl,cat(3,od,'',nezv,dok,'robiť','odtlač')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'odtlač%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_odtláč_1>kmen(('odtláč' , 1),('odtlač' , 1),sl,cat(3,'','ať',nezv,nedok,'čítať','odtláč')).:74030:
 slo_odvies_1>kmen((odvies , 1),(vies , 1),sl,cat(3,od,'',nezv,dok,'viesť',odved)).:74601:
 slo_odvodn_1>kmen((odvodn , 1),(vod , 1),sl,cat(120,od,'niť',nezv,dok,'kresliť',odvodn)).:74746:
@@ -204,7 +204,7 @@ slo_odzrkadl_1>kmen((odzrkadl , 1),(zrkadl , 2),sl,cat(121,od,'',nezv,dok,'kresl
 slo_odzrkadlov_1>kmen((odzrkadlov , 1),(odzrkadl , 1),sl,cat(121,'','ovať',nezv,nedok,'pracovať',odzrkadluj)).:None:Chýba v db
 slo_odzvon_1>kmen((odzvon , 1),(zvon , 2),sl,cat(142,od,'',nezv,dok,'robiť',odzvon)).:75100:
 slo_odzváň_1>kmen(('odzváň' , 1),(odzvon , 1),sl,cat(142,'','ať',nezv,nedok,'čítať','odzváň')).:75106:
-slo_ohor_1>kmen((ohor , 1),(hor , 1),sl,cat(33,o,'',nezv,dok,'vidieť',ohor)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'ohor%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_ohor_1>kmen((ohor , 1),(hor , 1),sl,cat(33,o,'',nezv,dok,'vidieť',ohor)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'ohor%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_okos_1>kmen((okos , 1),(kos , 1),sl,cat(22,o,'',nezv,dok,'robiť',okos)).:None:Chýba v db
 slo_okov_1>kmen((okov , 1),(kov , 1),sl,cat(22,o,'',nezv,dok,'chytať',okov)).:76876:
 slo_okradn_1>kmen((okradn , 1),(kradn , 1),sl,cat(307,o,'',nezv,dok,'chudnúť',okradn)).:76908:
@@ -214,45 +214,45 @@ slo_okrášľov_1>kmen(('okrášľov' , 1),('okrášl' , 1),sl,cat(139,'','ovať
 slo_okúzl_1>kmen(('okúzl' , 1),nil,sl,cat(110,'','',nezv,dok,'krášliť','okúzl')).:77339:
 slo_okúzľov_1>kmen(('okúzľov' , 1),('okúzl' , 1),sl,cat(110,'','ovať',nezv,nedok,'pracovať','okúzľuj')).:77345:
 slo_okúň_1>kmen(('okúň' , 1),(ok , 1),sl,cat(500,'','úňať',sa,nedok,'čítať','okúň')).:77269:
-slo_opekn_1>kmen((opekn , 1),(pekn , 1),sl,cat(140,o,'',nezv,dok,'rozumieť',opekn)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'opekn%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_opi_1>kmen((opi , 1),(pi , 2),sl,cat(502,o,'',sa,dok,'piť',opij)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'opi%' AND zak_tvar LIKE '%' AND zvratnost='sa'
+slo_opekn_1>kmen((opekn , 1),(pekn , 1),sl,cat(140,o,'',nezv,dok,'rozumieť',opekn)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'opekn%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_opi_1>kmen((opi , 1),(pi , 2),sl,cat(502,o,'',sa,dok,'piť',opij)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'opi%' AND zvratnost='sa' AND zak_tvar LIKE '%'
 slo_opíj_1>kmen(('opíj' , 1),(opi , 1),sl,cat(502,'','íjať',sa,nedok,'čítať','opíj')).:79392:
-slo_orez_1>kmen((orez , 1),(rez , 1),sl,cat(22,o,'',nezv,dok,'česať','orež')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'orez%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_orez_1>kmen((orez , 1),(rez , 1),sl,cat(22,o,'',nezv,dok,'česať','orež')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'orez%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_orezáv_1>kmen(('orezáv' , 1),(orez , 1),sl,cat(22,'','ávať',nezv,nedok,'čítať','orezáv')).:80458:
-slo_oslad_1>kmen((oslad , 1),(slad , 1),sl,cat(139,o,'',nezv,dok,'robiť',oslad)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'oslad%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_oslad_1>kmen((oslad , 1),(slad , 1),sl,cat(139,o,'',nezv,dok,'robiť',oslad)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'oslad%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_oslepn_1>kmen((oslepn , 1),(slepn , 1),sl,cat(140,o,'',nezv,dok,'chudnúť',oslepn)).:81375:
 slo_ostar_1>kmen((ostar , 1),(starn , 1),sl,cat(140,o,'ieť',nezv,dok,'trieť',ostar)).:81884:
 slo_osviet_1>kmen((osviet , 1),(sviet , 1),sl,cat(120,o,'',nezv,dok,'kúpiť',osviet)).:82414:
 slo_ovládn_1>kmen(('ovládn' , 1),('vládn' , 1),sl,cat(120,o,'',nezv,nedok,'vládnuť','ovládn')).:84309:
-slo_ozelen_1>kmen((ozelen , 1),(zelen , 3),sl,cat(140,o,'',nezv,dok,'rozumieť',ozelen)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'ozelen%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_očar_1>kmen(('očar' , 1),nil,sl,cat(110,'','',nezv,dok,'robiť','očar')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'očar%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_očerven_1>kmen(('očerven' , 1),('červen' , 3),sl,cat(140,o,'',nezv,dok,'rozumieť','očerven')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'očerven%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_ozelen_1>kmen((ozelen , 1),(zelen , 3),sl,cat(140,o,'',nezv,dok,'rozumieť',ozelen)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'ozelen%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_očar_1>kmen(('očar' , 1),nil,sl,cat(110,'','',nezv,dok,'robiť','očar')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'očar%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_očerven_1>kmen(('očerven' , 1),('červen' , 3),sl,cat(140,o,'',nezv,dok,'rozumieť','očerven')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'očerven%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_ožen_1>kmen(('ožen' , 1),('žen' , 2),sl,cat(0,o,'',sa,dok,'robiť','ožen')).:84951:
-slo_pad_1>kmen((pad , 1),nil,sl,cat(2,'','',nezv,nedok,'chytať',pad)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'pad%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_pad_1>kmen((pad , 1),nil,sl,cat(2,'','',nezv,nedok,'chytať',pad)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'pad%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_padn_1>kmen((padn , 1),(pad , 1),sl,cat(2,'','núť',nezv,dok,'chudnúť',padn)).:85305:
 slo_pestr_3>kmen((pestr , 3),(pestr , 1),sl,cat(141,'','ieť',sa,nedok,'trieť',pestr)).:88324:
-slo_pi_1>kmen((pi , 1),nil,sl,cat(500,'','',nezv,nedok,'piť',pij)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'pi%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_pi_2>kmen((pi , 2),nil,sl,cat(500,'','',nezv,nedok,'piť',pij)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'pi%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_pi_1>kmen((pi , 1),nil,sl,cat(500,'','',nezv,nedok,'piť',pij)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'pi%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_pi_2>kmen((pi , 2),nil,sl,cat(500,'','',nezv,nedok,'piť',pij)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'pi%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_plav_1>kmen((plav , 1),nil,sl,cat(1,'','',sa,nedok,'robiť',plav)).:89752:
 slo_pln_2>kmen((pln , 2),(pln , 1),sl,cat(155,'','iť',nezv,nedok,'kresliť',pln)).:90221:
 slo_podarov_1>kmen((podarov , 1),(darov , 1),sl,cat(300,po,'',nezv,dok,'pracovať',podaruj)).:92042:
 slo_podcen_1>kmen((podcen , 1),(cen , 1),sl,cat(80,pod,'iť',nezv,dok,'robiť',podcen)).:92208:
 slo_podiv_1>kmen((podiv , 1),(div , 5),sl,cat(104,po,'',sa,dok,'robiť',podiv)).:92742:
 slo_podlamov_1>kmen((podlamov , 1),(podlom , 1),sl,cat(22,'','ovať',nezv,nedok,'pracovať',podlamuj)).:93264:
-slo_podlet_1>kmen((podlet , 1),(let , 1),sl,cat(4,pod,'',nezv,dok,'vidieť',podlet)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'podlet%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_podlet_1>kmen((podlet , 1),(let , 1),sl,cat(4,pod,'',nezv,dok,'vidieť',podlet)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'podlet%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_podlom_1>kmen((podlom , 1),('lám' , 1),sl,cat(22,pod,'iť',nezv,dok,'robiť',podlom)).:93258:
 slo_poduč_1>kmen(('poduč' , 1),('uč' , 2),sl,cat(71,pod,'',sa,dok,'robiť','poduč')).:95267:
-slo_pohnev_1>kmen((pohnev , 1),(hnev , 1),sl,cat(131,po,'',sa,dok,'chytať',pohnev)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'pohnev%' AND zak_tvar LIKE '%' AND zvratnost='sa'
+slo_pohnev_1>kmen((pohnev , 1),(hnev , 1),sl,cat(131,po,'',sa,dok,'chytať',pohnev)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'pohnev%' AND zvratnost='sa' AND zak_tvar LIKE '%'
 slo_pohybov_0>kmen((pohybov , 0),nil,sl,cat(1,'','',sa,nedok,'pracovať',pohybuj)).:97261:
 slo_pokos_1>kmen((pokos , 1),(kos , 1),sl,cat(22,po,'',nezv,dok,'robiť',pokos)).:98698:
 slo_pokradn_1>kmen((pokradn , 1),(kradn , 1),sl,cat(306,po,'',nezv,dok,'chudnúť',pokradn)).:98745:
-slo_polia_1>kmen((polia , 1),(lia , 2),sl,cat(120,po,'',nezv,dok,'kliať',polej)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'polia%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_polia_1>kmen((polia , 1),(lia , 2),sl,cat(120,po,'',nezv,dok,'kliať',polej)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'polia%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_poliev_1>kmen((poliev , 1),(polia , 1),sl,cat(120,'','ievať',nezv,nedok,'čítať',poliev)).:99928:
 slo_polám_1>kmen(('polám' , 1),('lám' , 1),sl,cat(21,po,'',nezv,dok,'česať','polám')).:99578:
 slo_poodlamov_1>kmen((poodlamov , 1),(odlamov , 1),sl,cat(26,po,'',nezv,dok,'pracovať',poodlamuj)).:103305:
-slo_popad_1>kmen((popad , 1),(pad , 1),sl,cat(2,po,'',nezv,dok,'chytať',popad)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'popad%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_popad_1>kmen((popad , 1),(pad , 1),sl,cat(2,po,'',nezv,dok,'chytať',popad)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'popad%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_poperzšt_1>kmen(('poperzšt' , 1),(perzsk , 1),sl,cat(139,po,'iť',nezv,dok,'kresliť','poperzšt')).:None:Chýba v db
-slo_poprch_1>kmen((poprch , 1),('prš' , 1),sl,cat(180,po,'',nezv,nedok,'chytať',poprch)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'poprch%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_poprch_1>kmen((poprch , 1),('prš' , 1),sl,cat(180,po,'',nezv,nedok,'chytať',poprch)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'poprch%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_popíj_1>kmen(('popíj' , 1),(pi , 1),sl,cat(500,po,'íjať',nezv,nedok,'čítať','popíj')).:104727:
 slo_posmiev_1>kmen((posmiev , 1),(smia , 2),sl,cat(104,po,'ievať',sa,nedok,'čítať',posmiev)).:109395:
 slo_pospevov_1>kmen((pospevov , 1),(spiev , 1),sl,cat(60,po,'ovať',nezv,nedok,'pracovať',pospevuj)).:109619:
@@ -260,8 +260,8 @@ slo_postav_1>kmen((postav , 1),(st , 1),sl,cat(7,po,'iť',sa,dok,'robiť',postav
 slo_postraš_1>kmen(('postraš' , 1),('straš' , 1),sl,cat(115,po,'',nezv,dok,'robiť','postraš')).:110217:
 slo_postrel_1>kmen((postrel , 1),(strel , 2),sl,cat(122,po,'',nezv,dok,'robiť',postrel)).:110291:
 slo_postrieľ_1>kmen(('postrieľ' , 1),('strieľ' , 1),sl,cat(122,po,'',nezv,dok,'čítať','postrieľ')).:110429:
-slo_pouč_1>kmen(('pouč' , 1),('uč' , 1),sl,cat(70,po,'',nezv,dok,'robiť','pouč')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'pouč%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_pouč_2>kmen(('pouč' , 2),('uč' , 2),sl,cat(71,po,'',sa,dok,'robiť','pouč')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'pouč%' AND zak_tvar LIKE '%' AND zvratnost='sa'
+slo_pouč_1>kmen(('pouč' , 1),('uč' , 1),sl,cat(70,po,'',nezv,dok,'robiť','pouč')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'pouč%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_pouč_2>kmen(('pouč' , 2),('uč' , 2),sl,cat(71,po,'',sa,dok,'robiť','pouč')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'pouč%' AND zvratnost='sa' AND zak_tvar LIKE '%'
 slo_poved_1>kmen((poved , 1),nil,sl,cat(60,'','',nezv,dok,'brať',pov)).:113919:
 slo_pozlacov_1>kmen((pozlacov , 1),('pozlát' , 1),sl,cat(120,'','ovať',nezv,nedok,'pracovať',pozlacuj)).:117035:
 slo_pozlát_1>kmen(('pozlát' , 1),('zlát' , 1),sl,cat(120,po,'',nezv,dok,'kúpiť','pozlát')).:117029:
@@ -269,12 +269,12 @@ slo_pozomier_1>kmen((pozomier , 1),(zomier , 1),sl,cat(140,po,'',nezv,dok,'čít
 slo_pošepn_1>kmen(('pošepn' , 1),('šepk' , 1),sl,cat(60,po,'núť',nezv,dok,'chudnúť','pošepn')).:110957:
 slo_precen_1>kmen((precen , 1),(cen , 1),sl,cat(80,pre,'iť',nezv,dok,'robiť',precen)).:119133:
 slo_precestov_1>kmen((precestov , 1),(cestov , 1),sl,cat(4,pre,'',nezv,dok,'pracovať',precestuj)).:119160:
-slo_pred_1>kmen((pred , 1),('predáv' , 1),sl,cat(302,'','ať',nezv,dok,'chytať',pred)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'pred%' AND zak_tvar LIKE '%ať' AND ISNULL(zvratnost)=1
+slo_pred_1>kmen((pred , 1),('predáv' , 1),sl,cat(302,'','ať',nezv,dok,'chytať',pred)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'pred%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%ať'
 slo_predraž_1>kmen(('predraž' , 1),(drah , 1),sl,cat(139,pre,'iť',nezv,dok,'robiť','predraž')).:120420:
 slo_predražov_1>kmen(('predražov' , 1),('predraž' , 1),sl,cat(139,'','ovať',nezv,nedok,'pracovať','predražuj')).:120414:
 slo_predspevov_1>kmen((predspevov , 1),(spiev , 1),sl,cat(60,pred,'ovať',nezv,nedok,'pracovať',predspevuj)).:120552:
-slo_predstav_1>kmen((predstav , 1),nil,sl,cat(80,'','',si,dok,'robiť',predstav)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'predstav%' AND zak_tvar LIKE '%' AND zvratnost='si'
-slo_predstav_3>kmen((predstav , 3),nil,sl,cat(210,'','',sa,dok,'robiť',predstav)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'predstav%' AND zak_tvar LIKE '%' AND zvratnost='sa'
+slo_predstav_1>kmen((predstav , 1),nil,sl,cat(80,'','',si,dok,'robiť',predstav)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'predstav%' AND zvratnost='si' AND zak_tvar LIKE '%'
+slo_predstav_3>kmen((predstav , 3),nil,sl,cat(210,'','',sa,dok,'robiť',predstav)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'predstav%' AND zvratnost='sa' AND zak_tvar LIKE '%'
 slo_predstavov_1>kmen((predstavov , 1),(predstav , 1),sl,cat(80,'','ovať',si,nedok,'pracovať',predstavuj)).:120611:
 slo_predstavov_2>kmen((predstavov , 2),(predstav , 3),sl,cat(210,'','ovať',sa,nedok,'pracovať',predstavuj)).:120596:
 slo_predstavov_3>kmen((predstavov , 3),nil,sl,cat(200,'','',nezv,nedok,'pracovať',predstavuj)).:120584:
@@ -282,8 +282,8 @@ slo_predvies_1>kmen((predvies , 1),(vies , 1),sl,cat(3,pred,'',nezv,dok,'viesť'
 slo_predvies_2>kmen((predvies , 2),nil,sl,cat(121,'','',nezv,dok,'viesť',predved)).:120818:
 slo_predvádz_1>kmen(('predvádz' , 1),(predvies , 1),sl,cat(3,'','ať',nezv,nedok,'čítať','predvádz')).:120812:
 slo_predvádz_2>kmen(('predvádz' , 2),(predvies , 2),sl,cat(121,'','ať',nezv,nedok,'čítať','predvádz')).:120812:
-slo_predáv_1>kmen(('predáv' , 1),nil,sl,cat(302,'','',nezv,nedok,'čítať','predáv')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'predáv%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_prefarb_1>kmen((prefarb , 1),(farb , 3),sl,cat(137,pre,'',nezv,dok,'kresliť',prefarb)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'prefarb%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_predáv_1>kmen(('predáv' , 1),nil,sl,cat(302,'','',nezv,nedok,'čítať','predáv')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'predáv%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_prefarb_1>kmen((prefarb , 1),(farb , 3),sl,cat(137,pre,'',nezv,dok,'kresliť',prefarb)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'prefarb%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_prefarbov_1>kmen((prefarbov , 1),(prefarb , 1),sl,cat(137,'','ovať',nezv,nedok,'pracovať',prefarbuj)).:120975:
 slo_prehor_1>kmen((prehor , 1),(hor , 1),sl,cat(33,pre,'',nezv,dok,'vidieť',prehor)).:121468:
 slo_prehoriev_1>kmen((prehoriev , 1),(prehor , 1),sl,cat(33,'','ievať',nezv,nedok,'čítať',prehoriev)).:None:Chýba v db
@@ -292,73 +292,73 @@ slo_prehovor_2>kmen((prehovor , 2),(hovor , 1),sl,cat(68,pre,'',nezv,dok,'robiť
 slo_prehovár_1>kmen(('prehovár' , 1),(prehovor , 2),sl,cat(68,'','ať',nezv,nedok,'čítať','prehovár')).:121497:
 slo_prekvit_1>kmen((prekvit , 1),(kvitn , 1),sl,cat(141,pre,'ať',nezv,nedok,'chytať',prekvit)).:123054:
 slo_prelamov_1>kmen((prelamov , 1),(prelom , 1),sl,cat(22,'','ovať',nezv,nedok,'pracovať',prelamuj)).:123176:
-slo_prelet_1>kmen((prelet , 1),(let , 1),sl,cat(4,pre,'',nezv,dok,'vidieť',prelet)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'prelet%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_prelia_1>kmen((prelia , 1),(lia , 2),sl,cat(6,pre,'',nezv,dok,'kliať',prelej)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'prelia%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_prelet_1>kmen((prelet , 1),(let , 1),sl,cat(4,pre,'',nezv,dok,'vidieť',prelet)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'prelet%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_prelia_1>kmen((prelia , 1),(lia , 2),sl,cat(6,pre,'',nezv,dok,'kliať',prelej)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'prelia%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_prelietav_1>kmen((prelietav , 1),(prelet , 1),sl,cat(4,'','avať',nezv,nedok,'čítať',prelietav)).:None:Chýba v db
 slo_preliev_1>kmen((preliev , 1),(prelia , 1),sl,cat(6,'','ievať',nezv,nedok,'čítať',preliev)).:123326:
-slo_prelistov_1>kmen((prelistov , 1),(listov , 2),sl,cat(121,pre,'',nezv,dok,'pracovať',prelistuj)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'prelistov%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_prelistov_1>kmen((prelistov , 1),(listov , 2),sl,cat(121,pre,'',nezv,dok,'pracovať',prelistuj)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'prelistov%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_prelom_1>kmen((prelom , 1),('lám' , 1),sl,cat(22,pre,'iť',nezv,dok,'robiť',prelom)).:123424:
 slo_prepadn_1>kmen((prepadn , 1),(padn , 1),sl,cat(2,pre,'',sa,dok,'chudnúť',prepadn)).:124675:
 slo_prepadn_2>kmen((prepadn , 2),nil,sl,cat(122,'','',nezv,dok,'chudnúť',prepadn)).:124657:
 slo_prepadáv_1>kmen(('prepadáv' , 1),(prepadn , 1),sl,cat(2,'','ávať',sa,nedok,'čítať','prepadáv')).:124687:
 slo_prepadáv_2>kmen(('prepadáv' , 2),(prepadn , 2),sl,cat(122,'','ávať',nezv,nedok,'čítať','prepadáv')).:124663:
-slo_prerez_1>kmen((prerez , 1),(rez , 1),sl,cat(22,pre,'',nezv,dok,'česať','prerež')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'prerez%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_prerez_1>kmen((prerez , 1),(rez , 1),sl,cat(22,pre,'',nezv,dok,'česať','prerež')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'prerez%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_prerúb_1>kmen(('prerúb' , 1),('rúb' , 1),sl,cat(1,pre,'',sa,dok,'česať','prerúb')).:125792:
-slo_prest_0>kmen((prest , 0),nil,sl,cat(0,'','',nezv,dok,'česať',prestan)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'prest%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_prest_0>kmen((prest , 0),nil,sl,cat(0,'','',nezv,dok,'česať',prestan)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'prest%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_prestraš_1>kmen(('prestraš' , 1),('straš' , 1),sl,cat(115,pre,'',nezv,dok,'robiť','prestraš')).:126527:
 slo_prestrel_1>kmen((prestrel , 1),(strel , 1),sl,cat(120,pre,'',nezv,dok,'robiť',prestrel)).:126558:
 slo_prestáv_1>kmen(('prestáv' , 1),(prest , 0),sl,cat(0,'','ávať',nezv,nedok,'čítať','prestáv')).:126464:
-slo_pretlač_1>kmen(('pretlač' , 1),('tlač' , 5),sl,cat(3,pre,'',nezv,dok,'robiť','pretlač')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'pretlač%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_pretlač_1>kmen(('pretlač' , 1),('tlač' , 5),sl,cat(3,pre,'',nezv,dok,'robiť','pretlač')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'pretlač%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_prečít_1>kmen(('prečít' , 1),('čít' , 1),sl,cat(60,pre,'',nezv,dok,'čítať','prečít')).:119417:
 slo_pricestov_1>kmen((pricestov , 1),(cestov , 1),sl,cat(10,pri,'',nezv,dok,'pracovať',pricestuj)).:130010:
-slo_prifarb_1>kmen((prifarb , 1),(farb , 3),sl,cat(137,pri,'',nezv,dok,'kresliť',prifarb)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'prifarb%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_prifarb_1>kmen((prifarb , 1),(farb , 3),sl,cat(137,pri,'',nezv,dok,'kresliť',prifarb)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'prifarb%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_prifarbov_1>kmen((prifarbov , 1),(prifarb , 1),sl,cat(137,'','ovať',nezv,nedok,'pracovať',prifarbuj)).:130965:
-slo_prihor_1>kmen((prihor , 1),(hor , 1),sl,cat(33,pri,'',nezv,dok,'vidieť',prihor)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'prihor%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_prihor_1>kmen((prihor , 1),(hor , 1),sl,cat(33,pri,'',nezv,dok,'vidieť',prihor)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'prihor%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_prihár_1>kmen(('prihár' , 1),(prihor , 1),sl,cat(33,'','ať',nezv,nedok,'čítať','prihár')).:131077:
 slo_prikradn_1>kmen((prikradn , 1),(kradn , 2),sl,cat(10,pri,'',sa,dok,'chudnúť',prikradn)).:132176:
 slo_prikrád_1>kmen(('prikrád' , 1),(prikradn , 1),sl,cat(10,'','ať',sa,nedok,'čítať',prikradn)).:132170:
 slo_prikúp_1>kmen(('prikúp' , 1),('kúp' , 1),sl,cat(301,pri,'',nezv,dok,'kúpiť','prikúp')).:132436:
 slo_prikúzl_1>kmen(('prikúzl' , 1),('kúzl' , 1),sl,cat(20,pri,'',nezv,dok,'krášliť','prikúzl')).:None:Chýba v db
-slo_prilet_1>kmen((prilet , 1),(let , 1),sl,cat(10,pri,'',nezv,dok,'vidieť',prilet)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'prilet%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_prilia_1>kmen((prilia , 1),(lia , 2),sl,cat(6,pri,'',nezv,dok,'kliať',prilej)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'prilia%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_prilet_1>kmen((prilet , 1),(let , 1),sl,cat(10,pri,'',nezv,dok,'vidieť',prilet)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'prilet%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_prilia_1>kmen((prilia , 1),(lia , 2),sl,cat(6,pri,'',nezv,dok,'kliať',prilej)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'prilia%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_priliev_1>kmen((priliev , 1),(prilia , 1),sl,cat(6,'','ievať',nezv,nedok,'čítať',priliev)).:132707:
 slo_priliev_2>kmen((priliev , 2),(priliev , 1),sl,cat(2,'','',sa,nedok,'čítať',priliev)).:None:Chýba v db
 slo_prinies_1>kmen((prinies , 1),(nies , 6),sl,cat(3,pri,'',nezv,dok,'niesť',prines)).:133232:
 slo_prináš_1>kmen(('prináš' , 1),(prinies , 1),sl,cat(3,'','ať',nezv,nedok,'čítať','prináš')).:133238:
-slo_prislad_1>kmen((prislad , 1),(slad , 1),sl,cat(139,pri,'',nezv,dok,'robiť',prislad)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'prislad%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_prislad_1>kmen((prislad , 1),(slad , 1),sl,cat(139,pri,'',nezv,dok,'robiť',prislad)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'prislad%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_prisni_1>kmen((prisni , 1),(sni , 1),sl,cat(93,pri,'',sa,dok,'piť',prisnij)).:134934:
-slo_pritlač_1>kmen(('pritlač' , 1),('tlač' , 4),sl,cat(120,pri,'',nezv,dok,'robiť','pritlač')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'pritlač%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_pritlač_2>kmen(('pritlač' , 2),('tlač' , 5),sl,cat(3,pri,'',nezv,dok,'robiť','pritlač')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'pritlač%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_pritlač_1>kmen(('pritlač' , 1),('tlač' , 4),sl,cat(120,pri,'',nezv,dok,'robiť','pritlač')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'pritlač%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_pritlač_2>kmen(('pritlač' , 2),('tlač' , 5),sl,cat(3,pri,'',nezv,dok,'robiť','pritlač')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'pritlač%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_priuč_1>kmen(('priuč' , 1),('uč' , 2),sl,cat(71,pri,'',sa,dok,'robiť','priuč')).:136460:
 slo_privies_1>kmen((privies , 1),(vies , 1),sl,cat(3,pri,'',nezv,dok,'viesť',prived)).:136684:
 slo_privoň_1>kmen(('privoň' , 1),('voň' , 1),sl,cat(125,pri,'',nezv,dok,'klaňať',privon)).:136840:
 slo_privádz_1>kmen(('privádz' , 1),(vies , 2),sl,cat(3,pri,'ať',nezv,nedok,'čítať','privádz')).:136690:
 slo_privádz_2>kmen(('privádz' , 2),(privies , 1),sl,cat(3,'','ať',nezv,nedok,'čítať','privádz')).:136690:
-slo_prš_1>kmen(('prš' , 1),nil,sl,cat(180,'','',nezv,nedok,'kričať','prš')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'prš%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_prš_1>kmen(('prš' , 1),nil,sl,cat(180,'','',nezv,nedok,'kričať','prš')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'prš%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_pršiav_1>kmen(('pršiav' , 1),('prš' , 1),sl,cat(180,'','iavať',nezv,nedok,'čítať','pršiav')).:485712:
 slo_páč_1>kmen(('páč' , 1),nil,sl,cat(111,'','',sa,nedok,'kúpiť','páč')).:85272:
-slo_pís_1>kmen(('pís' , 1),nil,sl,cat(60,'','',nezv,nedok,'česať','píš')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'pís%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_rez_1>kmen((rez , 1),nil,sl,cat(22,'','',nezv,nedok,'česať','rež')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'rez%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_rob_0>kmen((rob , 0),nil,sl,cat(0,'','',nezv,nedok,'robiť',rob)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'rob%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_pís_1>kmen(('pís' , 1),nil,sl,cat(60,'','',nezv,nedok,'česať','píš')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'pís%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_rez_1>kmen((rez , 1),nil,sl,cat(22,'','',nezv,nedok,'česať','rež')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'rez%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_rob_0>kmen((rob , 0),nil,sl,cat(0,'','',nezv,nedok,'robiť',rob)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'rob%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_robiev_1>kmen((robiev , 1),(rob , 0),sl,cat(0,'','ievať',nezv,opak,'čítať',robiev)).:142509:
 slo_rozhnev_1>kmen((rozhnev , 1),(hnev , 1),sl,cat(102,roz,'',sa,dok,'chytať',rozhnev)).:145539:
 slo_rozhnev_2>kmen((rozhnev , 2),(hnev , 3),sl,cat(122,roz,'',nezv,dok,'chytať',rozhnev)).:145533:
-slo_rozhor_1>kmen((rozhor , 1),(hor , 1),sl,cat(33,roz,'',sa,dok,'vidieť',rozhor)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'rozhor%' AND zak_tvar LIKE '%' AND zvratnost='sa'
+slo_rozhor_1>kmen((rozhor , 1),(hor , 1),sl,cat(33,roz,'',sa,dok,'vidieť',rozhor)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'rozhor%' AND zvratnost='sa' AND zak_tvar LIKE '%'
 slo_rozhovor_1>kmen((rozhovor , 1),(hovor , 1),sl,cat(60,roz,'',sa,dok,'robiť',rozhovor)).:145746:
 slo_rozkradn_1>kmen((rozkradn , 1),(kradn , 1),sl,cat(306,roz,'',nezv,dok,'chudnúť',rozkradn)).:146965:
 slo_rozkrád_1>kmen(('rozkrád' , 1),(rozkradn , 1),sl,cat(306,'','ať',nezv,nedok,'čítať','rozkrád')).:146959:
 slo_rozkvit_1>kmen((rozkvit , 1),(rozkvitn , 1),sl,cat(142,'','ať',nezv,nedok,'chytať',rozkvit)).:147368:
 slo_rozkvitn_1>kmen((rozkvitn , 1),(kvitn , 1),sl,cat(142,roz,'',nezv,dok,'chudnúť',rozkvitn)).:147362:
-slo_rozlet_1>kmen((rozlet , 1),(let , 1),sl,cat(1,roz,'',sa,dok,'vidieť',rozlet)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'rozlet%' AND zak_tvar LIKE '%' AND zvratnost='sa'
+slo_rozlet_1>kmen((rozlet , 1),(let , 1),sl,cat(1,roz,'',sa,dok,'vidieť',rozlet)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'rozlet%' AND zvratnost='sa' AND zak_tvar LIKE '%'
 slo_rozlia_1>kmen((rozlia , 1),(lia , 2),sl,cat(6,roz,'',nezv,dok,'kliať',rozlej)).:147663:
-slo_rozlia_2>kmen((rozlia , 2),(rozlia , 1),sl,cat(2,'','',sa,dok,'kliať',rozlej)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'rozlia%' AND zak_tvar LIKE '%' AND zvratnost='sa'
-slo_rozliet_1>kmen((rozliet , 1),(liet , 1),sl,cat(500,roz,'',sa,dok,'čítať',rozliet)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'rozliet%' AND zak_tvar LIKE '%' AND zvratnost='sa'
+slo_rozlia_2>kmen((rozlia , 2),(rozlia , 1),sl,cat(2,'','',sa,dok,'kliať',rozlej)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'rozlia%' AND zvratnost='sa' AND zak_tvar LIKE '%'
+slo_rozliet_1>kmen((rozliet , 1),(liet , 1),sl,cat(500,roz,'',sa,dok,'čítať',rozliet)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'rozliet%' AND zvratnost='sa' AND zak_tvar LIKE '%'
 slo_rozliev_1>kmen((rozliev , 1),(rozlia , 1),sl,cat(6,'','ievať',nezv,nedok,'čítať',rozliev)).:147669:
 slo_rozosmia_1>kmen((rozosmia , 1),(smia , 1),sl,cat(101,rozo,'',sa,dok,'kliať',rozosmej)).:149114:
 slo_rozpadn_1>kmen((rozpadn , 1),(padn , 1),sl,cat(32,roz,'',sa,dok,'chudnúť',rozpadn)).:149465:
 slo_rozpadáv_1>kmen(('rozpadáv' , 1),(rozpadn , 1),sl,cat(32,'','ávať',sa,nedok,'čítať','rozpadáv')).:149459:
 slo_rozpoved_1>kmen((rozpoved , 1),(poved , 1),sl,cat(60,roz,'',nezv,dok,'brať',rozpov)).:150341:
-slo_rozpred_1>kmen((rozpred , 1),(pred , 1),sl,cat(302,roz,'',nezv,dok,'chytať',rozpred)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'rozpred%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_rozpred_1>kmen((rozpred , 1),(pred , 1),sl,cat(302,roz,'',nezv,dok,'chytať',rozpred)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'rozpred%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_rozprš_1>kmen(('rozprš' , 1),('prš' , 1),sl,cat(180,roz,'',sa,dok,'kričať','rozprš')).:150749:
 slo_rozrúb_1>kmen(('rozrúb' , 1),('rúb' , 1),sl,cat(21,roz,'',nezv,dok,'česať','rozrúb')).:151322:
 slo_rozstreľov_1>kmen(('rozstreľov' , 1),('rozstrieľ' , 2),sl,cat(210,'','ovať',sa,nedok,'pracovať','rozstreľuj')).:151981:
@@ -379,18 +379,18 @@ slo_rozvodn_1>kmen((rozvodn , 1),(vod , 1),sl,cat(33,roz,'niť',sa,dok,'kresliť
 slo_rozvoniav_1>kmen((rozvoniav , 1),('voň' , 1),sl,cat(142,roz,'iavať',nezv,nedok,'čítať',rozvoniav)).:154328:
 slo_rozvádz_1>kmen(('rozvádz' , 1),(vies , 2),sl,cat(3,roz,'ať',nezv,nedok,'čítať','rozvádz')).:153996:
 slo_rozvádz_2>kmen(('rozvádz' , 2),(rozvies , 1),sl,cat(130,'','ať',sa,nedok,'čítať','rozvádz')).:154008:
-slo_rozváž_1>kmen(('rozváž' , 1),nil,sl,cat(80,'','',nezv,dok,'kúpiť','rozváž')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'rozváž%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_rozzelen_1>kmen((rozzelen , 1),(zelen , 4),sl,cat(141,roz,'',sa,dok,'chytať',rozzelen)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'rozzelen%' AND zak_tvar LIKE '%' AND zvratnost='sa'
+slo_rozváž_1>kmen(('rozváž' , 1),nil,sl,cat(80,'','',nezv,dok,'kúpiť','rozváž')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'rozváž%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_rozzelen_1>kmen((rozzelen , 1),(zelen , 4),sl,cat(141,roz,'',sa,dok,'chytať',rozzelen)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'rozzelen%' AND zvratnost='sa' AND zak_tvar LIKE '%'
 slo_ružov_3>kmen(('ružov' , 3),('ružov' , 2),sl,cat(140,'','ieť',nezv,nedok,'rozumieť','ružov')).:155628:
 slo_rv_1>kmen((rv , 1),nil,sl,cat(22,'','',nezv,nedok,'česať',rv)).:155649:
-slo_ry_1>kmen((ry , 1),nil,sl,cat(22,'','',nezv,nedok,'piť',ryj)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'ry%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_ry_1>kmen((ry , 1),nil,sl,cat(22,'','',nezv,nedok,'piť',ryj)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'ry%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_rybárč_1>kmen(('rybárč' , 1),('rybár' , 1),sl,cat(400,'','čiť',nezv,nedok,'krášliť','rybárč')).:486436:
-slo_rúb_1>kmen(('rúb' , 1),nil,sl,cat(22,'','',nezv,nedok,'česať','rúb')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'rúb%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_rúb_1>kmen(('rúb' , 1),nil,sl,cat(22,'','',nezv,nedok,'česať','rúb')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'rúb%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_sfarb_1>kmen((sfarb , 1),(farb , 1),sl,cat(138,s,'iť',sa,dok,'kresliť',sfarb)).:None:Chýba v db
 slo_sfarbov_1>kmen((sfarbov , 1),(sfarb , 1),sl,cat(138,'','ovať',sa,nedok,'pracovať',sfarbuj)).:None:Chýba v db
-slo_skamen_1>kmen((skamen , 1),(kamen , 2),sl,cat(140,s,'',nezv,dok,'rozumieť',skamen)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'skamen%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_skos_1>kmen((skos , 1),(kos , 1),sl,cat(22,s,'',nezv,dok,'robiť',skos)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'skos%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_skrásn_1>kmen(('skrásn' , 1),('krásn' , 2),sl,cat(140,s,'',nezv,dok,'rozumieť','skrásn')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'skrásn%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_skamen_1>kmen((skamen , 1),(kamen , 2),sl,cat(140,s,'',nezv,dok,'rozumieť',skamen)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'skamen%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_skos_1>kmen((skos , 1),(kos , 1),sl,cat(22,s,'',nezv,dok,'robiť',skos)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'skos%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_skrásn_1>kmen(('skrásn' , 1),('krásn' , 2),sl,cat(140,s,'',nezv,dok,'rozumieť','skrásn')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'skrásn%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_skrášl_1>kmen(('skrášl' , 1),('krášl' , 1),sl,cat(139,s,'',nezv,dok,'krášliť','skrášl')).:160720:
 slo_skupov_1>kmen((skupov , 1),(kupov , 1),sl,cat(301,s,'',nezv,nedok,'pracovať',skupuj)).:161346:
 slo_skúp_1>kmen(('skúp' , 1),(skupov , 1),sl,cat(301,'','iť',nezv,dok,'kúpiť','skúp')).:161340:
@@ -399,74 +399,74 @@ slo_sladn_1>kmen((sladn , 1),(sladk , 1),sl,cat(140,'','núť',nezv,nedok,'chudn
 slo_slepn_1>kmen((slepn , 1),(slep , 1),sl,cat(140,'','núť',nezv,nedok,'chudnúť',slepn)).:161985:
 slo_sliepň_1>kmen(('sliepň' , 1),(slep , 1),sl,cat(500,'','ňať',nezv,nedok,'čítať','sliepň')).:162035:
 slo_sln_1>kmen((sln , 1),(slnk , 1),sl,cat(250,'','iť',sa,nedok,'kresliť',sln)).:162149:
-slo_sm_0>kmen((sm , 0),nil,sl,cat(posmod,'','',nezv,nedok,'rozumieť',sm)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'sm%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_smia_1>kmen((smia , 1),nil,sl,cat(101,'','',sa,nedok,'kliať',smej)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'smia%' AND zak_tvar LIKE '%' AND zvratnost='sa'
-slo_smia_2>kmen((smia , 2),nil,sl,cat(104,'','',sa,nedok,'kliať',smej)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'smia%' AND zak_tvar LIKE '%' AND zvratnost='sa'
+slo_sm_0>kmen((sm , 0),nil,sl,cat(posmod,'','',nezv,nedok,'rozumieť',sm)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'sm%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_smia_1>kmen((smia , 1),nil,sl,cat(101,'','',sa,nedok,'kliať',smej)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'smia%' AND zvratnost='sa' AND zak_tvar LIKE '%'
+slo_smia_2>kmen((smia , 2),nil,sl,cat(104,'','',sa,nedok,'kliať',smej)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'smia%' AND zvratnost='sa' AND zak_tvar LIKE '%'
 slo_smút_1>kmen(('smút' , 1),(smutn , 1),sl,cat(141,'','iť',nezv,nedok,'kúpiť','smút')).:162884:
 slo_snež_1>kmen(('snež' , 1),(sneh , 1),sl,cat(180,'','iť',nezv,nedok,'robiť','snež')).:163017:
 slo_sni_1>kmen((sni , 1),('snív' , 1),sl,cat(81,'','',nezv,nedok,'piť',snij)).:163052:
 slo_snív_1>kmen(('snív' , 1),nil,sl,cat(93,'','',sa,nedok,'čítať','snív')).:163076:
-slo_snív_2>kmen(('snív' , 2),('snív' , 1),sl,cat(81,'','',nezv,nedok,'čítať','snív')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'snív%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_snív_3>kmen(('snív' , 3),nil,sl,cat(81,'','',nezv,nedok,'čítať','snív')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'snív%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_snívav_1>kmen(('snívav' , 1),('snív' , 2),sl,cat(81,'',av,nezv,nedok,'čítať','snívav')).:None:Chýba v db
+slo_snív_2>kmen(('snív' , 2),('snív' , 1),sl,cat(81,'','',nezv,nedok,'čítať','snív')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'snív%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_snív_3>kmen(('snív' , 3),nil,sl,cat(81,'','',nezv,nedok,'čítať','snív')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'snív%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_snívav_1>kmen(('snívav' , 1),('snív' , 2),sl,cat(81,'',av,nezv,nedok,'čítať','snívav')).:163070:
 slo_spadn_1>kmen((spadn , 1),(padn , 1),sl,cat(2,s,'',nezv,dok,'chudnúť',spadn)).:163694:
 slo_spestr_1>kmen((spestr , 1),(pestr , 1),sl,cat(139,s,'iť',nezv,dok,'kresliť',spestr)).:164454:
 slo_spestrov_1>kmen((spestrov , 1),(spestr , 1),sl,cat(139,'','ovať',nezv,nedok,'pracovať',spestruj)).:164460:
-slo_spiev_1>kmen((spiev , 1),nil,sl,cat(60,'','',nezv,nedok,'čítať',spiev)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'spiev%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_spiev_1>kmen((spiev , 1),nil,sl,cat(60,'','',nezv,nedok,'čítať',spiev)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'spiev%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_spievk_1>kmen((spievk , 1),(spiev , 1),sl,cat(60,'','kať',nezv,nedok,'čítať',spievk)).:164587:
-slo_spôsob_1>kmen(('spôsob' , 1),nil,sl,cat(121,'','',nezv,dok,'robiť','spôsob')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'spôsob%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_st_0>kmen((st , 0),nil,sl,cat(0,'','',nezv,nedok,'stáť',stan)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'st%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_st_1>kmen((st , 1),nil,sl,cat(8,'','',nezv,nedok,'stáť',stoj)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'st%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_st_2>kmen((st , 2),nil,sl,cat(500,'','',nezv,nedok,'stáť',stoj)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'st%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_st_3>kmen((st , 3),nil,sl,cat(500,'','',nezv,nedok,'stáť',stoj)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'st%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_st_4>kmen((st , 4),(st , 1),sl,cat(7,'','',si,dok,'česať',stan)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'st%' AND zak_tvar LIKE '%' AND zvratnost='si'
+slo_spôsob_1>kmen(('spôsob' , 1),nil,sl,cat(121,'','',nezv,dok,'robiť','spôsob')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'spôsob%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_st_0>kmen((st , 0),nil,sl,cat(0,'','',nezv,nedok,'stáť',stan)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'st%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_st_1>kmen((st , 1),nil,sl,cat(8,'','',nezv,nedok,'stáť',stoj)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'st%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_st_2>kmen((st , 2),nil,sl,cat(500,'','',nezv,nedok,'stáť',stoj)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'st%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_st_3>kmen((st , 3),nil,sl,cat(500,'','',nezv,nedok,'stáť',stoj)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'st%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_st_4>kmen((st , 4),(st , 1),sl,cat(7,'','',si,dok,'česať',stan)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'st%' AND zvratnost='si' AND zak_tvar LIKE '%'
 slo_starn_2>kmen((starn , 2),(star , 1),sl,cat(140,'','núť',nezv,nedok,'chudnúť',starn)).:168657:
-slo_stlač_1>kmen(('stlač' , 1),('tlač' , 4),sl,cat(120,s,'',nezv,dok,'robiť','stlač')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'stlač%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_stlač_1>kmen(('stlač' , 1),('tlač' , 4),sl,cat(120,s,'',nezv,dok,'robiť','stlač')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'stlač%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_stlačov_1>kmen(('stlačov' , 1),('stlač' , 1),sl,cat(120,'','ovať',nezv,nedok,'pracovať','stlačuj')).:169667:
 slo_strachov_1>kmen((strachov , 1),(strach , 1),sl,cat(117,'','ovať',sa,nedok,'pracovať',strachuj)).:170279:
 slo_straš_1>kmen(('straš' , 1),(strach , 1),sl,cat(115,'','iť',nezv,nedok,'robiť','straš')).:170454:
 slo_strel_2>kmen((strel , 2),('strieľ' , 1),sl,cat(125,'','iť',nezv,dok,'robiť',strel)).:170785:
-slo_strieľ_1>kmen(('strieľ' , 1),nil,sl,cat(125,'','',nezv,nedok,'čítať','strieľ')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'strieľ%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_stroj_1>kmen((stroj , 1),nil,sl,cat(20,'','',nezv,nedok,'robiť',stroj)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'stroj%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_strieľ_1>kmen(('strieľ' , 1),nil,sl,cat(125,'','',nezv,nedok,'čítať','strieľ')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'strieľ%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_stroj_1>kmen((stroj , 1),nil,sl,cat(20,'','',nezv,nedok,'robiť',stroj)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'stroj%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_strách_1>kmen(('strách' , 1),(strach , 1),sl,cat(117,'','ať',sa,nedok,'čítať','strách')).:170285:
 slo_stáv_1>kmen(('stáv' , 1),(st , 0),sl,cat(0,'','ávať',sa,nedok,'čítať','stáv')).:168863:
 slo_stáv_2>kmen(('stáv' , 2),(st , 1),sl,cat(8,'','ávať',nezv,nedok,'čítať','stáv')).:168821:
 slo_stíchn_1>kmen(('stíchn' , 1),(tich , 1),sl,cat(140,s,'nuť',nezv,dok,'vládnuť','stíchn')).:169547:
 slo_sused_3>kmen((sused , 3),(sused , 1),sl,cat(401,'','iť',nezv,nedok,'robiť',sused)).:172969:
-slo_sviet_1>kmen((sviet , 1),nil,sl,cat(143,'','',nezv,nedok,'kúpiť',sviet)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'sviet%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_sčerven_1>kmen(('sčerven' , 1),('červen' , 3),sl,cat(140,s,'',nezv,dok,'rozumieť','sčerven')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'sčerven%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_sviet_1>kmen((sviet , 1),nil,sl,cat(143,'','',nezv,nedok,'kúpiť',sviet)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'sviet%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_sčerven_1>kmen(('sčerven' , 1),('červen' , 3),sl,cat(140,s,'',nezv,dok,'rozumieť','sčerven')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'sčerven%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_súvis_0>kmen(('súvis' , 0),nil,sl,cat(153,'','',nezv,nedok,'vidieť','súvis')).:173182:
 slo_telefonov_1>kmen((telefonov , 1),('telefón' , 1),sl,cat(60,'','ovať',nezv,nedok,'pracovať',telefonuj)).:180926:
-slo_tep_1>kmen((tep , 1),nil,sl,cat(20,'','',nezv,nedok,'česať',tep)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'tep%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_tlač_1>kmen(('tlač' , 1),nil,sl,cat(60,'','',nezv,nedok,'robiť','tlač')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'tlač%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_tlač_4>kmen(('tlač' , 4),nil,sl,cat(125,'','',nezv,nedok,'robiť','tlač')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'tlač%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_tlač_5>kmen(('tlač' , 5),nil,sl,cat(3,'','',nezv,nedok,'robiť','tlač')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'tlač%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_túž_1>kmen(('túž' , 1),nil,sl,cat(112,'','',nezv,nedok,'kúpiť','túž')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'túž%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_tep_1>kmen((tep , 1),nil,sl,cat(20,'','',nezv,nedok,'česať',tep)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'tep%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_tlač_1>kmen(('tlač' , 1),nil,sl,cat(60,'','',nezv,nedok,'robiť','tlač')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'tlač%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_tlač_4>kmen(('tlač' , 4),nil,sl,cat(125,'','',nezv,nedok,'robiť','tlač')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'tlač%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_tlač_5>kmen(('tlač' , 5),nil,sl,cat(3,'','',nezv,nedok,'robiť','tlač')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'tlač%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_túž_1>kmen(('túž' , 1),nil,sl,cat(112,'','',nezv,nedok,'kúpiť','túž')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'túž%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_ukameňov_1>kmen(('ukameňov' , 1),('kameňov' , 1),sl,cat(122,u,'',nezv,dok,'pracovať','ukameňuj')).:188730:
 slo_ukradn_1>kmen((ukradn , 1),(kradn , 1),sl,cat(306,u,'',nezv,dok,'chudnúť',ukradn)).:189151:
-slo_uku_1>kmen((uku , 1),(ku , 1),sl,cat(20,u,'',nezv,dok,'žuť',ukuj)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'uku%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_uku_1>kmen((uku , 1),(ku , 1),sl,cat(20,u,'',nezv,dok,'žuť',ukuj)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'uku%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_ulamov_1>kmen((ulamov , 1),(ulom , 1),sl,cat(26,'','ovať',nezv,nedok,'pracovať',ulamuj)).:189844:
-slo_ulet_1>kmen((ulet , 1),(let , 1),sl,cat(10,u,'',nezv,dok,'vidieť',ulet)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'ulet%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_ulet_1>kmen((ulet , 1),(let , 1),sl,cat(10,u,'',nezv,dok,'vidieť',ulet)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'ulet%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_ulom_1>kmen((ulom , 1),('lám' , 1),sl,cat(26,u,'iť',nezv,dok,'robiť',ulom)).:189838:
 slo_ulov_1>kmen((ulov , 1),(lov , 1),sl,cat(121,u,'',nezv,dok,'robiť',ulov)).:189866:
-slo_umier_1>kmen((umier , 1),(umr , 1),sl,cat(140,'','ať',nezv,nedok,'čítať',umier)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'umier%' AND zak_tvar LIKE '%ať' AND ISNULL(zvratnost)=1
+slo_umier_1>kmen((umier , 1),(umr , 1),sl,cat(140,'','ať',nezv,nedok,'čítať',umier)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'umier%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%ať'
 slo_umr_1>kmen((umr , 1),('mŕtv' , 1),sl,cat(140,u,'ieť',nezv,dok,'trieť',umr)).:190161:
 slo_umŕtv_1>kmen(('umŕtv' , 1),('mŕtv' , 1),sl,cat(139,u,'iť',nezv,dok,'krášliť','umŕtv')).:190506:
 slo_umŕtvov_1>kmen(('umŕtvov' , 1),('umŕtv' , 1),sl,cat(139,'','ovať',nezv,nedok,'pracovať','umŕtvuj')).:190512:
 slo_unies_1>kmen((unies , 1),(nies , 1),sl,cat(120,u,'',nezv,dok,'niesť',unes)).:190631:
 slo_unies_2>kmen((unies , 2),(nies , 3),sl,cat(120,u,'',nezv,dok,'niesť',unes)).:190631:
-slo_urez_1>kmen((urez , 1),(rez , 1),sl,cat(26,u,'',nezv,dok,'česať','urež')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'urez%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_urez_1>kmen((urez , 1),(rez , 1),sl,cat(26,u,'',nezv,dok,'česať','urež')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'urez%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_urob_1>kmen((urob , 1),(rob , 0),sl,cat(0,u,'',nezv,dok,'robiť',urob)).:192000:
 slo_usmia_1>kmen((usmia , 1),(smia , 1),sl,cat(101,u,'',sa,dok,'kliať',usmej)).:192573:
 slo_usmiev_1>kmen((usmiev , 1),(usmia , 1),sl,cat(101,'','ievať',sa,nedok,'čítať',usmiev)).:192579:
 slo_usmrcov_1>kmen((usmrcov , 1),(usmrt , 1),sl,cat(139,'','ovať',nezv,nedok,'pracovať',usmrcuj)).:192612:
 slo_usmrt_1>kmen((usmrt , 1),('smrť' , 1),sl,cat(139,u,'iť',nezv,dok,'kresliť',usmrt)).:192606:
-slo_utlač_1>kmen(('utlač' , 1),('tlač' , 5),sl,cat(120,u,'',nezv,dok,'robiť','utlač')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'utlač%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_utlač_1>kmen(('utlač' , 1),('tlač' , 5),sl,cat(120,u,'',nezv,dok,'robiť','utlač')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'utlač%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_uvid_1>kmen((uvid , 1),(vid , 1),sl,cat(50,u,'',nezv,dok,'vidieť',uvid)).:194785:
-slo_uč_1>kmen(('uč' , 1),nil,sl,cat(70,'','',nezv,nedok,'robiť','uč')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'uč%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_uč_2>kmen(('uč' , 2),('uč' , 1),sl,cat(71,'','',sa,nedok,'robiť','uč')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'uč%' AND zak_tvar LIKE '%' AND zvratnost='sa'
+slo_uč_1>kmen(('uč' , 1),nil,sl,cat(70,'','',nezv,nedok,'robiť','uč')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'uč%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_uč_2>kmen(('uč' , 2),('uč' , 1),sl,cat(71,'','',sa,nedok,'robiť','uč')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'uč%' AND zvratnost='sa' AND zak_tvar LIKE '%'
 slo_vesel_4>kmen((vesel , 4),(vesel , 1),sl,cat(141,'','iť',sa,nedok,'robiť',vesel)).:198096:
-slo_vid_1>kmen((vid , 1),nil,sl,cat(50,'','',nezv,nedok,'vidieť',vid)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'vid%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_vid_1>kmen((vid , 1),nil,sl,cat(50,'','',nezv,nedok,'vidieť',vid)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'vid%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_vies_1>kmen((vies , 1),nil,sl,cat(3,'','',nezv,nedok,'viesť',ved)).:199001:
 slo_vies_2>kmen((vies , 2),nil,sl,cat(3,'','',nezv,nedok,'viesť',ved)).:199001:
 slo_vkradn_1>kmen((vkradn , 1),(kradn , 2),sl,cat(10,v,'',sa,dok,'chudnúť',vkradn)).:199773:
@@ -475,26 +475,26 @@ slo_vlia_1>kmen((vlia , 1),(lia , 2),sl,cat(6,v,'',nezv,dok,'kliať',vlej)).:200
 slo_vliev_1>kmen((vliev , 1),(vlia , 1),sl,cat(6,'','ievať',nezv,nedok,'čítať',vliev)).:200180:
 slo_vliev_2>kmen((vliev , 2),(vliev , 1),sl,cat(2,'','',sa,nedok,'čítať',vliev)).:200192:
 slo_vln_2>kmen((vln , 2),(vln , 1),sl,cat(22,'','iť',nezv,nedok,'kresliť',vln)).:200281:
-slo_vln_3>kmen((vln , 3),(vln , 2),sl,cat(33,'','',sa,nedok,'kresliť',vln)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'vln%' AND zak_tvar LIKE '%' AND zvratnost='sa'
+slo_vln_3>kmen((vln , 3),(vln , 2),sl,cat(33,'','',sa,nedok,'kresliť',vln)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'vln%' AND zvratnost='sa' AND zak_tvar LIKE '%'
 slo_vládn_1>kmen(('vládn' , 1),nil,sl,cat(147,'','',nezv,nedok,'vládnuť','vládn')).:199961:
 slo_vnies_1>kmen((vnies , 1),(nies , 6),sl,cat(3,v,'',nezv,dok,'niesť',vnes)).:200585:
 slo_vnáš_1>kmen(('vnáš' , 1),(vnies , 1),sl,cat(3,'','ať',nezv,nedok,'čítať','vnáš')).:200591:
 slo_voň_1>kmen(('voň' , 1),nil,sl,cat(142,'','',nezv,nedok,'klaňať',von)).:201174:
-slo_vrac_1>kmen((vrac , 1),('vrát' , 1),sl,cat(10,'','',sa,nedok,'klaňať',vrac)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'vrac%' AND zak_tvar LIKE '%' AND zvratnost='sa'
-slo_vrez_1>kmen((vrez , 1),(rez , 1),sl,cat(20,v,'',nezv,dok,'česať','vrež')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'vrez%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_vrez_2>kmen((vrez , 2),(vrez , 1),sl,cat(2,'','',sa,dok,'česať','vrež')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'vrez%' AND zak_tvar LIKE '%' AND zvratnost='sa'
+slo_vrac_1>kmen((vrac , 1),('vrát' , 1),sl,cat(10,'','',sa,nedok,'klaňať',vrac)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'vrac%' AND zvratnost='sa' AND zak_tvar LIKE '%'
+slo_vrez_1>kmen((vrez , 1),(rez , 1),sl,cat(20,v,'',nezv,dok,'česať','vrež')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'vrez%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_vrez_2>kmen((vrez , 2),(vrez , 1),sl,cat(2,'','',sa,dok,'česať','vrež')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'vrez%' AND zvratnost='sa' AND zak_tvar LIKE '%'
 slo_vry_1>kmen((vry , 1),(ry , 1),sl,cat(20,v,'',nezv,dok,'piť',vryj)).:202911:
 slo_vrýv_1>kmen(('vrýv' , 1),(vry , 1),sl,cat(20,'','ať',nezv,nedok,'čítať','vrýv')).:202917:
 slo_vrýv_2>kmen(('vrýv' , 2),('vrýv' , 1),sl,cat(10,'','',sa,nedok,'čítať','vrýv')).:202929:
 slo_vrát_1>kmen(('vrát' , 1),nil,sl,cat(10,'','',sa,dok,'kúpiť','vrát')).:202058:
 slo_vstrel_1>kmen((vstrel , 1),(strel , 1),sl,cat(3,v,'',nezv,dok,'robiť',vstrel)).:203229:
 slo_vstrelov_1>kmen((vstrelov , 1),(vstrel , 1),sl,cat(3,'','ovať',nezv,nedok,'pracovať',vstreluj)).:None:Chýba v db
-slo_vtlač_1>kmen(('vtlač' , 1),('tlač' , 5),sl,cat(3,v,'',nezv,dok,'robiť','vtlač')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'vtlač%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_vtlač_1>kmen(('vtlač' , 1),('tlač' , 5),sl,cat(3,v,'',nezv,dok,'robiť','vtlač')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'vtlač%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_vybiel_1>kmen((vybiel , 1),(biel , 2),sl,cat(139,vy,'',nezv,dok,'kúpiť',vybiel)).:204438:
 slo_vycestov_1>kmen((vycestov , 1),(cestov , 1),sl,cat(10,vy,'',nezv,dok,'pracovať',vycestuj)).:205018:
 slo_vydrev_1>kmen((vydrev , 1),(drev , 1),sl,cat(120,vy,'iť',nezv,dok,'robiť',vydrev)).:206095:
 slo_vydrevov_1>kmen((vydrevov , 1),(vydrev , 1),sl,cat(120,'','ovať',nezv,nedok,'pracovať',vydrevuj)).:206101:
-slo_vyfarb_1>kmen((vyfarb , 1),(farb , 3),sl,cat(137,vy,'',nezv,dok,'kresliť',vyfarb)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'vyfarb%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_vyfarb_1>kmen((vyfarb , 1),(farb , 3),sl,cat(137,vy,'',nezv,dok,'kresliť',vyfarb)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'vyfarb%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_vyfarbov_1>kmen((vyfarbov , 1),(vyfarb , 1),sl,cat(137,'','ovať',nezv,nedok,'pracovať',vyfarbuj)).:206527:
 slo_vyhor_1>kmen((vyhor , 1),(hor , 1),sl,cat(33,vy,'',nezv,dok,'vidieť',vyhor)).:206815:
 slo_vykamienkov_1>kmen((vykamienkov , 1),(kamienok , 1),sl,cat(120,vy,'ovať',nezv,dok,'pracovať',vykamienkuj)).:None:Chýba v db
@@ -505,28 +505,28 @@ slo_vykúp_1>kmen(('vykúp' , 1),(vykupov , 1),sl,cat(301,'','iť',nezv,dok,'kú
 slo_vykúzl_1>kmen(('vykúzl' , 1),('kúzl' , 1),sl,cat(20,vy,'',nezv,dok,'krášliť','vykúzl')).:209979:
 slo_vykúzľov_1>kmen(('vykúzľov' , 1),('vykúzl' , 1),sl,cat(20,'','ovať',nezv,nedok,'pracovať','vykúzľuj')).:209985:
 slo_vylamov_1>kmen((vylamov , 1),(vylom , 1),sl,cat(26,'','ovať',nezv,nedok,'pracovať',vylamuj)).:210578:
-slo_vylet_1>kmen((vylet , 1),(let , 1),sl,cat(10,vy,'',nezv,dok,'vidieť',vylet)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'vylet%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_vylet_1>kmen((vylet , 1),(let , 1),sl,cat(10,vy,'',nezv,dok,'vidieť',vylet)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'vylet%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_vyletov_1>kmen((vyletov , 1),(vylet , 1),sl,cat(10,'','ovať',nezv,nedok,'pracovať',vyletuj)).:210321:
 slo_vylia_1>kmen((vylia , 1),(lia , 2),sl,cat(6,vy,'',nezv,dok,'kliať',vylej)).:210366:
-slo_vylia_2>kmen((vylia , 2),(lia , 3),sl,cat(11,vy,'',sa,dok,'kliať',vylej)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'vylia%' AND zak_tvar LIKE '%' AND zvratnost='sa'
+slo_vylia_2>kmen((vylia , 2),(lia , 3),sl,cat(11,vy,'',sa,dok,'kliať',vylej)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'vylia%' AND zvratnost='sa' AND zak_tvar LIKE '%'
 slo_vyliev_1>kmen((vyliev , 1),(vylia , 1),sl,cat(6,'','ievať',nezv,nedok,'čítať',vyliev)).:210372:
 slo_vyliev_2>kmen((vyliev , 2),(vyliev , 1),sl,cat(2,'','',sa,nedok,'čítať',vyliev)).:210384:
 slo_vylieč_1>kmen(('vylieč' , 1),('lieč' , 1),sl,cat(122,vy,'',nezv,dok,'kúpiť','vylieč')).:210414:
 slo_vylod_1>kmen((vylod , 1),('loď' , 1),sl,cat(252,vy,'iť',sa,dok,'robiť',vylod)).:210545:
 slo_vylom_1>kmen((vylom , 1),('lám' , 1),sl,cat(26,vy,'iť',nezv,dok,'robiť',vylom)).:210572:
-slo_vylov_1>kmen((vylov , 1),(lov , 3),sl,cat(252,vy,'',nezv,dok,'robiť',vylov)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'vylov%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_vylov_1>kmen((vylov , 1),(lov , 3),sl,cat(252,vy,'',nezv,dok,'robiť',vylov)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'vylov%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_vyloďov_1>kmen(('vyloďov' , 1),(vylod , 1),sl,cat(252,'','ovať',sa,nedok,'pracovať','vyloďuj')).:210551:
 slo_vynies_2>kmen((vynies , 2),(nies , 6),sl,cat(3,vy,'',nezv,dok,'niesť',vynes)).:211730:
 slo_vynos_1>kmen((vynos , 1),(nos , 1),sl,cat(3,vy,'',nezv,dok,'robiť',vynos)).:211886:
 slo_vynáš_1>kmen(('vynáš' , 1),(vynies , 2),sl,cat(3,'','ať',nezv,nedok,'čítať','vynáš')).:211724:
 slo_vypadn_1>kmen((vypadn , 1),(padn , 1),sl,cat(10,vy,'',nezv,dok,'chudnúť',vypadn)).:212210:
 slo_vypadáv_1>kmen(('vypadáv' , 1),(vypadn , 1),sl,cat(10,'','ávať',nezv,nedok,'čítať','vypadáv')).:212216:
-slo_vypi_1>kmen((vypi , 1),(pi , 1),sl,cat(500,vy,'',nezv,dok,'piť',vypij)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'vypi%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_vypred_1>kmen((vypred , 1),(pred , 1),sl,cat(302,vy,'',nezv,dok,'chytať',vypred)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'vypred%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_vyrez_1>kmen((vyrez , 1),(rez , 1),sl,cat(20,vy,'',nezv,dok,'česať','vyrež')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'vyrez%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_vypi_1>kmen((vypi , 1),(pi , 1),sl,cat(500,vy,'',nezv,dok,'piť',vypij)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'vypi%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_vypred_1>kmen((vypred , 1),(pred , 1),sl,cat(302,vy,'',nezv,dok,'chytať',vypred)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'vypred%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_vyrez_1>kmen((vyrez , 1),(rez , 1),sl,cat(20,vy,'',nezv,dok,'česať','vyrež')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'vyrez%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_vyrezáv_1>kmen(('vyrezáv' , 1),(vyrez , 1),sl,cat(20,'','ávať',nezv,nedok,'čítať','vyrezáv')).:214360:
 slo_vyrob_1>kmen((vyrob , 1),nil,sl,cat(20,'','',nezv,dok,'robiť',vyrob)).:214434:
-slo_vyry_1>kmen((vyry , 1),(ry , 1),sl,cat(20,vy,'',nezv,dok,'piť',vyryj)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'vyry%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_vyry_1>kmen((vyry , 1),(ry , 1),sl,cat(20,vy,'',nezv,dok,'piť',vyryj)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'vyry%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_vyráb_1>kmen(('vyráb' , 1),(vyrob , 1),sl,cat(20,'','ať',nezv,nedok,'čítať','vyráb')).:214440:
 slo_vysnív_1>kmen(('vysnív' , 1),('snív' , 3),sl,cat(80,vy,'',si,dok,'čítať','vysnív')).:None:Chýba v db
 slo_vyspevov_1>kmen((vyspevov , 1),(spiev , 1),sl,cat(60,vy,'ovať',nezv,nedok,'pracovať',vyspevuj)).:215634:
@@ -535,9 +535,9 @@ slo_vystrel_1>kmen((vystrel , 1),(strel , 2),sl,cat(125,vy,'',nezv,dok,'robiť',
 slo_vystrelov_1>kmen((vystrelov , 1),(vystrel , 1),sl,cat(125,'','ovať',nezv,nedok,'pracovať',vystreluj)).:None:Chýba v db
 slo_vystrieľ_1>kmen(('vystrieľ' , 1),('strieľ' , 1),sl,cat(125,vy,'',nezv,dok,'čítať','vystrieľ')).:216147:
 slo_vysviet_1>kmen((vysviet , 1),(sviet , 1),sl,cat(120,vy,'',nezv,dok,'kúpiť',vysviet)).:216550:
-slo_vytep_1>kmen((vytep , 1),(tep , 1),sl,cat(20,vy,'',nezv,dok,'česať',vytep)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'vytep%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_vytep_1>kmen((vytep , 1),(tep , 1),sl,cat(20,vy,'',nezv,dok,'česať',vytep)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'vytep%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_vytepáv_1>kmen(('vytepáv' , 1),(vytep , 1),sl,cat(20,'','ávať',nezv,nedok,'čítať','vytepáv')).:217660:
-slo_vytlač_1>kmen(('vytlač' , 1),('tlač' , 1),sl,cat(60,vy,'',nezv,dok,'robiť','vytlač')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'vytlač%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_vytlač_1>kmen(('vytlač' , 1),('tlač' , 1),sl,cat(60,vy,'',nezv,dok,'robiť','vytlač')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'vytlač%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_vyuč_1>kmen(('vyuč' , 1),('uč' , 2),sl,cat(71,vy,'',sa,dok,'robiť','vyuč')).:218379:
 slo_vyvies_1>kmen((vyvies , 1),(vies , 1),sl,cat(3,vy,'',nezv,dok,'viesť',vyved)).:218542:
 slo_vyvádz_1>kmen(('vyvádz' , 1),(vyvies , 1),sl,cat(3,'','ať',nezv,nedok,'čítať','vyvádz')).:218536:
@@ -545,22 +545,22 @@ slo_vyčar_1>kmen(('vyčar' , 1),('čarov' , 1),sl,cat(20,vy,'iť',nezv,dok,'rob
 slo_vzdorov_1>kmen((vzdorov , 1),nil,sl,cat(146,'','',nezv,nedok,'pracovať',vzdoruj)).:220383:
 slo_vzdorov_2>kmen((vzdorov , 2),nil,sl,cat(146,'','',nezv,nedok,'pracovať',vzdoruj)).:220383:
 slo_vzlietn_1>kmen((vzlietn , 1),(let , 1),sl,cat(10,vz,'uť',nezv,dok,'vládnuť',vzlietn)).:220658:
-slo_váž_1>kmen(('váž' , 1),nil,sl,cat(120,'','',nezv,nedok,'kúpiť','váž')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'váž%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_víd_1>kmen(('víd' , 1),(vid , 1),sl,cat(51,'','ať',nezv,opak,'čítať','víd')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'víd%' AND zak_tvar LIKE '%ať' AND ISNULL(zvratnost)=1
+slo_váž_1>kmen(('váž' , 1),nil,sl,cat(120,'','',nezv,nedok,'kúpiť','váž')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'váž%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_víd_1>kmen(('víd' , 1),(vid , 1),sl,cat(51,'','ať',nezv,opak,'čítať','víd')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'víd%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%ať'
 slo_vídav_1>kmen(('vídav' , 1),('víd' , 1),sl,cat(51,'','avať',nezv,nedok,'čítať','vídav')).:198854:
-slo_zafarb_1>kmen((zafarb , 1),(farb , 3),sl,cat(137,za,'',nezv,dok,'kresliť',zafarb)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'zafarb%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_zafarb_1>kmen((zafarb , 1),(farb , 3),sl,cat(137,za,'',nezv,dok,'kresliť',zafarb)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'zafarb%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_zafarbov_1>kmen((zafarbov , 1),(zafarb , 1),sl,cat(137,'','ovať',nezv,nedok,'pracovať',zafarbuj)).:225070:
 slo_zahemž_1>kmen(('zahemž' , 1),('hemž' , 1),sl,cat(126,za,'',sa,dok,'kresliť','zahemž')).:225992:
 slo_zahovor_1>kmen((zahovor , 1),(hovor , 1),sl,cat(500,za,'',sa,dok,'robiť',zahovor)).:226528:
 slo_zaknihov_1>kmen((zaknihov , 1),(knihov , 1),sl,cat(60,za,'',nezv,dok,'pracovať',zaknihuj)).:228874:
-slo_zakotv_1>kmen((zakotv , 1),(kotv , 2),sl,cat(7,za,'',nezv,dok,'kresliť',zakotv)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'zakotv%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_zakotv_1>kmen((zakotv , 1),(kotv , 2),sl,cat(7,za,'',nezv,dok,'kresliť',zakotv)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'zakotv%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_zakrád_1>kmen(('zakrád' , 1),(kradn , 2),sl,cat(1,za,'ať',sa,nedok,'čítať','zakrád')).:229228:
 slo_zakrúžkov_1>kmen(('zakrúžkov' , 1),('krúžkov' , 1),sl,cat(420,za,'',nezv,dok,'pracovať','zakrúžkuj')).:268993:
 slo_zakvitn_1>kmen((zakvitn , 1),(kvitn , 1),sl,cat(142,za,'',nezv,dok,'chudnúť',zakvitn)).:229988:
 slo_zakúp_1>kmen(('zakúp' , 1),('kúp' , 1),sl,cat(301,za,'',nezv,dok,'kúpiť','zakúp')).:229760:
 slo_zalesn_1>kmen((zalesn , 1),(les , 1),sl,cat(480,za,'iť',nezv,dok,'kresliť',zalesn)).:230251:
 slo_zalesňov_1>kmen(('zalesňov' , 1),(zalesn , 1),sl,cat(480,'','ovať',nezv,nedok,'pracovať','zalesňuj')).:230257:
-slo_zalet_1>kmen((zalet , 1),(let , 1),sl,cat(1,za,'',nezv,dok,'vidieť',zalet)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'zalet%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_zalet_1>kmen((zalet , 1),(let , 1),sl,cat(1,za,'',nezv,dok,'vidieť',zalet)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'zalet%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_zalia_1>kmen((zalia , 1),(lia , 2),sl,cat(120,za,'',nezv,dok,'kliať',zalej)).:230342:
 slo_zaliev_1>kmen((zaliev , 1),(zalia , 1),sl,cat(120,'','ievať',nezv,nedok,'čítať',zaliev)).:230348:
 slo_zalistov_1>kmen((zalistov , 1),(listov , 2),sl,cat(210,za,'',nezv,dok,'pracovať',zalistuj)).:230463:
@@ -568,20 +568,20 @@ slo_zalov_1>kmen((zalov , 1),(lov , 1),sl,cat(210,za,'',si,dok,'robiť',zalov)).
 slo_zamilov_1>kmen((zamilov , 1),(milov , 1),sl,cat(106,za,'',sa,dok,'pracovať',zamiluj)).:231305:
 slo_zanies_1>kmen((zanies , 1),(nies , 6),sl,cat(3,za,'',nezv,dok,'niesť',zanes)).:232022:
 slo_zaober_1>kmen((zaober , 1),nil,sl,cat(153,'','',sa,nedok,'chytať',zaober)).:232361:
-slo_zapad_1>kmen((zapad , 1),nil,sl,cat(210,'','',nezv,nedok,'chytať',zapad)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'zapad%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_zapad_1>kmen((zapad , 1),nil,sl,cat(210,'','',nezv,nedok,'chytať',zapad)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'zapad%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_zapadn_1>kmen((zapadn , 1),(padn , 1),sl,cat(2,za,'',nezv,dok,'chudnúť',zapadn)).:232896:
 slo_zapadn_2>kmen((zapadn , 2),(zapad , 1),sl,cat(210,'','núť',nezv,dok,'chudnúť',zapadn)).:232896:
 slo_zaprš_1>kmen(('zaprš' , 1),('prš' , 1),sl,cat(180,za,'',nezv,dok,'kričať','zaprš')).:234729:
 slo_zapáč_1>kmen(('zapáč' , 1),('páč' , 1),sl,cat(111,za,'',sa,dok,'kúpiť','zapáč')).:232877:
-slo_zarez_1>kmen((zarez , 1),(rez , 1),sl,cat(25,za,'',nezv,dok,'česať','zarež')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'zarez%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_zaskl_1>kmen((zaskl , 1),(skl , 1),sl,cat(120,za,'iť',nezv,dok,'kresliť',zaskl)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'zaskl%' AND zak_tvar LIKE '%iť' AND ISNULL(zvratnost)=1
+slo_zarez_1>kmen((zarez , 1),(rez , 1),sl,cat(25,za,'',nezv,dok,'česať','zarež')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'zarez%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_zaskl_1>kmen((zaskl , 1),(skl , 1),sl,cat(120,za,'iť',nezv,dok,'kresliť',zaskl)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'zaskl%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%iť'
 slo_zaskliev_1>kmen((zaskliev , 1),(zaskl , 1),sl,cat(120,'','ievať',nezv,nedok,'čítať',zaskliev)).:236016:
 slo_zaslep_1>kmen((zaslep , 1),(slep , 3),sl,cat(92,za,'iť',nezv,dok,'robiť',zaslep)).:236141:
 slo_zasmia_1>kmen((zasmia , 1),(smia , 1),sl,cat(101,za,'',sa,dok,'kliať',zasmej)).:236332:
 slo_zastrel_1>kmen((zastrel , 1),(strel , 2),sl,cat(122,za,'',nezv,dok,'robiť',zastrel)).:236970:
 slo_zastrieľ_1>kmen(('zastrieľ' , 1),('strieľ' , 1),sl,cat(210,za,'',si,dok,'čítať','zastrieľ')).:269131:
 slo_zasviet_1>kmen((zasviet , 1),(sviet , 1),sl,cat(143,za,'',nezv,dok,'kúpiť',zasviet)).:237303:
-slo_zatlač_1>kmen(('zatlač' , 1),('tlač' , 5),sl,cat(3,za,'',nezv,dok,'robiť','zatlač')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'zatlač%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_zatlač_1>kmen(('zatlač' , 1),('tlač' , 5),sl,cat(3,za,'',nezv,dok,'robiť','zatlač')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'zatlač%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_zatíchn_1>kmen(('zatíchn' , 1),(tich , 1),sl,cat(140,za,'nuť',nezv,dok,'vládnuť','zatíchn')).:238925:
 slo_zatúž_1>kmen(('zatúž' , 1),('túž' , 1),sl,cat(112,za,'',nezv,dok,'kúpiť','zatúž')).:239646:
 slo_zavies_1>kmen((zavies , 1),(vies , 1),sl,cat(3,za,'',nezv,dok,'viesť',zaved)).:240443:
@@ -591,27 +591,27 @@ slo_zavodňov_1>kmen(('zavodňov' , 1),(zavodn , 1),sl,cat(120,'','ovať',nezv,n
 slo_zavoň_1>kmen(('zavoň' , 1),('voň' , 1),sl,cat(142,za,'',nezv,dok,'klaňať',zavon)).:240753:
 slo_zavádz_1>kmen(('zavádz' , 1),(zavies , 1),sl,cat(3,'','ať',nezv,nedok,'čítať','zavádz')).:240449:
 slo_zazvon_1>kmen((zazvon , 1),(zvon , 2),sl,cat(142,za,'',nezv,dok,'robiť',zazvon)).:241460:
-slo_zač_0>kmen(('zač' , 0),nil,sl,cat(0,'','',nezv,dok,'česať','začn')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'zač%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_zač_0>kmen(('zač' , 0),nil,sl,cat(0,'','',nezv,dok,'česať','začn')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'zač%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_začarov_1>kmen(('začarov' , 1),('čarov' , 1),sl,cat(122,za,'',nezv,dok,'pracovať','začaruj')).:223475:
-slo_začerven_1>kmen(('začerven' , 1),('červen' , 2),sl,cat(141,za,'',sa,dok,'chytať','začerven')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'začerven%' AND zak_tvar LIKE '%' AND zvratnost='sa'
+slo_začerven_1>kmen(('začerven' , 1),('červen' , 2),sl,cat(141,za,'',sa,dok,'chytať','začerven')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'začerven%' AND zvratnost='sa' AND zak_tvar LIKE '%'
 slo_začín_1>kmen(('začín' , 1),('zač' , 0),sl,cat(0,'','ínať',nezv,nedok,'čítať','začín')).:223509:
-slo_začít_1>kmen(('začít' , 1),('čít' , 1),sl,cat(60,za,'',sa,dok,'čítať','začít')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'začít%' AND zak_tvar LIKE '%' AND zvratnost='sa'
-slo_zdiv_1>kmen((zdiv , 1),(div , 3),sl,cat(140,z,'',nezv,dok,'rozumieť',zdiv)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'zdiv%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
-slo_zdraž_1>kmen(('zdraž' , 1),('draž' , 1),sl,cat(140,z,'',nezv,dok,'rozumieť','zdraž')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'zdraž%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_začít_1>kmen(('začít' , 1),('čít' , 1),sl,cat(60,za,'',sa,dok,'čítať','začít')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'začít%' AND zvratnost='sa' AND zak_tvar LIKE '%'
+slo_zdiv_1>kmen((zdiv , 1),(div , 3),sl,cat(140,z,'',nezv,dok,'rozumieť',zdiv)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'zdiv%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
+slo_zdraž_1>kmen(('zdraž' , 1),('draž' , 1),sl,cat(140,z,'',nezv,dok,'rozumieť','zdraž')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'zdraž%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_zdraž_2>kmen(('zdraž' , 2),(drah , 1),sl,cat(139,z,'iť',nezv,dok,'robiť','zdraž')).:243865:
 slo_zdražov_1>kmen(('zdražov' , 1),('zdraž' , 2),sl,cat(139,'','ovať',nezv,nedok,'pracovať','zdražuj')).:243871:
 slo_zdreven_1>kmen((zdreven , 1),(dreven , 2),sl,cat(140,z,'',nezv,dok,'rozumieť',zdreven)).:243900:
 slo_zdrevnat_1>kmen((zdrevnat , 1),(drevnat , 2),sl,cat(140,z,'',nezv,dok,'rozumieť',zdrevnat)).:243906:
 slo_zhavran_1>kmen((zhavran , 1),(havran , 1),sl,cat(140,z,'ieť',nezv,dok,'rozumieť',zhavran)).:245516:
-slo_zhor_1>kmen((zhor , 1),(hor , 1),sl,cat(32,z,'',nezv,dok,'vidieť',zhor)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'zhor%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_zhor_1>kmen((zhor , 1),(hor , 1),sl,cat(32,z,'',nezv,dok,'vidieť',zhor)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'zhor%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_zhovár_1>kmen(('zhovár' , 1),(hovor , 1),sl,cat(60,z,'ať',sa,nedok,'čítať','zhovár')).:246105:
-slo_zlacn_1>kmen((zlacn , 1),(lacn , 3),sl,cat(140,z,'',nezv,dok,'rozumieť',zlacn)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'zlacn%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_zlacn_1>kmen((zlacn , 1),(lacn , 3),sl,cat(140,z,'',nezv,dok,'rozumieť',zlacn)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'zlacn%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_zlacn_2>kmen((zlacn , 2),(lacn , 1),sl,cat(139,z,'iť',nezv,dok,'kresliť',zlacn)).:247781:
 slo_zlacňov_1>kmen(('zlacňov' , 1),(zlacn , 2),sl,cat(139,'','ovať',nezv,nedok,'pracovať','zlacňuj')).:247787:
 slo_zlatn_1>kmen((zlatn , 1),(zlat , 1),sl,cat(140,'','núť',nezv,nedok,'chudnúť',zlatn)).:248072:
-slo_zlet_1>kmen((zlet , 1),(let , 1),sl,cat(10,z,'',nezv,dok,'vidieť',zlet)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'zlet%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_zlet_1>kmen((zlet , 1),(let , 1),sl,cat(10,z,'',nezv,dok,'vidieť',zlet)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'zlet%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_zlia_1>kmen((zlia , 1),(lia , 2),sl,cat(6,z,'',nezv,dok,'kliať',zlej)).:248345:
-slo_zlia_2>kmen((zlia , 2),(zlia , 1),sl,cat(34,'','',sa,dok,'kliať',zlej)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'zlia%' AND zak_tvar LIKE '%' AND zvratnost='sa'
+slo_zlia_2>kmen((zlia , 2),(zlia , 1),sl,cat(34,'','',sa,dok,'kliať',zlej)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'zlia%' AND zvratnost='sa' AND zak_tvar LIKE '%'
 slo_zliev_1>kmen((zliev , 1),(zlia , 1),sl,cat(6,'','ievať',nezv,nedok,'čítať',zliev)).:248351:
 slo_zliev_2>kmen((zliev , 2),(zliev , 1),sl,cat(34,'','',sa,nedok,'čítať',zliev)).:248363:
 slo_zlom_1>kmen((zlom , 1),('lám' , 1),sl,cat(21,z,'iť',nezv,dok,'robiť',zlom)).:248605:
@@ -631,12 +631,12 @@ slo_zosmutn_1>kmen((zosmutn , 1),(smutn , 1),sl,cat(140,zo,'ieť',nezv,dok,'rozu
 slo_zostarn_1>kmen((zostarn , 1),(starn , 2),sl,cat(140,zo,'',nezv,dok,'chudnúť',zostarn)).:254006:
 slo_zostrel_1>kmen((zostrel , 1),(strel , 1),sl,cat(3,zo,'',nezv,dok,'robiť',zostrel)).:254121:
 slo_zostrelov_1>kmen((zostrelov , 1),(zostrel , 1),sl,cat(3,'','ovať',nezv,nedok,'pracovať',zostreluj)).:None:Chýba v db
-slo_zozelen_1>kmen((zozelen , 1),(zelen , 3),sl,cat(140,zo,'',nezv,dok,'rozumieť',zozelen)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'zozelen%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_zozelen_1>kmen((zozelen , 1),(zelen , 3),sl,cat(140,zo,'',nezv,dok,'rozumieť',zozelen)).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'zozelen%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_zoženšt_1>kmen(('zoženšt' , 1),('ženšt' , 1),sl,cat(140,zo,'',nezv,dok,'rozumieť','zoženšt')).:255591:
 slo_zožltn_1>kmen(('zožltn' , 1),('žltn' , 1),sl,cat(140,zo,'',nezv,dok,'chudnúť','zožltn')).:255645:
 slo_zrkadl_2>kmen((zrkadl , 2),(zrkadl , 1),sl,cat(121,'','iť',nezv,nedok,'kresliť',zrkadl)).:256425:
 slo_zrkadl_3>kmen((zrkadl , 3),(zrkadl , 2),sl,cat(210,'','',sa,nedok,'kresliť',zrkadl)).:256419:
-slo_zružov_1>kmen(('zružov' , 1),('ružov' , 3),sl,cat(140,z,'',nezv,dok,'rozumieť','zružov')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'zružov%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_zružov_1>kmen(('zružov' , 1),('ružov' , 3),sl,cat(140,z,'',nezv,dok,'rozumieť','zružov')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'zružov%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_zvies_1>kmen((zvies , 1),(vies , 1),sl,cat(3,z,'',nezv,dok,'viesť',zved)).:257496:
 slo_zvln_1>kmen((zvln , 1),(vln , 3),sl,cat(33,z,'',sa,dok,'kresliť',zvln)).:258799:
 slo_zvoniev_1>kmen((zvoniev , 1),(zvon , 2),sl,cat(142,'','ievať',nezv,nedok,'čítať',zvoniev)).:259007:
@@ -645,13 +645,13 @@ slo_záhradkárč_1>kmen(('záhradkárč' , 1),('záhradkár' , 1),sl,cat(400,''
 slo_záhradníč_1>kmen(('záhradníč' , 1),('záhradník' , 1),sl,cat(400,'','iť',nezv,nedok,'kúpiť','záhradníč')).:226622:
 slo_čarov_1>kmen(('čarov' , 1),nil,sl,cat(210,'','',nezv,nedok,'pracovať','čaruj')).:450290:
 slo_červen_2>kmen(('červen' , 2),('červen' , 1),sl,cat(141,'','ať',sa,nedok,'chytať','červen')).:450767:
-slo_červen_3>kmen(('červen' , 3),('červen' , 1),sl,cat(140,'','ieť',nezv,nedok,'rozumieť','červen')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'červen%' AND zak_tvar LIKE '%ieť' AND ISNULL(zvratnost)=1
-slo_červen_4>kmen(('červen' , 4),('červen' , 3),sl,cat(141,'','',sa,nedok,'rozumieť','červen')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'červen%' AND zak_tvar LIKE '%' AND zvratnost='sa'
-slo_čít_1>kmen(('čít' , 1),nil,sl,cat(60,'','',nezv,nedok,'čítať','čít')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'čít%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_červen_3>kmen(('červen' , 3),('červen' , 1),sl,cat(140,'','ieť',nezv,nedok,'rozumieť','červen')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'červen%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%ieť'
+slo_červen_4>kmen(('červen' , 4),('červen' , 3),sl,cat(141,'','',sa,nedok,'rozumieť','červen')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'červen%' AND zvratnost='sa' AND zak_tvar LIKE '%'
+slo_čít_1>kmen(('čít' , 1),nil,sl,cat(60,'','',nezv,nedok,'čítať','čít')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'čít%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_čítav_1>kmen(('čítav' , 1),('čít' , 1),sl,cat(60,'','avať',nezv,nedok,'čítať','čítav')).:451294:
 slo_žen_2>kmen(('žen' , 2),('žen' , 0),sl,cat(0,'','iť',sa,nedok,'robiť','žen')).:260326:
 slo_ženšt_1>kmen(('ženšt' , 1),('žensk' , 1),sl,cat(140,'','ieť',nezv,nedok,'rozumieť','ženšt')).:260344:
-slo_ži_1>kmen(('ži' , 1),nil,sl,cat(210,'','',nezv,nedok,'piť','žij')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'ži%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_ži_1>kmen(('ži' , 1),nil,sl,cat(210,'','',nezv,nedok,'piť','žij')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'ži%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
 slo_žlt_3>kmen(('žlt' , 3),('žlt' , 1),sl,cat(141,'','ieť',sa,nedok,'rozumieť','žlt')).:261035:
 slo_žltn_1>kmen(('žltn' , 1),('žlt' , 1),sl,cat(140,'','núť',nezv,nedok,'chudnúť','žltn')).:261059:
-slo_šepk_1>kmen(('šepk' , 1),nil,sl,cat(60,'','',nezv,nedok,'chytať','šepk')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'šepk%' AND zak_tvar LIKE '%' AND ISNULL(zvratnost)=1
+slo_šepk_1>kmen(('šepk' , 1),nil,sl,cat(60,'','',nezv,nedok,'chytať','šepk')).:None:SELECT sd.*,sd_sloveso.* FROM sd_sloveso JOIN sd ON sd.id=sd_sloveso.id WHERE zak_tvar LIKE 'šepk%' AND ISNULL(zvratnost)=1 AND zak_tvar LIKE '%'
