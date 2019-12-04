@@ -28,6 +28,7 @@ def prihlas_ma():
     loguj(request)
     email = request.json["email"]
     heslo = request.json["heslo"]
+    red = request.json["redirect"]
     permanent = bool(request.json["permanent"])
 
     response = CommonResponse()
@@ -36,10 +37,12 @@ def prihlas_ma():
     if user and user.skontroluj_heslo(heslo):
         session["logged"] = user.id
         session.permanent = permanent
-        response.status=ResponseStatus.OK
+        response.status = ResponseStatus.OK
+        response.redirect = red
+
     else:
         response.status = ResponseStatus.ERROR
-        response.error_text="Zlé prihlasovacie údaje"
+        response.error_text = "Zlé prihlasovacie údaje"
 
     return json.dumps(response.__dict__)
 
@@ -53,6 +56,7 @@ def user_pridaj_zmen():
     email = request.json["email"]
     heslo = request.json["heslo"]
     nove_heslo = request.json["nove_heslo"]
+    red = request.json["redirect"]
 
     response = CommonResponse()
 
@@ -76,7 +80,8 @@ def user_pridaj_zmen():
             db.session.commit()
             session["logged"] = user.id
             session.permanent = False
-            response.status=ResponseStatus.OK
+            response.status = ResponseStatus.OK
+            response.redirect = red
     else:
         user = User.query.get(id)
 

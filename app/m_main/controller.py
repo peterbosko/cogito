@@ -31,3 +31,9 @@ def uvod():
 def popis():
     loguj(request)
     return render_template("m_main/popis_cogita.jinja.html")
+
+
+@main_blueprint.route("/potrebne_prihlasenie/")
+def potrebne_prihlasenie():
+    loguj(request)
+    return render_template("m_main/potrebne_prihlasenie.jinja.html")

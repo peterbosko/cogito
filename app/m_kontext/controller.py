@@ -9,6 +9,9 @@ from app.ut_service import spusti_unit_test as sut
 from app.ut_service import spusti_unit_testy_kontextu as sutk
 from sqlalchemy.exc import *
 import json
+from flask import redirect, url_for
+import urllib.parse
+
 
 kontext_blueprint = Blueprint("kontext", __name__)
 
@@ -16,6 +19,11 @@ kontext_blueprint = Blueprint("kontext", __name__)
 @kontext_blueprint.route("/pridat_kontext/", methods=["GET"])
 def pridat_kontext():
     loguj(request)
+
+    if 'logged' not in session.keys():
+        return redirect(url_for("main.potrebne_prihlasenie")+"?redirect="+urllib.parse.quote_plus(
+            url_for("kontext.pridat_kontext")))
+
     return render_template("m_kontext/pridat_kontext.jinja.html")
 
 

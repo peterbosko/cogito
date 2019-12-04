@@ -58,6 +58,7 @@ function login(){
     data.email=$("#defaultLoginFormEmail").val();
     data.heslo=$("#defaultLoginFormPassword").val();
     data.permanent=$("#defaultLoginFormRemember").prop('checked');
+    data.redirect='{{request.args.get("redirect")}}';
 
     AjaxMethods.getDataFromPostRequest('{{url_for("user.login")}}', "", data, function(r){
         if (r.status==responseOK){//OK vetva
@@ -65,7 +66,10 @@ function login(){
                    title  :  "Úspech",
                    text   :  "Boli ste úspešne prihlásený",
                    icon   :  "success"}).then(function(result) {
-                                                location.reload();
+                                                if (r.redirect)
+                                                    window.location = r.redirect;
+                                                else
+                                                    location.reload();
                                               });
         } else{
             swal({ buttons: {},

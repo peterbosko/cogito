@@ -16,6 +16,7 @@ class CommonResponse(object):
         self.error_text = ""
         self.message_text = ""
         self.data = None
+        self.redirect = None
 
 
 class AutocompleteSingleResponse(object):
@@ -39,8 +40,10 @@ def je_cislo(slovo):
     slovo = slovo.replace(',', '')
     return slovo.isdigit()
 
+
 def obsahuje_cisla(text):
     return any(char.isdigit() for char in text)
+
 
 def daj_cislo(slovo):
     if '.' in slovo:

@@ -68,6 +68,8 @@ function register(){
     data.heslo=$("#defaultRegisterFormPassword").val();
     data.nove_heslo=data.heslo;
     data.permanent=false;
+    data.redirect='{{request.args.get("redirect")}}';
+
 
     AjaxMethods.getDataFromPostRequest('{{url_for("user.user_pridaj_zmen")}}', "", data, function(r){
         if (r.status==responseOK){//OK vetva
@@ -75,7 +77,10 @@ function register(){
                    title  :  "Úspech",
                    text   :  "Používateľ bol úspešne vytvorený",
                    icon   :  "success"}).then(function(result) {
-                                                window.location.replace("{{url_for("user.login")}}");
+                                                if (r.redirect)
+                                                    window.location = r.redirect;
+                                                else
+                                                    window.location.replace("{{url_for("user.login")}}");
                                               });
         } else{
             swal({ buttons: {},
