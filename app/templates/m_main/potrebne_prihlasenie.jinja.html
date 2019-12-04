@@ -1,0 +1,20 @@
+{% extends "_main.jinja.html" %}
+{% block title %}Vítaj v Cogite, mysliacej platforme{% endblock %}
+{% block main %}
+
+    <div class="container padding-topCogito-Menu" style="max-width:400px">
+        <div class="logRegForm">
+            <p class="h4">Je požadované prihlásenie alebo registrácia!!!</p>
+            <div class="col-sm-12" style="margin-top:40px;">
+                <a class="btn btn-primary col-sm-12" role="button"
+                   href='{{url_for("user.login")}}?redirect={{request.args.get("redirect")}}'>Prihlásiť</a>
+            </div>
+            <br/>
+            <div class="col-sm-12">
+                <a class="btn btn-primary col-sm-12" role="button"
+                href='{{url_for("user.registracia")}}?redirect={{request.args.get("redirect")}}'>Registrovať</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

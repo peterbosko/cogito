@@ -28,7 +28,11 @@ def prihlas_ma():
     loguj(request)
     email = request.json["email"]
     heslo = request.json["heslo"]
-    red = request.json["redirect"]
+
+    red = ""
+    if request.json["redirect"] != "None":
+        red = request.json["redirect"]
+
     permanent = bool(request.json["permanent"])
 
     response = CommonResponse()
@@ -56,7 +60,10 @@ def user_pridaj_zmen():
     email = request.json["email"]
     heslo = request.json["heslo"]
     nove_heslo = request.json["nove_heslo"]
-    red = request.json["redirect"]
+
+    red = ""
+    if request.json["redirect"] != "None":
+        red = request.json["redirect"]
 
     response = CommonResponse()
 
