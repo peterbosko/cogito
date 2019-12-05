@@ -5,9 +5,15 @@
         <div class="container">
           <h1 class="display-3">Vitaj, som Cogito. </h1>
           <p>Experiment s budovaním umelej inteligencie založenej na metadátach o svete.</p>
-          <p><a class="btn btn-primary btn-lg" href="{{url_for("main.popis")}}" role="button">Dozvedieť sa viacej</a></p>
+          <p><a class="btn btn-primary btn-lg" href="{{url_for("main.popis")}}" role="button"><i class="fa fa-info"></i>&nbsp;Dozvedieť sa viacej</a></p>
         </div>
       </div>
+
+    <div class="container" style="margin-top:50px; margin-bottom:50px">
+        <div class="row justify-content-center align-items-center">
+            <a class="btn btn-secondary" href='{{url_for("kontext.pridat_kontext")}}' role="button"><i class="fa fa-plus"></i>&nbsp;Pridať vlastný kontext</a>
+        </div>
+    </div>
 
        <div class="container">
           <div class="row">
@@ -53,11 +59,6 @@
     </ul>
     </nav>
 
-    <div class="container" style="margin-top:50px; margin-bottom:50px">
-        <div class="row justify-content-center align-items-center">
-            <a class="btn btn-cogito" href='{{url_for("kontext.pridat_kontext")}}' role="button">Pridať vlastný kontext</a>
-        </div>
-    </div>
 <script>
 
     function DopytujKontext(id){
