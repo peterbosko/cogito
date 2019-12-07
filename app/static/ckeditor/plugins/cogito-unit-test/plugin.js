@@ -17,7 +17,8 @@
                     SpustiUnitTestyKontextu(kt_id);
 			    }
 			}
-		}
+		},
+		startDisabled: true	
 	};
 
 	var pluginName = 'cogito-unit-test';

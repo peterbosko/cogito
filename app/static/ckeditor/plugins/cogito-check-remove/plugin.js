@@ -10,13 +10,37 @@
 				data.data = editor.getData();
 				
 				var wrapped = $("<div>" + data.data + "</div>");
-				wrapped.find('.settings-rows').remove();
-				wrapped.find('span').removeClass('active m n no-select').removeAttr('ondblclick onselectstart');
+				wrapped.find('span').removeClass('active m n ns no-select').removeAttr('ondblclick onselectstart');
 				output = wrapped.html();
 				
 				editor.setData(output);
+				
+				$('body', parent.document).find('.cke_top.settings-enabled').addClass('settings-disabled').removeClass('settings-enabled');
+				
+				editor.on( 'selectionChange', function( evt ) {
+					var source = this.getCommand( 'source' ),
+						save = this.getCommand( 'save' );
+						cogito_check = this.getCommand( 'cogito-word-check' );
+						cogito_check_remove = this.getCommand( 'cogito-check-remove' );
+						cogito_ut = this.getCommand( 'cogito-unit-test' );
+						cogito_ut_list = this.getCommand( 'cogito-ut-list' );
+						cogito_anotacia = this.getCommand( 'cogito-anotacia' );
+						cogito_rozbor = this.getCommand( 'cogito-rozbor' );
+
+					source.enable();
+					save.enable();
+					cogito_check.enable();
+					cogito_check_remove.disable();
+					cogito_ut.disable();
+					cogito_ut_list.disable();
+					cogito_anotacia.disable();
+					cogito_rozbor.disable();
+					
+				} );
+				$('#save-context').prop('disabled', false);
 			}	
-		}	
+		},
+		startDisabled: true		
 	};
 
 	var pluginName = 'cogito-check-remove';

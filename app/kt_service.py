@@ -157,7 +157,7 @@ def vrat_pole_slov_z_textu(html, parent_slovo_id=None):
                     else:
                         v_slovo = vrat_slovo(s, parent_slovo_id)
                     
-                        if not v_slovo.neprekl_vyraz:
+                        if not v_slovo.neprekl_vyraz and not v_slovo.je_cislo:
                             celkom_slov += 1
 
                         if parent_slovo_id and parent_slovo_id == v_slovo.id_slova:
@@ -184,7 +184,7 @@ def vrat_slovo_po_kontrole_znakov(slova, parent_slovo_id):
             if s:
                 v_slovo = vrat_slovo(s, parent_slovo_id)
                     
-                if not v_slovo.neprekl_vyraz:
+                if not v_slovo.neprekl_vyraz and not v_slovo.je_cislo:
                     celkom_slov += 1
 
                 if parent_slovo_id and parent_slovo_id == v_slovo.id_slova:
@@ -209,10 +209,10 @@ def serializuj_pole_slov(pole):
         cl = "s"
 
         if not slovo.je_v_slovniku:
-            cl = "n"
+            cl = "n ns"
 
         if slovo.je_viacej_v_slovniku and not slovo.bolo_vybrate:
-            cl = "m"
+            cl = "m ns"
 
         if slovo.neprekl_vyraz:
             prilep = ""
@@ -277,8 +277,6 @@ def kontrola_slov_v_kontexte(data):
 
     jednoznacnych_slov = 0
     
-    row_id = 0
-
     result.data = ""
 
     for p in doc("p"):
@@ -296,39 +294,8 @@ def kontrola_slov_v_kontexte(data):
         pole_slov.extend(pole)
         
         if pole_slov:
-            result.data += """
-            <div id="row-id-%s" class=settings-rows  contenteditable='false' style='background: #f8f8f8;border-top: 1px dashed #bcbcbc;margin: 0 -20px;user-select:none;-webkit-user-select:none;-moz-user-select:none;'>
-                <div style='border-bottom: 1px dashed #bcbcbc;padding: 5px 20px;'>
-                    <b>GRAMATIKA:</b>
-                    <el class="setting-tvar"></el>
-                    <el class="setting-slovny_druh"></el>
-                    <el class="setting-spec_meno"></el>
-                    <el class="setting-rod"></el>
-                    <el class="setting-podrod"></el>
-                    <el class="setting-vzor"></el>
-                    <el class="setting-prefix"></el>
-                    <el class="setting-sufix"></el>
-                    <el class="setting-pocitatelnost"></el>
-                    <el class="setting-pad"></el>
-                    <el class="setting-cislo"></el>
-                    <el class="setting-odvodene"></el>
-                </div>
-                <div style='border-bottom: 1px dashed #bcbcbc;padding: 5px 20px;'>
-                    <b style='font-weight:bold;'>SÉMANTIKA:</b>
-                    <el class="setting-popis"></el>
-                    <el class="setting-priznak_slova"></el>
-                    <el class="setting-anotacia"></el>
-                </div>
-                <div style='border-bottom: 1px dashed #bcbcbc;padding: 5px 20px;'>
-                    <el class="prev-word"></el>
-                    <el class="next-word"></el>
-                    <el class="setting-accept_word"></el>
-                </div>
-            </div>
-            """ % (row_id)
-        result.data += "<p id='data-row-%s' data-row-id='%s'>%s</p>" % (row_id,row_id,serializuj_pole_slov(pole_slov))
-        
-        row_id += 1
+
+            result.data += "<p>%s</p>" % (serializuj_pole_slov(pole_slov))
         
     result.uspesnost = round(jednoznacnych_slov/celkom_slov * 100, 2)
 
@@ -362,10 +329,10 @@ def serializuj_pole_slov(pole):
         cl = "s"
 
         if not slovo.je_v_slovniku:
-            cl = "n"
+            cl = "n ns"
 
         if slovo.je_viacej_v_slovniku and not slovo.bolo_vybrate:
-            cl = "m"
+            cl = "m ns"
         
         if slovo.je_cislo:
             prilep = ""

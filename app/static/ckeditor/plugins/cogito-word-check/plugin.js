@@ -18,8 +18,7 @@
                        // <div class="fa-3x"><i class="fas fa-spinner fa-spin"></i></div>
                        // not working now html : true
                        });
-
-                AjaxMethods.getDataFromAsyncPostRequest('/kontrola_slov/', "", data, function(r){
+				AjaxMethods.getDataFromAsyncPostRequest('/kontrola_slov/', "", data, function(r){
                     if (r.status==responseOK){//OK vetva
                         swal.close();
                         swal({ buttons: {},
@@ -27,6 +26,10 @@
                             text   :  "Kontext bol skontrolovaný. Miera zvalidovaných slov: " + r.data.uspesnost+" %",
                             icon   :  "success"});
                         editor.setData(r.data.data);
+						
+						$('body', parent.document).find('#kontextProgress').css("width", r.data.uspesnost+"%");
+						$('body', parent.document).find('#kontextProgressText').html(r.data.uspesnost+" %");
+						$('body', parent.document).find('.cke_top.settings-disabled').addClass('settings-enabled').removeClass('settings-disabled');
 						
 						setTimeout(function(){
 							var all = editor.document.getElementsByTag( 'span' );
@@ -37,7 +40,36 @@
 								el.setAttribute('ondblclick','load_slovo(this);');
 								el.setAttribute('onselectstart','return false;');
 							}	
+							$("iframe.cke_wysiwyg_frame").contents().find('span.m, span.n').first().dblclick();
 						}, 200)	
+						
+						editor.on( 'selectionChange', function( evt ) {
+							var source = this.getCommand( 'source' ),
+								save = this.getCommand( 'save' );
+								cut = this.getCommand( 'cut' );
+								copy = this.getCommand( 'copy' );
+								paste = this.getCommand( 'paste' );
+								cogito_check = this.getCommand( 'cogito-word-check' );
+								cogito_check_remove = this.getCommand( 'cogito-check-remove' );
+								cogito_ut = this.getCommand( 'cogito-unit-test' );
+								cogito_ut_list = this.getCommand( 'cogito-ut-list' );
+								cogito_anotacia = this.getCommand( 'cogito-anotacia' );
+								cogito_rozbor = this.getCommand( 'cogito-rozbor' );
+
+							source.disable();
+							save.disable();
+							cut.disable();
+							copy.disable();
+							paste.disable();
+							cogito_check.disable();
+							cogito_check_remove.enable();
+							cogito_ut.enable();
+							cogito_ut_list.enable();
+							cogito_anotacia.enable();
+							cogito_rozbor.enable();
+							
+						} );
+						$('#save-context').prop('disabled', true);
                     } else{
                         swal({ buttons: {},
                             title  :  "Chyba",
@@ -46,6 +78,8 @@
 
                     }
                 });
+                
+				//loadContextModal('Kontrola kontextu', data);
 			}
 		}
 	};
