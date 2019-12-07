@@ -8,7 +8,8 @@
                 var kt_id=$('#kt_id').val();
                 loadTemplateIntoModal('#defaultModal','Rozbor viet kontextu', '/rozbor_viet_kontextu/?kontext_id='+kt_id);
 			}
-		}
+		},
+		startDisabled: true	
 	};
 
 	var pluginName = 'cogito-rozbor';

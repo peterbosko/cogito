@@ -71,194 +71,105 @@ var AjaxMethods = {
         return res;
     }
 };
-/*
-function vrat_tooltip(s, slovo){
 
-    var thtml = "";
-
-    AjaxMethods.getDataFromGetRequest('/vrat_slovo?sid=', s+'&slovo='+slovo, '', function(response){
-
-        var obj = JSON.parse(response.data);
-
-        if (obj){
-            var pad = "";
-
-            if (obj.pad){
-                pad = "<tr><td>Pád:</td><td>"+ obj.pad +"</td></tr>";
-            }
-
-            var tvar = "";
-
-            if (obj.tvar)
-                tvar = obj.tvar;
-
-            if (obj.zvratnost)
-                tvar += " " + obj.zvratnost;
-
-            var cas = "";
-
-            if (obj.cas)
-                cas = "<tr><td>Čas:</td><td>"+ obj.cas +"</td></tr>";
-
-            var zak_tvar = "";
-
-            if (obj.zak_tvar)
-                zak_tvar = "<tr><td>Základný tvar:</td><td>"+ obj.zak_tvar +"</td></tr>";
-
-            var id = "";
-
-            if (obj.id)
-                id = "<tr><td>Id slova:</td><td>"+ obj.id +"</td></tr>";
-
-            var idsd = "";
-
-            if (obj.sd_id)
-                idsd = "<tr><td>Id slov. druhu:</td><td>"+ obj.sd_id +"</td></tr>";
-
-            var rod = "";
-
-            if (obj.rod)
-                rod = obj.rod;
-
-            if (obj.podrod)
-                rod += " / "+obj.podrod;
-
-            if (rod)
-                rod = "<tr><td>Rod/Podrod:</td><td>"+ rod +"</td></tr>";
-
-            var cislo = "";
-
-            if (obj.cislo)
-                cislo = "<tr><td>Číslo:</td><td>"+ obj.cislo +"</td></tr>";
-
-            var osoba = "";
-
-            if (obj.osoba)
-                osoba = "<tr><td>Osoba:</td><td>"+ obj.osoba +"</td></tr>";
-
-            var negneurprech = "";
-
-            if (obj.je_negacia && obj.je_negacia=="A")
-                negneurprech = "Neg"
-
-            if (obj.je_neurcitok && obj.je_neurcitok=="A"){
-                if (negneurprech)
-                    negneurprech += "/";
-                negneurprech += "Neur"
-            }
-
-            if (obj.je_prech  && obj.je_prech=="A"){
-                if (negneurprech)
-                    negneurprech+="/";
-                negneurprech += "Prech"
-            }
-
-            if (negneurprech)
-                negneurprech = "<tr><td>Neg/Neur/Prech:</td><td>"+ negneurprech +"</td></tr>";
-
-            var pricastie = "";
-
-            if (obj.pricastie)
-                pricastie = "<tr><td>Príčastie:</td><td>"+ obj.pricastie +"</td></tr>";
-
-            var popis = "";
-
-            if (obj.popis)
-                popis = "<tr><td>Popis:</td><td>"+ obj.popis +"</td></tr>";
-
-            var sposob = "";
-
-            if (obj.sposob)
-                sposob = "<tr><td>Spôsob:</td><td>"+ obj.sposob +"</td></tr>";
-
-            var anotacia = "";
-
-            if (obj.anotacia)
-                anotacia = "<tr><td>Anotácia:</td><td>"+ obj.anotacia +"</td></tr>";
-
-            thtml = "<table>"+
-                    "<tr><td style='text-align: center;' colspan='2'><b>"+ tvar +"</b></td></tr>"+
-                    "<tr><td>Slovný druh:</td><td>"+ obj.slovny_druh +"</td></tr>"+
-                    pad +
-                    cas +
-                    zak_tvar +
-                    cislo +
-                    rod +
-                    osoba +
-                    negneurprech +
-                    pricastie +
-                    sposob +
-                    popis +
-                    id +
-                    idsd +
-                    anotacia +
-                    "</table>";
-          }
-    });
-    return thtml;
-}
-
-function t(that){
-  var sid = $(that).attr('sid');
-  var slovo = $(that).text();
-
-  if (sid && sid!="None")
-      $(that).tooltip({
-        placement: "right",
-        title: vrat_tooltip(sid, slovo),
-        selector: true,
-        html : true,
-    });
-}
-*/
-
-function update_sid(that, row_id){
+function update_sid(that){
 	var sid = $(that).data('id');
 	var new_data = $(that).val();
+	var main = $("iframe.cke_wysiwyg_frame").contents();
+	
 	
 	if(new_data.indexOf(":") >= 0) {
 		var data = new_data.split(':');
-		console.log(data);
-		$('p[data-row-id="'+row_id+'"] span[sid="'+sid+'"]').attr('sid',data[0]);
-		$('p[data-row-id="'+row_id+'"] span[sid="'+data[0]+'"]').text(data[1]);
-		$('p[data-row-id="'+row_id+'"] span[sid="'+data[0]+'"]').dblclick();
+		main.find('span[sid="'+sid+'"].active').attr('sid',data[0]).text(data[1]).dblclick();
 	} else {
-		$('p[data-row-id="'+row_id+'"] span[sid="'+sid+'"]').attr('sid',new_data);
-		$('p[data-row-id="'+row_id+'"] span[sid="'+new_data+'"]').dblclick();
+		main.find('span[sid="'+sid+'"].active').attr('sid',new_data).dblclick();
 	}
 }
 
-function prev_word(that){
-	var row_id = $(that).data('row-id');
+function acceptKontext(that){
+	var data = $('#kontextBody');
+	var editor = CKEDITOR.instances['txtContext'];
+	data.find('span').removeClass('m n ns no-select active');
+	
+	editor.setData(data.html());
+	$('#kontextModal').modal('toggle');
+}
 
-	$('#data-row-'+row_id).find('.active').prev().dblclick();
+function prev_word(that){
+	var main = $("iframe.cke_wysiwyg_frame").contents();
+	var prev = main.find('.active').prevAll('.ns').eq(0);
+	var parent = main.find('.active').parent();
+	if(prev.length) {
+		prev.dblclick();
+	} else {
+		parent.prev().find('span.ns').last().dblclick();
+	}
+	return false;
 }
 
 function next_word(that){
-	var row_id = $(that).data('row-id');
-	
-	$('#data-row-'+row_id).find('.active').next().dblclick();
+	var main = $("iframe.cke_wysiwyg_frame").contents();
+	var next = main.find('.active').nextAll('.ns').eq(0);
+	var parent = main.find('.active').parent();
+	if(next.length) {
+		next.dblclick();
+	} else {
+		parent.next().find('span.ns').first().dblclick();
+	}
+	return false;
 }
 
-function accept_word(row_id, sid){
-	var el = $('#data-row-'+row_id).find('.active');
+function accept_word(that){
+	var main = $("iframe.cke_wysiwyg_frame").contents();
+	var el = main.find('.active');
 	
 	if(el.hasClass('s')){
 		el.removeClass('s').addClass('m').dblclick();
 	} else {
-		el.removeClass('m').removeClass('n').addClass('s').next().dblclick();
-	}	
+		el.removeClass('m n ns').addClass('s');
+		var next = main.find('.active').nextAll('.ns').eq(0);
+		var parent = main.find('.active').parent();
+		if(next.length) {
+			next.dblclick();
+		} else {
+			parent.next().find('span.ns').first().dblclick();
+		}
+	}
+	setProgressBar();
+	return false;
+}
+
+function setProgressBar(){
+	var main = $("iframe.cke_wysiwyg_frame").contents();
+	var progressInfo = $('#kontextProgressText');
+	var progressBar = $('#kontextProgress');
+	var uspesnost = 0;
+	
+	var allWords = main.find('span');
+	var allWordsAccepted = main.find('span.s');
+	
+	console.log(allWordsAccepted.length);
+	console.log(allWords.length);
+	
+	uspesnost = Math.round(((allWordsAccepted.length/allWords.length)*100) * 100) / 100;
+	
+	progressInfo.html(uspesnost);
+	progressBar.css("width", uspesnost+"%");
 }
 
 function load_slovo(that){
 	var sid = $(that).attr('sid');
 	var slovo = $(that).text();
-	var row_id = $(that).parent().data('row-id');
 	var data = {};
-	var settings_row = $('#row-id-'+row_id);
+	
+	var settings_row = $('body', parent.document).find('#settings-rows');
+	var settings_row_buttons = $('body', parent.document).find('#settings-rows-buttons');
+	
 	settings_row.find('el').html('');
 	var cislo = {'J': 'Jednotné', 'M': 'Množné', 'P': 'Podmnožné'};
 	var class_type = 's';
+	
+	
 	
 	if($(that).hasClass('m')) {
 		class_type = 'm';
@@ -270,32 +181,57 @@ function load_slovo(that){
 	$(that).addClass('active');
 	
 	var options;
-	settings_row.find('.setting-tvar').html('Tvar: ' + slovo + ' | ');
+	settings_row.find('.setting-tvar').html(slovo);
 	
 	/*** NACITAJ SLOVO DO OBJEKTU ***/
 	
 	AjaxMethods.getDataFromGetRequest('/vrat_slovo?sid=', sid+'&slovo='+slovo, '', function(response){
 		var obj = JSON.parse(response.data);
-		console.log('OBJ:');
-		console.log(obj);
 		if (obj){
-			
 			/*** NACITAJ VSETKY SLOVNE DRUHY PRE DANE SLOVO ***/
 			if(class_type == 's') {
-				settings_row.find('.setting-slovny_druh').html('Slovný druh: ' + obj.slovny_druh);
+				var pod_m_data = '';
+				var sem_priznak = '';
+				if(obj.slovny_druh == "POD_M") {
+					if(obj.sem_id) {
+						/*** NACITAJ SEMANTICKY PRIZNAK PRE DANE SLOVO SO SLOVNYM DRUHOM ***/
+						AjaxMethods.getDataFromAsyncGetRequest('/daj_sem_priznak?sem_id='+obj.sem_id, '', "", function(r){
+							if (r.status==responseOK){
+								data = r.data;
+								sem_priznak = data.nazov;
+							}
+						});
+					}
+					pod_m_data = ", "+obj.rod+", "+obj.podrod+", "+obj.popis+", "+sem_priznak;
+				}
+				settings_row.find('.setting-slovny_druh').html('Slovný druh: <b>' + obj.slovny_druh + pod_m_data + '</b>');
 			} else {
 				AjaxMethods.getDataFromAsyncGetRequest('/daj_tvary_slova?vyraz='+slovo, "", "", function(r){
 					if (r.status==responseOK){
 						data = r.data;
 						if(data.length > 0) {
 							var i;
-							options = '<select data-id="'+obj.id+'" onchange="update_sid(this, '+row_id+');">';
+							options = '<select data-id="'+obj.id+'" onchange="update_sid(this);">';
 							for (i = 0; i < data.length; i++) { 
 								var selected = '';
+								var pod_m_data = '';
+								var sem_priznak = '';
 								if (obj.id && obj.id == data[i].id) {
 									selected = 'selected=selected';
 								}
-								options = options + "<option value="+data[i].id+" "+selected+">"+data[i].slovny_druh+" - "+data[i].zak_tvar+"</option>";
+								if(data[i].slovny_druh == "POD_M") {
+									if(data[i].sem_id) {
+										/*** NACITAJ SEMANTICKY PRIZNAK PRE DANE SLOVO SO SLOVNYM DRUHOM ***/
+										AjaxMethods.getDataFromAsyncGetRequest('/daj_sem_priznak?sem_id='+data[i].sem_id, '', "", function(r){
+											if (r.status==responseOK){
+												data = r.data;
+												sem_priznak = data.nazov;
+											}
+										});
+									}
+									pod_m_data = ", "+data[i].rod+", "+data[i].podrod+", "+data[i].popis+", "+sem_priznak;
+								}
+								options = options + "<option value="+data[i].id+" "+selected+">"+data[i].slovny_druh+", "+data[i].zak_tvar+pod_m_data+"</option>";
 							}
 							var options = options + '</select> | ';
 						}
@@ -304,47 +240,26 @@ function load_slovo(that){
 				});
 			}
 			if(obj.slovny_druh == "POD_M") {
-				if(obj.rod) {
-					settings_row.find('.setting-rod').html('Rod: ' + obj.rod + ' | ');
-					if(obj.rod == "M") {
-						if(obj.podrod) {
-							settings_row.find('.setting-podrod').html('Podrod: ' + obj.podrod + ' | ');
-						}	
-					}	
-				}
+				
 				if(obj.vzor) {
-					settings_row.find('.setting-vzor').html('Vzor: ' + obj.vzor + ' | ');
+					settings_row.find('.setting-vzor').html('Vzor: <b>' + obj.vzor + '</b>');
 				}
 				if(obj.prefix) {
-					settings_row.find('.setting-prefix').html('Prefix: ' + obj.prefix + ' | ');
+					settings_row.find('.setting-prefix').html('Prefix: <b>' + obj.prefix + '</b>');
 				}
 				if(obj.sufix) {
-					settings_row.find('.setting-sufix').html('Sufix: ' + obj.sufix + ' | ');
+					settings_row.find('.setting-sufix').html('Sufix: <b>' + obj.sufix + '</b>');
 				}
 				if(obj.pocitatelnost) {
-					settings_row.find('.setting-pocitatelnost').html('Pocitatelnost: ' + obj.pocitatelnost + ' | ');
+					settings_row.find('.setting-pocitatelnost').html('Pocitatelnost: <b>' + obj.pocitatelnost + '</b>');
 				}
 				if(obj.anotacia) {
-					settings_row.find('.setting-anotacia').html('Anotácia: ' + obj.anotacia + ' | ');
-				}
-				if(obj.sem_id) {				
-
-					/*** NACITAJ SEMANTICKY PRIZNAK PRE DANE SLOVO SO SLOVNYM DRUHOM ***/
-					
-					AjaxMethods.getDataFromAsyncGetRequest('/daj_sem_priznak?sem_id='+obj.sem_id, '', "", function(r){
-						if (r.status==responseOK){
-							data = r.data;
-							console.log('Všetky semanticke priznaky:');
-							console.log(data);
-							settings_row.find('.setting-priznak_slova').html('Sémantický príznak: ' + data.kod + ' - ' + data.nazov + ' | ');
-						}
-					});
+					settings_row.find('.setting-anotacia').html('Anotácia: <b>' + obj.anotacia + '</b>');
 				}
 				
 				if(class_type == 's') {
-					settings_row.find('.setting-slovny_druh').html('Slovný druh: ' + obj.slovny_druh);
-					settings_row.find('.setting-pad').html('Pád: ' + obj.pad);
-					settings_row.find('.setting-cislo').html('Číslo: ' + obj.cislo);
+					settings_row.find('.setting-pad').html('Pád: <b>' + obj.pad + '</b>');
+					settings_row.find('.setting-cislo').html('Číslo: <b>' + obj.cislo + '</b>');
 					settings_row.find('.setting-odvodene').html('Odvodené od slov: ');
 				} else {
 					/*** NACITAJ VSETKY PADY PRE DANE SLOVO SO SLOVNYM DRUHOM ***/
@@ -355,7 +270,7 @@ function load_slovo(that){
 					
 							if(data.length > 0) {
 								var i;
-								options = '<select data-id="'+obj.id+'" onchange="update_sid(this, '+row_id+');">';
+								options = '<select data-id="'+obj.id+'" onchange="update_sid(this);">';
 								for (i = 0; i < data.length; i++) { 
 									var selected = '';
 									if (obj.id && obj.pad == data[i].pad) {
@@ -376,7 +291,7 @@ function load_slovo(that){
 							data = r.data;
 							if(data.length > 0) {
 								var i;
-								options = '<select data-id="'+obj.id+'" onchange="update_sid(this, '+row_id+');">';
+								options = '<select data-id="'+obj.id+'" onchange="update_sid(this);">';
 								for (i = 0; i < data.length; i++) { 
 									var selected = '';
 									if (obj.id && obj.cislo == data[i].cislo) {
@@ -398,7 +313,7 @@ function load_slovo(that){
 							console.log(data);
 							if(data.length > 0) {
 								var i;
-								options = '<select data-id="'+obj.id+'" onchange="update_sid(this, '+row_id+');">';
+								options = '<select data-id="'+obj.id+'" onchange="update_sid(this);">';
 								for (i = 0; i < data.length; i++) { 
 									var selected = '';
 									if (obj.id && obj.cislo == data[i].cislo) {
@@ -417,7 +332,7 @@ function load_slovo(that){
 			
 			if(class_type == 's') {
 				if(obj.popis) {
-					settings_row.find('.setting-popis').html('Popis: ' + obj.popis);
+					settings_row.find('.setting-popis').html('Popis: <b>' + obj.popis + '</b>');
 				}	
 			} else {	
 				/*** NACITAJ VSETKY POPISY PRE DANE SLOVO ***/
@@ -425,12 +340,10 @@ function load_slovo(that){
 				AjaxMethods.getDataFromAsyncGetRequest('/daj_vsetky_slova?vyraz='+obj.tvar, '', "", function(r){
 					if (r.status==responseOK){
 						data = r.data;
-						console.log('Všetky popisy slova:');
-						console.log(data);
 						if(data.length > 0) {
 							var i;
 							var counter = 0;
-							options = '<select data-id="'+obj.id+'" onchange="update_sid(this, '+row_id+');">';
+							options = '<select data-id="'+obj.id+'" onchange="update_sid(this);">';
 							for (i = 0; i < data.length; i++) { 
 								var selected = '';
 								if (obj.id && obj.id == data[i].id) {
@@ -451,16 +364,16 @@ function load_slovo(that){
 			}
 		}
 	});
-	settings_row.find('.prev-word').html('<a href="#" onclick="prev_word(this);" data-row-id="'+row_id+'">Predchádzajúce slovo</a>');
-	settings_row.find('.next-word').html('<a href="#" onclick="next_word(this);" data-row-id="'+row_id+'">Nasledujúce slovo</a>');
 	
-	var save_name = 'Potvrdiť slovo';
+	var save_name = 'Potvrdiť slovo <i class="fa fa-check-double"></i>';
 	if(class_type == 's') {
-		save_name = 'Upraviť slovo';
+		save_name = 'Upraviť slovo <i class="fa fa-edit"></i>';
 	}
 	if(class_type != 'n') {
-		settings_row.find('.setting-accept_word').html('<a href="#" onclick="accept_word('+row_id+', '+sid+');" data-row-id="'+row_id+'" style="float: right;">'+save_name+'</a>');
+		settings_row_buttons.find('.setting-accept_word').html('<a href="#" onclick="accept_word(this);" class="btn" style="float: right;">'+save_name+'</a>');
 	}
+	//$('select').niceSelect();
+
 }
 
 function loadTemplateIntoModal(modalSelector, title, controlPath, fireMethod, methodParams) {
@@ -796,29 +709,21 @@ function loadNeededScriptsAndStyles(script, style, callback) {
                 }
         });
 		
-		var myscript6 = CKEDITOR.document.createElement( 'script', {
-            attributes : {
-                type : 'text/javascript',
-                'src' : '/static/js/jquery.nice-select.min.js'
-                }
-        });
-		
         head.append( myscript1 );
         head.append( myscript5 );
-        head.append( myscript6 );
     }
 
     function GetCKEditorHtml(ckeditorName){
         return CKEDITOR.instances[ckeditorName].getData();
     }
 
-    function initCKEditorInstance(ckeditorName, h, toolbar){
+    function initCKEditorInstance(ckeditorName, h, toolbar, settingsToolbar){
 
 		CKEDITOR.timestamp=Math.random();
         
 		CKEDITOR.addCss('.tooltip > .tooltip-inner { background-color: #000; color:#fff; }');
-
-        CKEDITOR.addCss('span.no-select { -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }');
+		
+		CKEDITOR.addCss('span.no-select { -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }');
         
 		CKEDITOR.addCss('span.active { background-color: #afe5ff !important;  padding: 4px;}');
         
@@ -839,13 +744,15 @@ function loadNeededScriptsAndStyles(script, style, callback) {
         if (toolbar==="kontext"){
             tbar = [
         		{ name: 'document', items: [ 'Source' , '-' ,'Save'] },
-		        { name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo', '-', 'cogito-word-check', 'cogito-check-remove', '-' ,'cogito-unit-test' , 'cogito-ut-list' , '-' , 'cogito-anotacia', '-' , 'cogito-rozbor'] },
-	        ]
+		        { name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'cogito-word-check', 'cogito-check-remove', '-' ,'cogito-unit-test' , 'cogito-ut-list' , '-' , 'cogito-anotacia', '-' , 'cogito-rozbor'] },
+				'/',
+				{ name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
+			]
         }
         else {
             tbar = [
         		{ name: 'document', items: [ 'Source' , '-' ,'Save'] },
-		        { name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo', '-', 'cogito-word-check', 'cogito-check-remove', '-' ] },
+		        { name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'cogito-word-check', 'cogito-check-remove', '-' ] },
 	        ]
         }
 
@@ -881,7 +788,6 @@ function loadNeededScriptsAndStyles(script, style, callback) {
                 //load_sematicke_pady(ckeditorName);
             },
           },
-		  //contentsCss : '/static/css/nice-select.css',
           toolbar: tbar,
 		  extraAllowedContent: '*[*]{*}(*)',
 		  allowedContent: {
@@ -897,6 +803,12 @@ function loadNeededScriptsAndStyles(script, style, callback) {
         });
 
         CKEDITOR.instances[ckeditorName].CogitoEditorType = toolbar;
+		
+		CKEDITOR.on('instanceReady',function(){
+			$('#cke_1_top').after(settingsToolbar);
+		});
+		
+		
     }
 
 /********************* Manage ck editor *****************************/

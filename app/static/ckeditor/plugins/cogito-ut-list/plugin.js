@@ -16,7 +16,8 @@
                     loadTemplateIntoLargeScreenModal('#defaultModal','largefitheightscreen', 'Unit testy kontextu', '/zoznam_ut/?kontext_id='+kt_id);
 			    }
 			}
-		}
+		},
+		startDisabled: true	
 	};
 
 	var pluginName = 'cogito-ut-list';
