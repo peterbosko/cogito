@@ -8,7 +8,7 @@ from .m_metadata import metadata_blueprint
 from flask_fontawesome import FontAwesome
 from app.main_helper import *
 
-flask_app = Flask(__name__)
+flask_app = Flask(__name__, static_folder='static', static_url_path='')
 
 fa = FontAwesome(flask_app)
 
