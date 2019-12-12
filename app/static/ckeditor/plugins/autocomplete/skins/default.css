@@ -36,3 +36,15 @@ For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 {
 	background-color: #EFF0EF;
 }
+
+.cke_autocomplete_panel > li > span
+{
+	display: none;
+}
+
+.cke_autocomplete_panel > li:first-child > span
+{
+	display: block;
+	color: #f00;
+	
+}

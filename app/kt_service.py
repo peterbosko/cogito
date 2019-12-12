@@ -78,8 +78,24 @@ def vrat_pady_slova(cislo, sd_id):
 def vrat_cisla_slova(pad, sd_id):
     if pad:
         pole_slov = Slovo.query.filter(Slovo.sd_id == sd_id).filter(Slovo.pad == pad)
-        
+
         return [{key: value for (key, value) in row.exportuj(False).__dict__.items()} for row in pole_slov]
+    else:
+        return None
+
+def vrat_odvodene_slova(sd_id):
+    if sd_id:
+        pole_slov = HierarchiaSD.query.filter(HierarchiaSD.sd_id == sd_id)
+
+        return [{key: value for (key, value) in row.exportuj().__dict__.items()} for row in pole_slov]
+    else:
+        return None
+
+def vrat_prid_meno(sd_id):
+    if sd_id:
+        pole_slov = PridavneMeno.query.filter(PridavneMeno.prid_m_id == sd_id)
+
+        return [{key: value for (key, value) in row.exportuj().__dict__.items()} for row in pole_slov]
     else:
         return None
 

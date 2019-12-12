@@ -39,8 +39,8 @@
 				} );
 				$('#save-context').prop('disabled', false);
 			}	
-		},
-		startDisabled: true		
+			},
+			startDisabled: true		
 	};
 
 	var pluginName = 'cogito-check-remove';

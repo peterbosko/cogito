@@ -83,6 +83,7 @@ class SlovnyDruh(db.Model):
     sufix = db.Column(db.String(20, collation='utf8mb4_bin'), nullable=True)
     sem_priznak_id = db.Column(db.Integer, db.ForeignKey("sem.id"), nullable=True, index=True)
     sem_priznak = relationship("Semantika", foreign_keys=[sem_priznak_id])
+    sd_hier = relationship("HierarchiaSD", primaryjoin="(SlovnyDruh.id==HierarchiaSD.sd_id)")
 
     __mapper_args__ = {
         'polymorphic_identity': 'sd',
@@ -94,6 +95,7 @@ class SlovnyDruh(db.Model):
         export.id = self.id
         export.zak_tvar = self.zak_tvar
         export.typ = self.typ
+        export.parent_sd_id = self.parent_sd_id
         return export
 
     def exportujSem(self):
@@ -218,7 +220,10 @@ class PridavneMeno(SlovnyDruh):
     __mapper_args__ = {
         'polymorphic_identity': 'PRID_M',
     }
+    def exportuj(self):
+        export = self
 
+        return export
 
 class Zameno(SlovnyDruh):
     __tablename__ = 'sd_zameno'
@@ -464,6 +469,15 @@ class HierarchiaSD(db.Model):
     parent_sd_id = db.Column('parent_sd_id', db.Integer, db.ForeignKey('sd.id'), nullable=False)
     parent_sd = relationship("SlovnyDruh", foreign_keys=[parent_sd_id])
 
+    def exportuj(self):
+        export = SlovnyDruhHierExport()
+        export.id = self.id
+        export.sd_id = self.sd_id
+        export.parent_sd_id = self.parent_sd_id
+        export.sd = self.sd
+        export.parent_sd = self.parent_sd
+
+        return export
 
 sem1 = aliased(Semantika, name='sem1')
 sem2 = aliased(Semantika, name='sem2')

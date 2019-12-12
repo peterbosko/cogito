@@ -452,12 +452,6 @@ form label {
     }
 }
 
-@media ( max-width: 695px ) {
-    .container .display-4 {
-        margin-top:30px;
-    }
-}
-
 @media ( max-width: 877px ) {
     .topSearchForm {
         display:none;

@@ -148,12 +148,9 @@ function setProgressBar(){
 	var allWords = main.find('span');
 	var allWordsAccepted = main.find('span.s');
 	
-	console.log(allWordsAccepted.length);
-	console.log(allWords.length);
-	
 	uspesnost = Math.round(((allWordsAccepted.length/allWords.length)*100) * 100) / 100;
 	
-	progressInfo.html(uspesnost);
+	progressInfo.html(uspesnost+" %");
 	progressBar.css("width", uspesnost+"%");
 }
 
@@ -304,32 +301,19 @@ function load_slovo(that){
 						}
 						settings_row.find('.setting-cislo').html('Číslo: ' + options);
 					});
-					
-					/* CHYBAJU DATA V DB - dorobit prepojenie semantika - slovny druh
-					
-					AjaxMethods.getDataFromAsyncGetRequest('/daj_odvodene_od_slova?pad='+obj.pad, '&sd_id='+obj.sd_id, "", function(r){
+				}	
+			} else if(obj.slovny_druh == "PRID_M") {
+				settings_row.find('.setting-stupen').html('Stupeň: ' + obj.stupen + ' | ');
+				AjaxMethods.getDataFromAsyncGetRequest('/daj_prid_meno/?sd_id='+obj.sd_id, '', "", function(r){
+						console.log(r);
 						if (r.status==responseOK){
 							data = r.data;
-							console.log(data);
-							if(data.length > 0) {
-								var i;
-								options = '<select data-id="'+obj.id+'" onchange="update_sid(this);">';
-								for (i = 0; i < data.length; i++) { 
-									var selected = '';
-									if (obj.id && obj.cislo == data[i].cislo) {
-										selected = 'selected=selected';
-									}
-									options = options + "<option value="+data[i].id+":"+data[i].tvar+" "+selected+">"+cislo[data[i].cislo]+"</option>";
-								}
-								var options = options + '</select>';
-							}
+							settings_row.find('.setting-sem_priznak_prid_meno').html('Sem. priznak príd. mena: ' + data[0].sem_priznak_prid_m_id + ' | ');
 						}
-						settings_row.find('.setting-odvodene').html('Odvodené od slov: ' + from_words);
+						
 					});
-					*/
-				}	
 			}
-			
+			settings_row.find('.setting-sem_priznak').html('Sem. priznak: ' + obj.sem_priznak_id + ' | ');
 			if(class_type == 's') {
 				if(obj.popis) {
 					settings_row.find('.setting-popis').html('Popis: <b>' + obj.popis + '</b>');
@@ -362,6 +346,20 @@ function load_slovo(that){
 					}
 				});
 			}
+			/*** NACITAJ VSETKY KORENE SLOVA PRE DANY SLOVNY DRUH ***/
+			AjaxMethods.getDataFromAsyncGetRequest('/daj_odvodene_od_slova/?sd_id='+obj.sd_id, '', "", function(r){
+				if (r.status==responseOK){
+					data = r.data;
+					if(data.length > 0) {
+						var i;
+						var from_words = '';
+						for (i = 0; i < data.length; i++) { 
+							from_words = from_words + data[i].parent_sd.zak_tvar+" ("+data[i].parent_sd.popis+"), ";
+						}
+						settings_row.find('.setting-odvodene').html('Odvodené od slov: <b>' + from_words + '</b>');
+					}
+				}
+			});
 		}
 	});
 	
@@ -619,7 +617,7 @@ function loadNeededScriptsAndStyles(script, style, callback) {
       if (!range.collapsed) {
         return null;
       }
-      return CKEDITOR.plugins.textMatch.match(range, matchCallback);
+		return CKEDITOR.plugins.textMatch.match(range, matchCallback);
     }
 
     function matchCallback(text, offset) {
@@ -699,13 +697,13 @@ function loadNeededScriptsAndStyles(script, style, callback) {
         var myscript1 = CKEDITOR.document.createElement( 'script', {
             attributes : {
                 type : 'text/javascript',
-                'src' : '/js/allJS.min.js'
+                'src' : '/static/js/allJS.min.js'
                 }
         });
         var myscript5 = CKEDITOR.document.createElement( 'script', {
             attributes : {
                 type : 'text/javascript',
-                'src' : '/js/main.js?='+Math.random()
+                'src' : '/static/js/main.js?='+Math.random()
                 }
         });
 		
@@ -755,12 +753,12 @@ function loadNeededScriptsAndStyles(script, style, callback) {
 		        { name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'cogito-word-check', 'cogito-check-remove', '-' ] },
 	        ]
         }
-
+		var info = '<p style="color:red">Pre určenie slova kliknite na jeden zaznam zo zoznamu:</p>';
         CKEDITOR.replace(ckeditorName, {
           height: h,
           on: {
             instanceReady: function(evt) {
-              var itemTemplate = '<li data-id="{id}">' +
+              var itemTemplate = '<li data-id="{id}"><span>Pre určenie slova kliknite na jeden zaznam zo zoznamu:</span>' +
                 '<div><strong class="item-title">{tvar} - {slovny_druh} ({zak_tvar})</strong></div>' +
                 '<div><i>Pád: {pad} Číslo: {cislo} Osoba:{osoba}</i></div>' +
                 '<div><i>Stupeň: {stupen} Čas: {cas} Rod:{rod} Podrod:{podrod}</i></div>' +
@@ -768,7 +766,7 @@ function loadNeededScriptsAndStyles(script, style, callback) {
                 '<div><i>Anotácia: {anotacia}</i></div>' +
                 '<div><i>Popis: {popis}</i></div>' +
                 '</li>',
-                outputTemplate = '<span class="s" sid="{id}">{tvar}</span>';
+                outputTemplate = '<span class="s" sid="{id}">{tvar}</span>&nbsp;';
 
               var autocomplete = new CKEDITOR.plugins.autocomplete(evt.editor, {
                 textTestCallback: textTestCallback,
@@ -779,6 +777,7 @@ function loadNeededScriptsAndStyles(script, style, callback) {
 
               // Override default getHtmlToInsert to enable rich content output.
               autocomplete.getHtmlToInsert = function(item) {
+				  
                 return this.outputTemplate.output(item);
               }
             },
@@ -790,16 +789,6 @@ function loadNeededScriptsAndStyles(script, style, callback) {
           },
           toolbar: tbar,
 		  extraAllowedContent: '*[*]{*}(*)',
-		  allowedContent: {
-				div: {
-					classes: { 'settings-rows': true, 'settings-row': true }
-				},
-				el: {},
-				span: {},
-				b: {},
-				a: {},
-				select: {}
-		  },
         });
 
         CKEDITOR.instances[ckeditorName].CogitoEditorType = toolbar;
