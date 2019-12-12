@@ -699,13 +699,13 @@ function loadNeededScriptsAndStyles(script, style, callback) {
         var myscript1 = CKEDITOR.document.createElement( 'script', {
             attributes : {
                 type : 'text/javascript',
-                'src' : '/static/js/allJS.min.js'
+                'src' : '/js/allJS.min.js'
                 }
         });
         var myscript5 = CKEDITOR.document.createElement( 'script', {
             attributes : {
                 type : 'text/javascript',
-                'src' : '/static/js/main.js?='+Math.random()
+                'src' : '/js/main.js?='+Math.random()
                 }
         });
 		
