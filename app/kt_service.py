@@ -49,13 +49,14 @@ def vrat_slovo_komplet(sid, vyraz):
         #cisla = Slovo.query.filter(Slovo.sd_id == slovo_data.data['sd_id']).filter(Slovo.pad == slovo_data.data['pad'])
         #slovo_data.cisla = [{key: value for (key, value) in row.exportuj(False).__dict__.items()} for row in cisla]
 
-        slova = Slovo.query.filter(Slovo.tvar == slovo_data.data['tvar'])
-        slovo_data.vsetky_slova = [{key: value for (key, value) in row.exportuj_komplet(prvy_znak_upper).__dict__.items()} for row in
-                                   slova]
+        if slovo_data.data:
+            slova = Slovo.query.filter(Slovo.tvar == slovo_data.data['tvar']).filter(Slovo.anotacia.isnot(None))
+            slovo_data.vsetky_slova = [{key: value for (key, value) in row.exportuj_komplet(prvy_znak_upper).__dict__.items()} for row in
+                                       slova]
 
-        odvodene_slova = HierarchiaSD.query.filter(HierarchiaSD.sd_id == slovo_data.data['sd_id'])
-        slovo_data.odvodene = [{key: value for (key, value) in row.exportuj().__dict__.items()} for row in
-                                   odvodene_slova]
+            odvodene_slova = HierarchiaSD.query.filter(HierarchiaSD.sd_id == slovo_data.data['sd_id'])
+            slovo_data.odvodene = [{key: value for (key, value) in row.exportuj().__dict__.items()} for row in
+                                       odvodene_slova]
 
         #if slovo_data.data['slovny_druh'] == "PRID_M":
             # PRID_M
@@ -175,7 +176,7 @@ def vrat_pole_slov_z_textu(html, parent_slovo_id=None):
             # print("Kontent je span:" + str(content.hasClass("slovnik"))+"|")
             s_id = None
 
-            if content.hasClass("s"):
+            if content.hasClass("s") and content.attr('sid').isdigit():
                 s_id = int(content.attr('sid'))
 
             s, u, p = vrat_pole_slov_z_textu(content.outerHtml(), s_id)
@@ -193,7 +194,7 @@ def vrat_pole_slov_z_textu(html, parent_slovo_id=None):
             for s in slova_to_check:
                 if s:
 
-                    if pq(html).is_("span") and pq(html).hasClass("s"):
+                    if pq(html).is_("span") and pq(html).hasClass("s") and pq(html).attr('sid').isdigit():
                         parent_slovo_id = int(pq(html).attr("sid"))
                     
                     posledny_znak = s[len(s)-1]

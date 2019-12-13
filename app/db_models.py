@@ -389,7 +389,8 @@ class Slovo(db.Model):
         elif export.slovny_druh == "PRID_M":
             prm = PridavneMeno.query.get(self.sd_id)
             export.sloveso_id = prm.sloveso_id
-            export.sem_priznak_prid_m = prm.sem_priznak_prid_m.kod
+            if prm.sem_priznak_prid_m:
+                export.sem_priznak_prid_m = prm.sem_priznak_prid_m.kod
 
             if prm.sloveso_id:
                 slov = Sloveso.query.get(prm.sloveso_id)

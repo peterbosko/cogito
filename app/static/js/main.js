@@ -111,10 +111,17 @@ function next_word(that){
 	var main = $("iframe.cke_wysiwyg_frame").contents();
 	var next = main.find('.active').nextAll('.ns').eq(0);
 	var parent = main.find('.active').parent();
+	var settings_row = $('body', parent.document).find('#settings-rows-buttons');
 	if(next.length) {
 		next.dblclick();
 	} else {
-		parent.next().find('span.ns').first().dblclick();
+		var nextp = parent.nextAll('p');
+		for (i = 0; i < nextp.length; i++) {      
+			 if (nextp.eq(i).find('span.ns').first().length) {
+				  nextp.eq(i).find('span.ns').first().dblclick();
+				  break;
+			 }
+		}
 	}
 	return false;
 }
@@ -185,10 +192,8 @@ function load_slovo(that){
 	AjaxMethods.getDataFromGetRequest('/daj_komplet?sid=', sid+'&vyraz='+slovo, '', function(response){
 		//console.log(response);
 		var obj = response;
-		if (obj){
+		if (obj.data){
 			/*** NACITAJ VSETKY SLOVA PRE DANE SLOVO ***/
-			
-			
 			if(class_type == 's') {
 				var slovo_data = '';
 				if(obj.data.pad) {
@@ -300,6 +305,8 @@ function load_slovo(that){
 	}
 	if(class_type != 'n') {
 		settings_row_buttons.find('.setting-accept_word').html('<a href="#" onclick="accept_word(this);" class="btn" style="float: right;">'+save_name+'</a>');
+	} else {
+		settings_row_buttons.find('.setting-accept_word').html('');
 	}
 	//$('select').niceSelect();
 
