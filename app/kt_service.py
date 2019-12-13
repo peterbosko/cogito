@@ -36,35 +36,39 @@ def vrat_slovo_komplet(sid, vyraz):
 
         # VSEOBECNE
 
-        v_slovne_druhy = SlovnyDruh.query.filter(SlovnyDruh.zak_tvar == slovo_data.data['zak_tvar'])
-        slovo_data.vsetky_slovne_druhy = [{key: value for (key, value) in row.exportuj().__dict__.items()} for row in
-                                          v_slovne_druhy]
+        #v_slovne_druhy = SlovnyDruh.query.filter(SlovnyDruh.zak_tvar == slovo_data.data['zak_tvar'])
+        #slovo_data.vsetky_slovne_druhy = [{key: value for (key, value) in row.exportuj().__dict__.items()} for row in
+        #                                  v_slovne_druhy]
 
-        pady = Slovo.query.filter(Slovo.sd_id == slovo_data.data['sd_id']).filter(
-            Slovo.cislo == slovo_data.data['cislo']).filter(Slovo.rod == slovo_data.data['rod']).filter(
-            Slovo.podrod == slovo_data.data['podrod'])
-        slovo_data.pady = [{key: value for (key, value) in row.exportuj(False).__dict__.items()} for row
-                                          in pady]
+        #pady = Slovo.query.filter(Slovo.sd_id == slovo_data.data['sd_id']).filter(
+        #    Slovo.cislo == slovo_data.data['cislo']).filter(Slovo.rod == slovo_data.data['rod']).filter(
+        #    Slovo.podrod == slovo_data.data['podrod'])
+        #slovo_data.pady = [{key: value for (key, value) in row.exportuj(False).__dict__.items()} for row
+        #                                  in pady]
 
-        cisla = Slovo.query.filter(Slovo.sd_id == slovo_data.data['sd_id']).filter(Slovo.pad == slovo_data.data['pad'])
-        slovo_data.cisla = [{key: value for (key, value) in row.exportuj(False).__dict__.items()} for row in cisla]
+        #cisla = Slovo.query.filter(Slovo.sd_id == slovo_data.data['sd_id']).filter(Slovo.pad == slovo_data.data['pad'])
+        #slovo_data.cisla = [{key: value for (key, value) in row.exportuj(False).__dict__.items()} for row in cisla]
 
-        slova = Slovo.query.filter(Slovo.sd_id == slovo_data.data['sd_id'])
-        slovo_data.vsetky_slova = [{key: value for (key, value) in row.exportuj(False).__dict__.items()} for row in
+        slova = Slovo.query.filter(Slovo.tvar == slovo_data.data['tvar'])
+        slovo_data.vsetky_slova = [{key: value for (key, value) in row.exportuj_komplet(prvy_znak_upper).__dict__.items()} for row in
                                    slova]
 
-        if slovo_data.data['slovny_druh'] == "PRID_M":
-            # PRID_M
-            stupne = Slovo.query.filter(Slovo.sd_id == slovo_data.data['sd_id']).group_by(Slovo.stupen).group_by(
-                Slovo.cislo)
-            slovo_data.stupne = [{key: value for (key, value) in row.exportuj(False).__dict__.items()} for row in
-                                 stupne]
+        odvodene_slova = HierarchiaSD.query.filter(HierarchiaSD.sd_id == slovo_data.data['sd_id'])
+        slovo_data.odvodene = [{key: value for (key, value) in row.exportuj().__dict__.items()} for row in
+                                   odvodene_slova]
 
-        if slovo_data.data['slovny_druh'] == "SLOVESO":
+        #if slovo_data.data['slovny_druh'] == "PRID_M":
+            # PRID_M
+        #    stupne = Slovo.query.filter(Slovo.sd_id == slovo_data.data['sd_id']).group_by(Slovo.stupen).group_by(
+        #        Slovo.cislo)
+        #    slovo_data.stupne = [{key: value for (key, value) in row.exportuj(False).__dict__.items()} for row in
+        #                        stupne]
+
+        #if slovo_data.data['slovny_druh'] == "SLOVESO":
             # SLOVESO
-            tvary_slovies = Slovo.query.get(slovo_data.data['sd_id'])
-            slovo_data.tvary_slovies = [{key: value for (key, value) in row.exportuj(False).__dict__.items()} for row in
-                                        tvary_slovies]
+        #    tvary_slovies = Slovo.query.get(slovo_data.data['sd_id'])
+        #    slovo_data.tvary_slovies = [{key: value for (key, value) in row.exportuj(False).__dict__.items()} for row in
+        #                                tvary_slovies]
 
         print("--- %s seconds ---" % (time.time() - start_time))
         return slovo_data
