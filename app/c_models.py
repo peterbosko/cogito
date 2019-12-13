@@ -48,3 +48,17 @@ class SlovnyDruhExport(object):
     zak_tvar = None
     druh = None
 
+
+class SlovnyDruhHierExport(object):
+    id = None
+    sd_id = None
+    parent_sd_id = None
+    sd = None
+    parent_sd = None
+
+class slovo_data(object):
+    data = []
+    cisla = []
+    def __init__(self):
+        self.data = []
+        self.cisla = []

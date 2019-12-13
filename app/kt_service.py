@@ -4,11 +4,72 @@ from pyquery import PyQuery as pq
 from app.c_helper import *
 import re
 from app.c_service import *
+from app.c_models import *
 import json
 import jsonpickle
 import html
 import datetime
+import time
 
+
+def vrat_slovo_komplet(sid, vyraz):
+    start_time = time.time()
+    prvy_znak_upper = False
+
+    if sid or vyraz:
+        if sid:
+            data = Slovo.query.filter(Slovo.id == sid)
+        elif len(vyraz) > 0 and not sid:
+            prvy_znak = vyraz[0]
+
+            if prvy_znak == prvy_znak.upper():
+                prvy_znak_upper = True
+
+            if prvy_znak_upper:
+                data = Slovo.query.filter(or_(Slovo.tvar == vyraz, Slovo.tvar == vyraz.lower()))
+            else:
+                data = Slovo.query.filter(Slovo.tvar == vyraz)
+
+        slovo_data = CommonObj()
+        for row in data:
+            slovo_data.data = {key: value for (key, value) in row.exportuj_komplet(prvy_znak_upper).__dict__.items()}
+
+        # VSEOBECNE
+
+        v_slovne_druhy = SlovnyDruh.query.filter(SlovnyDruh.zak_tvar == slovo_data.data['zak_tvar'])
+        slovo_data.vsetky_slovne_druhy = [{key: value for (key, value) in row.exportuj().__dict__.items()} for row in
+                                          v_slovne_druhy]
+
+        pady = Slovo.query.filter(Slovo.sd_id == slovo_data.data['sd_id']).filter(
+            Slovo.cislo == slovo_data.data['cislo']).filter(Slovo.rod == slovo_data.data['rod']).filter(
+            Slovo.podrod == slovo_data.data['podrod'])
+        slovo_data.pady = [{key: value for (key, value) in row.exportuj(False).__dict__.items()} for row
+                                          in pady]
+
+        cisla = Slovo.query.filter(Slovo.sd_id == slovo_data.data['sd_id']).filter(Slovo.pad == slovo_data.data['pad'])
+        slovo_data.cisla = [{key: value for (key, value) in row.exportuj(False).__dict__.items()} for row in cisla]
+
+        slova = Slovo.query.filter(Slovo.sd_id == slovo_data.data['sd_id'])
+        slovo_data.vsetky_slova = [{key: value for (key, value) in row.exportuj(False).__dict__.items()} for row in
+                                   slova]
+
+        if slovo_data.data['slovny_druh'] == "PRID_M":
+            # PRID_M
+            stupne = Slovo.query.filter(Slovo.sd_id == slovo_data.data['sd_id']).group_by(Slovo.stupen).group_by(
+                Slovo.cislo)
+            slovo_data.stupne = [{key: value for (key, value) in row.exportuj(False).__dict__.items()} for row in
+                                 stupne]
+
+        if slovo_data.data['slovny_druh'] == "SLOVESO":
+            # SLOVESO
+            tvary_slovies = Slovo.query.get(slovo_data.data['sd_id'])
+            slovo_data.tvary_slovies = [{key: value for (key, value) in row.exportuj(False).__dict__.items()} for row in
+                                        tvary_slovies]
+
+        print("--- %s seconds ---" % (time.time() - start_time))
+        return slovo_data
+    else:
+        return None
 
 def vrat_slova_zacinajuce_na(vyraz, presna_zhoda):
     if len(vyraz) > 0:
@@ -62,38 +123,6 @@ def vrat_slovne_druhy_slova_zacinajuce_na(vyraz):
             else:
                 pole_slov = SlovnyDruh.query.filter(SlovnyDruh.zak_tvar.like(vyraz + "%"))\
                     .paginate(1, 15, False).items
-
-        return [{key: value for (key, value) in row.exportuj().__dict__.items()} for row in pole_slov]
-    else:
-        return None
-
-def vrat_pady_slova(cislo, sd_id):
-    if cislo:
-        pole_slov = Slovo.query.filter(Slovo.sd_id == sd_id).filter(Slovo.cislo == cislo)
-        
-        return [{key: value for (key, value) in row.exportuj(False).__dict__.items()} for row in pole_slov]
-    else:
-        return None
-
-def vrat_cisla_slova(pad, sd_id):
-    if pad:
-        pole_slov = Slovo.query.filter(Slovo.sd_id == sd_id).filter(Slovo.pad == pad)
-
-        return [{key: value for (key, value) in row.exportuj(False).__dict__.items()} for row in pole_slov]
-    else:
-        return None
-
-def vrat_odvodene_slova(sd_id):
-    if sd_id:
-        pole_slov = HierarchiaSD.query.filter(HierarchiaSD.sd_id == sd_id)
-
-        return [{key: value for (key, value) in row.exportuj().__dict__.items()} for row in pole_slov]
-    else:
-        return None
-
-def vrat_prid_meno(sd_id):
-    if sd_id:
-        pole_slov = PridavneMeno.query.filter(PridavneMeno.prid_m_id == sd_id)
 
         return [{key: value for (key, value) in row.exportuj().__dict__.items()} for row in pole_slov]
     else:

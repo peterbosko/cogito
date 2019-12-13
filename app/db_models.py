@@ -83,7 +83,7 @@ class SlovnyDruh(db.Model):
     sufix = db.Column(db.String(20, collation='utf8mb4_bin'), nullable=True)
     sem_priznak_id = db.Column(db.Integer, db.ForeignKey("sem.id"), nullable=True, index=True)
     sem_priznak = relationship("Semantika", foreign_keys=[sem_priznak_id])
-    sd_hier = relationship("HierarchiaSD", primaryjoin="(SlovnyDruh.id==HierarchiaSD.sd_id)")
+    #sd_hier = relationship("HierarchiaSD", primaryjoin="(SlovnyDruh.id==HierarchiaSD.sd_id)")
 
     __mapper_args__ = {
         'polymorphic_identity': 'sd',
@@ -95,7 +95,7 @@ class SlovnyDruh(db.Model):
         export.id = self.id
         export.zak_tvar = self.zak_tvar
         export.typ = self.typ
-        export.parent_sd_id = self.parent_sd_id
+        #export.parent_sd_id = self.parent_sd_id
         return export
 
     def exportujSem(self):
@@ -220,10 +220,6 @@ class PridavneMeno(SlovnyDruh):
     __mapper_args__ = {
         'polymorphic_identity': 'PRID_M',
     }
-    def exportuj(self):
-        export = self
-
-        return export
 
 class Zameno(SlovnyDruh):
     __tablename__ = 'sd_zameno'
@@ -333,6 +329,10 @@ class Slovo(db.Model):
     SlovnyDruh = relationship("SlovnyDruh", foreign_keys=[sd_id], back_populates="slova")
     user_id = db.Column(db.Integer, db.ForeignKey("u.id"), nullable=True)
 
+    __mapper_args__ = {
+        'polymorphic_identity': 'sl',
+    }
+
     def exportuj(self, prvy_znak_upper):
         export = SlovoExport()
         export.id = self.id
@@ -358,6 +358,8 @@ class Slovo(db.Model):
         export.slovny_druh = self.SlovnyDruh.typ
         export.anotacia = self.anotacia
         export.sem_id = self.SlovnyDruh.sem_priznak_id
+        if export.sem_id:
+            export.sem_priznak = Semantika.query.get(export.sem_id)
         export.sufix = self.SlovnyDruh.sufix
         export.prefix = self.SlovnyDruh.prefix
         export.vzor = self.SlovnyDruh.vzor
@@ -365,6 +367,64 @@ class Slovo(db.Model):
         if export.slovny_druh == "PREDLOZKA":
             predlozka = Predlozka.query.get(export.sd_id)
             export.zoznam_padov = predlozka.pady
+
+        return export
+
+    def exportuj_komplet(self, prvy_znak_upper):
+        export = self.exportuj(prvy_znak_upper)
+
+        if export.slovny_druh == "POD_M":
+            pm = PodstatneMeno.query.get(self.sd_id)
+            export.rod = pm.rod
+            export.podrod = pm.podrod
+            export.sloveso_id = pm.sloveso_id
+
+            if pm.sloveso_id:
+                slov = Sloveso.query.get(pm.sloveso_id)
+                export.sloveso_tvar = slov.zak_tvar
+
+                if slov.zvratnost:
+                    export.sloveso_tvar += " " + slov.zvratnost
+
+        elif export.slovny_druh == "PRID_M":
+            prm = PridavneMeno.query.get(self.sd_id)
+            export.sloveso_id = prm.sloveso_id
+            export.sem_priznak_prid_m = prm.sem_priznak_prid_m.kod
+
+            if prm.sloveso_id:
+                slov = Sloveso.query.get(prm.sloveso_id)
+                export.sloveso_tvar = slov.zak_tvar
+
+                if slov.zvratnost:
+                    export.sloveso_tvar += " " + slov.zvratnost
+
+            export.je_privlastnovacie = prm.je_privlastnovacie
+
+        elif export.slovny_druh == "ZAMENO":
+            zam = Zameno.query.get(self.sd_id)
+            export.rod = zam.rod
+            export.podrod = zam.podrod
+            export.cislo = zam.cislo
+
+        elif export.slovny_druh == "SLOVESO":
+            s = Sloveso.query.get(self.sd_id)
+            export.zvratnost = s.zvratnost
+            export.je_negacia = s.je_negacia
+            export.sloveso_id = s.pozitivne_sloveso_id
+
+            if s.pozitivne_sloveso_id:
+                slov = Sloveso.query.get(s.pozitivne_sloveso_id)
+                export.sloveso_tvar = slov.zak_tvar
+
+                if slov.zvratnost:
+                    export.sloveso_tvar += " " + slov.zvratnost
+
+        elif export.slovny_druh == "CISLOVKA":
+            cis = Cislovka.query.get(self.sd_id)
+            export.rod = cis.rod
+            export.podrod = cis.podrod
+            export.cislo = cis.cislo
+            export.hodnota = cis.hodnota
 
         return export
         

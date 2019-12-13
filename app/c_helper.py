@@ -19,14 +19,18 @@ class CommonResponse(object):
         self.redirect = None
 
 
+class CommonObj(object):
+    def __init__(self):
+        self.data = None
+
+
 class AutocompleteSingleResponse(object):
     id = None
     text = None
 
 
 def daj_medzery_pred_specialne_znaky(text):
-
-    rstr = "(?P<slovo>\\b(.*?)\\S)(?P<znak>["+SPEC_ZNAKY_regexstr+"])"
+    rstr = "(?P<slovo>\\b(.*?)\\S)(?P<znak>[" + SPEC_ZNAKY_regexstr + "])"
 
     regex = re.compile(r"{}".format(rstr), re.IGNORECASE)
 
@@ -78,5 +82,3 @@ def formatuj_datum(dt):
     if dt:
         return dt.strftime('%d.%m.%Y %H:%M:%S')
     return ""
-
-

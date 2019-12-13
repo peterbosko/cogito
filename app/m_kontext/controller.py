@@ -127,6 +127,14 @@ def zmaz_kontext(kt_id):
     return json.dumps(response.__dict__)
 
 
+@kontext_blueprint.route("/daj_komplet/", methods=["GET"])
+def daj_komplet():
+    loguj(request)
+    sid = request.args.get("sid", "")
+    vyraz = request.args.get("vyraz", "")
+
+    return jsonpickle.encode(vrat_slovo_komplet(sid, vyraz))\
+
 @kontext_blueprint.route("/daj_vsetky_slova/", methods=["GET"])
 def daj_vsetky_slova():
     loguj(request)
@@ -136,8 +144,9 @@ def daj_vsetky_slova():
 
     response.data = vrat_vsetky_slova(vyraz)
 
-    return jsonpickle.encode(response)
-    
+    return jsonpickle.encode(response)\
+
+
 @kontext_blueprint.route("/daj_tvary_slova/", methods=["GET"])
 def daj_tvary_slova():
     loguj(request)
@@ -148,78 +157,6 @@ def daj_tvary_slova():
     response = CommonResponse()
 
     response.data = vrat_slova_zacinajuce_na(vyraz, presna_zhoda)
-
-    return jsonpickle.encode(response)
-
-@kontext_blueprint.route("/daj_slovne_druhy_podla_slova/", methods=["GET"])
-def daj_slovne_druhy_podla_slova():
-    loguj(request)
-    vyraz = request.args.get("vyraz", "")
-
-    response = CommonResponse()
-
-    response.data = vrat_slovne_druhy_slova_zacinajuce_na(vyraz)
-
-    return jsonpickle.encode(response)
-    
-@kontext_blueprint.route("/daj_vsetky_pady_slova/", methods=["GET"])
-def daj_vsetky_pady_slova():
-    loguj(request)
-    cislo = request.args.get("cislo", "")
-    
-    sd_id = request.args.get("sd_id", "")
-
-    response = CommonResponse()
-
-    response.data = vrat_pady_slova(cislo, sd_id)
-
-    return jsonpickle.encode(response)
-    
-@kontext_blueprint.route("/daj_vsetky_cisla_slova/", methods=["GET"])
-def daj_vsetky_cisla_slova():
-    loguj(request)
-    pad = request.args.get("pad", "")
-    
-    sd_id = request.args.get("sd_id", "")
-
-    response = CommonResponse()
-
-    response.data = vrat_cisla_slova(pad, sd_id)
-
-    return jsonpickle.encode(response)
-    
-@kontext_blueprint.route("/daj_odvodene_od_slova/", methods=["GET"])
-def daj_odvodene_od_slova():
-    loguj(request)
-    pad = request.args.get("pad", "")
-    
-    sd_id = request.args.get("sd_id", "")
-
-    response = CommonResponse()
-
-    response.data = vrat_cisla_slova(pad, sd_id)
-
-    return jsonpickle.encode(response)
-    
-@kontext_blueprint.route("/daj_sem_priznak/", methods=["GET"])
-def daj_sem_priznak():
-    loguj(request)
-    sem_id = request.args.get("sem_id", "")
-    
-    response = CommonResponse()
-
-    response.data = vrat_sem_priznak(sem_id)
-
-    return jsonpickle.encode(response)
-
-@kontext_blueprint.route("/daj_sem_pad/", methods=["GET"])
-def daj_sem_pad():
-    loguj(request)
-    sd_id = request.args.get("sd_id", "")
-    
-    response = CommonResponse()
-
-    response.data = vrat_sem_pad(sd_id)
 
     return jsonpickle.encode(response)
 
