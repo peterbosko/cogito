@@ -594,15 +594,21 @@ def spracuj_pzkmene():
 
                         if ids:
                             rodic_slovo = Sloveso.query.get(ids)
-                            print(f"Zakladam hierachiu pre slovo:{sloveso.zak_tvar} Parent:{rodic_slovo.zak_tvar}")
-                            zaloz_hierarchiu_sd(sloveso.id, ids)
+                            if rodic_slovo:
+                                print(f"Zakladam hierachiu pre slovo:{sloveso.zak_tvar} Parent:{rodic_slovo.zak_tvar}")
+
+                                if sloveso.id != ids:
+                                    zaloz_hierarchiu_sd(sloveso.id, ids)
 
                         if m_s.group('rodic_2'):
                             ids2 = daj_id_zo_slovnika(dic, m_s.group('rodic_2'), m_s.group('rodic_2_poradie'))
 
                             if ids2:
-                                rodic_slovo = Sloveso.query.get(ids2)
-                                print(
-                                    f"Zakladam druhu hierachiu pre slovo:{sloveso.zak_tvar} Parent:{rodic_slovo.zak_tvar}")
-                                zaloz_hierarchiu_sd(sloveso.id, ids2)
+                                rodic2_slovo = Sloveso.query.get(ids2)
+
+                                if rodic2_slovo:
+                                    print(
+                                        f"Zakladam druhu hierachiu pre slovo:{sloveso.zak_tvar} Parent:{rodic2_slovo.zak_tvar}")
+                                    if sloveso.id != ids2:
+                                        zaloz_hierarchiu_sd(sloveso.id, ids2)
 

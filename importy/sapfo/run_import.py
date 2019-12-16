@@ -16,7 +16,7 @@ if __name__ == "__main__":
             print(f"{p} intencii bolo pridanych...")
         elif command == "spracuj_slovniky":
             mode = "all"
-            if len(sys.argv) > 1:
+            if len(sys.argv) > 2:
                 mode = sys.argv[2]
             spracuj_slovniky(mode)
         elif command == "spracuj_pzkmene":

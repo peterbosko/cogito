@@ -1,12 +1,12 @@
 ﻿adj_Aničkin_1>kmen(('Aničkin' , 1),('Aničk' , 1),adj,cat([],indprivl,'',in,otcov,nil)).:381057:
 adj_Annin_1>kmen(('Annin' , 1),('Ann' , 1),adj,cat([],indprivl,'',in,otcov,nil)).:381056:
-adj_Janov_1>kmen(('Janov' , 1),('Jan' , 1),adj,cat([],indprivl,'',ov,otcov,nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'Janov%' AND zak_tvar LIKE '%ov'
+adj_Janov_1>kmen(('Janov' , 1),('Jan' , 1),adj,cat([],indprivl,'',ov,otcov,nil)).:348123:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'Janov%' AND zak_tvar LIKE '%ov'
 adj_belostn_1>kmen((belostn , 1),('belosť' , 1),adj,cat([],akvzt,'',n,'pekný','belasý')).:339068:
 adj_belošsk_1>kmen(('belošsk' , 1),(beloch , 1),adj,cat([],akvzt,'',ak,'pekný','belasý')).:445493:
-adj_biel_1>kmen((biel , 1),nil,adj,cat([kon],kval,'','','krásny',biely)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'biel%' AND zak_tvar LIKE '%'
+adj_biel_1>kmen((biel , 1),nil,adj,cat([kon],kval,'','','krásny',biely)).:446670:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'biel%' AND zak_tvar LIKE '%'
 adj_bielovlas_1>kmen((bielovlas , 1),((biel , 1) , vlas , 1),adj,cat([ziv],akvzt,'','','pekný','belasý')).:446641:
-adj_bojazliv_1>kmen((bojazliv , 1),(b , 1),adj,cat([zivabs],akvzt,'',liv,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'bojazliv%'
-adj_bratislavsk_1>kmen((bratislavsk , 1),('Bratislav' , 1),adj,cat([],klas,'',sk,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'bratislavsk%'
+adj_bojazliv_1>kmen((bojazliv , 1),(b , 1),adj,cat([zivabs],akvzt,'',liv,'pekný','belasý')).:448167:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'bojazliv%'
+adj_bratislavsk_1>kmen((bratislavsk , 1),('Bratislav' , 1),adj,cat([],klas,'',sk,'pekný',nil)).:273976:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'bratislavsk%'
 adj_cenn_1>kmen((cenn , 1),(cen , 1),adj,cat([],akvzt,'',n,'pekný','belasý')).:340310:
 adj_cestn_1>kmen((cestn , 1),(cest , 2),adj,cat([],klas,'',n,'pekný',nil)).:446823:
 adj_cestovateľsk_1>kmen(('cestovateľsk' , 1),('cestovateľ' , 1),adj,cat([],klas,'',sk,'pekný',nil)).:446877:
@@ -16,99 +16,99 @@ adj_darovac_1>kmen((darovac , 1),(darov , 1),adj,cat([],klas,'',ac,'cudzí',nil)
 adj_darčekov_1>kmen(('darčekov' , 1),('darček' , 1),adj,cat([],klas,'',ov,'pekný',nil)).:452112:
 adj_daždiv_1>kmen(('daždiv' , 1),('dážď' , 1),adj,cat([neziv],akvzt,'',iv,'pekný','belasý')).:452316:
 adj_delostreleck_1>kmen((delostreleck , 1),(delostrelec , 1),adj,cat([],klas,'',k,'pekný',nil)).:452526:
-adj_delov_1>kmen((delov , 1),(del , 1),adj,cat([],klas,'',ov,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'delov%' AND zak_tvar LIKE '%ov'
+adj_delov_1>kmen((delov , 1),(del , 1),adj,cat([],klas,'',ov,'pekný',nil)).:452523:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'delov%'
 adj_dievock_1>kmen((dievock , 1),(dievk , 1),adj,cat([],akvzt,'',k,'pekný','belasý')).:452938:
-adj_dievč_3>kmen(('dievč' , 3),('dievč' , 1),adj,cat([],indprivl,'','','cudzí',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'dievč%' AND zak_tvar LIKE '%'
+adj_dievč_3>kmen(('dievč' , 3),('dievč' , 1),adj,cat([],indprivl,'','','cudzí',nil)).:452920:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'dievč%' AND zak_tvar LIKE '%'
 adj_dievčatin_1>kmen(('dievčatin' , 1),('dievč' , 1),adj,cat([],indprivl,'',in,otcov,nil)).:None:Chýba v db
-adj_dievčensk_1>kmen(('dievčensk' , 1),('dievč' , 1),adj,cat([],akvzt,'',sk,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'dievčensk%'
-adj_div_1>kmen((div , 1),nil,adj,cat([],kval,'','','pekný','nový')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'div%' AND zak_tvar LIKE '%'
+adj_dievčensk_1>kmen(('dievčensk' , 1),('dievč' , 1),adj,cat([],akvzt,'',sk,'pekný','belasý')).:452914:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'dievčensk%'
+adj_div_1>kmen((div , 1),nil,adj,cat([],kval,'','','pekný','nový')).:453097:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'div%' AND zak_tvar LIKE '%'
 adj_divn_1>kmen((divn , 1),(div , 4),adj,cat([],akvzt,'',n,'pekný','belasý')).:453067:
-adj_divok_1>kmen((divok , 1),(div , 1),adj,cat([],kval,'','','pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'divok%' AND zak_tvar LIKE '%'
+adj_divok_1>kmen((divok , 1),(div , 1),adj,cat([],kval,'','','pekný','belasý')).:453084:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'divok%' AND zak_tvar LIKE '%'
 adj_divošsk_1>kmen(('divošsk' , 1),(divoch , 1),adj,cat([],akvzt,'',sk,'pekný','belasý')).:453080:
 adj_divukrásn_1>kmen(('divukrásn' , 1),(div , 4),adj,cat([],akvzt,'','','krásny','belasý')).:None:Chýba v db
 adj_divúc_1>kmen(('divúc' , 1),(div , 4),adj,cat([],akvzt,'','úci','rýdzi','belasý')).:453096:
-adj_drah_1>kmen((drah , 1),nil,adj,cat([neziv],kval,'','','pekný','nový')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'drah%' AND zak_tvar LIKE '%'
+adj_drah_1>kmen((drah , 1),nil,adj,cat([neziv],kval,'','','pekný','nový')).:6761:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'drah%' AND zak_tvar LIKE '%'
 adj_drah_3>kmen((drah , 3),nil,adj,cat([ziv],kval,'','','pekný','nový')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'drah%' AND zak_tvar LIKE '%'
-adj_drahocenn_1>kmen((drahocenn , 1),((drah , 1) , cenn , 1),adj,cat([neziv],kval,'','','pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'drahocenn%' AND zak_tvar LIKE '%'
+adj_drahocenn_1>kmen((drahocenn , 1),((drah , 1) , cenn , 1),adj,cat([neziv],kval,'','','pekný','belasý')).:6748:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'drahocenn%' AND zak_tvar LIKE '%'
 adj_drahulink_1>kmen((drahulink , 1),(drah , 3),adj,cat([],kval,'',ulink,'pekný','belasý')).:6759:
 adj_drahunk_1>kmen((drahunk , 1),(drah , 3),adj,cat([],kval,'',unk,'pekný','belasý')).:6757:
 adj_drahučk_1>kmen(('drahučk' , 1),(drah , 3),adj,cat([],kval,'','učk','pekný','belasý')).:6756:
 adj_drahušk_1>kmen(('drahušk' , 1),(drah , 3),adj,cat([],kval,'','ušk','pekný','belasý')).:6758:
-adj_drač_1>kmen(('drač' , 1),(drak , 1),adj,cat([],drprivl,'','','cudzí',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'drač%' AND zak_tvar LIKE '%'
-adj_dreven_1>kmen((dreven , 1),(drev , 1),adj,cat([inslok],klas,'',en,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'dreven%'
+adj_drač_1>kmen(('drač' , 1),(drak , 1),adj,cat([],drprivl,'','','cudzí',nil)).:6765:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'drač%' AND zak_tvar LIKE '%'
+adj_dreven_1>kmen((dreven , 1),(drev , 1),adj,cat([inslok],klas,'',en,'pekný',nil)).:7102:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'dreven%'
 adj_dreven_3>kmen((dreven , 3),nil,adj,cat([zivabs],kval,'','','pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'dreven%' AND zak_tvar LIKE '%'
 adj_drevit_1>kmen((drevit , 1),(drev , 1),adj,cat([inslok],akvzt,'',it,'pekný','belasý')).:7110:
-adj_drevnat_1>kmen((drevnat , 1),(drev , 1),adj,cat([inslok],akvzt,'',nat,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'drevnat%'
+adj_drevnat_1>kmen((drevnat , 1),(drev , 1),adj,cat([inslok],akvzt,'',nat,'pekný','belasý')).:7117:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'drevnat%'
 adj_drevoobrábac_1>kmen(('drevoobrábac' , 1),((drev , 1) , 'obráb' , 1),adj,cat([],klas,'','','cudzí',nil)).:7140:
 adj_drevorubačsk_1>kmen(('drevorubačsk' , 1),('drevorubač' , 1),adj,cat([],klas,'',sk,'pekný',nil)).:7154:
 adj_drevársk_1>kmen(('drevársk' , 1),('drevár' , 1),adj,cat([],klas,'',sk,'krásny',nil)).:7087:
-adj_dávn_2>kmen(('dávn' , 2),('dávn' , 1),adj,cat([],kval,'','','krásny','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'dávn%' AND zak_tvar LIKE '%'
+adj_dávn_2>kmen(('dávn' , 2),('dávn' , 1),adj,cat([],kval,'','','krásny','belasý')).:452311:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'dávn%' AND zak_tvar LIKE '%'
 adj_farbist_1>kmen((farbist , 1),(farb , 1),adj,cat([],akvzt,'',ist,'pekný','belasý')).:11126:
-adj_farboslep_1>kmen((farboslep , 1),((farb , 1) , slep , 1),adj,cat([ziv],akvzt,'','','pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'farboslep%' AND zak_tvar LIKE '%'
+adj_farboslep_1>kmen((farboslep , 1),((farb , 1) , slep , 1),adj,cat([ziv],akvzt,'','','pekný','belasý')).:11147:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'farboslep%' AND zak_tvar LIKE '%'
 adj_farebn_1>kmen((farebn , 1),(farb , 1),adj,cat([],akvzt,'',n,'pekný','belasý')).:343818:
-adj_havran_2>kmen((havran , 2),(havran , 1),adj,cat([],drprivl,'','','cudzí',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'havran%' AND zak_tvar LIKE '%'
+adj_havran_2>kmen((havran , 2),(havran , 1),adj,cat([],drprivl,'','','cudzí',nil)).:16031:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'havran%' AND zak_tvar LIKE '%'
 adj_hemživ_1>kmen(('hemživ' , 1),('hemž' , 1),adj,cat([],akvzt,'',iv,'pekný','belasý')).:None:Chýba v db
 adj_hmýriv_1>kmen(('hmýriv' , 1),('hmýr' , 1),adj,cat([],akvzt,'',iv,'pekný','belasý')).:263503:
-adj_hnevliv_1>kmen((hnevliv , 1),(hnev , 1),adj,cat([zivabs],akvzt,'',liv,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'hnevliv%'
-adj_hornat_1>kmen((hornat , 1),(hor , 2),adj,cat([lok],akvzt,'',nat,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'hornat%'
+adj_hnevliv_1>kmen((hnevliv , 1),(hnev , 1),adj,cat([zivabs],akvzt,'',liv,'pekný','belasý')).:17347:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'hnevliv%'
+adj_hornat_1>kmen((hornat , 1),(hor , 2),adj,cat([lok],akvzt,'',nat,'pekný','belasý')).:18267:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'hornat%'
 adj_horolezeck_1>kmen((horolezeck , 1),(horolezec , 1),adj,cat([],klas,'',k,'pekný',nil)).:18296:
 adj_horsk_1>kmen((horsk , 1),(hor , 2),adj,cat([],akvzt,'',sk,'pekný','belasý')).:18316:
-adj_horľav_1>kmen(('horľav' , 1),(hor , 1),adj,cat([neziv],akvzt,'','ľav','pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'horľav%'
+adj_horľav_1>kmen(('horľav' , 1),(hor , 1),adj,cat([neziv],akvzt,'','ľav','pekný','belasý')).:18247:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'horľav%'
 adj_horárkin_1>kmen(('horárkin' , 1),('horárk' , 1),adj,cat([],indprivl,'',in,matkin,nil)).:346186:
 adj_horárov_1>kmen(('horárov' , 1),('horár' , 1),adj,cat([],indprivl,'',ov,otcov,nil)).:346185:
 adj_horársk_1>kmen(('horársk' , 1),('horár' , 1),adj,cat([],klas,'',sk,'krásny',nil)).:18156:
-adj_hradn_1>kmen((hradn , 1),(hrad , 1),adj,cat([],klas,'',n,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'hradn%'
+adj_hradn_1>kmen((hradn , 1),(hrad , 1),adj,cat([],klas,'',n,'pekný',nil)).:18631:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'hradn%'
 adj_hrdeln_1>kmen((hrdeln , 1),(hrdl , 1),adj,cat([],klas,'',n,'pekný',nil)).:346379:
 adj_hviezdicovit_1>kmen((hviezdicovit , 1),(hviezdic , 1),adj,cat([],akvzt,'',ovit,'pekný','belasý')).:20292:
 adj_hviezdn_1>kmen((hviezdn , 1),(hviezd , 1),adj,cat([],klas,'',n,'krásny',nil)).:346703:
-adj_hviezdnat_1>kmen((hviezdnat , 1),(hviezd , 1),adj,cat([inslok],akvzt,'',nat,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'hviezdnat%'
+adj_hviezdnat_1>kmen((hviezdnat , 1),(hviezd , 1),adj,cat([inslok],akvzt,'',nat,'pekný','belasý')).:20295:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'hviezdnat%'
 adj_hviezdovit_1>kmen((hviezdovit , 1),(hviezd , 2),adj,cat([],akvzt,'',ovit,'pekný','belasý')).:20306:
 adj_hôrn_1>kmen(('hôrn' , 1),(hor , 2),adj,cat([],klas,'',n,'krásny',nil)).:18552:
 adj_ihličnat_1>kmen(('ihličnat' , 1),('ihlič' , 1),adj,cat([flor],akvzt,'',nat,'pekný','belasý')).:22839:
-adj_ist_0>kmen((ist , 0),nil,adj,cat([],kval,'','','pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'ist%' AND zak_tvar LIKE '%'
-adj_kališn_1>kmen(('kališn' , 1),(kalich , 1),adj,cat([],klas,'',n,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'kališn%'
+adj_ist_0>kmen((ist , 0),nil,adj,cat([],kval,'','','pekný','belasý')).:24700:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'ist%' AND zak_tvar LIKE '%'
+adj_kališn_1>kmen(('kališn' , 1),(kalich , 1),adj,cat([],klas,'',n,'pekný',nil)).:26567:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'kališn%'
 adj_kameninov_1>kmen((kameninov , 1),(kamenin , 1),adj,cat([inslok],klas,'',ov,'pekný',nil)).:26735:
 adj_kamenist_1>kmen((kamenist , 1),('kameň' , 1),adj,cat([kon],akvzt,'',ist,'pekný','belasý')).:26736:
 adj_kamenit_1>kmen((kamenit , 1),('kameň' , 1),adj,cat([kon],akvzt,'',it,'pekný','belasý')).:26737:
-adj_kamenn_1>kmen((kamenn , 1),('kameň' , 1),adj,cat([],klas,'',n,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'kamenn%'
+adj_kamenn_1>kmen((kamenn , 1),('kameň' , 1),adj,cat([],klas,'',n,'pekný',nil)).:26739:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'kamenn%'
 adj_kamenársk_1>kmen(('kamenársk' , 1),('kamenár' , 1),adj,cat([],klas,'',sk,'krásny',nil)).:26721:
 adj_kameňouhoľn_1>kmen(('kameňouhoľn' , 1),(('kameň' , 1) , 'uhoľn' , 1),adj,cat([],klas,'','','pekný',nil)).:None:Chýba v db
 adj_kamienkov_1>kmen((kamienkov , 1),(kamienok , 1),adj,cat([],klas,'',ov,'pekný',nil)).:348632:
 adj_knihovníck_1>kmen(('knihovníck' , 1),('knihovník' , 1),adj,cat([],klas,'',k,'krásny',nil)).:474814:
 adj_knihársk_1>kmen(('knihársk' , 1),('knihár' , 1),adj,cat([],klas,'',sk,'krásny',nil)).:29103:
-adj_knižn_1>kmen(('knižn' , 1),(knih , 1),adj,cat([],klas,'',n,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'knižn%' AND zak_tvar LIKE '%n'
+adj_knižn_1>kmen(('knižn' , 1),(knih , 1),adj,cat([],klas,'',n,'pekný',nil)).:29151:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'knižn%' AND zak_tvar LIKE '%n'
 adj_knižničn_1>kmen(('knižničn' , 1),('knižnic' , 1),adj,cat([],klas,'',n,'pekný',nil)).:29149:
-adj_konsk_1>kmen((konsk , 1),('kôň' , 1),adj,cat([],klas,'',sk,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'konsk%'
+adj_konsk_1>kmen((konsk , 1),('kôň' , 1),adj,cat([],klas,'',sk,'pekný',nil)).:31991:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'konsk%'
 adj_korunn_1>kmen((korunn , 1),(korun , 1),adj,cat([],klas,'',n,'pekný',nil)).:31480:
-adj_korunov_2>kmen((korunov , 2),(korun , 3),adj,cat([],klas,'',ov,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'korunov%'
+adj_korunov_2>kmen((korunov , 2),(korun , 3),adj,cat([],klas,'',ov,'pekný',nil)).:31481:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'korunov%'
 adj_korunovačn_1>kmen(('korunovačn' , 1),('korunováci' , 1),adj,cat([],klas,'',n,'pekný',nil)).:31487:
 adj_kotevn_1>kmen((kotevn , 1),(kotv , 1),adj,cat([],klas,'',n,'pekný',nil)).:31725:
 adj_kradm_2>kmen((kradm , 2),(kradn , 2),adj,cat([],akvzt,'',m,'pekný','belasý')).:32071:
 adj_kruhov_1>kmen((kruhov , 1),(kruh , 1),adj,cat([],akvzt,'',ov,'pekný','belasý')).:350775:
-adj_kruhovit_1>kmen((kruhovit , 1),(kruh , 1),adj,cat([],akvzt,'',ovit,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'kruhovit%'
+adj_kruhovit_1>kmen((kruhovit , 1),(kruh , 1),adj,cat([],akvzt,'',ovit,'pekný','belasý')).:33336:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'kruhovit%'
 adj_krčn_1>kmen(('krčn' , 1),(krk , 1),adj,cat([],klas,'',n,'pekný',nil)).:350526:
-adj_krásn_1>kmen(('krásn' , 1),(pekn , 1),adj,cat([],kval,'','','krásny','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'krásn%' AND zak_tvar LIKE '%'
+adj_krásn_1>kmen(('krásn' , 1),(pekn , 1),adj,cat([],kval,'','','krásny','belasý')).:475497:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'krásn%' AND zak_tvar LIKE '%'
 adj_krásnook_1>kmen(('krásnook' , 1),((ok , 1) , 'krásn' , 1),adj,cat([ziv],akvzt,'','','pekný','belasý')).:263914:
-adj_kráľov_1>kmen(('kráľov' , 1),('kráľ' , 1),adj,cat([],indprivl,'',ov,otcov,nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'kráľov%' AND zak_tvar LIKE '%ov'
+adj_kráľov_1>kmen(('kráľov' , 1),('kráľ' , 1),adj,cat([],indprivl,'',ov,otcov,nil)).:350433:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'kráľov%' AND zak_tvar LIKE '%ov'
 adj_kráľovnin_1>kmen(('kráľovnin' , 1),('kráľovn' , 1),adj,cat([],indprivl,'',in,otcov,nil)).:None:Chýba v db
-adj_kráľovsk_1>kmen(('kráľovsk' , 1),('kráľ' , 1),adj,cat([],klas,'',ovsk,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'kráľovsk%'
-adj_krídlov_1>kmen(('krídlov' , 1),('krídl' , 2),adj,cat([],klas,'',ov,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'krídlov%'
+adj_kráľovsk_1>kmen(('kráľovsk' , 1),('kráľ' , 1),adj,cat([],klas,'',ovsk,'pekný',nil)).:32195:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'kráľovsk%'
+adj_krídlov_1>kmen(('krídlov' , 1),('krídl' , 2),adj,cat([],klas,'',ov,'pekný',nil)).:32723:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'krídlov%'
 adj_krúživ_1>kmen(('krúživ' , 1),('krúž' , 1),adj,cat([],akvzt,'',iv,'pekný','belasý')).:33474:
 adj_kujn_1>kmen((kujn , 1),(ku , 1),adj,cat([kon],akvzt,'',n,'pekný','belasý')).:350934:
 adj_kupeck_1>kmen((kupeck , 1),(kupec , 1),adj,cat([],klas,'',k,'pekný',nil)).:34125:
 adj_kvetinársk_1>kmen(('kvetinársk' , 1),('kvetinár' , 1),adj,cat([],klas,'',sk,'krásny',nil)).:34847:
-adj_kvetn_1>kmen((kvetn , 1),(kvet , 1),adj,cat([],klas,'',n,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'kvetn%' AND zak_tvar LIKE '%n'
-adj_kvetnat_1>kmen((kvetnat , 1),(kvet , 1),adj,cat([kon],akvzt,'',nat,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'kvetnat%'
+adj_kvetn_1>kmen((kvetn , 1),(kvet , 1),adj,cat([],klas,'',n,'pekný',nil)).:34833:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'kvetn%' AND zak_tvar LIKE '%n'
+adj_kvetnat_1>kmen((kvetnat , 1),(kvet , 1),adj,cat([kon],akvzt,'',nat,'pekný','belasý')).:34850:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'kvetnat%'
 adj_kvetnat_2>kmen((kvetnat , 2),nil,adj,cat([abs],kval,'','','pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'kvetnat%' AND zak_tvar LIKE '%'
 adj_kvetovan_1>kmen((kvetovan , 1),(kvet , 1),adj,cat([kon],klas,'',ovan,'pekný',nil)).:34860:
 adj_kvietkovan_1>kmen((kvietkovan , 1),(kvietok , 1),adj,cat([kon],klas,'',ovan,'pekný',nil)).:34917:
-adj_kúpyschopn_1>kmen(('kúpyschopn' , 1),((kupov , 1) , schopn , 1),adj,cat([],akvzt,'','','pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'kúpyschopn%' AND zak_tvar LIKE '%'
-adj_kúzeln_1>kmen(('kúzeln' , 1),('okúzľov' , 1),adj,cat([],kval,'',n,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'kúzeln%'
+adj_kúpyschopn_1>kmen(('kúpyschopn' , 1),((kupov , 1) , schopn , 1),adj,cat([],akvzt,'','','pekný','belasý')).:34186:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'kúpyschopn%' AND zak_tvar LIKE '%'
+adj_kúzeln_1>kmen(('kúzeln' , 1),('okúzľov' , 1),adj,cat([],kval,'',n,'pekný','belasý')).:34497:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'kúzeln%'
 adj_kúzelníck_1>kmen(('kúzelníck' , 1),('kúzelník' , 1),adj,cat([],klas,'',k,'krásny',nil)).:34489:
 adj_kúzelníkov_1>kmen(('kúzelníkov' , 1),('kúzelník' , 1),adj,cat([],indprivl,'',ov,otcov,nil)).:351122:
 adj_kúzelníčkin_1>kmen(('kúzelníčkin' , 1),('kúzelníčk' , 1),adj,cat([],indprivl,'',in,matkin,nil)).:None:Chýba v db
-adj_labut_1>kmen((labut , 1),('labuť' , 1),adj,cat([],drprivl,'','','cudzí',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'labut%' AND zak_tvar LIKE '%'
-adj_lacn_1>kmen((lacn , 1),nil,adj,cat([],kval,'','','pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'lacn%' AND zak_tvar LIKE '%'
+adj_labut_1>kmen((labut , 1),('labuť' , 1),adj,cat([],drprivl,'','','cudzí',nil)).:35425:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'labut%' AND zak_tvar LIKE '%'
+adj_lacn_1>kmen((lacn , 1),nil,adj,cat([],kval,'','','pekný','belasý')).:35449:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'lacn%' AND zak_tvar LIKE '%'
 adj_lejársk_1>kmen(('lejársk' , 1),('lejár' , 1),adj,cat([],klas,'',sk,'krásny',nil)).:36649:
 adj_lekársk_1>kmen(('lekársk' , 1),('lekár' , 1),adj,cat([],klas,'',sk,'krásny',nil)).:36658:
 adj_lesn_1>kmen((lesn , 1),(les , 1),adj,cat([],akvzt,'',n,'pekný','belasý')).:351867:
@@ -117,15 +117,15 @@ adj_letcov_1>kmen((letcov , 1),(letec , 1),adj,cat([],indprivl,'',ov,otcov,nil))
 adj_leteck_1>kmen((leteck , 1),(letec , 1),adj,cat([],klas,'',k,'pekný',nil)).:36993:
 adj_letiskov_1>kmen((letiskov , 1),(letisk , 1),adj,cat([],klas,'',ov,'pekný',nil)).:37005:
 adj_letm_1>kmen((letm , 1),(let , 1),adj,cat([],akvzt,'',m,'pekný','belasý')).:37010:
-adj_letn_1>kmen((letn , 1),(let , 2),adj,cat([],akvzt,'',n,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'letn%' AND zak_tvar LIKE '%n'
-adj_letov_2>kmen((letov , 2),(let , 3),adj,cat([],klas,'',ov,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'letov%' AND zak_tvar LIKE '%ov'
+adj_letn_1>kmen((letn , 1),(let , 2),adj,cat([],akvzt,'',n,'pekný','belasý')).:37025:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'letn%' AND zak_tvar LIKE '%n'
+adj_letov_2>kmen((letov , 2),(let , 3),adj,cat([],klas,'',ov,'pekný',nil)).:36970:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'letov%' AND zak_tvar LIKE '%ov'
 adj_liatinov_1>kmen((liatinov , 1),(liatin , 1),adj,cat([kon],klas,'',ov,'pekný',nil)).:37226:
 adj_lietac_1>kmen((lietac , 1),(let , 1),adj,cat([],klas,'',ac,'cudzí',nil)).:37386:
-adj_lietav_2>kmen((lietav , 2),(liet , 1),adj,cat([],akvzt,'',av,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'lietav%'
-adj_liečiteľn_1>kmen(('liečiteľn' , 1),('lieč' , 1),adj,cat([neziv],akvzt,'','teľn','pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'liečiteľn%'
-adj_liečiv_1>kmen(('liečiv' , 1),('lieč' , 1),adj,cat([],akvzt,'',iv,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'liečiv%'
-adj_listnat_1>kmen((listnat , 1),(list , 1),adj,cat([flor],akvzt,'',nat,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'listnat%'
-adj_listov_1>kmen((listov , 1),(list , 1),adj,cat([],klas,'',ov,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'listov%' AND zak_tvar LIKE '%ov'
+adj_lietav_2>kmen((lietav , 2),(liet , 1),adj,cat([],akvzt,'',av,'pekný','belasý')).:37406:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'lietav%'
+adj_liečiteľn_1>kmen(('liečiteľn' , 1),('lieč' , 1),adj,cat([neziv],akvzt,'','teľn','pekný','belasý')).:37344:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'liečiteľn%'
+adj_liečiv_1>kmen(('liečiv' , 1),('lieč' , 1),adj,cat([],akvzt,'',iv,'pekný','belasý')).:37347:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'liečiv%'
+adj_listnat_1>kmen((listnat , 1),(list , 1),adj,cat([flor],akvzt,'',nat,'pekný','belasý')).:37783:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'listnat%'
+adj_listov_1>kmen((listov , 1),(list , 1),adj,cat([],klas,'',ov,'pekný',nil)).:37755:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'listov%' AND zak_tvar LIKE '%ov'
 adj_listov_3>kmen((listov , 3),(list , 5),adj,cat([],klas,'',ov,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'listov%' AND zak_tvar LIKE '%ov'
 adj_listovozelen_1>kmen((listovozelen , 1),((list , 1) , zelen , 0),adj,cat([kon],akvzt,'','','pekný','belasý')).:37804:
 adj_listársk_1>kmen(('listársk' , 1),('listár' , 1),adj,cat([],klas,'',sk,'krásny',nil)).:37762:
@@ -133,102 +133,102 @@ adj_lodeničn_1>kmen(('lodeničn' , 1),(lodenic , 1),adj,cat([],klas,'',n,'pekn�
 adj_lodiarsk_1>kmen((lodiarsk , 1),(lodiar , 1),adj,cat([],klas,'',sk,'krásny',nil)).:38021:
 adj_lodičkov_1>kmen(('lodičkov' , 1),('lodičk' , 1),adj,cat([kon],klas,'',ov,'pekný',nil)).:38012:
 adj_lodníck_1>kmen(('lodníck' , 1),('lodník' , 1),adj,cat([],klas,'',k,'krásny',nil)).:38035:
-adj_lomn_1>kmen((lomn , 1),(lom , 2),adj,cat([],klas,'',n,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'lomn%'
+adj_lomn_1>kmen((lomn , 1),(lom , 2),adj,cat([],klas,'',n,'pekný',nil)).:38221:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'lomn%'
 adj_loveck_1>kmen((loveck , 1),(lovec , 1),adj,cat([],klas,'',k,'pekný',nil)).:38354:
 adj_lovn_1>kmen((lovn , 1),(lov , 1),adj,cat([],klas,'',n,'pekný',nil)).:38370:
-adj_loďkov_1>kmen(('loďkov' , 1),('loďk' , 1),adj,cat([],akvzt,'',ov,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'loďkov%'
+adj_loďkov_1>kmen(('loďkov' , 1),('loďk' , 1),adj,cat([],akvzt,'',ov,'pekný','belasý')).:38010:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'loďkov%'
 adj_loďov_1>kmen(('loďov' , 1),('loď' , 2),adj,cat([],klas,'',ov,'pekný',nil)).:None:Chýba v db
 adj_lukostreleck_1>kmen((lukostreleck , 1),(lukostrelec , 1),adj,cat([],klas,'',k,'pekný',nil)).:38663:
-adj_lunárn_1>kmen(('lunárn' , 1),(lun , 1),adj,cat([],klas,'','árn','krásny',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'lunárn%'
-adj_lámav_1>kmen(('lámav' , 1),('lám' , 1),adj,cat([],akvzt,'',av,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'lámav%'
-adj_láskav_1>kmen(('láskav' , 1),('lásk' , 1),adj,cat([zivabs],akvzt,'',av,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'láskav%'
+adj_lunárn_1>kmen(('lunárn' , 1),(lun , 1),adj,cat([],klas,'','árn','krásny',nil)).:38750:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'lunárn%'
+adj_lámav_1>kmen(('lámav' , 1),('lám' , 1),adj,cat([],akvzt,'',av,'pekný','belasý')).:35905:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'lámav%'
+adj_láskav_1>kmen(('láskav' , 1),('lásk' , 1),adj,cat([zivabs],akvzt,'',av,'pekný','belasý')).:36235:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'láskav%'
 adj_láskypln_1>kmen(('láskypln' , 1),(('lásk' , 1) , pln , 1),adj,cat([zivabs],akvzt,'','','pekný','nový')).:36253:
 adj_lístkov_1>kmen(('lístkov' , 1),('lístok' , 1),adj,cat([],klas,'',ov,'pekný',nil)).:352182:
 adj_lístočkov_1>kmen(('lístočkov' , 1),('lístoček' , 1),adj,cat([],klas,'',ov,'pekný',nil)).:352183:
-adj_lúčn_1>kmen(('lúčn' , 1),('lúk' , 1),adj,cat([],klas,'',n,'krásny',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'lúčn%'
+adj_lúčn_1>kmen(('lúčn' , 1),('lúk' , 1),adj,cat([],klas,'',n,'krásny',nil)).:38654:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'lúčn%'
 adj_lúčnat_1>kmen(('lúčnat' , 1),('lúk' , 1),adj,cat([lok],akvzt,'',nat,'pekný','belasý')).:38549:
 adj_magick_1>kmen((magick , 1),('mági' , 1),adj,cat([],akvzt,'',ick,'pekný','belasý')).:39327:
-adj_mal_1>kmen((mal , 1),nil,adj,cat([],kval,'','','pekný',suplet)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'mal%' AND zak_tvar LIKE '%'
-adj_malink_1>kmen((malink , 1),(mal , 1),adj,cat([],kval,'',ink,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'malink%'
-adj_maličk_1>kmen(('maličk' , 1),(mal , 1),adj,cat([],kval,'','ičk','pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'maličk%'
+adj_mal_1>kmen((mal , 1),nil,adj,cat([],kval,'','','pekný',suplet)).:40016:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'mal%' AND zak_tvar LIKE '%'
+adj_malink_1>kmen((malink , 1),(mal , 1),adj,cat([],kval,'',ink,'pekný','belasý')).:39803:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'malink%'
+adj_maličk_1>kmen(('maličk' , 1),(mal , 1),adj,cat([],kval,'','ičk','pekný','belasý')).:39761:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'maličk%'
 adj_malokvet_1>kmen((malokvet , 1),((mal , 1) , kvet , 1),adj,cat([flor],klas,'','','pekný',nil)).:39859:
 adj_malučičk_1>kmen(('malučičk' , 1),(mal , 1),adj,cat([],kval,'','učičk','pekný','belasý')).:None:Chýba v db
-adj_mačac_1>kmen(('mačac' , 1),('mačk' , 1),adj,cat([],drprivl,'','','cudzí',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'mačac%' AND zak_tvar LIKE '%'
-adj_mačkovit_1>kmen(('mačkovit' , 1),('mačk' , 1),adj,cat([],akvzt,'',ovit,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'mačkovit%'
-adj_meden_1>kmen((meden , 1),('meď' , 1),adj,cat([inslok],klas,'',en,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'meden%'
+adj_mačac_1>kmen(('mačac' , 1),('mačk' , 1),adj,cat([],drprivl,'','','cudzí',nil)).:39222:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'mačac%' AND zak_tvar LIKE '%'
+adj_mačkovit_1>kmen(('mačkovit' , 1),('mačk' , 1),adj,cat([],akvzt,'',ovit,'pekný','belasý')).:477411:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'mačkovit%'
+adj_meden_1>kmen((meden , 1),('meď' , 1),adj,cat([inslok],klas,'',en,'pekný',nil)).:41432:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'meden%'
 adj_medzihviezdn_1>kmen((medzihviezdn , 1),(hviezd , 1),adj,cat([],klas,medzi,n,'krásny',nil)).:41608:
 adj_mesačn_1>kmen(('mesačn' , 1),(mesiac , 1),adj,cat([],akvzt,'',n,'pekný','belasý')).:353742:
 adj_mesačn_2>kmen(('mesačn' , 2),(mesiac , 2),adj,cat([],klas,'',n,'pekný',nil)).:353742:
 adj_mestsk_1>kmen((mestsk , 1),(mest , 1),adj,cat([],akvzt,'',sk,'pekný','belasý')).:42257:
 adj_meďnat_1>kmen(('meďnat' , 1),('meď' , 1),adj,cat([kon],akvzt,'',nat,'pekný','belasý')).:41513:
-adj_meštiack_1>kmen(('meštiack' , 1),('meštiak' , 1),adj,cat([],akvzt,'',k,'krásny','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'meštiack%'
+adj_meštiack_1>kmen(('meštiack' , 1),('meštiak' , 1),adj,cat([],akvzt,'',k,'krásny','belasý')).:42292:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'meštiack%'
 adj_meštiansk_1>kmen(('meštiansk' , 1),('mešťan' , 1),adj,cat([],akvzt,'',sk,'krásny','belasý')).:42281:
 adj_miestn_1>kmen((miestn , 1),(miest , 0),adj,cat([],klas,'',n,'krásny',nil)).:353893:
-adj_mil_1>kmen((mil , 1),nil,adj,cat([],kval,'','','pekný','nový')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'mil%' AND zak_tvar LIKE '%'
+adj_mil_1>kmen((mil , 1),nil,adj,cat([],kval,'','','pekný','nový')).:43074:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'mil%' AND zak_tvar LIKE '%'
 adj_mileneck_1>kmen((mileneck , 1),(milenec , 1),adj,cat([],klas,'',k,'pekný',nil)).:42932:
-adj_milosrdn_1>kmen((milosrdn , 1),((mil , 1) , srdc , 3),adj,cat([zivabs],akvzt,'',n,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'milosrdn%' AND zak_tvar LIKE '%n'
-adj_mincov_1>kmen((mincov , 1),(minc , 1),adj,cat([],klas,'',ov,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'mincov%'
-adj_modr_1>kmen((modr , 1),nil,adj,cat([kon],kval,'','','pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'modr%' AND zak_tvar LIKE '%'
+adj_milosrdn_1>kmen((milosrdn , 1),((mil , 1) , srdc , 3),adj,cat([zivabs],akvzt,'',n,'pekný','belasý')).:43015:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'milosrdn%' AND zak_tvar LIKE '%n'
+adj_mincov_1>kmen((mincov , 1),(minc , 1),adj,cat([],klas,'',ov,'pekný',nil)).:43148:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'mincov%'
+adj_modr_1>kmen((modr , 1),nil,adj,cat([kon],kval,'','','pekný','belasý')).:44270:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'modr%' AND zak_tvar LIKE '%'
 adj_modrook_1>kmen((modrook , 1),((ok , 1) , modr , 1),adj,cat([ziv],akvzt,'','','pekný','belasý')).:44258:
 adj_morsk_1>kmen((morsk , 1),(mor , 1),adj,cat([],klas,'',sk,'pekný',nil)).:44736:
 adj_možn_1>kmen(('možn' , 1),('môc' , 0),adj,cat([],klas,'',n,'pekný',nil)).:354620:
 adj_mágov_1>kmen(('mágov' , 1),('mág' , 1),adj,cat([],indprivl,'',ov,otcov,nil)).:352684:
-adj_mŕtv_1>kmen(('mŕtv' , 1),nil,adj,cat([zivabs],kval,'','','krásny','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'mŕtv%' AND zak_tvar LIKE '%'
+adj_mŕtv_1>kmen(('mŕtv' , 1),nil,adj,cat([zivabs],kval,'','','krásny','belasý')).:45534:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'mŕtv%' AND zak_tvar LIKE '%'
 adj_nadočnicov_1>kmen(('nadočnicov' , 1),('očnic' , 1),adj,cat([],klas,nad,ov,'pekný',nil)).:48072:
 adj_nasládl_1>kmen(('nasládl' , 1),(sladn , 1),adj,cat([],kval,na,ly,'krásny','belasý')).:None:Chýba v db
 adj_nevyhnutn_1>kmen((nevyhnutn , 1),(mus , 0),adj,cat([],akvzt,'',n,'pekný','belasý')).:356558:
 adj_nijak_0>kmen((nijak , 0),nil,adj,cat([],kval,'','','pekný','belasý')).:None:Chýba v db
 adj_nosičsk_1>kmen(('nosičsk' , 1),('nosič' , 1),adj,cat([],klas,'',sk,'pekný',nil)).:61226:
-adj_nádhern_1>kmen(('nádhern' , 1),nil,adj,cat([],kval,'','','pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'nádhern%' AND zak_tvar LIKE '%'
+adj_nádhern_1>kmen(('nádhern' , 1),nil,adj,cat([],kval,'','','pekný','belasý')).:47645:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'nádhern%' AND zak_tvar LIKE '%'
 adj_náhodn_0>kmen(('náhodn' , 0),('náhod' , 1),adj,cat([],akvzt,'',n,'pekný','belasý')).:355176:
 adj_námorníck_1>kmen(('námorníck' , 1),('námorník' , 1),adj,cat([],klas,'',k,'krásny',nil)).:51560:
 adj_nápadit_1>kmen(('nápadit' , 1),('nápad' , 1),adj,cat([],akvzt,'',it,'pekný','belasý')).:481960:
-adj_nápadn_1>kmen(('nápadn' , 1),(napadn , 2),adj,cat([],akvzt,'',n,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'nápadn%' AND zak_tvar LIKE '%n'
+adj_nápadn_1>kmen(('nápadn' , 1),(napadn , 2),adj,cat([],akvzt,'',n,'pekný','belasý')).:52094:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'nápadn%' AND zak_tvar LIKE '%n'
 adj_nástrojov_1>kmen(('nástrojov' , 1),('nástroj' , 0),adj,cat([],klas,'',ov,'pekný',nil)).:355500:
 adj_nástrojárensk_1>kmen(('nástrojárensk' , 1),('nástrojáreň' , 1),adj,cat([],klas,'',sk,'pekný',nil)).:54890:
 adj_náterov_1>kmen(('náterov' , 1),('náter' , 1),adj,cat([],klas,'',ov,'pekný',nil)).:55684:
 adj_obrábac_1>kmen(('obrábac' , 1),('obráb' , 1),adj,cat([],klas,'',ac,'cudzí',nil)).:64928:
 adj_odlievac_1>kmen((odlievac , 1),(odliev , 1),adj,cat([neziv],klas,'',ac,'cudzí',nil)).:70309:
 adj_odvodňovac_1>kmen(('odvodňovac' , 1),('odvodňov' , 1),adj,cat([],klas,'','ací','cudzí',nil)).:74758:
-adj_ohniv_1>kmen((ohniv , 1),('oheň' , 1),adj,cat([],akvzt,'',iv,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'ohniv%'
-adj_ohnivočerven_1>kmen(('ohnivočerven' , 1),(('oheň' , 1) , 'červen' , 1),adj,cat([kon],akvzt,'','','pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'ohnivočerven%' AND zak_tvar LIKE '%'
-adj_ohňov_1>kmen(('ohňov' , 1),('oheň' , 1),adj,cat([],klas,'',ov,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'ohňov%'
-adj_ohňovzdorn_1>kmen(('ohňovzdorn' , 1),(('oheň' , 1) , vzdorn , 1),adj,cat([inslok],akvzt,'','','pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'ohňovzdorn%' AND zak_tvar LIKE '%'
+adj_ohniv_1>kmen((ohniv , 1),('oheň' , 1),adj,cat([],akvzt,'',iv,'pekný','belasý')).:75709:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'ohniv%'
+adj_ohnivočerven_1>kmen(('ohnivočerven' , 1),(('oheň' , 1) , 'červen' , 1),adj,cat([kon],akvzt,'','','pekný','belasý')).:75708:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'ohnivočerven%' AND zak_tvar LIKE '%'
+adj_ohňov_1>kmen(('ohňov' , 1),('oheň' , 1),adj,cat([],klas,'',ov,'pekný',nil)).:75461:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'ohňov%'
+adj_ohňovzdorn_1>kmen(('ohňovzdorn' , 1),(('oheň' , 1) , vzdorn , 1),adj,cat([inslok],akvzt,'','','pekný','belasý')).:75716:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'ohňovzdorn%' AND zak_tvar LIKE '%'
 adj_okvetn_1>kmen((okvetn , 1),(okvet , 1),adj,cat([],klas,'',n,'pekný',nil)).:77366:
-adj_orl_1>kmen((orl , 1),(orol , 1),adj,cat([],drprivl,'','','cudzí',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'orl%' AND zak_tvar LIKE '%'
+adj_orl_1>kmen((orl , 1),(orol , 1),adj,cat([],drprivl,'','','cudzí',nil)).:80609:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'orl%' AND zak_tvar LIKE '%'
 adj_osobn_1>kmen((osobn , 1),(osob , 0),adj,cat([],akvzt,'',n,'pekný','belasý')).:358446:
-adj_otcov_1>kmen((otcov , 1),(otec , 1),adj,cat([],indprivl,'',ov,otcov,nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'otcov%' AND zak_tvar LIKE '%ov'
+adj_otcov_1>kmen((otcov , 1),(otec , 1),adj,cat([],indprivl,'',ov,otcov,nil)).:358623:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'otcov%' AND zak_tvar LIKE '%ov'
 adj_otcovsk_1>kmen((otcovsk , 1),(otec , 1),adj,cat([],akvzt,'',ovsk,'pekný','belasý')).:83410:
 adj_očn_1>kmen(('očn' , 1),(ok , 1),adj,cat([],klas,'',n,'pekný',nil)).:357412:
-adj_panensk_1>kmen((panensk , 1),(pann , 1),adj,cat([],akvzt,'',sk,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'panensk%'
-adj_panick_1>kmen((panick , 1),(panik , 1),adj,cat([],akvzt,'',k,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'panick%'
-adj_pekn_1>kmen((pekn , 1),nil,adj,cat([],kval,'','','pekný',suplet)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'pekn%' AND zak_tvar LIKE '%'
+adj_panensk_1>kmen((panensk , 1),(pann , 1),adj,cat([],akvzt,'',sk,'pekný','belasý')).:85900:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'panensk%'
+adj_panick_1>kmen((panick , 1),(panik , 1),adj,cat([],akvzt,'',k,'pekný','belasý')).:85914:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'panick%'
+adj_pekn_1>kmen((pekn , 1),nil,adj,cat([],kval,'','','pekný',suplet)).:483624:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'pekn%' AND zak_tvar LIKE '%'
 adj_peknulink_1>kmen((peknulink , 1),(pekn , 1),adj,cat([],kval,'',ulink,'pekný','belasý')).:87704:
 adj_peknučk_1>kmen(('peknučk' , 1),(pekn , 1),adj,cat([],kval,'','učk','pekný','belasý')).:87700:
 adj_peknušk_1>kmen(('peknušk' , 1),(pekn , 1),adj,cat([],kval,'','ušk','pekný','belasý')).:87702:
 adj_perzsk_1>kmen((perzsk , 1),('Perzi' , 1),adj,cat([],akvzt,'',sk,'pekný','belasý')).:88273:
-adj_pestr_1>kmen((pestr , 1),nil,adj,cat([],kval,'','','pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'pestr%' AND zak_tvar LIKE '%'
-adj_pestrofarebn_1>kmen((pestrofarebn , 1),((farebn , 1) , pestr , 1),adj,cat([],akvzt,'','','pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'pestrofarebn%' AND zak_tvar LIKE '%'
-adj_peňažit_1>kmen(('peňažit' , 1),(peniaz , 1),adj,cat([neziv],klas,'',it,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'peňažit%'
+adj_pestr_1>kmen((pestr , 1),nil,adj,cat([],kval,'','','pekný','belasý')).:88346:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'pestr%' AND zak_tvar LIKE '%'
+adj_pestrofarebn_1>kmen((pestrofarebn , 1),((farebn , 1) , pestr , 1),adj,cat([],akvzt,'','','pekný','belasý')).:88342:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'pestrofarebn%' AND zak_tvar LIKE '%'
+adj_peňažit_1>kmen(('peňažit' , 1),(peniaz , 1),adj,cat([neziv],klas,'',it,'pekný',nil)).:87795:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'peňažit%'
 adj_peňažníck_1>kmen(('peňažníck' , 1),('peňažník' , 1),adj,cat([],klas,'',k,'krásny',nil)).:87799:
 adj_pitn_1>kmen((pitn , 1),(pi , 1),adj,cat([inslok],klas,'',n,'pekný',nil)).:360255:
-adj_pln_1>kmen((pln , 1),nil,adj,cat([],kval,'','','pekný','nový')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'pln%' AND zak_tvar LIKE '%'
-adj_podivn_1>kmen((podivn , 1),(divn , 1),adj,cat([],akvzt,po,'','pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'podivn%' AND zak_tvar LIKE '%'
+adj_pln_1>kmen((pln , 1),nil,adj,cat([],kval,'','','pekný','nový')).:90300:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'pln%' AND zak_tvar LIKE '%'
+adj_podivn_1>kmen((podivn , 1),(divn , 1),adj,cat([],akvzt,po,'','pekný','belasý')).:92749:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'podivn%' AND zak_tvar LIKE '%'
 adj_podmorsk_1>kmen((podmorsk , 1),(mor , 1),adj,cat([],klas,pod,sk,'pekný',nil)).:93484:
-adj_pohybliv_1>kmen((pohybliv , 1),(pohybov , 0),adj,cat([mov],akvzt,'',liv,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'pohybliv%'
+adj_pohybliv_1>kmen((pohybliv , 1),(pohybov , 0),adj,cat([mov],akvzt,'',liv,'pekný','belasý')).:97252:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'pohybliv%'
 adj_pohybov_1>kmen((pohybov , 1),(pohyb , 1),adj,cat([],klas,'',ov,'pekný',nil)).:361208:
 adj_polomŕtv_1>kmen(('polomŕtv' , 1),('mŕtv' , 1),adj,cat([zivabs],kval,polo,'','krásny','belasý')).:100334:
 adj_polosladk_1>kmen((polosladk , 1),(sladk , 1),adj,cat([],kval,polo,'','pekný','krátky')).:100481:
 adj_posmrtn_1>kmen((posmrtn , 1),('smrť' , 1),adj,cat([],klas,po,n,'pekný',nil)).:109437:
 adj_pramal_1>kmen((pramal , 1),(mal , 1),adj,cat([],kval,pra,'','pekný','belasý')).:118139:
 adj_prapodivn_1>kmen((prapodivn , 1),(podivn , 1),adj,cat([],akvzt,pra,'','pekný','belasý')).:118197:
-adj_predajn_1>kmen((predajn , 1),(predaj , 1),adj,cat([],akvzt,'',n,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'predajn%' AND zak_tvar LIKE '%n'
+adj_predajn_1>kmen((predajn , 1),(predaj , 1),adj,cat([],akvzt,'',n,'pekný','belasý')).:119476:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'predajn%' AND zak_tvar LIKE '%n'
 adj_predavačsk_1>kmen(('predavačsk' , 1),('predavač' , 1),adj,cat([],klas,'',sk,'pekný',nil)).:119511:
 adj_predstaviv_1>kmen((predstaviv , 1),(predstav , 1),adj,cat([],akvzt,'',iv,'pekný','belasý')).:362804:
 adj_prekrásn_1>kmen(('prekrásn' , 1),('krásn' , 1),adj,cat([],kval,pre,'','krásny',nil)).:122682:
-adj_prelietav_2>kmen((prelietav , 2),(prelietav , 1),adj,cat([mov],klas,'',av,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'prelietav%'
+adj_prelietav_2>kmen((prelietav , 2),(prelietav , 1),adj,cat([mov],klas,'',av,'pekný',nil)).:123346:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'prelietav%'
 adj_prepadov_1>kmen((prepadov , 1),(prepadn , 2),adj,cat([],klas,'',ov,'pekný',nil)).:362980:
-adj_presn_1>kmen((presn , 1),nil,adj,cat([],kval,'','','pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'presn%' AND zak_tvar LIKE '%'
+adj_presn_1>kmen((presn , 1),nil,adj,cat([],kval,'','','pekný','belasý')).:126359:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'presn%' AND zak_tvar LIKE '%'
 adj_prevelik_1>kmen((prevelik , 1),(velik , 1),adj,cat([],kval,pre,'','pekný',nil)).:128399:
 adj_princeznin_1>kmen((princeznin , 1),(princezn , 1),adj,cat([],indprivl,'',in,matkin,nil)).:None:Chýba v db
 adj_princov_1>kmen((princov , 1),(princ , 1),adj,cat([],indprivl,'',ov,otcov,nil)).:363546:
@@ -239,113 +239,113 @@ adj_prímorsk_1>kmen(('prímorsk' , 1),('prímor' , 1),adj,cat([],klas,'',sk,'pe
 adj_pôvabn_1>kmen(('pôvabn' , 1),('pôvab' , 1),adj,cat([],kval,'',n,'pekný','belasý')).:362425:
 adj_rezac_1>kmen((rezac , 1),(rez , 1),adj,cat([],klas,'','ací','cudzí',nil)).:142065:
 adj_rezbársk_1>kmen(('rezbársk' , 1),('rezbár' , 1),adj,cat([],klas,'',sk,'krásny',nil)).:142101:
-adj_rezn_1>kmen((rezn , 1),(rez , 1),adj,cat([],klas,'',n,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'rezn%' AND zak_tvar LIKE '%n'
-adj_rovn_1>kmen((rovn , 1),nil,adj,cat([],kval,'','','pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'rovn%' AND zak_tvar LIKE '%'
-adj_rozličn_0>kmen(('rozličn' , 0),nil,adj,cat([],kval,'','','pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'rozličn%' AND zak_tvar LIKE '%'
+adj_rezn_1>kmen((rezn , 1),(rez , 1),adj,cat([],klas,'',n,'pekný',nil)).:142168:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'rezn%' AND zak_tvar LIKE '%n'
+adj_rovn_1>kmen((rovn , 1),nil,adj,cat([],kval,'','','pekný','belasý')).:143127:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'rovn%' AND zak_tvar LIKE '%'
+adj_rozličn_0>kmen(('rozličn' , 0),nil,adj,cat([],kval,'','','pekný','belasý')).:147676:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'rozličn%' AND zak_tvar LIKE '%'
 adj_rozvážn_1>kmen(('rozvážn' , 1),('rozváž' , 1),adj,cat([],akvzt,'',n,'krásny','belasý')).:365969:
-adj_ružov_1>kmen(('ružov' , 1),('ruž' , 1),adj,cat([],klas,'',ov,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'ružov%'
-adj_ružov_2>kmen(('ružov' , 2),nil,adj,cat([],kval,'','','pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'ružov%' AND zak_tvar LIKE '%'
+adj_ružov_1>kmen(('ružov' , 1),('ruž' , 1),adj,cat([],klas,'',ov,'pekný',nil)).:155644:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'ružov%'
+adj_ružov_2>kmen(('ružov' , 2),nil,adj,cat([],kval,'','','pekný','belasý')).:155644:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'ružov%' AND zak_tvar LIKE '%'
 adj_ružovkast_1>kmen(('ružovkast' , 1),('ružov' , 2),adj,cat([kon],kval,'',ast,'pekný','belasý')).:155625:
-adj_ryb_2>kmen((ryb , 2),(ryb , 1),adj,cat([],drprivl,'','','cudzí',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'ryb%' AND zak_tvar LIKE '%'
+adj_ryb_2>kmen((ryb , 2),(ryb , 1),adj,cat([],drprivl,'','','cudzí',nil)).:155665:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'ryb%' AND zak_tvar LIKE '%'
 adj_rybac_1>kmen((rybac , 1),(ryb , 1),adj,cat([],klas,'','ací','cudzí',nil)).:155664:
 adj_rybn_1>kmen((rybn , 1),(ryb , 1),adj,cat([],klas,'',n,'pekný',nil)).:366221:
-adj_rybnat_1>kmen((rybnat , 1),(ryb , 1),adj,cat([lok],akvzt,'',nat,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'rybnat%'
+adj_rybnat_1>kmen((rybnat , 1),(ryb , 1),adj,cat([lok],akvzt,'',nat,'pekný','belasý')).:155690:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'rybnat%'
 adj_rybnikársk_1>kmen(('rybnikársk' , 1),('rybnikár' , 1),adj,cat([],klas,'',sk,'krásny',nil)).:486419:
 adj_rybníkov_1>kmen(('rybníkov' , 1),('rybník' , 1),adj,cat([],klas,'',ov,'pekný',nil)).:366222:
 adj_rybolovn_1>kmen((rybolovn , 1),(rybolov , 1),adj,cat([],klas,'',n,'pekný',nil)).:155699:
 adj_rybárov_1>kmen(('rybárov' , 1),('rybár' , 1),adj,cat([],indprivl,'',ov,otcov,nil)).:366213:
 adj_rybársk_1>kmen(('rybársk' , 1),('rybár' , 1),adj,cat([],klas,'',sk,'krásny',nil)).:155674:
-adj_rôzn_1>kmen(('rôzn' , 1),nil,adj,cat([],kval,'','','krásny','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'rôzn%' AND zak_tvar LIKE '%'
-adj_rôznofarebn_1>kmen(('rôznofarebn' , 1),((farebn , 1) , 'rôzn' , 1),adj,cat([kon],akvzt,'','','pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'rôznofarebn%' AND zak_tvar LIKE '%'
+adj_rôzn_1>kmen(('rôzn' , 1),nil,adj,cat([],kval,'','','krásny','belasý')).:154988:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'rôzn%' AND zak_tvar LIKE '%'
+adj_rôznofarebn_1>kmen(('rôznofarebn' , 1),((farebn , 1) , 'rôzn' , 1),adj,cat([kon],akvzt,'','','pekný','belasý')).:154964:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'rôznofarebn%' AND zak_tvar LIKE '%'
 adj_scestovan_1>kmen((scestovan , 1),(cestov , 1),adj,cat([ziv],akvzt,s,an,'pekný','belasý')).:156838:
-adj_schopn_1>kmen((schopn , 1),nil,adj,cat([],kval,'','','pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'schopn%' AND zak_tvar LIKE '%'
-adj_sklen_1>kmen((sklen , 1),(skl , 1),adj,cat([],klas,'',n,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'sklen%' AND zak_tvar LIKE '%n'
+adj_schopn_1>kmen((schopn , 1),nil,adj,cat([],kval,'','','pekný','belasý')).:158444:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'schopn%' AND zak_tvar LIKE '%'
+adj_sklen_1>kmen((sklen , 1),(skl , 1),adj,cat([],klas,'',n,'pekný',nil)).:159944:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'sklen%' AND zak_tvar LIKE '%n'
 adj_sklenen_1>kmen((sklenen , 1),(skl , 1),adj,cat([inslok],akvzt,'',n,'pekný','belasý')).:367200:
 adj_sklenársk_1>kmen(('sklenársk' , 1),('sklenár' , 1),adj,cat([],klas,'',sk,'krásny',nil)).:159928:
 adj_skleníkov_1>kmen(('skleníkov' , 1),('skleník' , 1),adj,cat([],klas,'',ov,'pekný',nil)).:367203:
 adj_sklolaminátov_1>kmen(('sklolaminátov' , 1),('laminát' , 1),adj,cat([instr],klas,'',ov,'pekný',nil)).:436843:
-adj_sklovit_1>kmen((sklovit , 1),(skl , 1),adj,cat([inslok],akvzt,'',ovit,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'sklovit%'
+adj_sklovit_1>kmen((sklovit , 1),(skl , 1),adj,cat([inslok],akvzt,'',ovit,'pekný','belasý')).:160054:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'sklovit%'
 adj_sklársk_1>kmen(('sklársk' , 1),('sklár' , 1),adj,cat([],klas,'',sk,'krásny',nil)).:159870:
-adj_skúp_2>kmen(('skúp' , 2),nil,adj,cat([],kval,'','','krásny','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'skúp%' AND zak_tvar LIKE '%'
-adj_sladk_1>kmen((sladk , 1),nil,adj,cat([],kval,'','','pekný','krátky')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'sladk%' AND zak_tvar LIKE '%'
-adj_sladkast_1>kmen((sladkast , 1),(sladk , 1),adj,cat([],kval,'',ast,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'sladkast%'
-adj_sladkav_1>kmen((sladkav , 1),(sladk , 1),adj,cat([],kval,'',av,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'sladkav%'
+adj_skúp_2>kmen(('skúp' , 2),nil,adj,cat([],kval,'','','krásny','belasý')).:161366:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'skúp%' AND zak_tvar LIKE '%'
+adj_sladk_1>kmen((sladk , 1),nil,adj,cat([],kval,'','','pekný','krátky')).:161812:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'sladk%' AND zak_tvar LIKE '%'
+adj_sladkast_1>kmen((sladkast , 1),(sladk , 1),adj,cat([],kval,'',ast,'pekný','belasý')).:161799:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'sladkast%'
+adj_sladkav_1>kmen((sladkav , 1),(sladk , 1),adj,cat([],kval,'',av,'pekný','belasý')).:161802:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'sladkav%'
 adj_sladunk_1>kmen((sladunk , 1),(sladk , 1),adj,cat([],kval,'',unk,'pekný','belasý')).:161838:
 adj_sladučk_1>kmen(('sladučk' , 1),(sladk , 1),adj,cat([],kval,'','učk','pekný','belasý')).:161834:
-adj_slep_1>kmen((slep , 1),nil,adj,cat([ziv],kval,'','','pekný','nový')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'slep%' AND zak_tvar LIKE '%'
+adj_slep_1>kmen((slep , 1),nil,adj,cat([ziv],kval,'','','pekný','nový')).:161994:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'slep%' AND zak_tvar LIKE '%'
 adj_slep_3>kmen((slep , 3),nil,adj,cat([abs],kval,'','','pekný','nový')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'slep%' AND zak_tvar LIKE '%'
 adj_slep_4>kmen((slep , 4),nil,adj,cat([lok],klas,'','','pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'slep%' AND zak_tvar LIKE '%'
 adj_slepcov_1>kmen((slepcov , 1),(slepec , 1),adj,cat([],indprivl,'',ov,otcov,nil)).:367455:
 adj_slepeck_1>kmen((slepeck , 1),(slepec , 1),adj,cat([],klas,'',k,'pekný',nil)).:161968:
-adj_slncov_1>kmen((slncov , 1),(slnc , 1),adj,cat([],klas,'',ov,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'slncov%'
-adj_slnečn_1>kmen(('slnečn' , 1),(slnk , 1),adj,cat([],akvzt,'','ečn','pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'slnečn%'
+adj_slncov_1>kmen((slncov , 1),(slnc , 1),adj,cat([],klas,'',ov,'pekný',nil)).:162141:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'slncov%'
+adj_slnečn_1>kmen(('slnečn' , 1),(slnk , 1),adj,cat([],akvzt,'','ečn','pekný','belasý')).:162146:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'slnečn%'
 adj_slnovratov_1>kmen((slnovratov , 1),(slnovrat , 1),adj,cat([],klas,'',ov,'pekný',nil)).:367513:
 adj_smaragdov_1>kmen((smaragdov , 1),(smaragd , 1),adj,cat([kon],klas,'',ov,'pekný',nil)).:367629:
 adj_smiešn_1>kmen(('smiešn' , 1),(smiech , 1),adj,cat([],akvzt,'',n,'krásny','belasý')).:367670:
 adj_smrtonosn_1>kmen((smrtonosn , 1),(('smrť' , 1) , nies , 4),adj,cat([],akvzt,'',n,'pekný','belasý')).:162863:
-adj_smutn_1>kmen((smutn , 1),nil,adj,cat([],kval,'','','pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'smutn%' AND zak_tvar LIKE '%'
+adj_smutn_1>kmen((smutn , 1),nil,adj,cat([],kval,'','','pekný','belasý')).:162909:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'smutn%' AND zak_tvar LIKE '%'
 adj_smútočn_1>kmen(('smútočn' , 1),('smútok' , 1),adj,cat([],akvzt,'',n,'pekný','belasý')).:162912:
 adj_snehobiel_1>kmen((snehobiel , 1),((biel , 1) , sneh , 1),adj,cat([kon],kval,'','','krásny',biely)).:162982:
 adj_snehov_1>kmen((snehov , 1),(sneh , 1),adj,cat([],klas,'',ov,'pekný',nil)).:367749:
 adj_snežn_1>kmen(('snežn' , 1),(sneh , 1),adj,cat([],klas,'',n,'pekný',nil)).:367774:
-adj_sniv_1>kmen((sniv , 1),('snív' , 3),adj,cat([zivabs],akvzt,'',iv,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'sniv%'
-adj_snov_1>kmen((snov , 1),(sen , 1),adj,cat([],klas,'',ov,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'snov%'
-adj_spevav_1>kmen((spevav , 1),(spiev , 1),adj,cat([zivabs],akvzt,'',av,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'spevav%'
+adj_sniv_1>kmen((sniv , 1),('snív' , 3),adj,cat([zivabs],akvzt,'',iv,'pekný','belasý')).:163082:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'sniv%'
+adj_snov_1>kmen((snov , 1),(sen , 1),adj,cat([],klas,'',ov,'pekný',nil)).:163138:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'snov%'
+adj_spevav_1>kmen((spevav , 1),(spiev , 1),adj,cat([zivabs],akvzt,'',av,'pekný','belasý')).:164485:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'spevav%'
 adj_spevn_1>kmen((spevn , 1),(spiev , 1),adj,cat([],akvzt,'',n,'pekný','belasý')).:368103:
 adj_spevníkov_1>kmen(('spevníkov' , 1),('spevník' , 1),adj,cat([],klas,'',ov,'pekný',nil)).:368101:
-adj_speváck_1>kmen(('speváck' , 1),('spevák' , 1),adj,cat([],klas,'',k,'krásny',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'speváck%'
+adj_speváck_1>kmen(('speváck' , 1),('spevák' , 1),adj,cat([],klas,'',k,'krásny',nil)).:164480:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'speváck%'
 adj_srdcelomn_1>kmen((srdcelomn , 1),((srdc , 3) , 'lám' , 1),adj,cat([],akvzt,'',n,'pekný','belasý')).:168222:
 adj_srdcervúc_1>kmen(('srdcervúc' , 1),((srdc , 3) , rv , 1),adj,cat([],akvzt,'','úci','rýdzi','belasý')).:168224:
 adj_srdcov_1>kmen((srdcov , 1),(srdc , 1),adj,cat([],klas,'',ov,'pekný',nil)).:368502:
 adj_srdcov_2>kmen((srdcov , 2),(srdc , 3),adj,cat([],klas,'',ov,'pekný',nil)).:368502:
 adj_srdcovit_1>kmen((srdcovit , 1),(srdc , 4),adj,cat([],akvzt,'',ovit,'pekný','belasý')).:168226:
 adj_srdcovnicov_1>kmen((srdcovnicov , 1),(srdcovnic , 1),adj,cat([],klas,'',ov,'pekný',nil)).:168230:
-adj_srdečn_1>kmen(('srdečn' , 1),(srdc , 3),adj,cat([zivabs],akvzt,'','ečn','pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'srdečn%'
-adj_srdiečkov_1>kmen(('srdiečkov' , 1),('srdiečk' , 3),adj,cat([],klas,'',ov,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'srdiečkov%'
-adj_star_1>kmen((star , 1),nil,adj,cat([],kval,'','','pekný','nový')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'star%' AND zak_tvar LIKE '%'
-adj_stareck_1>kmen((stareck , 1),(starec , 1),adj,cat([],klas,'',k,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'stareck%'
+adj_srdečn_1>kmen(('srdečn' , 1),(srdc , 3),adj,cat([zivabs],akvzt,'','ečn','pekný','belasý')).:168233:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'srdečn%'
+adj_srdiečkov_1>kmen(('srdiečkov' , 1),('srdiečk' , 3),adj,cat([],klas,'',ov,'pekný',nil)).:168237:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'srdiečkov%'
+adj_star_1>kmen((star , 1),nil,adj,cat([],kval,'','','pekný','nový')).:168796:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'star%' AND zak_tvar LIKE '%'
+adj_stareck_1>kmen((stareck , 1),(starec , 1),adj,cat([],klas,'',k,'pekný',nil)).:168614:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'stareck%'
 adj_starinársk_1>kmen(('starinársk' , 1),('starinár' , 1),adj,cat([],klas,'',sk,'krásny',nil)).:168649:
 adj_starobn_1>kmen((starobn , 1),(starob , 1),adj,cat([],klas,'',n,'pekný',nil)).:168667:
-adj_starobyl_1>kmen((starobyl , 1),(star , 1),adj,cat([],kval,'','','pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'starobyl%' AND zak_tvar LIKE '%'
+adj_starobyl_1>kmen((starobyl , 1),(star , 1),adj,cat([],kval,'','','pekný','belasý')).:168668:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'starobyl%' AND zak_tvar LIKE '%'
 adj_starodievock_1>kmen((starodievock , 1),((star , 1) , dievock , 1),adj,cat([],akvzt,'','','pekný','belasý')).:168681:
-adj_starodávn_1>kmen(('starodávn' , 1),((star , 1) , 'dávn' , 2),adj,cat([],kval,'','','krásny','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'starodávn%' AND zak_tvar LIKE '%'
+adj_starodávn_1>kmen(('starodávn' , 1),((star , 1) , 'dávn' , 2),adj,cat([],kval,'','','krásny','belasý')).:168675:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'starodávn%' AND zak_tvar LIKE '%'
 adj_staropanensk_1>kmen((staropanensk , 1),((star , 1) , panensk , 1),adj,cat([],akvzt,'','','pekný','belasý')).:168718:
 adj_staroperzsk_1>kmen((staroperzsk , 1),((star , 1) , perzsk , 1),adj,cat([],klas,'','','pekný',nil)).:None:Chýba v db
-adj_starovek_2>kmen((starovek , 2),(starovek , 1),adj,cat([],klas,'','','pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'starovek%' AND zak_tvar LIKE '%'
+adj_starovek_2>kmen((starovek , 2),(starovek , 1),adj,cat([],klas,'','','pekný',nil)).:168770:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'starovek%' AND zak_tvar LIKE '%'
 adj_starožitn_1>kmen(('starožitn' , 1),((star , 1) , 'ži' , 1),adj,cat([],akvzt,'',n,'pekný','belasý')).:368624:
 adj_staručičk_1>kmen(('staručičk' , 1),(star , 1),adj,cat([],kval,'','učičk','pekný',nil)).:168790:
 adj_staručk_1>kmen(('staručk' , 1),(star , 1),adj,cat([],kval,'','učk','pekný','belasý')).:168787:
-adj_starušk_1>kmen(('starušk' , 1),(star , 1),adj,cat([],kval,'','ušk','pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'starušk%'
-adj_stojac_1>kmen((stojac , 1),(st , 1),adj,cat([],klas,'',ac,'cudzí',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'stojac%'
-adj_stojat_1>kmen((stojat , 1),(st , 1),adj,cat([kon],akvzt,'',at,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'stojat%'
+adj_starušk_1>kmen(('starušk' , 1),(star , 1),adj,cat([],kval,'','ušk','pekný','belasý')).:168788:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'starušk%'
+adj_stojac_1>kmen((stojac , 1),(st , 1),adj,cat([],klas,'',ac,'cudzí',nil)).:168816:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'stojac%'
+adj_stojat_1>kmen((stojat , 1),(st , 1),adj,cat([kon],akvzt,'',at,'pekný','belasý')).:169952:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'stojat%'
 adj_stojm_1>kmen((stojm , 1),(st , 1),adj,cat([],klas,'',m,'pekný',nil)).:None:Chýba v db
 adj_strašideln_1>kmen(('strašideln' , 1),('strašidl' , 1),adj,cat([],akvzt,'',n,'pekný','belasý')).:368970:
 adj_strašliv_1>kmen(('strašliv' , 1),(strach , 1),adj,cat([],akvzt,'',liv,'pekný','belasý')).:170473:
 adj_strašn_1>kmen(('strašn' , 1),(strach , 1),adj,cat([],akvzt,'',n,'pekný','belasý')).:368972:
 adj_streleck_1>kmen((streleck , 1),(strelec , 1),adj,cat([],klas,'',k,'pekný',nil)).:170779:
 adj_strelivov_1>kmen((strelivov , 1),(streliv , 1),adj,cat([],klas,'',ov,'pekný',nil)).:None:Chýba v db
-adj_streln_1>kmen((streln , 1),(strel , 2),adj,cat([],klas,'',n,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'streln%' AND zak_tvar LIKE '%n'
+adj_streln_1>kmen((streln , 1),(strel , 2),adj,cat([],klas,'',n,'pekný',nil)).:170819:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'streln%' AND zak_tvar LIKE '%n'
 adj_strelničn_1>kmen(('strelničn' , 1),(strelnic , 1),adj,cat([],klas,'',n,'pekný',nil)).:170816:
 adj_strieľňov_1>kmen(('strieľňov' , 1),('strieľň' , 1),adj,cat([],klas,'',ov,'pekný',nil)).:None:Chýba v db
-adj_strojn_1>kmen((strojn , 1),(stroj , 2),adj,cat([],klas,'',n,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'strojn%' AND zak_tvar LIKE '%n'
+adj_strojn_1>kmen((strojn , 1),(stroj , 2),adj,cat([],klas,'',n,'pekný',nil)).:171436:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'strojn%' AND zak_tvar LIKE '%n'
 adj_strojníck_1>kmen(('strojníck' , 1),('strojník' , 1),adj,cat([],klas,'',k,'krásny',nil)).:171431:
 adj_strojov_1>kmen((strojov , 1),(stroj , 2),adj,cat([],akvzt,'',ov,'pekný','belasý')).:369118:
 adj_strojársk_1>kmen(('strojársk' , 1),('strojár' , 1),adj,cat([],klas,'',sk,'krásny',nil)).:171383:
 adj_stromkovit_1>kmen((stromkovit , 1),(stromec , 1),adj,cat([],klas,'',ovit,'pekný',nil)).:171469:
 adj_stromov_1>kmen((stromov , 1),(strom , 1),adj,cat([],klas,'',ov,'pekný',nil)).:369138:
-adj_stromčekov_1>kmen(('stromčekov' , 1),('stromček' , 1),adj,cat([],klas,'',ov,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'stromčekov%'
+adj_stromčekov_1>kmen(('stromčekov' , 1),('stromček' , 1),adj,cat([],klas,'',ov,'pekný',nil)).:171453:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'stromčekov%'
 adj_stromčekovit_1>kmen(('stromčekovit' , 1),('stromček' , 1),adj,cat([],akvzt,'',ovit,'pekný','belasý')).:171456:
 adj_strožitníck_1>kmen(('strožitníck' , 1),('starožitník' , 1),adj,cat([],klas,'',k,'krásny',nil)).:None:Chýba v db
 adj_susedkin_1>kmen((susedkin , 1),(susedk , 1),adj,cat([],indprivl,'',in,matkin,nil)).:369547:
 adj_susedov_1>kmen((susedov , 1),(sused , 1),adj,cat([],indprivl,'',ov,otcov,nil)).:369545:
 adj_susedsk_1>kmen((susedsk , 1),(sused , 1),adj,cat([],akvzt,'',sk,'pekný','belasý')).:172965:
-adj_svietiv_1>kmen((svietiv , 1),(sviet , 1),adj,cat([],akvzt,'',iv,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'svietiv%'
-adj_synov_1>kmen((synov , 1),(syn , 1),adj,cat([],indprivl,'',ov,otcov,nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'synov%' AND zak_tvar LIKE '%ov'
+adj_svietiv_1>kmen((svietiv , 1),(sviet , 1),adj,cat([],akvzt,'',iv,'pekný','belasý')).:173677:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'svietiv%'
+adj_synov_1>kmen((synov , 1),(syn , 1),adj,cat([],indprivl,'',ov,otcov,nil)).:369860:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'synov%' AND zak_tvar LIKE '%ov'
 adj_synovsk_1>kmen((synovsk , 1),(syn , 1),adj,cat([],akvzt,'',ovsk,'pekný','belasý')).:174110:
 adj_telefonick_1>kmen((telefonick , 1),('telefón' , 1),adj,cat([abs],klas,'',ick,'pekný',nil)).:180910:
 adj_telefónn_1>kmen(('telefónn' , 1),('telefón' , 1),adj,cat([],klas,'',n,'krásny',nil)).:180912:
-adj_tesn_1>kmen((tesn , 1),nil,adj,cat([],kval,'','','pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'tesn%' AND zak_tvar LIKE '%'
-adj_tich_1>kmen((tich , 1),nil,adj,cat([],kval,'','','pekný','nový')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'tich%' AND zak_tvar LIKE '%'
+adj_tesn_1>kmen((tesn , 1),nil,adj,cat([],kval,'','','pekný','belasý')).:181610:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'tesn%' AND zak_tvar LIKE '%'
+adj_tich_1>kmen((tich , 1),nil,adj,cat([],kval,'','','pekný','nový')).:181924:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'tich%' AND zak_tvar LIKE '%'
 adj_tlakomern_1>kmen((tlakomern , 1),(tlakomer , 1),adj,cat([],klas,'',n,'pekný',nil)).:182262:
 adj_tlakov_1>kmen((tlakov , 1),(tlak , 1),adj,cat([],klas,'',ov,'pekný',nil)).:372139:
 adj_tlačiarensk_1>kmen(('tlačiarensk' , 1),('tlačiareň' , 1),adj,cat([],klas,'',sk,'pekný',nil)).:182218:
@@ -354,77 +354,77 @@ adj_tlačidlov_1>kmen(('tlačidlov' , 1),('tlačidl' , 1),adj,cat([],klas,'',ov,
 adj_tretinov_1>kmen((tretinov , 1),(tretin , 1),adj,cat([],klas,'',ov,'pekný',nil)).:183900:
 adj_trojuholníkov_1>kmen(('trojuholníkov' , 1),('trojuholník' , 1),adj,cat([],klas,'',ov,'pekný',nil)).:372842:
 adj_trávnat_1>kmen(('trávnat' , 1),('tráv' , 1),adj,cat([lok],akvzt,'',nat,'pekný','belasý')).:183576:
-adj_trávov_1>kmen(('trávov' , 1),('tráv' , 1),adj,cat([],akvzt,'',ov,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'trávov%'
-adj_túžobn_1>kmen(('túžobn' , 1),('túžb' , 1),adj,cat([abs],akvzt,'',n,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'túžobn%' AND zak_tvar LIKE '%n'
-adj_uhoľn_1>kmen(('uhoľn' , 1),(uhl , 1),adj,cat([],klas,'',n,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'uhoľn%'
-adj_umrlč_1>kmen(('umrlč' , 1),(umrlec , 1),adj,cat([],indprivl,'','č','cudzí',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'umrlč%'
-adj_určit_0>kmen(('určit' , 0),nil,adj,cat([],kval,'','','pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'určit%' AND zak_tvar LIKE '%'
-adj_usmievav_1>kmen((usmievav , 1),(usmiev , 1),adj,cat([zivabs],akvzt,'',av,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'usmievav%'
-adj_ustrašen_1>kmen(('ustrašen' , 1),('straš' , 1),adj,cat([zivabs],akvzt,u,en,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'ustrašen%'
-adj_ustráchan_1>kmen(('ustráchan' , 1),('strách' , 1),adj,cat([zivabs],akvzt,u,an,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'ustráchan%'
-adj_učebn_1>kmen(('učebn' , 1),('uč' , 1),adj,cat([],klas,'',n,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'učebn%' AND zak_tvar LIKE '%n'
+adj_trávov_1>kmen(('trávov' , 1),('tráv' , 1),adj,cat([],akvzt,'',ov,'pekný','belasý')).:183589:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'trávov%'
+adj_túžobn_1>kmen(('túžobn' , 1),('túžb' , 1),adj,cat([abs],akvzt,'',n,'pekný','belasý')).:186038:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'túžobn%' AND zak_tvar LIKE '%n'
+adj_uhoľn_1>kmen(('uhoľn' , 1),(uhl , 1),adj,cat([],klas,'',n,'pekný',nil)).:490279:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'uhoľn%'
+adj_umrlč_1>kmen(('umrlč' , 1),(umrlec , 1),adj,cat([],indprivl,'','č','cudzí',nil)).:190497:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'umrlč%'
+adj_určit_0>kmen(('určit' , 0),nil,adj,cat([],kval,'','','pekný','belasý')).:191924:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'určit%' AND zak_tvar LIKE '%'
+adj_usmievav_1>kmen((usmievav , 1),(usmiev , 1),adj,cat([zivabs],akvzt,'',av,'pekný','belasý')).:192586:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'usmievav%'
+adj_ustrašen_1>kmen(('ustrašen' , 1),('straš' , 1),adj,cat([zivabs],akvzt,u,en,'pekný','belasý')).:193040:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'ustrašen%'
+adj_ustráchan_1>kmen(('ustráchan' , 1),('strách' , 1),adj,cat([zivabs],akvzt,u,an,'pekný','belasý')).:193032:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'ustráchan%'
+adj_učebn_1>kmen(('učebn' , 1),('uč' , 1),adj,cat([],klas,'',n,'pekný',nil)).:186866:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'učebn%' AND zak_tvar LIKE '%n'
 adj_učebnicov_1>kmen(('učebnicov' , 1),('učebnic' , 1),adj,cat([],klas,'',ov,'pekný',nil)).:186864:
-adj_učenliv_1>kmen(('učenliv' , 1),('uč' , 2),adj,cat([ziv],akvzt,'',liv,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'učenliv%'
+adj_učenliv_1>kmen(('učenliv' , 1),('uč' , 2),adj,cat([ziv],akvzt,'',liv,'pekný',nil)).:186886:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'učenliv%'
 adj_učiteľsk_1>kmen(('učiteľsk' , 1),('učiteľ' , 1),adj,cat([],klas,'',sk,'pekný',nil)).:186992:
 adj_učňovsk_1>kmen(('učňovsk' , 1),('učeň' , 1),adj,cat([],klas,'',sk,'pekný',nil)).:186878:
-adj_velik_1>kmen((velik , 1),('veľk' , 1),adj,cat([],kval,'','','pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'velik%' AND zak_tvar LIKE '%'
+adj_velik_1>kmen((velik , 1),('veľk' , 1),adj,cat([],kval,'','','pekný','belasý')).:490721:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'velik%' AND zak_tvar LIKE '%'
 adj_veličizn_1>kmen(('veličizn' , 1),(velik , 1),adj,cat([],kval,'',izn,'pekný',nil)).:197410:
-adj_vesel_1>kmen((vesel , 1),nil,adj,cat([zivabs],kval,'','','pekný','nový')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'vesel%' AND zak_tvar LIKE '%'
-adj_veľk_1>kmen(('veľk' , 1),nil,adj,cat([],kval,'','','pekný',suplet)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'veľk%' AND zak_tvar LIKE '%'
+adj_vesel_1>kmen((vesel , 1),nil,adj,cat([zivabs],kval,'','','pekný','nový')).:198118:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'vesel%' AND zak_tvar LIKE '%'
+adj_veľk_1>kmen(('veľk' , 1),nil,adj,cat([],kval,'','','pekný',suplet)).:197677:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'veľk%' AND zak_tvar LIKE '%'
 adj_veľkokvet_1>kmen(('veľkokvet' , 1),(('veľk' , 1) , kvet , 1),adj,cat([flor],klas,'','','pekný',nil)).:197527:
 adj_veľkovýrobn_1>kmen(('veľkovýrobn' , 1),('veľkovýrob' , 1),adj,cat([],klas,'',n,'pekný',nil)).:380703:
 adj_veľrybársk_1>kmen(('veľrybársk' , 1),('veľrybár' , 1),adj,cat([],klas,'',sk,'krásny',nil)).:197717:
 adj_viacfarebn_1>kmen((viacfarebn , 1),((farebn , 1) , 'veľa' , 1),adj,cat([kon],akvzt,'','','pekný','belasý')).:198660:
-adj_viditeľn_1>kmen(('viditeľn' , 1),(vid , 1),adj,cat([],akvzt,'','teľn','pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'viditeľn%'
-adj_viničn_1>kmen(('viničn' , 1),('vinič' , 1),adj,cat([],klas,'',n,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'viničn%'
+adj_viditeľn_1>kmen(('viditeľn' , 1),(vid , 1),adj,cat([],akvzt,'','teľn','pekný','belasý')).:198900:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'viditeľn%'
+adj_viničn_1>kmen(('viničn' , 1),('vinič' , 1),adj,cat([],klas,'',n,'pekný',nil)).:199162:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'viničn%'
 adj_vinohradníck_1>kmen(('vinohradníck' , 1),('vinohradník' , 1),adj,cat([],klas,'',k,'krásny',nil)).:199208:
 adj_vinárensk_1>kmen(('vinárensk' , 1),('vináreň' , 1),adj,cat([],klas,'',sk,'pekný',nil)).:199137:
 adj_vinárov_1>kmen(('vinárov' , 1),('vinár' , 1),adj,cat([],indprivl,'',ov,otcov,nil)).:375043:
 adj_vinársk_1>kmen(('vinársk' , 1),('vinár' , 1),adj,cat([],akvzt,'',sk,'krásny','belasý')).:199134:
 adj_vladársk_1>kmen(('vladársk' , 1),('vladár' , 1),adj,cat([],klas,'',sk,'krásny',nil)).:199936:
-adj_vlasat_1>kmen((vlasat , 1),(vlas , 1),adj,cat([kon],akvzt,'',at,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'vlasat%'
-adj_vlasov_1>kmen((vlasov , 1),(vlas , 1),adj,cat([],klas,'',ov,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'vlasov%' AND zak_tvar LIKE '%ov'
+adj_vlasat_1>kmen((vlasat , 1),(vlas , 1),adj,cat([kon],akvzt,'',at,'pekný','belasý')).:200034:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'vlasat%'
+adj_vlasov_1>kmen((vlasov , 1),(vlas , 1),adj,cat([],klas,'',ov,'pekný',nil)).:200030:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'vlasov%' AND zak_tvar LIKE '%ov'
 adj_vlnen_1>kmen((vlnen , 1),(vln , 4),adj,cat([inslok],klas,'',en,'pekný',nil)).:200264:
-adj_vlnit_1>kmen((vlnit , 1),(vln , 1),adj,cat([],akvzt,'',it,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'vlnit%'
+adj_vlnit_1>kmen((vlnit , 1),(vln , 1),adj,cat([],akvzt,'',it,'pekný','belasý')).:200293:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'vlnit%'
 adj_vlniv_1>kmen((vlniv , 1),(vln , 3),adj,cat([],akvzt,'',iv,'pekný','belasý')).:200297:
 adj_vlnov_1>kmen((vlnov , 1),(vln , 1),adj,cat([],akvzt,'',ov,'pekný','belasý')).:375260:
-adj_vlnovit_1>kmen((vlnovit , 1),(vln , 1),adj,cat([],akvzt,'',ovit,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'vlnovit%'
-adj_vlnovkov_1>kmen((vlnovkov , 1),(vlnovk , 1),adj,cat([],akvzt,'',ov,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'vlnovkov%'
+adj_vlnovit_1>kmen((vlnovit , 1),(vln , 1),adj,cat([],akvzt,'',ovit,'pekný','belasý')).:200302:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'vlnovit%'
+adj_vlnovkov_1>kmen((vlnovkov , 1),(vlnovk , 1),adj,cat([],akvzt,'',ov,'pekný','belasý')).:200306:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'vlnovkov%'
 adj_vlnársk_1>kmen(('vlnársk' , 1),('vlnár' , 1),adj,cat([],klas,'',sk,'krásny',nil)).:200261:
 adj_vládcov_1>kmen(('vládcov' , 1),('vládc' , 1),adj,cat([],indprivl,'',ov,otcov,nil)).:375174:
 adj_vládcovsk_1>kmen(('vládcovsk' , 1),('vládc' , 1),adj,cat([],klas,'',ovsk,'pekný',nil)).:490884:
-adj_vládn_2>kmen(('vládn' , 2),('vlád' , 2),adj,cat([],klas,'',n,'krásny',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'vládn%'
-adj_vládychtiv_1>kmen(('vládychtiv' , 1),(('vládn' , 1) , chc , 0),adj,cat([ziv],akvzt,'',iv,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'vládychtiv%'
+adj_vládn_2>kmen(('vládn' , 2),('vlád' , 2),adj,cat([],klas,'',n,'krásny',nil)).:199967:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'vládn%'
+adj_vládychtiv_1>kmen(('vládychtiv' , 1),(('vládn' , 1) , chc , 0),adj,cat([ziv],akvzt,'',iv,'pekný','belasý')).:199970:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'vládychtiv%'
 adj_vodcovsk_1>kmen((vodcovsk , 1),(vodc , 1),adj,cat([],akvzt,'',ovsk,'pekný','belasý')).:200771:
-adj_vodiv_1>kmen((vodiv , 1),(vies , 2),adj,cat([inslok],akvzt,'',iv,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'vodiv%'
+adj_vodiv_1>kmen((vodiv , 1),(vies , 2),adj,cat([inslok],akvzt,'',iv,'pekný','belasý')).:200808:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'vodiv%'
 adj_vodivostn_1>kmen((vodivostn , 1),('vodivosť' , 1),adj,cat([],klas,'',n,'pekný',nil)).:None:Chýba v db
 adj_vodičsk_1>kmen(('vodičsk' , 1),('vodič' , 2),adj,cat([],klas,'',sk,'pekný',nil)).:200776:
-adj_vodn_1>kmen((vodn , 1),(vod , 1),adj,cat([],klas,'',n,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'vodn%' AND zak_tvar LIKE '%n'
-adj_vodnat_1>kmen((vodnat , 1),(vod , 1),adj,cat([kon],akvzt,'',nat,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'vodnat%'
+adj_vodn_1>kmen((vodn , 1),(vod , 1),adj,cat([],klas,'',n,'pekný',nil)).:200839:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'vodn%' AND zak_tvar LIKE '%n'
+adj_vodnat_1>kmen((vodnat , 1),(vod , 1),adj,cat([kon],akvzt,'',nat,'pekný','belasý')).:200830:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'vodnat%'
 adj_vodohospodársk_1>kmen(('vodohospodársk' , 1),('vodohospodárstv' , 1),adj,cat([],klas,'',sk,'krásny',nil)).:200843:
-adj_vodorovn_1>kmen((vodorovn , 1),((vod , 1) , rovn , 1),adj,cat([],kval,'','','pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'vodorovn%' AND zak_tvar LIKE '%'
-adj_vodotesn_1>kmen((vodotesn , 1),((vod , 1) , tesn , 1),adj,cat([],akvzt,'','','pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'vodotesn%' AND zak_tvar LIKE '%'
+adj_vodorovn_1>kmen((vodorovn , 1),((vod , 1) , rovn , 1),adj,cat([],kval,'','','pekný','belasý')).:200868:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'vodorovn%' AND zak_tvar LIKE '%'
+adj_vodotesn_1>kmen((vodotesn , 1),((vod , 1) , tesn , 1),adj,cat([],akvzt,'','','pekný','belasý')).:200874:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'vodotesn%' AND zak_tvar LIKE '%'
 adj_vodov_1>kmen((vodov , 1),(vod , 1),adj,cat([],akvzt,'',ov,'pekný','belasý')).:375338:
-adj_vodáck_1>kmen(('vodáck' , 1),('vodák' , 1),adj,cat([],klas,'',k,'krásny',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'vodáck%'
+adj_vodáck_1>kmen(('vodáck' , 1),('vodák' , 1),adj,cat([],klas,'',k,'krásny',nil)).:200761:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'vodáck%'
 adj_vodárensk_1>kmen(('vodárensk' , 1),('vodáreň' , 1),adj,cat([],klas,'',sk,'pekný',nil)).:200765:
 adj_vonn_1>kmen((vonn , 1),('voň' , 1),adj,cat([],akvzt,'',n,'pekný','belasý')).:201205:
-adj_voňav_1>kmen(('voňav' , 1),('voň' , 1),adj,cat([kon],akvzt,'',av,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'voňav%'
-adj_vtáč_2>kmen(('vtáč' , 2),('vták' , 1),adj,cat([],drprivl,'','','papagájí',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'vtáč%' AND zak_tvar LIKE '%'
+adj_voňav_1>kmen(('voňav' , 1),('voň' , 1),adj,cat([kon],akvzt,'',av,'pekný','belasý')).:201192:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'voňav%'
+adj_vtáč_2>kmen(('vtáč' , 2),('vták' , 1),adj,cat([],drprivl,'','','papagájí',nil)).:203657:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'vtáč%' AND zak_tvar LIKE '%'
 adj_vzdorn_1>kmen((vzdorn , 1),(vzdorov , 1),adj,cat([],akvzt,'',n,'pekný','belasý')).:376473:
-adj_vzdorovit_1>kmen((vzdorovit , 1),(vzdorov , 2),adj,cat([zivabs],kval,'',it,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'vzdorovit%'
+adj_vzdorovit_1>kmen((vzdorovit , 1),(vzdorov , 2),adj,cat([zivabs],kval,'',it,'pekný','belasý')).:220389:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'vzdorovit%'
 adj_včelársk_1>kmen(('včelársk' , 1),('včelár' , 1),adj,cat([],klas,'',sk,'krásny',nil)).:196814:
-adj_včerajš_1>kmen(('včerajš' , 1),('včer' , 1),adj,cat([],klas,'','jš','cudzí',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'včerajš%'
-adj_výrobn_1>kmen(('výrobn' , 1),('výrob' , 1),adj,cat([],klas,'',n,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'výrobn%' AND zak_tvar LIKE '%n'
+adj_včerajš_1>kmen(('včerajš' , 1),('včer' , 1),adj,cat([],klas,'','jš','cudzí',nil)).:196836:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'včerajš%'
+adj_výrobn_1>kmen(('výrobn' , 1),('výrob' , 1),adj,cat([],klas,'',n,'pekný',nil)).:214451:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'výrobn%' AND zak_tvar LIKE '%n'
 adj_vínn_1>kmen(('vínn' , 1),('vín' , 1),adj,cat([],klas,'',n,'krásny',nil)).:199193:
-adj_vínov_1>kmen(('vínov' , 1),('vín' , 1),adj,cat([],akvzt,'',ov,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'vínov%'
+adj_vínov_1>kmen(('vínov' , 1),('vín' , 1),adj,cat([],akvzt,'',ov,'pekný','belasý')).:199192:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'vínov%'
 adj_zavodňovac_1>kmen(('zavodňovac' , 1),('zavodňov' , 1),adj,cat([],klas,'','ací','cudzí',nil)).:240728:
-adj_začiatočn_1>kmen(('začiatočn' , 1),('začiatok' , 1),adj,cat([],klas,'',n,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'začiatočn%' AND zak_tvar LIKE '%n'
-adj_zelen_1>kmen((zelen , 1),nil,adj,cat([kon],kval,'','','pekný','nový')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'zelen%' AND zak_tvar LIKE '%'
-adj_zelenkast_1>kmen((zelenkast , 1),(zelen , 1),adj,cat([kon],kval,'',ast,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'zelenkast%'
-adj_zelenkav_1>kmen((zelenkav , 1),(zelen , 1),adj,cat([kon],kval,'',av,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'zelenkav%'
+adj_začiatočn_1>kmen(('začiatočn' , 1),('začiatok' , 1),adj,cat([],klas,'',n,'pekný',nil)).:223651:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'začiatočn%' AND zak_tvar LIKE '%n'
+adj_zelen_1>kmen((zelen , 1),nil,adj,cat([kon],kval,'','','pekný','nový')).:244889:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'zelen%' AND zak_tvar LIKE '%'
+adj_zelenkast_1>kmen((zelenkast , 1),(zelen , 1),adj,cat([kon],kval,'',ast,'pekný','belasý')).:244821:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'zelenkast%'
+adj_zelenkav_1>kmen((zelenkav , 1),(zelen , 1),adj,cat([kon],kval,'',av,'pekný','belasý')).:244842:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'zelenkav%'
 adj_zelenook_1>kmen((zelenook , 1),((ok , 1) , zelen , 1),adj,cat([ziv],akvzt,'','','pekný','belasý')).:None:Chýba v db
 adj_zeleňučk_1>kmen(('zeleňučk' , 1),(zelen , 1),adj,cat([kon],kval,'','učk','pekný','belasý')).:None:Chýba v db
-adj_zlat_2>kmen((zlat , 2),(zlat , 1),adj,cat([kon],klas,'','','pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'zlat%' AND zak_tvar LIKE '%'
+adj_zlat_2>kmen((zlat , 2),(zlat , 1),adj,cat([kon],klas,'','','pekný',nil)).:248146:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'zlat%' AND zak_tvar LIKE '%'
 adj_zlat_5>kmen((zlat , 5),nil,adj,cat([zivabs],kval,'','','pekný','nový')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'zlat%' AND zak_tvar LIKE '%'
 adj_zlatist_1>kmen((zlatist , 1),(zlat , 1),adj,cat([kon],akvzt,'',ist,'pekný','belasý')).:248044:
 adj_zlatn_2>kmen((zlatn , 2),(zlat , 1),adj,cat([],klas,'',n,'pekný',nil)).:377743:
@@ -442,15 +442,15 @@ adj_zliatinov_1>kmen((zliatinov , 1),(zliatin , 1),adj,cat([kon],klas,'',ov,'pek
 adj_zlodejkin_1>kmen((zlodejkin , 1),(zlodejk , 1),adj,cat([],indprivl,'',in,matkin,nil)).:377800:
 adj_zlodejov_1>kmen((zlodejov , 1),(zlodej , 1),adj,cat([],indprivl,'',ov,otcov,nil)).:377799:
 adj_zlodejsk_1>kmen((zlodejsk , 1),(zlodej , 1),adj,cat([],akvzt,'',sk,'pekný','belasý')).:248541:
-adj_zriedkav_1>kmen((zriedkav , 1),nil,adj,cat([],kval,'','','pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'zriedkav%' AND zak_tvar LIKE '%'
-adj_zrkadlov_1>kmen((zrkadlov , 1),(zrkadl , 1),adj,cat([],klas,'',ov,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'zrkadlov%'
+adj_zriedkav_1>kmen((zriedkav , 1),nil,adj,cat([],kval,'','','pekný','belasý')).:256380:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'zriedkav%' AND zak_tvar LIKE '%'
+adj_zrkadlov_1>kmen((zrkadlov , 1),(zrkadl , 1),adj,cat([],klas,'',ov,'pekný',nil)).:256432:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'zrkadlov%'
 adj_zrkadlovit_1>kmen((zrkadlovit , 1),(zrkadl , 1),adj,cat([],akvzt,'',ovit,'pekný','belasý')).:256438:
-adj_zvoniv_1>kmen((zvoniv , 1),(zvon , 2),adj,cat([],akvzt,'',iv,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'zvoniv%'
-adj_zvonov_1>kmen((zvonov , 1),(zvon , 1),adj,cat([],klas,'',ov,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'zvonov%' AND zak_tvar LIKE '%ov'
+adj_zvoniv_1>kmen((zvoniv , 1),(zvon , 2),adj,cat([],akvzt,'',iv,'pekný','belasý')).:259014:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'zvoniv%'
+adj_zvonov_1>kmen((zvonov , 1),(zvon , 1),adj,cat([],klas,'',ov,'pekný',nil)).:258970:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'zvonov%' AND zak_tvar LIKE '%ov'
 adj_zvončekokvet_1>kmen(('zvončekokvet' , 1),(('zvonček' , 1) , kvet , 1),adj,cat([flor],klas,'','','pekný',nil)).:258992:
-adj_zvončekovit_1>kmen(('zvončekovit' , 1),('zvonček' , 1),adj,cat([],akvzt,'',ovit,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'zvončekovit%'
+adj_zvončekovit_1>kmen(('zvončekovit' , 1),('zvonček' , 1),adj,cat([],akvzt,'',ovit,'pekný','belasý')).:258993:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'zvončekovit%'
 adj_zvonársk_1>kmen(('zvonársk' , 1),('zvonár' , 1),adj,cat([],klas,'',sk,'krásny',nil)).:258974:
-adj_zženštil_1>kmen(('zženštil' , 1),('zoženšt' , 1),adj,cat([zivabs],akvzt,'',il,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'zženštil%'
+adj_zženštil_1>kmen(('zženštil' , 1),('zoženšt' , 1),adj,cat([zivabs],akvzt,'',il,'pekný','belasý')).:259658:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'zženštil%'
 adj_záhradkárov_1>kmen(('záhradkárov' , 1),('záhradkár' , 1),adj,cat([],indprivl,'',ov,otcov,nil)).:376788:
 adj_záhradkársk_1>kmen(('záhradkársk' , 1),('záhradkár' , 1),adj,cat([],klas,'',sk,'krásny',nil)).:226619:
 adj_záhradn_1>kmen(('záhradn' , 1),('záhrad' , 1),adj,cat([],klas,'',n,'pekný',nil)).:376790:
@@ -460,7 +460,7 @@ adj_zálesáck_1>kmen(('zálesáck' , 1),('zálesák' , 1),adj,cat([],akvzt,'',k
 adj_zámock_1>kmen(('zámock' , 1),('zámok' , 1),adj,cat([],klas,'',k,'pekný',nil)).:231499:
 adj_zámorsk_1>kmen(('zámorsk' , 1),('zámor' , 1),adj,cat([],klas,'',sk,'pekný',nil)).:231577:
 adj_zámočníck_1>kmen(('zámočníck' , 1),('zámočník' , 1),adj,cat([],klas,'',k,'krásny',nil)).:231488:
-adj_zázračn_1>kmen(('zázračn' , 1),('zázrak' , 1),adj,cat([],akvzt,'',n,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'zázračn%' AND zak_tvar LIKE '%n'
+adj_zázračn_1>kmen(('zázračn' , 1),('zázrak' , 1),adj,cat([],akvzt,'',n,'pekný','belasý')).:241359:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'zázračn%' AND zak_tvar LIKE '%n'
 adj_čarodejkin_1>kmen(('čarodejkin' , 1),('čarodejk' , 1),adj,cat([],indprivl,'',in,matkin,nil)).:340872:
 adj_čarodejn_1>kmen(('čarodejn' , 1),('čarov' , 1),adj,cat([],akvzt,'',n,'pekný','belasý')).:340874:
 adj_čarodejníck_1>kmen(('čarodejníck' , 1),('čarodejník' , 1),adj,cat([],akvzt,'',ck,'krásny','belasý')).:450343:
@@ -470,32 +470,32 @@ adj_čarovn_1>kmen(('čarovn' , 1),('čarov' , 1),adj,cat([],akvzt,'',n,'pekný'
 adj_čašníck_1>kmen(('čašníck' , 1),('čašník' , 1),adj,cat([],klas,'',k,'krásny',nil)).:450453:
 adj_čašníkov_1>kmen(('čašníkov' , 1),('čašník' , 1),adj,cat([],indprivl,'',ov,otcov,nil)).:340908:
 adj_čašníčkin_1>kmen(('čašníčkin' , 1),('čašníčk' , 1),adj,cat([],indprivl,'',in,matkin,nil)).:340909:
-adj_červen_1>kmen(('červen' , 1),nil,adj,cat([kon],kval,'','','pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'červen%' AND zak_tvar LIKE '%'
-adj_červenkast_1>kmen(('červenkast' , 1),('červen' , 1),adj,cat([kon],kval,'',ast,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'červenkast%'
-adj_červenkav_1>kmen(('červenkav' , 1),('červen' , 1),adj,cat([kon],kval,'',kav,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'červenkav%'
+adj_červen_1>kmen(('červen' , 1),nil,adj,cat([kon],kval,'','','pekný','belasý')).:450813:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'červen%' AND zak_tvar LIKE '%'
+adj_červenkast_1>kmen(('červenkast' , 1),('červen' , 1),adj,cat([kon],kval,'',ast,'pekný','belasý')).:450764:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'červenkast%'
+adj_červenkav_1>kmen(('červenkav' , 1),('červen' , 1),adj,cat([kon],kval,'',kav,'pekný','belasý')).:450774:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'červenkav%'
 adj_červenovlas_1>kmen(('červenovlas' , 1),(('červen' , 1) , vlas , 1),adj,cat([ziv],akvzt,'','','pekný','belasý')).:450809:
-adj_čiern_1>kmen(('čiern' , 1),nil,adj,cat([kon],kval,'','','krásny','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'čiern%' AND zak_tvar LIKE '%'
+adj_čiern_1>kmen(('čiern' , 1),nil,adj,cat([kon],kval,'','','krásny','belasý')).:451066:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'čiern%' AND zak_tvar LIKE '%'
 adj_čiernomorsk_1>kmen(('čiernomorsk' , 1),((mor , 1) , 'čiern' , 1),adj,cat([],klas,'',sk,'pekný',nil)).:451050:
-adj_čitateľn_1>kmen(('čitateľn' , 1),('čít' , 1),adj,cat([],akvzt,'','teľn','pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'čitateľn%'
+adj_čitateľn_1>kmen(('čitateľn' , 1),('čít' , 1),adj,cat([],akvzt,'','teľn','pekný','belasý')).:451305:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'čitateľn%'
 adj_čitateľsk_1>kmen(('čitateľsk' , 1),('čitateľ' , 1),adj,cat([],klas,'',sk,'pekný',nil)).:451302:
 adj_čítac_1>kmen(('čítac' , 1),('čít' , 1),adj,cat([],klas,'',ac,'cudzí',nil)).:451279:
 adj_čítankov_1>kmen(('čítankov' , 1),('čítank' , 1),adj,cat([],klas,'',ov,'pekný',nil)).:451283:
 adj_ľubovoľn_0>kmen(('ľubovoľn' , 0),nil,adj,cat([],kval,'','','pekný','belasý')).:38485:
-adj_žensk_1>kmen(('žensk' , 1),('žen' , 0),adj,cat([],akvzt,'',sk,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'žensk%'
+adj_žensk_1>kmen(('žensk' , 1),('žen' , 0),adj,cat([],akvzt,'',sk,'pekný','belasý')).:260340:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'žensk%'
 adj_žiack_1>kmen(('žiack' , 1),('žiak' , 1),adj,cat([],klas,'',k,'krásny',nil)).:260538:
 adj_životodarn_1>kmen(('životodarn' , 1),(('život' , 1) , darov , 1),adj,cat([],akvzt,'',n,'pekný','belasý')).:378699:
-adj_žlt_1>kmen(('žlt' , 1),nil,adj,cat([kon],kval,'','','pekný','nový')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'žlt%' AND zak_tvar LIKE '%'
-adj_žltast_1>kmen(('žltast' , 1),('žlt' , 1),adj,cat([kon],kval,'',ast,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'žltast%'
-adj_žltav_1>kmen(('žltav' , 1),('žlt' , 1),adj,cat([kon],kval,'',av,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'žltav%'
-adj_žltkav_1>kmen(('žltkav' , 1),('žlt' , 1),adj,cat([kon],kval,'',kav,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'žltkav%'
+adj_žlt_1>kmen(('žlt' , 1),nil,adj,cat([kon],kval,'','','pekný','nový')).:261131:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'žlt%' AND zak_tvar LIKE '%'
+adj_žltast_1>kmen(('žltast' , 1),('žlt' , 1),adj,cat([kon],kval,'',ast,'pekný','belasý')).:261029:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'žltast%'
+adj_žltav_1>kmen(('žltav' , 1),('žlt' , 1),adj,cat([kon],kval,'',av,'pekný','belasý')).:261033:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'žltav%'
+adj_žltkav_1>kmen(('žltkav' , 1),('žlt' , 1),adj,cat([kon],kval,'',kav,'pekný','belasý')).:261052:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'žltkav%'
 adj_žltočerven_1>kmen(('žltočerven' , 1),(('žlt' , 1) , 'červen' , 1),adj,cat([kon],kval,'','','pekný','belasý')).:261096:
 adj_žltulink_1>kmen(('žltulink' , 1),('žlt' , 1),adj,cat([kon],kval,'',ulink,'pekný','belasý')).:261128:
 adj_žltučk_1>kmen(('žltučk' , 1),('žlt' , 1),adj,cat([kon],kval,'','učk','pekný','belasý')).:261125:
 adj_úmrtn_1>kmen(('úmrtn' , 1),('úmrt' , 1),adj,cat([],klas,'',n,'pekný',nil)).:373646:
 adj_úsmevn_1>kmen(('úsmevn' , 1),('úsmev' , 1),adj,cat([],akvzt,'',n,'pekný','belasý')).:373874:
-adj_úvodn_1>kmen(('úvodn' , 1),('úvod' , 1),adj,cat([],klas,'',n,'pekný',nil)).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'úvodn%'
-adj_škared_1>kmen(('škared' , 1),nil,adj,cat([],kval,'','','pekný','nový')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'škared%' AND zak_tvar LIKE '%'
+adj_úvodn_1>kmen(('úvodn' , 1),('úvod' , 1),adj,cat([],klas,'',n,'pekný',nil)).:194877:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'úvodn%'
+adj_škared_1>kmen(('škared' , 1),nil,adj,cat([],kval,'','','pekný','nový')).:175651:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'škared%' AND zak_tvar LIKE '%'
 adj_šperkov_1>kmen(('šperkov' , 1),('šperk' , 1),adj,cat([],klas,'',ov,'pekný',nil)).:370836:
-adj_štedr_1>kmen(('štedr' , 1),nil,adj,cat([],kval,'','','pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'štedr%' AND zak_tvar LIKE '%'
-adj_šťastliv_1>kmen(('šťastliv' , 1),('šťast' , 1),adj,cat([zivabs],akvzt,'',liv,'pekný','belasý')).:None:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'šťastliv%'
+adj_štedr_1>kmen(('štedr' , 1),nil,adj,cat([],kval,'','','pekný','belasý')).:178035:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'štedr%' AND zak_tvar LIKE '%'
+adj_šťastliv_1>kmen(('šťastliv' , 1),('šťast' , 1),adj,cat([zivabs],akvzt,'',liv,'pekný','belasý')).:177919:SELECT sd.*,sd_prid_m.* FROM sd_prid_m JOIN sd ON sd.id=sd_prid_m.id WHERE zak_tvar LIKE 'šťastliv%'
 adj_šťastn_1>kmen(('šťastn' , 1),nil,adj,cat([zivabs],kval,'','','pekný','belasý')).:177921:

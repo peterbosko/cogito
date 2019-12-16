@@ -1,13 +1,13 @@
-﻿cis_dvanást_1>kmen(('dvanást' , 1),('dvanásť' , 1),cis,cat(rad,'','','krásny','12')).:None:SELECT sd.*,sd_cislovka.* FROM sd_cislovka JOIN sd ON sd.id=sd_cislovka.id WHERE zak_tvar LIKE 'dvanást%'
+﻿cis_dvanást_1>kmen(('dvanást' , 1),('dvanásť' , 1),cis,cat(rad,'','','krásny','12')).:498098:SELECT sd.*,sd_cislovka.* FROM sd_cislovka JOIN sd ON sd.id=sd_cislovka.id WHERE zak_tvar LIKE 'dvanást%'
 cis_dvanástin_1>kmen(('dvanástin' , 1),('dvanásť' , 1),cis,cat(zlomk,'',ina,'úloha','12')).:498092:
-cis_dvanástorak_1>kmen(('dvanástorak' , 1),('dvanásť' , 1),cis,cat(druh,'',rak,'pekný','12')).:None:SELECT sd.*,sd_cislovka.* FROM sd_cislovka JOIN sd ON sd.id=sd_cislovka.id WHERE zak_tvar LIKE 'dvanástorak%'
+cis_dvanástorak_1>kmen(('dvanástorak' , 1),('dvanásť' , 1),cis,cat(druh,'',rak,'pekný','12')).:8663:SELECT sd.*,sd_cislovka.* FROM sd_cislovka JOIN sd ON sd.id=sd_cislovka.id WHERE zak_tvar LIKE 'dvanástorak%'
 cis_dvanástoro_1>kmen(('dvanástoro' , 1),('dvanásť' , 1),cis,cat(kol,'',oro,nil,'12')).:8665:
-cis_dvanásť_1>kmen(('dvanásť' , 1),nil,cis,cat(zak,'','','jedenásť','12')).:None:SELECT sd.*,sd_cislovka.* FROM sd_cislovka JOIN sd ON sd.id=sd_cislovka.id WHERE zak_tvar LIKE 'dvanásť%'
+cis_dvanásť_1>kmen(('dvanásť' , 1),nil,cis,cat(zak,'','','jedenásť','12')).:8647:SELECT sd.*,sd_cislovka.* FROM sd_cislovka JOIN sd ON sd.id=sd_cislovka.id WHERE zak_tvar LIKE 'dvanásť%'
 cis_dvanásťkrát_1>kmen(('dvanásťkrát' , 1),('dvanásť' , 1),cis,cat('nás','','krát',nil,'12')).:8656:
-cis_dvanásťnásobn_1>kmen(('dvanásťnásobn' , 1),('dvanásť' , 1),cis,cat('nás','','násob','pekný','12')).:None:SELECT sd.*,sd_cislovka.* FROM sd_cislovka JOIN sd ON sd.id=sd_cislovka.id WHERE zak_tvar LIKE 'dvanásťnásobn%'
-cis_tr_1>kmen((tr , 1),nil,cis,cat(zak,'','',tri,'3')).:None:SELECT sd.*,sd_cislovka.* FROM sd_cislovka JOIN sd ON sd.id=sd_cislovka.id WHERE zak_tvar LIKE 'tr%'
-cis_tret_1>kmen((tret , 1),(tr , 1),cis,cat(rad,'','','cudzí','3')).:None:SELECT sd.*,sd_cislovka.* FROM sd_cislovka JOIN sd ON sd.id=sd_cislovka.id WHERE zak_tvar LIKE 'tret%'
+cis_dvanásťnásobn_1>kmen(('dvanásťnásobn' , 1),('dvanásť' , 1),cis,cat('nás','','násob','pekný','12')).:8658:SELECT sd.*,sd_cislovka.* FROM sd_cislovka JOIN sd ON sd.id=sd_cislovka.id WHERE zak_tvar LIKE 'dvanásťnásobn%'
+cis_tr_1>kmen((tr , 1),nil,cis,cat(zak,'','',tri,'3')).:184002:SELECT sd.*,sd_cislovka.* FROM sd_cislovka JOIN sd ON sd.id=sd_cislovka.id WHERE zak_tvar LIKE 'tr%'
+cis_tret_1>kmen((tret , 1),(tr , 1),cis,cat(rad,'','','cudzí','3')).:183891:SELECT sd.*,sd_cislovka.* FROM sd_cislovka JOIN sd ON sd.id=sd_cislovka.id WHERE zak_tvar LIKE 'tret%'
 cis_tretin_1>kmen((tretin , 1),(tr , 1),cis,cat(zlomk,'',ina,'žena','3')).:498829:
 cis_trikrát_1>kmen(('trikrát' , 1),(tr , 1),cis,cat('nás','','krát',nil,'3')).:184250:
-cis_trojit_1>kmen((trojit , 1),(tr , 1),cis,cat('nás','',it,'pekný','3')).:None:SELECT sd.*,sd_cislovka.* FROM sd_cislovka JOIN sd ON sd.id=sd_cislovka.id WHERE zak_tvar LIKE 'trojit%'
+cis_trojit_1>kmen((trojit , 1),(tr , 1),cis,cat('nás','',it,'pekný','3')).:184589:SELECT sd.*,sd_cislovka.* FROM sd_cislovka JOIN sd ON sd.id=sd_cislovka.id WHERE zak_tvar LIKE 'trojit%'
 cis_trojo_1>kmen((trojo , 1),(tr , 1),cis,cat(skup,'','',nil,'3')).:None:Chýba v db

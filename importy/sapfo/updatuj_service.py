@@ -57,7 +57,8 @@ def updatuj_pod_m(slovo_id, rodic_id, s_priznak, prefix, sufix, vzor, poc):
         pm.pocitatelnost = poc
 
         if rodic_id and rodic_id > 0:
-            zaloz_hierarchiu_sd(slovo_id, rodic_id)
+            if slovo_id != rodic_id:
+                zaloz_hierarchiu_sd(slovo_id, rodic_id)
 
         db.session.add(pm)
         db.session.commit()
@@ -91,7 +92,8 @@ def updatuj_prid_m(slovo_id, rodic_id, s_priznak_pod_m, prefix, sufix, vzor, s_p
         pm.vzor2 = vzor2
 
         if rodic_id and rodic_id > 0:
-            zaloz_hierarchiu_sd(slovo_id, rodic_id)
+            if slovo_id != rodic_id:
+                zaloz_hierarchiu_sd(slovo_id, rodic_id)
 
         db.session.add(pm)
         db.session.commit()
@@ -138,7 +140,8 @@ def updatuj_prislovku(slovo_id, rodic_id, sem_pad, vzor, prefix, sufix, koncovka
         adv.koncovka = koncovka
 
         if rodic_id and rodic_id > 0:
-            zaloz_hierarchiu_sd(slovo_id, rodic_id)
+            if slovo_id != rodic_id:
+                zaloz_hierarchiu_sd(slovo_id, rodic_id)
 
         db.session.add(adv)
         db.session.commit()
@@ -162,7 +165,8 @@ def updatuj_cislovku(slovo_id, rodic_id, sem_priznak, vzor, prefix, sufix, hodno
         cis.hodnota = hodnota
 
         if rodic_id and rodic_id > 0:
-            zaloz_hierarchiu_sd(slovo_id, rodic_id)
+            if slovo_id != rodic_id:
+                zaloz_hierarchiu_sd(slovo_id, rodic_id)
 
         db.session.add(cis)
         db.session.commit()
