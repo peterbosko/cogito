@@ -133,7 +133,8 @@ def daj_komplet():
     sid = request.args.get("sid", "")
     vyraz = request.args.get("vyraz", "")
 
-    return jsonpickle.encode(vrat_slovo_komplet(sid, vyraz))\
+    return jsonpickle.encode(vrat_slovo_komplet(sid, vyraz))
+
 
 @kontext_blueprint.route("/daj_vsetky_slova/", methods=["GET"])
 def daj_vsetky_slova():
@@ -144,7 +145,7 @@ def daj_vsetky_slova():
 
     response.data = vrat_vsetky_slova(vyraz)
 
-    return jsonpickle.encode(response)\
+    return jsonpickle.encode(response)
 
 
 @kontext_blueprint.route("/daj_tvary_slova/", methods=["GET"])

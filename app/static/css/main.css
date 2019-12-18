@@ -324,7 +324,11 @@ body {
 }
 
 .marginbottom20{
-    margin-bottom:10px;
+    margin-bottom:20px;
+}
+
+.marginbottomDetailSD{
+    margin-bottom:40px;
 }
 
 .fullscreen .modal-dialog {
@@ -534,4 +538,8 @@ span.s {
 	margin-left: auto;
 	margin-right: auto;
 	width: 100px;
+}
+
+.odsadeny-container-pod-tabom{
+    margin-top:60px;
 }

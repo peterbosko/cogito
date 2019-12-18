@@ -1,0 +1,445 @@
+<div class="row">
+    <div class="col-sm-12">
+        <form id="SDSlovaForm" data-fv-framework="bootstrap" method="post">
+                <div class="row VZOR marginbottomDetailSD nodisplay">
+                    <label class="col-sm-2" for="prepend">
+                         Vzor:
+                    </label>
+                    <div class="col-sm-2">
+                        <select id="ddlVzor" class="form-control">
+                        </select>
+                    </div>
+                    <label class="col-sm-1" for="prepend">
+                         Prefix:
+                    </label>
+                    <div class="col-sm-2">
+                        <select id="ddlPrefix" class="form-control">
+                        </select>
+                    </div>
+                    <label class="col-sm-2" for="prepend">
+                         Sufix:
+                    </label>
+                    <div class="col-sm-3">
+                        <select id="ddlSufix" class="form-control" name="ddlSufix">
+                        </select>
+                    </div>
+                </div>
+                <fieldset class="border p-2">
+                    <legend>Údaje slov</legend>
+                <div id="divSTabulkou" class="col-xs-12">
+                    <table class="tabulka_slov" style="margin: auto;width: 50% !important; margin-bottom:10px">
+                        <thead>
+                            <th>Id</th>
+                            <th>Tvar</th>
+                            <th class="c_rod">Rod</th>
+                            <th class="c_podrod">Podrod</th>
+                            <th class="c_pad">Pád</th>
+                            <th class="c_cislo">Číslo</th>
+                            <th class="c_osoba">Osoba</th>
+                            <th class="c_cas">Čas</th>
+                            <th class="c_sposob">Spôsob</th>
+                            <th class="c_stupen">Stupeň</th>
+                            <th class="c_pricastie">Príčastie</th>
+                            <th>Anotácia</th>
+                            <th></th>
+                        </thead>
+                        <tbody id="telo_tabulky">
+                        <tr id="zaznam_0" class="nodisplay">
+                            <td>
+                                <span id="id_0"></span>
+                            </td>
+                            <td>
+                                <div class="row">
+                                <div class="col-sm-12">
+                                    <input class="form-control" type="text" id="tvar_0" name="tvar_0" value=""/>
+                                </div>
+                                </div>
+                            </td>
+                            <td class="c_rod">
+                                <select class="form-control" id="rod_0" name="rod_0">
+                                    <option value="">Žiaden</option>
+                                    <option value="M">M</option>
+                                    <option value="Z">Z</option>
+                                    <option value="S">S</option>
+                                </select>
+                            </td>
+                            <td class="c_podrod">
+                                <select id="podrod_0" class="form-control">
+                                    <option value="">Žiaden</option>
+                                    <option value="Z">Z</option>
+                                    <option value="N">N</option>
+                                </select>
+                            <td class="c_pad">
+                                <select id="pad_0" class="form-control">
+                                    <option value="">Žiaden</option>
+                                    <option value="Nom">Nom</option>
+                                    <option value="Gen">Gen</option>
+                                    <option value="Dat">Dat</option>
+                                    <option value="Aku">Aku</option>
+                                    <option value="Vok">Vok</option>
+                                    <option value="Lok">Lok</option>
+                                    <option value="Ins">Ins</option>
+                                </select>
+                            </td>
+                            <td class="c_cislo">
+                                <select id="cislo_0" class="form-control">
+                                    <option value="">Žiadne</option>
+                                    <option value="J">J</option>
+                                    <option value="M">M</option>
+                                    <option value="P">P</option>
+                                </select>
+                            </td>
+                            <td class="c_osoba">
+                                <select id="osoba_0" class="form-control">
+                                    <option value="">Žiadna</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                            </td>
+                            <td class="c_cas">
+                                <select id="cas_0" class="form-control">
+                                    <option value="">Žiaden</option>
+                                    <option value="P">P</option>
+                                    <option value="M">M</option>
+                                    <option value="B">B</option>
+                                </select>
+                            </td>
+                            <td class="c_sposob">
+                                <select id="sposob_0" class="form-control">
+                                    <option value="">Žiaden</option>
+                                    <option value="O">O</option>
+                                    <option value="R">R</option>
+                                </select>
+                            </td>
+                            <td class="c_stupen">
+                                <select id="stupen_0" class="form-control">
+                                    <option value="">Žiaden</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                            </td>
+                            <td class="c_pricastie">
+                                <select id="pricastie_0" class="form-control">
+                                    <option value="">Žiaden</option>
+                                    <option value="T">T</option>
+                                    <option value="C">C</option>
+                                    <option value="M">M</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input class="form-control anotacia" type="text" id="anotacia_0" name="anotacia_0" value=""/>
+                            </td>
+                            <td>
+                                <button id="btnZmazSlovo_0" type='button' class="btn btn-primary" title="Odstrániť slovo" onclick="ZmazSlovo(0);"><i class="fa fa-minus"></i></button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-xs-12">
+                        <button id="btnPridajSlovo" style="margin:0 auto;display:block;" type='button' class="btn btn-primary" onclick="PridajNoveSlovo();">Pridaj slovo</button>
+                </div>
+                </fieldset>
+        </form>
+    </div>
+</div>
+<script>
+
+function setupSlova(a){
+    for (var i=0;i<a.length;i++){
+        PridajNoveSlovo();
+        var j=i+1;
+        $('#id_'+j).html(a[i].id);
+        $('#tvar_'+j).val(a[i].tvar);
+        $('#rod_'+j).val(a[i].rod);
+        $('#podrod_'+j).val(a[i].podrod);
+        $('#pad_'+j).val(a[i].pad);
+        $('#cislo_'+j).val(a[i].cislo);
+        $('#osoba_'+j).val(a[i].osoba);
+        $('#cas_'+j).val(a[i].cas);
+        $('#sposob_'+j).val(a[i].sposob);
+        $('#stupen_'+j).val(a[i].stupen);
+        $('#pricastie_'+j).val(a[i].pricastie);
+        $('#anotacia_'+j).val(a[i].anotacia);
+    }
+}
+
+function NacitajSD(id){
+        AjaxMethods.getDataFromGetRequest('{{url_for("sd.vrat_cely_slovny_druh")}}', "", "?sd_id="+id, function(r){
+            if (r.status==responseOK){//OK vetva
+                $('#txtFormZakTvar').val(r.data.zak_tvar);
+                $('#taFormPopis').val(r.data.popis);
+
+                if (r.data.typ=="POD_M"){
+                    $('#txtPOD_M_ROD').val(r.data.rod);
+                    $('#txtPOD_M_PODROD').val(r.data.podrod);
+                    NastavSloveso('#ddlPOD_M_Sloveso',r.data.sloveso_id,r.data.sloveso_tvar);
+                }
+                else if (r.data.typ=="PRID_M"){
+                    $('#cbPRID_M_je_priv').prop('checked',r.data.je_privlastnovacie=="A");
+                    NastavSloveso('#ddlPRID_M_Sloveso',r.data.sloveso_id,r.data.sloveso_tvar);
+                }
+                else if (r.data.typ=="ZAMENO"){
+                    $('#ddlZAMENO_ROD').val(r.data.rod);
+                    $('#ddlZAMENO_PODROD').val(r.data.podrod);
+                    $('#ddlZAMENO_CISLO').val(r.data.cislo);
+                }
+                else if (r.data.typ=="SLOVESO"){
+                    $('#ddlSLOVESO_Zvratnost').val(r.data.zvratnost);
+                    $('#cbSLOVESO_je_negacia').prop('checked',r.data.je_negacia=="A");
+                    NastavSloveso('#ddlSLOVESO_Sloveso',r.data.sloveso_id,r.data.sloveso_tvar);
+                }
+                else if (r.data.typ=="PREDLOZKA"){
+                    var pady = r.data.pady;
+                    $("#ddlPREDLOZKA_Pady").val(pady.split(';'));
+                }
+                else if (r.data.typ=="CISLOVKA"){
+                    $('#ddlCISLOVKA_ROD').val(r.data.rod);
+                    $('#ddlCISLOVKA_PODROD').val(r.data.podrod);
+                    $('#ddlFormCISLOVKA_Cislo').val(r.data.cislo);
+                    $('#txtFormCISLOVKA_HODNOTA').val(r.data.hodnota);
+                }
+
+                setupSlova(r.data.slova);
+
+                setupDruh(r.data.typ);
+            } else{
+                   swal({ buttons: {},
+                       title  :  "Chyba",
+                       text   :  r.message_text,
+                       icon   :  "error"})
+            }
+        });
+
+}
+
+var pocet_slov = 0;
+
+function PridajNoveSlovo(){
+   pocet_slov++;
+   var htmlRiadku = $('#zaznam_0').html();
+   htmlRiadku = '<tr id="zaznam_'+pocet_slov+'">'+htmlRiadku.replace(/0/g, pocet_slov)+'</tr>';
+   $('#telo_tabulky').append(htmlRiadku);
+
+   var mandatoryValidator = {
+            row: '.col-sm-12',
+            validators: {
+                notEmpty: {
+                    message: 'Tvar slova je povinný'
+                }
+            }
+        };
+
+   $('#SDSlovaForm').formValidation('addField', 'tvar_' + pocet_slov, mandatoryValidator);
+}
+
+function ZmazSlovo(id){
+    $('#zaznam_'+id).remove();
+}
+
+function VratZoznamSlov(){
+    var zoznam = [];
+    var prvy = true;
+    $("tr[id^='zaznam_']").each(function () {
+        if (!prvy){
+            var j=$(this).attr('id').replace('zaznam_','');
+            var o = {};
+            o.id = $('#id_'+j).html()||0;
+            o.tvar = $('#tvar_'+j).val();
+            o.rod = $('#rod_'+j).val();
+            o.podrod = $('#podrod_'+j).val();
+            o.pad = $('#pad_'+j).val();
+            o.cislo = $('#cislo_'+j).val();
+            o.osoba = $('#osoba_'+j).val();
+            o.cas = $('#cas_'+j).val();
+            o.sposob = $('#sposob_'+j).val();
+            o.stupen = $('#stupen_'+j).val();
+            o.pricastie = $('#pricastie_'+j).val();
+            o.anotacia = $('#anotacia_'+j).val();
+            o.zvratnost = $('#ddlSLOVESO_Zvratnost').val();
+
+            zoznam.push(o);
+        }
+        prvy=false;
+    });
+
+    return zoznam;
+}
+
+function ZmenSlovaSD(closeScreen){
+    $('#SDSlovaForm').data('formValidation').validate();
+    var formIsVald = $('#SDSlovaForm').data('formValidation').isValid();
+
+    if (formIsVald) {
+        var data={};
+
+        data.id = $('#txtFormSlovoId').val();
+        data.zak_tvar = $('#txtFormZakTvar').val();
+        data.popis = $('#taFormPopis').val();
+        var typ = '{{request.args.get("slovnyDruh")}}';
+        data.typ = typ;
+        if (typ == "POD_M"){
+            data.rod = $('#txtPOD_M_ROD').val();
+            data.podrod = $('#txtPOD_M_PODROD').val();
+            data.sloveso_id = $('#ddlPOD_M_Sloveso').val();
+        }
+        else if (typ == "PRID_M"){
+            data.sloveso_id = $('#ddlPRID_M_Sloveso').val();
+
+            if ($('#cbPRID_M_je_priv').prop('checked'))
+                data.je_privlastnovacie = 'A';
+            else
+                data.je_privlastnovacie = 'N';
+        }
+        else if (typ == "ZAMENO"){
+            data.rod = $('#ddlZAMENO_ROD').val();
+            data.podrod = $('#ddlZAMENO_PODROD').val();
+            data.cislo = $('#ddlZAMENO_CISLO').val();
+        }
+        else if (typ == "SLOVESO"){
+            data.zvratnost = $('#ddlSLOVESO_Zvratnost').val();
+            if ($('#cbSLOVESO_je_negacia').prop('checked'))
+                data.je_negacia = 'A';
+            else
+                data.je_negacia = 'N';
+            data.sloveso_id = $('#ddlSLOVESO_Sloveso').val();
+        }
+        else if (typ == "PREDLOZKA"){
+            data.pady = $('#ddlPREDLOZKA_Pady').val().join(';');
+        }
+        else if (typ=="CISLOVKA"){
+            data.rod=$('#ddlCISLOVKA_ROD').val();
+            data.podrod=$('#ddlCISLOVKA_PODROD').val();
+            data.cislo=$('#ddlFormCISLOVKA_Cislo').val();
+            data.hodnota=$('#txtFormCISLOVKA_HODNOTA').val();
+        }
+
+        data.slova = VratZoznamSlov();
+
+        AjaxMethods.getDataFromPostRequest('{{url_for("sd.zmenit_slova_sd")}}', "", data, function(r){
+            if (r.status==responseOK){//OK vetva
+                swal({ buttons: {},
+                   title  :  "Úspech",
+                   text   :  "Slovný druh bol úspešne pridaný/zmenený",
+                   icon   :  "success"}).then(function(result) {
+                                                var $modal =  $('#txtFormZakTvar').parents('.modal');
+                                                if (closeScreen) $modal.modal('hide');
+                                                if (typeof ZnovuNacitajZaznamy === "function") {
+                                                    ZnovuNacitajZaznamy();
+                                                }
+                                              });
+            }
+            else {
+                   swal({ buttons: {},
+                       title  :  "Chyba",
+                       text   :  r.message_text,
+                       icon   :  "error"})
+            }
+        });
+    }
+    else{
+        swal({ buttons: {},
+                   title  :  "Chyba",
+                   text   :  "Chyba validácie. Skontrolujte červené položky",
+                   icon   :  "error"});
+    }
+}
+
+$(document).ready(function() {
+    $('#SDSlovaForm').formValidation();
+
+    NacitajSD(getSD_ID());
+
+    pridavanyDruh = '{{request.args.get("slovnyDruh")}}';
+    setupSlovaDruh(pridavanyDruh);
+    PridajNoveSlovo();
+
+    bindSlovesoAutocomplete('#ddlPOD_M_Sloveso');
+    bindSlovesoAutocomplete('#ddlSLOVESO_Sloveso');
+    bindSlovesoAutocomplete('#ddlPRID_M_Sloveso');
+
+    $('#ddlPREDLOZKA_Pady').select2();
+
+    if (pridavanyDruh == "SLOVESO" ||
+        pridavanyDruh == "POD_M" ||
+        pridavanyDruh == "PRID_M" ||
+        pridavanyDruh == "PRISLOVKA" ||
+        pridavanyDruh == "CISLOVKA"){
+        $(".VZOR").removeClass('nodisplay');
+    }
+});
+
+
+function setupSlovaDruh(pridavanyDruh){
+    typ = pridavanyDruh;
+    if (pridavanyDruh == "POD_M"){
+        $(".c_rod").addClass('nodisplay');
+        $(".c_podrod").addClass('nodisplay');
+        $(".c_osoba").addClass('nodisplay');
+        $(".c_cas").addClass('nodisplay');
+        $(".c_stupen").addClass('nodisplay');
+        $(".c_sposob").addClass('nodisplay');
+        $(".c_pricastie").addClass('nodisplay');
+        $(".POD_M").removeClass('nodisplay');
+    }
+    else if (pridavanyDruh == "SLOVESO"){
+        $(".SLOVESO").removeClass('nodisplay');
+        $(".c_pricastie").addClass('nodisplay');
+        $(".c_pad").addClass('nodisplay');
+    }
+    else if (pridavanyDruh == "ZAMENO"){
+        $(".ZAMENO").removeClass('nodisplay');
+        $(".c_osoba").addClass('nodisplay');
+        $(".c_cas").addClass('nodisplay');
+        $(".c_stupen").addClass('nodisplay');
+        $(".c_sposob").addClass('nodisplay');
+        $(".c_pricastie").addClass('nodisplay');
+    }
+    else if (pridavanyDruh == "CISLOVKA"){
+        $(".CISLOVKA").removeClass('nodisplay');
+        $(".c_osoba").addClass('nodisplay');
+        $(".c_cas").addClass('nodisplay');
+        $(".c_stupen").addClass('nodisplay');
+        $(".c_sposob").addClass('nodisplay');
+        $(".c_pricastie").addClass('nodisplay');
+    }
+    else if (pridavanyDruh == "PRID_M"){
+        $(".PRID_M").removeClass('nodisplay');
+        $(".c_osoba").addClass('nodisplay');
+        $(".c_cas").addClass('nodisplay');
+        $(".c_sposob").addClass('nodisplay');
+    }
+    else if (pridavanyDruh == "PREDLOZKA"){
+        $(".PREDLOZKA").removeClass('nodisplay');
+        $(".c_cislo").addClass('nodisplay');
+        $(".c_rod").addClass('nodisplay');
+        $(".c_podrod").addClass('nodisplay');
+        $(".c_osoba").addClass('nodisplay');
+        $(".c_cas").addClass('nodisplay');
+        $(".c_stupen").addClass('nodisplay');
+        $(".c_sposob").addClass('nodisplay');
+        $(".c_pricastie").addClass('nodisplay');
+        $(".c_pad").addClass('nodisplay');
+    }
+    else if (pridavanyDruh == "OSTATNE"||
+            pridavanyDruh == "CASTICA"||
+            pridavanyDruh == "SPOJKA"||
+            pridavanyDruh == "PRISLOVKA"||
+            pridavanyDruh == "CITOSLOVCE"){
+
+        $(".c_cislo").addClass('nodisplay');
+        $(".c_rod").addClass('nodisplay');
+        $(".c_podrod").addClass('nodisplay');
+        $(".c_osoba").addClass('nodisplay');
+        $(".c_cas").addClass('nodisplay');
+        if (pridavanyDruh != "PRISLOVKA")
+            $(".c_stupen").addClass('nodisplay');
+        $(".c_sposob").addClass('nodisplay');
+        $(".c_pad").addClass('nodisplay');
+        $(".c_pricastie").addClass('nodisplay');
+    }
+}
+
+</script>

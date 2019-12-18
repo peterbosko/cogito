@@ -1,0 +1,104 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2">
+            <div class="nav flex-column nav-pills" id="nav-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active zakladne-tab" id="zakladne-tab" data-toggle="pill" href="#zakladne" role="tab" aria-controls="v-pills-home" aria-selected="true">Základné údaje</a>
+                <a class="nav-link rodicia-tab" id="rodicia-tab" data-toggle="pill" href="#rodicia" role="tab" aria-controls="v-pills-profile" aria-selected="false">Rodičia slova</a>
+                <a class="nav-link slova-tab" id="slova-tab" data-toggle="pill" href="#slova" role="tab" aria-controls="v-pills-messages" aria-selected="false">Slová druhu</a>
+            </div>
+        </div>
+        <div class="col-10">
+            <div class="tab-content" id="nav-tabContent">
+                  <div class="tab-pane fade show active" id="zakladne" role="tabpanel" aria-labelledby="zakladne-tab" data-target="{{url_for('sd.sd_zakladne_info')}}?slovnyDruh={{request.args.get('slovnyDruh')}}&sd_id=">
+                  </div>
+                  <div class="tab-pane fade" id="rodicia" role="tabpanel" aria-labelledby="rodicia-tab" data-target="{{url_for('sd.sd_rodicia')}}?slovnyDruh={{request.args.get('slovnyDruh')}}&sd_id=">
+                  </div>
+                  <div class="tab-pane fade" id="slova" role="tabpanel" aria-labelledby="slova-tab" data-target="{{url_for('sd.sd_slova_zmen')}}?slovnyDruh={{request.args.get('slovnyDruh')}}&sd_id=">
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" id="hdnSD_ID" value="0"/>
+<script>
+
+    var loadnuteTaby = {};
+
+    function setSD_ID(id){
+        $('#hdn_SD_ID').val(id);
+    }
+
+    function getSD_ID(){
+        return $('#hdn_SD_ID').val();
+    }
+
+    var currentTab = {};
+
+    function RefreshContent(e, data) {
+        reloadActiveTab();
+    }
+
+    function reloadActiveTab() {
+        var selected = $('#nav-tab .active a');
+        selected.trigger("click");
+    }
+
+    function activateTab(cssClass) {
+        var tabObj = $('#nav-tab .' + cssClass);
+        tabObj.trigger("click");
+    }
+
+    function show_tab(tab) {
+        var selected = $('#nav-tab .active a').attr('href');
+
+        if (loadnuteTaby[$(tab).attr('id')]){
+
+        }
+        else{
+            loadnuteTaby[$(tab).attr('id')] = true;
+            tab.html('<i class="fa fa-spinner fa-spin fa-lg"></i>');
+            tab.load(tab.attr('data-target')+getSD_ID());
+        }
+
+        currentTab = tab;
+    }
+
+    function load_default_tab() {
+        var tab = $('#nav-tab .active');
+        tab.tab('show');
+        show_tab($('#' + tab.attr('href').substr(1)));
+    }
+
+    function init_tabs() {
+        load_default_tab();
+    }
+
+     function init_click() {
+         $('#nav-tab a').click(function (e) {
+             e.preventDefault();
+             var id = $(this).attr('href').substr(1);
+             var tabObj = $(this);
+             tabObj.tab('show');
+             var tab = $('#' + id);
+             show_tab(tab);
+            });
+     }
+
+
+$(document).ready(function() {
+    init_click();
+    init_tabs();
+
+    var $modal =  $('#nav-tab').parents('.modal');
+    $modal.find('.btnCancel').removeClass('nodisplay');
+    var $btnSave = $modal.find('.btnSave').removeClass('nodisplay').html("<i class='fa fa-save'></i>&nbsp;Uložiť zmeny");
+    $btnSave.unbind("click");
+    $btnSave.click(function() {
+        UlozSD(true);
+    });
+
+});
+
+
+</script>

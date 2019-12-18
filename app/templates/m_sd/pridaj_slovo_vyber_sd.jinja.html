@@ -53,31 +53,31 @@ $(document).ready(function() {
             $('#ddlVyberDruh').val()=="CITOSLOVCE"){
 
             $modal.modal('hide');
-            loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', 'Pridať slovo iného druhu','{{url_for("sd.zmenit_sd")}}?pridavanyDruh='+$('#ddlVyberDruh').val()+slovoParam);
+            loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', 'Pridať slovo iného druhu','{{url_for("sd.zmenit_sd")}}?slovnyDruh='+$('#ddlVyberDruh').val()+slovoParam);
         }
         else if ($('#ddlVyberDruh').val()=="POD_M"){
             $modal.modal('hide');
-            loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', 'Pridať podstatné meno','{{url_for("sd.zmenit_sd")}}?pridavanyDruh='+$('#ddlVyberDruh').val()+slovoParam);
+            loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', 'Pridať podstatné meno','{{url_for("sd.zmenit_sd")}}?slovnyDruh='+$('#ddlVyberDruh').val()+slovoParam);
         }
         else if ($('#ddlVyberDruh').val()=="SLOVESO"){
             $modal.modal('hide');
-            loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', 'Pridať sloveso','{{url_for("sd.zmenit_sd")}}?pridavanyDruh='+$('#ddlVyberDruh').val()+slovoParam);
+            loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', 'Pridať sloveso','{{url_for("sd.zmenit_sd")}}?slovnyDruh='+$('#ddlVyberDruh').val()+slovoParam);
         }
         else if ($('#ddlVyberDruh').val()=="ZAMENO"){
             $modal.modal('hide');
-            loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', 'Pridať zámeno','{{url_for("sd.zmenit_sd")}}?pridavanyDruh='+$('#ddlVyberDruh').val()+slovoParam);
+            loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', 'Pridať zámeno','{{url_for("sd.zmenit_sd")}}?slovnyDruh='+$('#ddlVyberDruh').val()+slovoParam);
         }
         else if ($('#ddlVyberDruh').val()=="CISLOVKA"){
             $modal.modal('hide');
-            loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', 'Pridať číslovku','{{url_for("sd.zmenit_sd")}}?pridavanyDruh='+$('#ddlVyberDruh').val()+slovoParam);
+            loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', 'Pridať číslovku','{{url_for("sd.zmenit_sd")}}?slovnyDruh='+$('#ddlVyberDruh').val()+slovoParam);
         }
         else if ($('#ddlVyberDruh').val()=="PRID_M"){
             $modal.modal('hide');
-            loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', 'Pridať prídavné meno','{{url_for("sd.zmenit_sd")}}?pridavanyDruh='+$('#ddlVyberDruh').val()+slovoParam);
+            loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', 'Pridať prídavné meno','{{url_for("sd.zmenit_sd")}}?slovnyDruh='+$('#ddlVyberDruh').val()+slovoParam);
         }
         else if ($('#ddlVyberDruh').val()=="PREDLOZKA"){
             $modal.modal('hide');
-            loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', 'Pridať predložku','{{url_for("sd.zmenit_sd")}}?pridavanyDruh='+$('#ddlVyberDruh').val()+slovoParam);
+            loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', 'Pridať predložku','{{url_for("sd.zmenit_sd")}}?slovnyDruh='+$('#ddlVyberDruh').val()+slovoParam);
         }
     });
 

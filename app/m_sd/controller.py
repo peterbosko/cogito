@@ -660,10 +660,61 @@ def zmenit_sd_post():
     return json.dumps(response.__dict__)
 
 
+@sd_blueprint.route("/zmenit_slova_sd/", methods=['POST'])
+def zmenit_slova_sd():
+    loguj(request)
+    response = CommonResponse()
+
+    if som_admin_slov():
+        js = request.json
+        js["py/object"] = ".".join([SDExport.__module__, SDExport.__name__])
+        strjson = str(js).replace("'", '"')
+        export = jsonpickle.decode(strjson)
+
+    else:
+        response.status = ResponseStatus.ERROR
+        response.error_text = "Nedostatočné práva pre operáciu"
+
+    return json.dumps(response.__dict__)
+
+
 @sd_blueprint.route("/zmenit_sd/", methods=["GET"])
 def zmenit_sd():
     loguj(request)
-    return render_template("m_sd/zmenit_sd.jinja.html")
+    return render_template("m_sd/zmenit_sd2.jinja.html")
+
+
+@sd_blueprint.route("/sd_zakladne_info/", methods=["GET"])
+def sd_zakladne_info():
+    loguj(request)
+    kts = Kontext.query.order_by(Kontext.nazov)
+
+    sem_priz_pod_m = Semantika.query.filter(Semantika.typ == "POD_M").all()
+
+    sem_priz_prid_m = Semantika.query.filter(Semantika.typ == "PRID_M").all()
+
+    sem_priz_cislovka = Semantika.query.filter(Semantika.typ == "CISLOVKA").all()
+
+    return render_template("m_sd/sd_zakladne_info.jinja.html", sem_priz_pod_m=sem_priz_pod_m,
+                           sem_priz_prid_m=sem_priz_prid_m, sem_priz_cislovka=sem_priz_cislovka)
+
+
+@sd_blueprint.route("/sd_slova_zmen/", methods=["GET"])
+def sd_slova_zmen():
+    loguj(request)
+    return render_template("m_sd/sd_slova_zmen.jinja.html")
+
+
+@sd_blueprint.route("/sd_rodicia/", methods=["GET"])
+def sd_rodicia():
+    loguj(request)
+    return render_template("m_sd/sd_rodicia.jinja.html")
+
+
+@sd_blueprint.route("/sd_slova/", methods=["GET"])
+def sd_slova():
+    loguj(request)
+    return render_template("m_sd/sd_slova.jinja.html")
 
 
 @sd_blueprint.route("/daj_autocomplete_slovies/", methods=["GET"])
