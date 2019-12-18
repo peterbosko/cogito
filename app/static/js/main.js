@@ -95,23 +95,28 @@ function acceptKontext(that){
 	$('#kontextModal').modal('toggle');
 }
 
-function prev_word(that){
+function prev_valid_word(that){
 	var main = $("iframe.cke_wysiwyg_frame").contents();
 	var prev = main.find('.active').prevAll('.ns').eq(0);
 	var parent = main.find('.active').parent();
 	if(prev.length) {
 		prev.dblclick();
 	} else {
-		parent.prev().find('span.ns').last().dblclick();
+		var prevp = parent.prevAll('p');
+		for (i = 0; i < prevp.length; i++) {      
+			 if (prevp.eq(i).find('span.ns').last().length) {
+				  prevp.eq(i).find('span.ns').last().dblclick();
+				  break;
+			 }
+		}
 	}
 	return false;
 }
 
-function next_word(that){
+function next_valid_word(that){
 	var main = $("iframe.cke_wysiwyg_frame").contents();
 	var next = main.find('.active').nextAll('.ns').eq(0);
 	var parent = main.find('.active').parent();
-	var settings_row = $('body', parent.document).find('#settings-rows-buttons');
 	if(next.length) {
 		next.dblclick();
 	} else {
@@ -119,6 +124,42 @@ function next_word(that){
 		for (i = 0; i < nextp.length; i++) {      
 			 if (nextp.eq(i).find('span.ns').first().length) {
 				  nextp.eq(i).find('span.ns').first().dblclick();
+				  break;
+			 }
+		}
+	}
+	return false;
+}
+
+function prev_word(that){
+	var main = $("iframe.cke_wysiwyg_frame").contents();
+	var prev = main.find('.active').prevAll('span').eq(0);
+	var parent = main.find('.active').parent();
+	if(prev.length) {
+		prev.dblclick();
+	} else {
+		var prevp = parent.prevAll('p');
+		for (i = 0; i < prevp.length; i++) {      
+			 if (prevp.eq(i).find('span').last().length) {
+				  prevp.eq(i).find('span').last().dblclick();
+				  break;
+			 }
+		}
+	}
+	return false;
+}
+
+function next_word(that){
+	var main = $("iframe.cke_wysiwyg_frame").contents();
+	var next = main.find('.active').nextAll('span').eq(0);
+	var parent = main.find('.active').parent();
+	if(next.length) {
+		next.dblclick();
+	} else {
+		var nextp = parent.nextAll('p');
+		for (i = 0; i < nextp.length; i++) {      
+			 if (nextp.eq(i).find('span').first().length) {
+				  nextp.eq(i).find('span').first().dblclick();
 				  break;
 			 }
 		}
@@ -144,6 +185,24 @@ function accept_word(that){
 	}
 	setProgressBar();
 	return false;
+}
+
+function add_word(that, is_new){
+	var main = $("iframe.cke_wysiwyg_frame").contents();
+	var slovo = '';
+	var sdid = '';
+	var sd = '';
+	var param = '';
+	
+	if(is_new == true) {
+		slovo = main.find('.active').html();
+		param = '?slovo='+slovo;
+	} else {
+		sdid = main.find('.active').attr('sdid');
+		sd = main.find('.active').attr('sd');
+		param = '?sd_id='+sdid+'&sd='+sd;
+	}
+	loadTemplateIntoModal('#defaultModal', 'Pridanie slova','/pridaj_slovo_vyber_sd/'+param);
 }
 
 function setProgressBar(){
@@ -296,6 +355,8 @@ function load_slovo(that){
 				}
 				settings_row.find('.setting-odvodene').html('Odvodené od slov: <b>' + from_words + '</b>');
 			}
+			$(that).attr('sdid', obj.data.sd_id);
+			$(that).attr('sd', obj.data.slovny_druh);
 		}
 	});
 	
@@ -304,9 +365,10 @@ function load_slovo(that){
 		save_name = 'Upraviť slovo <i class="fa fa-edit"></i>';
 	}
 	if(class_type != 'n') {
-		settings_row_buttons.find('.setting-accept_word').html('<a href="#" onclick="accept_word(this);" class="btn" style="float: right;">'+save_name+'</a>');
+		settings_row_buttons.find('.setting-accept_word').html('<a href="#" onclick="accept_word(this);" class="btn" style="position: absolute; right: 20px;">'+save_name+'</a>');
+		settings_row_buttons.find('.setting-accept_word').append('<a href="#" onclick="add_word(this, false);" class="btn" style="position: absolute; left: 20px;"><i class="fa fa-plus"></i> Pridať nový význam slova</a>');
 	} else {
-		settings_row_buttons.find('.setting-accept_word').html('');
+		settings_row_buttons.find('.setting-accept_word').html('<a href="#" onclick="add_word(this, true);" class="btn" style="position: absolute; left: 20px;"><i class="fa fa-plus"></i> Pridať nové slovo</a>');
 	}
 	//$('select').niceSelect();
 

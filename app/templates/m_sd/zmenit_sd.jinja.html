@@ -13,7 +13,7 @@
         <div class="col-sm-12">
             <form id="SDForm" data-fv-framework="bootstrap" method="post">
                 <fieldset class="border p-2">
-                    <legend>Údaje slovného druhu</legend>
+                    <legend>Údaje slovného druhu <span id="SlovoTvar"></span></legend>
                     <div class="row marginbottom10">
                         <input type="hidden" id="txtFormSlovoId" value="0"/>
                         <label class="col-sm-2" for="prepend">
@@ -544,13 +544,36 @@ $(document).ready(function() {
         setupDruh(pridavanyDruh);
         PridajNoveSlovo();
     }
-
+	
+	if ('{{request.args.get("slovo")}}'!='None'){
+        $('#SlovoTvar').html('(pre tvar slova: <b>{{request.args.get("slovo")}}</b>)');
+        var slovo = '{{request.args.get("slovo")}}';
+		$('#tvar_1').val(slovo.toLowerCase());
+    }
+	
     bindSlovesoAutocomplete('#ddlPOD_M_Sloveso');
     bindSlovesoAutocomplete('#ddlSLOVESO_Sloveso');
     bindSlovesoAutocomplete('#ddlPRID_M_Sloveso');
 
     $('#ddlPREDLOZKA_Pady').select2();
-
+	
+	if ('{{request.args.get("edit")}}'=='false'){
+        $('tr:not(#zaznam_0) input, tr:not(#zaznam_0) select, tr:not(#zaznam_0) textarea').each(function(){
+			var el = $(this);
+			if(el.attr('type') == 'checkbox') {
+				if(el.is(":checked")) {
+					$(this).parent().html('Áno');
+				} else {
+					$(this).parent().html('Nie');
+				}
+			} else {
+				$(this).parent().html(el.val());
+			}
+			//el.remove();
+		});
+		$('tr:not(#zaznam_0) button[id*="btnZmazSlovo_"]').remove();
+		
+    }
 });
 
 

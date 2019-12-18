@@ -34,7 +34,13 @@
 $(document).ready(function() {
 
     var $modal =  $('#ddlVyberDruh').parents('.modal');
-
+	
+	if ('{{request.args.get("slovo")}}'!='None'){
+ 		slovoParam = '&slovo={{request.args.get("slovo")}}';
+    }
+	if ('{{request.args.get("sd_id")}}'!='None'){
+ 		slovoParam = '&sd_id={{request.args.get("sd_id")}}&edit=false';
+	}
 
     $modal.find('.btnCancel').removeClass('nodisplay');
     var $btnSave = $modal.find('.btnSave').removeClass('nodisplay').html("<i class='fa fa-plus'></i>&nbsp;Pridať");
@@ -47,31 +53,31 @@ $(document).ready(function() {
             $('#ddlVyberDruh').val()=="CITOSLOVCE"){
 
             $modal.modal('hide');
-            loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', 'Pridať slovo iného druhu','{{url_for("sd.zmenit_sd")}}?pridavanyDruh='+$('#ddlVyberDruh').val());
+            loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', 'Pridať slovo iného druhu','{{url_for("sd.zmenit_sd")}}?pridavanyDruh='+$('#ddlVyberDruh').val()+slovoParam);
         }
         else if ($('#ddlVyberDruh').val()=="POD_M"){
             $modal.modal('hide');
-            loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', 'Pridať podstatné meno','{{url_for("sd.zmenit_sd")}}?pridavanyDruh='+$('#ddlVyberDruh').val());
+            loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', 'Pridať podstatné meno','{{url_for("sd.zmenit_sd")}}?pridavanyDruh='+$('#ddlVyberDruh').val()+slovoParam);
         }
         else if ($('#ddlVyberDruh').val()=="SLOVESO"){
             $modal.modal('hide');
-            loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', 'Pridať sloveso','{{url_for("sd.zmenit_sd")}}?pridavanyDruh='+$('#ddlVyberDruh').val());
+            loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', 'Pridať sloveso','{{url_for("sd.zmenit_sd")}}?pridavanyDruh='+$('#ddlVyberDruh').val()+slovoParam);
         }
         else if ($('#ddlVyberDruh').val()=="ZAMENO"){
             $modal.modal('hide');
-            loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', 'Pridať zámeno','{{url_for("sd.zmenit_sd")}}?pridavanyDruh='+$('#ddlVyberDruh').val());
+            loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', 'Pridať zámeno','{{url_for("sd.zmenit_sd")}}?pridavanyDruh='+$('#ddlVyberDruh').val()+slovoParam);
         }
         else if ($('#ddlVyberDruh').val()=="CISLOVKA"){
             $modal.modal('hide');
-            loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', 'Pridať číslovku','{{url_for("sd.zmenit_sd")}}?pridavanyDruh='+$('#ddlVyberDruh').val());
+            loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', 'Pridať číslovku','{{url_for("sd.zmenit_sd")}}?pridavanyDruh='+$('#ddlVyberDruh').val()+slovoParam);
         }
         else if ($('#ddlVyberDruh').val()=="PRID_M"){
             $modal.modal('hide');
-            loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', 'Pridať prídavné meno','{{url_for("sd.zmenit_sd")}}?pridavanyDruh='+$('#ddlVyberDruh').val());
+            loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', 'Pridať prídavné meno','{{url_for("sd.zmenit_sd")}}?pridavanyDruh='+$('#ddlVyberDruh').val()+slovoParam);
         }
         else if ($('#ddlVyberDruh').val()=="PREDLOZKA"){
             $modal.modal('hide');
-            loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', 'Pridať predložku','{{url_for("sd.zmenit_sd")}}?pridavanyDruh='+$('#ddlVyberDruh').val());
+            loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', 'Pridať predložku','{{url_for("sd.zmenit_sd")}}?pridavanyDruh='+$('#ddlVyberDruh').val()+slovoParam);
         }
     });
 
@@ -80,6 +86,11 @@ $(document).ready(function() {
             $('body').addClass('modal-open'); // if open mean length is 1 then add a bootstrap css class to body of the page
         }
     });
+	
+	if ('{{request.args.get("sd")}}'!='None'){
+		$('#ddlVyberDruh').val('{{request.args.get("sd")}}');
+		$btnSave.click();
+	}
 });
 
 </script>

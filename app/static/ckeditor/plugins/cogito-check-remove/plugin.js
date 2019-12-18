@@ -10,7 +10,7 @@
 				data.data = editor.getData();
 				
 				var wrapped = $("<div>" + data.data + "</div>");
-				wrapped.find('span').removeClass('active m n ns no-select').removeAttr('ondblclick onselectstart');
+				wrapped.find('span').removeClass('active m n ns no-select').removeAttr('ondblclick onselectstart sdid sd');
 				output = wrapped.html();
 				
 				editor.setData(output);
