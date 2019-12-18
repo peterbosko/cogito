@@ -193,16 +193,44 @@ function add_word(that, is_new){
 	var sdid = '';
 	var sd = '';
 	var param = '';
+	var modal_title = '';
 	
 	if(is_new == true) {
 		slovo = main.find('.active').html();
 		param = '?slovo='+slovo;
+		loadTemplateIntoModal('#defaultModal', 'Pridanie slova','/pridaj_slovo_vyber_sd/'+param);
 	} else {
 		sdid = main.find('.active').attr('sdid');
 		sd = main.find('.active').attr('sd');
-		param = '?sd_id='+sdid+'&sd='+sd;
+		param = '&sd_id='+sdid;
+		if (sd=="OSTATNE"||
+            sd=="CASTICA"||
+            sd=="SPOJKA"||
+            sd=="PRISLOVKA"||
+            sd=="CITOSLOVCE"){
+            modal_title = 'Pridať slovo iného druhu';
+        }
+        else if (sd=="POD_M"){
+			modal_title = 'Pridať podstatné meno';
+        }
+        else if (sd=="SLOVESO"){
+            modal_title = 'Pridať sloveso';
+        }
+        else if (sd=="ZAMENO"){
+            modal_title = 'Pridať zámeno';
+        }
+        else if (sd=="CISLOVKA"){
+            modal_title = 'Pridať číslovku';
+        }
+        else if (sd=="PRID_M"){
+            modal_title = 'Pridať prídavné meno';
+        }
+        else if (sd=="PREDLOZKA"){
+            modal_title = 'Pridať predložku';
+        }
+		loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', modal_title,'/zmenit_sd/?pridavanyDruh='+sd+param);
 	}
-	loadTemplateIntoModal('#defaultModal', 'Pridanie slova','/pridaj_slovo_vyber_sd/'+param);
+	
 }
 
 function setProgressBar(){
@@ -366,9 +394,9 @@ function load_slovo(that){
 	}
 	if(class_type != 'n') {
 		settings_row_buttons.find('.setting-accept_word').html('<a href="#" onclick="accept_word(this);" class="btn" style="position: absolute; right: 20px;">'+save_name+'</a>');
-		settings_row_buttons.find('.setting-accept_word').append('<a href="#" onclick="add_word(this, false);" class="btn" style="position: absolute; left: 20px;"><i class="fa fa-plus"></i> Pridať nový význam slova</a>');
+		settings_row_buttons.find('.setting-accept_word').append('<a href="#" onclick="add_word(this, false);" class="btn" style="position: absolute; left: 200px;"><i class="fa fa-plus"></i> Pridať nový význam slova <i class="fa fa-info-circle"></i></a>');
 	} else {
-		settings_row_buttons.find('.setting-accept_word').html('<a href="#" onclick="add_word(this, true);" class="btn" style="position: absolute; left: 20px;"><i class="fa fa-plus"></i> Pridať nové slovo</a>');
+		settings_row_buttons.find('.setting-accept_word').html('');
 	}
 	//$('select').niceSelect();
 
