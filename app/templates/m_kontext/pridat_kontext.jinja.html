@@ -147,7 +147,7 @@ $(document).ready(function() {
     ChybaAkNepodporovanyBrowser();
     $('#ContextForm').formValidation();
     
-	var settingsToolbar = $('<span id="settings-rows" class="cke_top settings-disabled" style="height: auto; user-select: none;padding: 6px 8px 20px;">'+
+	var settingsToolbar = $('<span id="settings-rows" class="cke_top settings-disabled" style="height: 80px; user-select: none;padding: 6px 8px 20px;">'+
 						'<span class="cke_voice_label">Settings row</span>'+
 						'<span class="cke_toolbox">'+
 							'<span class="cke_toolbar cke_toolbar_last">'+
@@ -204,6 +204,7 @@ $(document).ready(function() {
 								'<a href="#" class="btn" onclick="prev_valid_word(this);" title="Predchádzajúce nezvalidované slovo"><i class="fa fa-angle-double-left"></i></a>'+
 								'<a href="#" class="btn" onclick="next_valid_word(this);" title="Nasledujúce nezvalidované slovo"><i class="fa fa-angle-double-right"></i></a>'+
 								'<a href="#" class="btn" onclick="next_word(this);" title="Nasledujúce slovo"><i class="fa fa-angle-right"></i></a>'+
+								'<a href="#" onclick="add_word(this, true);" class="btn" style="position: absolute; left: 20px;"><i class="fa fa-plus"></i> Pridať nové slovo</a>'+
 								'<el class="setting-accept_word"></el>'+
 							'</div>'+
 							'<div>'+

@@ -38,9 +38,6 @@ $(document).ready(function() {
 	if ('{{request.args.get("slovo")}}'!='None'){
  		slovoParam = '&slovo={{request.args.get("slovo")}}';
     }
-	if ('{{request.args.get("sd_id")}}'!='None'){
- 		slovoParam = '&sd_id={{request.args.get("sd_id")}}&edit=false';
-	}
 
     $modal.find('.btnCancel').removeClass('nodisplay');
     var $btnSave = $modal.find('.btnSave').removeClass('nodisplay').html("<i class='fa fa-plus'></i>&nbsp;Pridať");
@@ -87,10 +84,6 @@ $(document).ready(function() {
         }
     });
 	
-	if ('{{request.args.get("sd")}}'!='None'){
-		$('#ddlVyberDruh').val('{{request.args.get("sd")}}');
-		$btnSave.click();
-	}
 });
 
 </script>
