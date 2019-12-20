@@ -1,0 +1,256 @@
+alt(otec,vokdel1) :- !.
+alt('vodník','vodník') :- !.
+alt(achilles,achilles) :- !.
+alt(syzifos,syzifos) :- !.
+alt(anaxagoras,anaxagoras) :- !.
+alt('génius','génius') :- !.
+alt(pontifex,pontifex) :- !.
+alt(noe,noe) :- !.
+alt(paris,paris) :- !.
+alt(aias,aias) :- !.
+alt(nero,juno) :- !.
+alt('nónius',rytmus) :- !.
+alt(lovec,vokdel1) :- !.
+alt('černoch','černoch') :- !.
+alt(turek,turek) :- !.
+alt(meter,vokdel14) :- !.
+alt(rytmus,rytmus) :- !.
+alt(zlomok,vokdel14) :- !.
+alt('ohníček',vokdel14) :-!.
+alt(pojem,vokdel14) :- !.
+alt('chrbát',vokdel14) :- !.
+alt(chlieb,vokcont14) :- !.
+alt('mráz',vokcont14) :- !.
+alt('stôl',vokcont14) :- !.
+alt(orol,vokdel1) :- !.
+alt(vietor,vietor) :- !.
+alt(mravec,vokdel1) :- !.
+alt(veniec,vokdel14) :- !.
+alt('dážď',vokcont14) :- !.
+alt(peniaz,vokcont2) :- !.
+alt('deň',vokdel14) :- !.
+alt('kôň',vokcont1) :- !.
+alt('žena',voklong2) :- !.
+alt(matka,vokinsie) :- !.
+alt(vojna,vokinse) :- !.
+alt(jamka,'vokinsô') :- !.
+alt(perla,'vokinsá') :- !.
+alt('kráska',vokinso) :- !.
+alt('čarodejka',vokinso) :- !.
+alt(zora,voklong2) :- !.
+alt(izis,paris) :- !.
+alt(ceres,ceres) :- !.
+alt(juno,juno) :- !.
+alt(demeter,demeter) :- !.
+alt('sudkyňa',voklong2) :- !.
+alt(ulica,voklong2) :- !.
+alt('čerešňa',vokinsie).
+alt('myseľ',vokdel14) :- !.
+alt('báseň',vokdel14) :- !.
+alt('kráľovná',vokinsie) :- !.
+alt('gazdiná',voklong2) :- !.
+alt('mať','mať') :- !.
+alt(cirkev,vokdel14) :- !.
+alt(mesto,voklong2) :- !.
+alt('mestečko',vokinsie) :- !.
+alt('sklenárstvo',vokinsie) :- !.
+alt(jedlo,'vokinsá') :- !.
+alt('kráľovstvo',vokinsie) :- !.
+alt(slnko,voklong2) :- !.
+alt('krídlo',vokinse) :- !.
+alt('lýtko',vokinso) :- !.
+alt('múzeum','múzeum') :- !.
+alt('fórum','múzeum') :- !.
+alt(drievce,vokinse) :- !.
+alt(citoslovce,vokinsie) :- !.
+alt('dievča','dievča') :- !.
+alt(srdce,voklong2) :- !.
+alt('mača','mača') :- !.
+alt(kura,kura) :- !.
+alt('teľa','teľa') :- !.
+alt(_,noalt) :- !.
+postfix(chlap,'',a,ovi,a,ovi,om,i,ov,om,ov,och,mi).
+postfix(hrdina,a,u,ovi,u,ovi,om,ovia,ov,om,ov,och,ami).
+postfix(dedo,o,a,ovi,a,ovi,om,ovia,ov,om,ov,och,ami).
+postfix('feláh','',a,ovi,a,ovi,om,ovia,ov,om,ov,och,mi).
+postfix(botto,o,u,ovi,u,ovi,om,ovia,ov,om,ov,och,ami).
+postfix('hosť','',a,ovi,a,ovi,om,ia,'í',om,'í',och,ami).
+postfix(boh,'',a,u,a,u,om,ovia,ov,om,ov,och,mi).
+postfix(otec,'',a,ovi,a,ovi,om,ovia,ov,om,ov,och,ami).
+postfix(turek,'',a,ovi,a,ovi,om,i,ov,om,ov,och,ami).
+postfix(bandita,a,u,ovi,u,ovi,om,i,ov,om,ov,och,mi).
+postfix(dub,'',a,u,'',e,om,y,ov,om,y,och,mi).
+postfix(mak,'',u,u,'',u,om,y,ov,om,y,och,mi).
+postfix(med,'',u,u,'',e,om,y,ov,om,y,och,mi).
+postfix(svietnik,'',a,u,'',u,om,y,ov,om,y,och,mi).
+postfix(stroj,'',a,u,'',i,om,e,ov,om,e,och,mi).
+postfix('jeleň','',a,ovi,a,ovi,om,e,ov,om,e,och,mi).
+postfix(had,'',a,ovi,a,ovi,om,y,ov,om,y,och,mi).
+postfix('deň','',a,u,'',i,om,i,'í',om,i,och,ami).
+postfix(kuli,'',ho,mu,ho,m,m,ovia,ov,om,ov,och,ami).
+postfix('žena',a,y,e,u,e,ou,y,'','ám',y,'ách',ami).
+postfix(idea,a,y,e,u,i,ou,y,'í','ám',y,'ách',ami).
+postfix('dáma',a,y,e,u,e,ou,y,'',am,y,ach,ami).
+postfix(izis,'',y,e,u,e,ou,y,'','ám',y,'ách',ami).
+postfix(funkcia,a,e,i,u,i,ou,e,'í','ám',e,'ách',ami).
+postfix('vôňa',a,e,i,u,i,ou,e,'í',am,e,ach,ami).
+postfix(svieca,a,e,i,u,i,ou,e,'',am,e,ach,ami).
+postfix(ulica,a,e,i,u,i,ou,e,'',iam,e,iach,ami).
+postfix('dlaň','',e,i,'',i,ou,e,'í',iam,e,iach,ami).
+postfix('koľaj','',e,i,'',i,ou,e,'í',am,e,ach,ami).
+postfix(pani,i,ej,ej,iu,ej,ou,ie,'í',iam,ie,iach,iami).
+postfix('kráľovná','á',ej,ej,'ú',ej,ou,'é','','ám','é','ách',ami).
+postfix('kosť','',i,i,'',i,ou,i,'í',iam,i,iach,ami).
+postfix(kader,'',e,i,'',i,ou,e,'í','ám',e,'ách',ami).
+postfix('labuť','',i,i,'',i,ou,e,'í',iam,e,iach,ami).
+postfix(mesto,o,a,u,o,e,om,'á','','ám','á','ách',ami).
+postfix('mestečko',o,a,u,o,u,om,'á','','ám','á','ách',ami).
+postfix('rádio',o,a,u,o,u,om,'á','í','ám','á','ách',ami).
+postfix('sklenárstvo',o,a,u,o,e,om,a,'',am,a,ach,ami).
+postfix('krídlo',o,a,u,o,u,om,a,'',am,a,ach,ami).
+postfix('múzeum','',a,u,'',u,om,'á','í','ám','á','ách',ami).
+postfix('fórum','',a,u,'',e,om,a,'',am,a,ach,ami).
+postfix(srdce,e,a,u,e,i,om,ia,'',iam,ia,iach,ami).
+postfix('líce',e,a,u,e,i,om,a,'',am,a,ach,ami).
+postfix('vysvedčenie',ie,ia,iu,ie,'í','ím',ia,'í',iam,ia,iach,iami).
+postfix('dievča',a,a,u,a,i,om,'á','','ám','á','ách',ami).
+postfix(more,e,a,u,e,i,om,ia,'í',iam,ia,iach,iami).
+postfix(oje,e,a,u,e,i,om,e,'í',am,e,ach,ami).
+postfix(kura,a,a,u,a,i,om,e,'',om,e,och,ami).
+postfix('sapfo','','','','','','','','','','','','').
+postfix('vrchný','ý','ého','ému','ého','om','ým','í','ích','ím','ích','ích','ími'). % PBO
+postfix('cestujúci','i','eho','emu','eho','om','im','i','ích','ím','ích','ích','ími').% PBO
+postfix('zora','a','y','y','e','e','ou','e','e','iam','e','e','ami').% PBO
+postfix('ženská','á','ej','ej','ú','ej','ou','é','ých','ým','é','ých','ými').% PBO
+postfix('mača','a','ťa','ťu','a','ti','ťom','ence','eniec','encom','ence','encoch','encami').% PBO
+postfix('cestovné','é','ého','ému','é','on','ým','é','ých','ým','é','ých','ými').% PBO
+vzorsub('vrchný',muz,'vrchný') :- !.
+vzorsub(chlap,muz,chlap) :- !.   
+vzorsub('peržan',muz,chlap) :- !.
+vzorsub(dedo,muz,dedo) :- !.
+vzorsub('feláh',muz,'feláh') :- !.
+vzorsub(botto,muz,botto) :- !.
+vzorsub('hosť',muz,'hosť') :- !.
+vzorsub(boh,muz,boh) :- !.
+vzorsub('mím',muz,otec) :- !.
+vzorsub(lovec,muz,turek) :- !.
+vzorsub('vodník',muz,chlap) :- !.
+vzorsub('černoch',muz,chlap) :- !.
+vzorsub(hrdina,muz,hrdina) :- !.
+vzorsub(otec,muz,otec) :- !.
+vzorsub(turek,muz,turek) :- !.
+vzorsub(paris,muz,'feláh') :- !.
+vzorsub(aias,muz,'feláh') :- !.
+vzorsub(nero,muz,chlap) :- !.
+vzorsub('anakreón',muz,chlap) :- !.
+vzorsub(achilles,muz,'feláh') :- !.
+vzorsub(syzifos,muz,'feláh') :- !.
+vzorsub(anaxagoras,muz,'feláh') :- !.
+vzorsub('génius',muz,'feláh') :- !.
+vzorsub(pontifex,muz,'feláh') :- !.
+vzorsub(noe,muz,otec) :- !.
+vzorsub(futbalista,muz,bandita) :- !.
+vzorsub(bandita,muz,bandita) :- !.
+vzorsub(hume,muz,otec) :- !.
+vzorsub('cestujúci',muz,'cestujúci') :- !.
+vzorsub(dub,muz,dub) :- !.
+vzorsub(mak,muz,mak) :- !.
+vzorsub(med,muz,med) :- !.
+vzorsub(svietnik,muz,svietnik) :- !.
+vzorsub(papier,muz,stroj) :- !.
+vzorsub(model,muz,mak) :- !.
+vzorsub(strom,muz,med) :- !.
+vzorsub(meter,muz,stroj) :- !.
+vzorsub(hotel,muz,dub) :- !.
+vzorsub(rytmus,muz,med) :- !.
+vzorsub('nónius',muz,dub) :- !.
+vzorsub(most,muz,dub) :- !.
+vzorsub(zlomok,muz,mak) :- !.
+vzorsub('šperk',muz,mak) :- !.
+vzorsub('ohníček',muz,svietnik) :- !.
+vzorsub(pojem,muz,med) :- !.
+vzorsub(papier,muz,stroj) :- !.
+vzorsub('chrbát',muz,dub) :- !.
+vzorsub(chlieb,muz,dub) :- !.
+vzorsub('mráz',muz,med) :- !.
+vzorsub('stôl',muz,dub) :- !.
+vzorsub(vietor,muz,dub) :- !.
+vzorsub(stroj,muz,stroj) :- !.
+vzorsub('jeleň',muz,'jeleň') :- !.
+vzorsub(mravec,muz,'jeleň') :- !.
+vzorsub('čaj',muz,stroj) :- !.
+vzorsub(veniec,muz,stroj) :- !.
+vzorsub('dážď',muz,stroj) :- !.
+vzorsub(had,muz,had) :- !.
+vzorsub(orol,muz,had) :- !.
+vzorsub(peniaz,muz,stroj) :- !.
+vzorsub('plášť',muz,stroj) :- !.
+vzorsub('deň',muz,'deň') :- !.
+vzorsub(kuli,muz,kuli) :- !.
+vzorsub('atašé',muz,sapfo) :- !.
+vzorsub('žena',zen,'žena') :- !.
+vzorsub(zora,zen,zora) :- !.
+vzorsub(matka,zen,'žena') :- !.
+vzorsub(vojna,zen,'žena') :- !.
+vzorsub(jamka,zen,'žena') :- !.
+vzorsub(perla,zen,'žena') :- !.
+vzorsub('kráska',zen,'dáma') :- !.
+vzorsub('čarodejka',zen,'žena') :- !.
+vzorsub(idea,zen,idea) :- !.
+vzorsub('dáma',zen,'dáma') :- !.
+vzorsub('úloha',zen,'žena') :- !.
+vzorsub(izis,zen,izis) :- !.
+vzorsub(ceres,zen,izis) :- !.
+vzorsub(juno,zen,'dáma') :- !.
+vzorsub(demeter,zen,'žena') :- !.
+vzorsub('víchrica',zen,ulica) :- !.
+vzorsub(ulica,zen,ulica) :- !.
+vzorsub(funkcia,zen,funkcia) :- !.
+vzorsub('sudkyňa',zen,ulica) :- !.
+vzorsub('vládkyňa',zen,ulica) :- !.
+vzorsub('čerešňa',zen,ulica) :- !.
+vzorsub('lyža',zen,ulica) :- !.
+vzorsub('vôňa',zen,'vôňa') :- !.
+vzorsub(svieca,zen,svieca) :- !.
+vzorsub('dlaň',zen,'dlaň') :- !.
+vzorsub('myseľ',zen,'dlaň') :- !.
+vzorsub('báseň',zen,'koľaj') :- !.
+vzorsub('koľaj',zen,'koľaj') :- !.
+vzorsub(pani,zen,pani) :- !.
+vzorsub('kráľovná',zen,'kráľovná') :- !.
+vzorsub('gazdiná',zen,'kráľovná') :- !.
+vzorsub('ženská',zen,'ženská') :- !.
+vzorsub('mať',zen,'dlaň') :- !.
+vzorsub('kosť',zen,'kosť') :- !.
+vzorsub(cirkev,zen,'kosť') :- !.
+vzorsub(kader,zen,kader) :- !.
+vzorsub('labuť',zen,'labuť') :- !.
+vzorsub(sapfo,zen,sapfo) :- !.
+vzorsub(mesto,str,mesto) :- !.
+vzorsub('mestečko',str,'mestečko') :- !.
+vzorsub('rádio',str,'rádio') :- !.
+vzorsub(jedlo,str,'mestečko') :- !.
+vzorsub('kráľovstvo',str,mesto) :- !.
+vzorsub('sklenárstvo',str,'sklenárstvo') :- !.
+vzorsub(slnko,str,'mestečko') :- !.
+vzorsub('krídlo',str,'krídlo') :- !.
+vzorsub('rúcho',str,'krídlo') :- !.
+vzorsub(miesto,str,'krídlo') :- !.
+vzorsub('lýtko',str,'krídlo') :- !.
+vzorsub(gesto,str,mesto) :- !.
+vzorsub(capriccio,str,'rádio') :- !.
+vzorsub('fórum',str,'fórum') :- !.
+vzorsub('múzeum',str,'múzeum') :- !.
+vzorsub(srdce,str,srdce) :- !.
+vzorsub('riečište',str,srdce) :- !.
+vzorsub(drievce,str,srdce) :- !.
+vzorsub('líce',str,'líce') :- !.
+vzorsub(citoslovce,str,srdce) :- !.
+vzorsub(more,str,more) :- !.
+vzorsub(oje,str,oje) :- !.
+vzorsub('vysvedčenie',str,'vysvedčenie') :- !.
+vzorsub('dievča',str,'dievča') :- !.
+vzorsub('mača',str,'mača') :- !.
+vzorsub(kura,str,kura) :- !.
+vzorsub('teľa',str,kura) :- !.
+vzorsub('cestovné',str,'cestovné') :- !.

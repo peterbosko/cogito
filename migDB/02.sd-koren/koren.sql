@@ -1,0 +1,1 @@
+alter table sd add column koren varchar(500);
