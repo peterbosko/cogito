@@ -21,7 +21,9 @@ if __name__ == "__main__":
             spracuj_slovniky(mode)
         elif command == "spracuj_pzkmene":
             spracuj_pzkmene()
+        elif command == "spracuj_vzory":
+            spracuj_vzory()
 
     else:
         print("usage:\n\n\trun_import.py [ vytvor_slovniky all|sub|sl|adj|adv|cast|cisl|cit ] | "
-              "vloz_intencie | spracuj_slovniky | spracuj_pzkmene ]")
+              "vloz_intencie | spracuj_slovniky | spracuj_pzkmene | spracuj_vzory ]")

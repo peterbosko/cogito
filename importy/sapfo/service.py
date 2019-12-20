@@ -247,6 +247,14 @@ def daj_id_zo_slovnika(slovnik, slovo, slovo_poradie):
         return -1
 
 
+def daj_koren_z_d(dict_key):
+    if dict_key[0] == "_":
+        dict_key = dict_key[1:]
+
+    res = dict_key[0:dict_key.index("_", 1)]
+    return res
+
+
 def spracuj_slovniky(mode):
 
     dic = {}
@@ -302,7 +310,7 @@ def spracuj_slovniky(mode):
                             print(f"!!!!!!!!!!!!!!!!! Treba pridat slovo:{m_rodic.group('rodic_slovo')} "
                                   f"{m_rodic.group('rodic_slovo_poradie')}")
 
-                    updatuj_pod_m(slovo_id, rodic_id, m_sub.group('sem_priznak'), m_sub.group('prefix'),
+                    updatuj_pod_m(daj_koren_z_d(d), slovo_id, rodic_id, m_sub.group('sem_priznak'), m_sub.group('prefix'),
                                   m_sub.group('sufix'), m_sub.group('vzor'), m_sub.group('poc'))
 
         if m_adj:
@@ -334,7 +342,7 @@ def spracuj_slovniky(mode):
                     if m_adj.group('pom_tvar') and m_adj.group('pom_tvar') != "nil":
                         v2 = m_adj.group('pom_tvar')
 
-                    updatuj_prid_m(slovo_id, rodic_id, m_adj.group('pod_m_kategoria'), m_adj.group('prefix'),
+                    updatuj_prid_m(daj_koren_z_d(d),slovo_id, rodic_id, m_adj.group('pod_m_kategoria'), m_adj.group('prefix'),
                                    m_adj.group('sufix'), m_adj.group('vzor'), m_adj.group('prid_m_kategoria'), v2)
 
         if m_sl:
@@ -362,7 +370,7 @@ def spracuj_slovniky(mode):
                             print(f"!!!!!!!!!!!!!!!!! Treba pridat slovo:{m_sl.group('rodic')} " +
                                   f"poradie: {m_sl.group('rodic_poradie')}")
 
-                    updatuj_sl(slovo_id, rodic_id, m_sl.group('intencny_ramec'), m_sl.group('prefix'),
+                    updatuj_sl(daj_koren_z_d(d),slovo_id, rodic_id, m_sl.group('intencny_ramec'), m_sl.group('prefix'),
                                m_sl.group('sufix'), m_sl.group('vzor'), m_sl.group('vid'),
                                m_sl.group('vzor2'))
 
@@ -390,7 +398,7 @@ def spracuj_slovniky(mode):
                             print(f"!!!!!!!!!!!!!!!!! Treba pridat slovo:{m_adv.group('rodic')} " +
                                   f"poradie: {m_adv.group('rodic_poradie')}")
 
-                    updatuj_prislovku(slovo_id, rodic_id, m_adv.group('sem_pad'), m_adv.group('vzor'),
+                    updatuj_prislovku(daj_koren_z_d(d), slovo_id, rodic_id, m_adv.group('sem_pad'), m_adv.group('vzor'),
                                       m_adv.group('prefix'), m_adv.group('sufix'), m_adv.group('koncovka'))
 
         if m_cast:
@@ -432,7 +440,7 @@ def spracuj_slovniky(mode):
                     if m_cis.group('vzor') and m_cis.group('vzor') != "nil":
                         v = m_cis.group('vzor')
 
-                    updatuj_cislovku(slovo_id, rodic_id, m_cis.group('sem_priznak'), v,
+                    updatuj_cislovku(daj_koren_z_d(d), slovo_id, rodic_id, m_cis.group('sem_priznak'), v,
                                      m_cis.group('prefix'), m_cis.group('sufix'), m_cis.group('hodnota'))
 
         print(s)
@@ -612,3 +620,30 @@ def spracuj_pzkmene():
                                     if sloveso.id != ids2:
                                         zaloz_hierarchiu_sd(sloveso.id, ids2)
 
+
+def spracuj_vzory():
+    postfix_dict = {}
+    alternacie_vzorov = {}
+    with open("data\\POD_M_vzory.txt", newline='', encoding="utf-8") as subor:
+        re_pf = re.compile(r"postfix\('?(?P<postfix>.*?)'?,(?P<koncovky>.*?)\)")
+        re_vzor = re.compile(r"vzorsub\('?(?P<vzor>.*?)'?,(?P<rod>.*?),'?(?P<postfix>.*?)'?\)")
+        re_alt = re.compile(r"alt\('?(?P<vzor>.*?)'?,'?(?P<alternacia>.*?)'?\)")
+        for line in subor:
+            if line[0:3] == "alt":
+                m_alt = re.match(re_alt, line)
+                alternacie_vzorov[m_alt.group('vzor')] = m_alt.group('alternacia')
+            elif line[0:7] == "postfix":
+                m_pf = re.match(re_pf, line)
+                postfix_dict[m_pf.group('postfix')] = m_pf.group('koncovky').replace('\'', '')
+            elif line[0:7] == "vzorsub":
+                m_v = re.match(re_vzor, line)
+                vzor = m_v.group('vzor').replace('\'', '')
+                rod = m_v.group('rod')
+                pf = m_v.group('postfix').replace('\'', '')
+                alternacia = None
+                if vzor in alternacie_vzorov.keys():
+                    alternacia = alternacie_vzorov[vzor]
+
+                zaloz_vzor("POD_M", vzor, rod, postfix_dict[pf], alternacia)
+                print(f"Vzor:{vzor} rod:{rod} "
+                      f"koncovky:{postfix_dict[pf]}")

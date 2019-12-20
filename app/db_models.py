@@ -76,6 +76,7 @@ class SlovnyDruh(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     zak_tvar = db.Column(db.String(500, collation='utf8mb4_bin'), nullable=False)
     typ = db.Column(db.String(20), nullable=False, index=True)
+    koren = db.Column(db.String(500, collation='utf8mb4_bin'), nullable=False)
     popis = db.Column(db.String(2000), nullable=True)
     slova = relationship("Slovo", back_populates="SlovnyDruh")
     vzor = db.Column(db.String(500, collation='utf8mb4_bin'), nullable=True)
@@ -83,7 +84,7 @@ class SlovnyDruh(db.Model):
     sufix = db.Column(db.String(20, collation='utf8mb4_bin'), nullable=True)
     sem_priznak_id = db.Column(db.Integer, db.ForeignKey("sem.id"), nullable=True, index=True)
     sem_priznak = relationship("Semantika", foreign_keys=[sem_priznak_id])
-    #sd_hier = relationship("HierarchiaSD", primaryjoin="(SlovnyDruh.id==HierarchiaSD.sd_id)")
+    # sd_hier = relationship("HierarchiaSD", primaryjoin="(SlovnyDruh.id==HierarchiaSD.sd_id)")
 
     __mapper_args__ = {
         'polymorphic_identity': 'sd',
@@ -220,6 +221,7 @@ class PridavneMeno(SlovnyDruh):
     __mapper_args__ = {
         'polymorphic_identity': 'PRID_M',
     }
+
 
 class Zameno(SlovnyDruh):
     __tablename__ = 'sd_zameno'
@@ -540,6 +542,7 @@ class HierarchiaSD(db.Model):
 
         return export
 
+
 sem1 = aliased(Semantika, name='sem1')
 sem2 = aliased(Semantika, name='sem2')
 sd = aliased(SlovnyDruh, name='sd')
@@ -672,4 +675,26 @@ class IntencieSlovesaView(db.Model):
         ),
         metadata=db.Model.metadata
     )
+
+
+class SDVzory(db.Model):
+    __tablename__ = 'sd_vzory'
+    __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8mb4', 'mysql_collate': 'utf8mb4_bin'}
+    id = db.Column(db.Integer, primary_key=True)
+    typ = db.Column(db.String(20), nullable=False)
+    rod = db.Column(db.String(1), nullable=False)
+    vzor = db.Column(db.String(50), nullable=False)
+    deklinacia = db.Column(db.String(500), nullable=False)
+    alternacia = db.Column(db.String(50), nullable=True)
+
+
+class SDPrefixSufix(db.Model):
+    __tablename__ = 'sd_prefix_sufix'
+    __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8mb4', 'mysql_collate': 'utf8mb4_bin'}
+    id = db.Column(db.Integer, primary_key=True)
+    typ = db.Column(db.String(20), nullable=False)
+    prefix_sufix = db.Column(db.String(1), nullable=False)
+    hodnota = db.Column(db.String(50), nullable=False)
+
+
 

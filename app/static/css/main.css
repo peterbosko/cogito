@@ -448,6 +448,18 @@ form label {
     width : 100px;
 }
 
+.slovo_ddl {
+    width : 70px;
+}
+
+.slovo_tvar {
+    width : 120px;
+}
+
+.pm_slovo_tvar {
+    width : 320px;
+}
+
 
 /* ADAPTIVE */
 @media ( max-width: 695px ) {

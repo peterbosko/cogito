@@ -1,35 +1,68 @@
 <div class="row">
     <div class="col-sm-12">
         <form id="SDSlovaForm" data-fv-framework="bootstrap" method="post">
+                <div class="row marginbottomDetailSD ">
+                    <label class="col-sm-2" for="prepend">
+                         Koreň slova:
+                    </label>
+                    <div class="col-sm-5">
+                        <select id="ddlKorenSlova" class="form-control" name="ddlKorenSlova">
+                        </select>
+                    </div>
+                </div>
                 <div class="row VZOR marginbottomDetailSD nodisplay">
                     <label class="col-sm-2" for="prepend">
                          Vzor:
                     </label>
-                    <div class="col-sm-2">
+                    <div class="col-sm-10">
                         <select id="ddlVzor" class="form-control">
                         </select>
                     </div>
-                    <label class="col-sm-1" for="prepend">
+                </div>
+                <div class="row VZOR marginbottomDetailSD nodisplay">
+                    <label class="col-sm-2" for="prepend">
                          Prefix:
                     </label>
-                    <div class="col-sm-2">
+                    <div class="col-sm-4">
                         <select id="ddlPrefix" class="form-control">
                         </select>
                     </div>
                     <label class="col-sm-2" for="prepend">
                          Sufix:
                     </label>
-                    <div class="col-sm-3">
+                    <div class="col-sm-4">
                         <select id="ddlSufix" class="form-control" name="ddlSufix">
                         </select>
                     </div>
                 </div>
-                <fieldset class="border p-2">
+                <div class="row POD_M marginbottomDetailSD nodisplay">
+                    <label class="col-sm-2" for="prepend">
+                         Paradigma:
+                    </label>
+                    <div class="col-sm-8">
+                        <select id="ddlParadigma_POD_M" class="form-control">
+                            <option value="S">S - substantívna - napr. chlap, žena, srdce</option>
+                            <option value="A">A - adjektívna - napr. hlavný, vedúci, Mastný, starká, Slaná, vstupné</option>
+                            <option value="F">F - zmiešaná - napr. kuli, gazdiná</option>
+                            <option value="U">U - neúplná - napr. kanoe, kupé</option>
+                        </select>
+                    </div>
+                </div>
+
+                    <fieldset class="border p-2">
                     <legend>Údaje slov</legend>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="text-center POD_M nodisplay">
+                                <a href="#" id="genDefTvaryPOD_M" onclick="generuj_default_tvary_pod_m();" class="btn"><i class="fa fa-plus"></i>&nbsp;Generovať default tvary</a>
+                                <a href="#" id="genAnotaciuPOD_M" onclick="generuj_default_anotaciu_pod_m();" class="btn"><i class="fa fa-plus"></i>&nbsp;Generovať default anotáciu</a>
+                            </div>
+                        </div>
+                    </div>
                 <div id="divSTabulkou" class="col-xs-12">
                     <table class="tabulka_slov" style="margin: auto;width: 50% !important; margin-bottom:10px">
                         <thead>
-                            <th>Id</th>
+                            <th class="nodisplay">Id</th>
                             <th>Tvar</th>
                             <th class="c_rod">Rod</th>
                             <th class="c_podrod">Podrod</th>
@@ -45,18 +78,18 @@
                         </thead>
                         <tbody id="telo_tabulky">
                         <tr id="zaznam_0" class="nodisplay">
-                            <td>
+                            <td class="nodisplay">
                                 <span id="id_0"></span>
                             </td>
                             <td>
                                 <div class="row">
                                 <div class="col-sm-12">
-                                    <input class="form-control" type="text" id="tvar_0" name="tvar_0" value=""/>
+                                    <input class="form-control slovo_tvar" type="text" id="tvar_0" name="tvar_0" value=""/>
                                 </div>
                                 </div>
                             </td>
                             <td class="c_rod">
-                                <select class="form-control" id="rod_0" name="rod_0">
+                                <select class="form-control slovo_ddl" id="rod_0" name="rod_0">
                                     <option value="">Žiaden</option>
                                     <option value="M">M</option>
                                     <option value="Z">Z</option>
@@ -64,13 +97,13 @@
                                 </select>
                             </td>
                             <td class="c_podrod">
-                                <select id="podrod_0" class="form-control">
+                                <select id="podrod_0" class="form-control slovo_ddl">
                                     <option value="">Žiaden</option>
                                     <option value="Z">Z</option>
                                     <option value="N">N</option>
                                 </select>
                             <td class="c_pad">
-                                <select id="pad_0" class="form-control">
+                                <select id="pad_0" class="form-control slovo_ddl">
                                     <option value="">Žiaden</option>
                                     <option value="Nom">Nom</option>
                                     <option value="Gen">Gen</option>
@@ -82,7 +115,7 @@
                                 </select>
                             </td>
                             <td class="c_cislo">
-                                <select id="cislo_0" class="form-control">
+                                <select id="cislo_0" class="form-control slovo_ddl">
                                     <option value="">Žiadne</option>
                                     <option value="J">J</option>
                                     <option value="M">M</option>
@@ -90,7 +123,7 @@
                                 </select>
                             </td>
                             <td class="c_osoba">
-                                <select id="osoba_0" class="form-control">
+                                <select id="osoba_0" class="form-control slovo_ddl">
                                     <option value="">Žiadna</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -98,7 +131,7 @@
                                 </select>
                             </td>
                             <td class="c_cas">
-                                <select id="cas_0" class="form-control">
+                                <select id="cas_0" class="form-control slovo_ddl">
                                     <option value="">Žiaden</option>
                                     <option value="P">P</option>
                                     <option value="M">M</option>
@@ -106,14 +139,14 @@
                                 </select>
                             </td>
                             <td class="c_sposob">
-                                <select id="sposob_0" class="form-control">
+                                <select id="sposob_0" class="form-control slovo_ddl">
                                     <option value="">Žiaden</option>
                                     <option value="O">O</option>
                                     <option value="R">R</option>
                                 </select>
                             </td>
                             <td class="c_stupen">
-                                <select id="stupen_0" class="form-control">
+                                <select id="stupen_0" class="form-control slovo_ddl">
                                     <option value="">Žiaden</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -121,7 +154,7 @@
                                 </select>
                             </td>
                             <td class="c_pricastie">
-                                <select id="pricastie_0" class="form-control">
+                                <select id="pricastie_0" class="form-control slovo_ddl">
                                     <option value="">Žiaden</option>
                                     <option value="T">T</option>
                                     <option value="C">C</option>
@@ -348,11 +381,16 @@ function ZmenSlovaSD(closeScreen){
 }
 
 $(document).ready(function() {
+    pridavanyDruh = '{{request.args.get("slovnyDruh")}}';
+    if (pridavanyDruh == "POD_M"){
+        $('.POD_M').removeClass('nodisplay');
+        $('#tvar_0').removeClass('slovo_tvar').addClass('pm_slovo_tvar');
+    }
+
     $('#SDSlovaForm').formValidation();
 
     NacitajSD(getSD_ID());
 
-    pridavanyDruh = '{{request.args.get("slovnyDruh")}}';
     setupSlovaDruh(pridavanyDruh);
     PridajNoveSlovo();
 
@@ -369,6 +407,7 @@ $(document).ready(function() {
         pridavanyDruh == "CISLOVKA"){
         $(".VZOR").removeClass('nodisplay');
     }
+
 });
 
 

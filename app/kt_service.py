@@ -76,6 +76,7 @@ def vrat_slovo_komplet(sid, vyraz):
     else:
         return None
 
+
 def vrat_slova_zacinajuce_na(vyraz, presna_zhoda):
     if len(vyraz) > 0:
         prvy_znak = vyraz[0]
@@ -105,6 +106,7 @@ def vrat_slova_zacinajuce_na(vyraz, presna_zhoda):
     else:
         return None
 
+
 def vrat_slovne_druhy_slova_zacinajuce_na(vyraz):
     if len(vyraz) > 0:
         prvy_znak = vyraz[0]
@@ -133,6 +135,7 @@ def vrat_slovne_druhy_slova_zacinajuce_na(vyraz):
     else:
         return None
 
+
 def vrat_vsetky_slova(vyraz):
     if vyraz:
         pole_slov = Slovo.query.filter(Slovo.tvar == vyraz).filter(Slovo.anotacia.isnot(None))
@@ -141,6 +144,7 @@ def vrat_vsetky_slova(vyraz):
     else:
         return None
 
+
 def vrat_sem_priznak(sem_id):
     if sem_id:
         sem = Semantika.query.get(sem_id)
@@ -148,6 +152,7 @@ def vrat_sem_priznak(sem_id):
         return sem
     else:
         return None
+
 
 def vrat_sem_pad(sid):
     if sid:
@@ -159,6 +164,7 @@ def vrat_sem_pad(sid):
         return sem_pad
     else:
         return None
+
 
 def vrat_pole_slov_z_textu(html, parent_slovo_id=None):
     pole = []

@@ -39,7 +39,7 @@ def zaloz_hierarchiu_sd(slovo, rodic):
             db.session.commit()
 
 
-def updatuj_pod_m(slovo_id, rodic_id, s_priznak, prefix, sufix, vzor, poc):
+def updatuj_pod_m(koren, slovo_id, rodic_id, s_priznak, prefix, sufix, vzor, poc):
     with flask_app.app_context():
         pm = PodstatneMeno.query.get(slovo_id)
 
@@ -55,6 +55,7 @@ def updatuj_pod_m(slovo_id, rodic_id, s_priznak, prefix, sufix, vzor, poc):
         pm.sufix = sufix
         pm.vzor = vzor
         pm.pocitatelnost = poc
+        pm.koren = koren
 
         if rodic_id and rodic_id > 0:
             if slovo_id != rodic_id:
@@ -64,7 +65,7 @@ def updatuj_pod_m(slovo_id, rodic_id, s_priznak, prefix, sufix, vzor, poc):
         db.session.commit()
 
 
-def updatuj_prid_m(slovo_id, rodic_id, s_priznak_pod_m, prefix, sufix, vzor, s_priznak_prid_m, vzor2):
+def updatuj_prid_m(koren, slovo_id, rodic_id, s_priznak_pod_m, prefix, sufix, vzor, s_priznak_prid_m, vzor2):
     with flask_app.app_context():
         pm = PridavneMeno.query.get(slovo_id)
 
@@ -90,6 +91,7 @@ def updatuj_prid_m(slovo_id, rodic_id, s_priznak_pod_m, prefix, sufix, vzor, s_p
         pm.sufix = sufix
         pm.vzor = vzor
         pm.vzor2 = vzor2
+        pm.koren = koren
 
         if rodic_id and rodic_id > 0:
             if slovo_id != rodic_id:
@@ -99,7 +101,7 @@ def updatuj_prid_m(slovo_id, rodic_id, s_priznak_pod_m, prefix, sufix, vzor, s_p
         db.session.commit()
 
 
-def updatuj_sl(slovo_id, rodic_id, intencny_ramec, prefix, sufix, vzor, vid, pzkmen):
+def updatuj_sl(koren, slovo_id, rodic_id, intencny_ramec, prefix, sufix, vzor, vid, pzkmen):
     with flask_app.app_context():
         sl = Sloveso.query.get(slovo_id)
 
@@ -117,12 +119,13 @@ def updatuj_sl(slovo_id, rodic_id, intencny_ramec, prefix, sufix, vzor, vid, pzk
         sl.vzor = vzor
         sl.vid = vid
         sl.pzkmen = pzkmen
+        sl.koren = koren
 
         db.session.add(sl)
         db.session.commit()
 
 
-def updatuj_prislovku(slovo_id, rodic_id, sem_pad, vzor, prefix, sufix, koncovka):
+def updatuj_prislovku(koren, slovo_id, rodic_id, sem_pad, vzor, prefix, sufix, koncovka):
     with flask_app.app_context():
         adv = Prislovka.query.get(slovo_id)
 
@@ -138,6 +141,7 @@ def updatuj_prislovku(slovo_id, rodic_id, sem_pad, vzor, prefix, sufix, koncovka
         adv.sufix = sufix
         adv.vzor = vzor
         adv.koncovka = koncovka
+        adv.koren = koren
 
         if rodic_id and rodic_id > 0:
             if slovo_id != rodic_id:
@@ -147,7 +151,7 @@ def updatuj_prislovku(slovo_id, rodic_id, sem_pad, vzor, prefix, sufix, koncovka
         db.session.commit()
 
 
-def updatuj_cislovku(slovo_id, rodic_id, sem_priznak, vzor, prefix, sufix, hodnota):
+def updatuj_cislovku(koren, slovo_id, rodic_id, sem_priznak, vzor, prefix, sufix, hodnota):
     with flask_app.app_context():
         cis = Cislovka.query.get(slovo_id)
 
@@ -163,12 +167,37 @@ def updatuj_cislovku(slovo_id, rodic_id, sem_priznak, vzor, prefix, sufix, hodno
         cis.sufix = sufix
         cis.vzor = vzor
         cis.hodnota = hodnota
+        cis.koren = koren
 
         if rodic_id and rodic_id > 0:
             if slovo_id != rodic_id:
                 zaloz_hierarchiu_sd(slovo_id, rodic_id)
 
         db.session.add(cis)
+        db.session.commit()
+
+
+def zaloz_vzor(druh, vz, rod, deklinacia, alter):
+    with flask_app.app_context():
+        v = SDVzory.query.filter(SDVzory.vzor == vz).filter(SDVzory.typ == druh).first()
+
+        r = "M"
+
+        if rod == "zen":
+            r = "Z"
+        elif rod == "str":
+            r = "S"
+
+        if not v:
+            v = SDVzory()
+
+        v.typ = druh
+        v.rod = r
+        v.vzor = vz
+        v.deklinacia = deklinacia
+        v.alternacia = alter
+
+        db.session.add(v)
         db.session.commit()
 
 
