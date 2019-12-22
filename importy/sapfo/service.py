@@ -313,6 +313,29 @@ def spracuj_slovniky(mode):
                     updatuj_pod_m(daj_koren_z_d(d), slovo_id, rodic_id, m_sub.group('sem_priznak'), m_sub.group('prefix'),
                                   m_sub.group('sufix'), m_sub.group('vzor'), m_sub.group('poc'))
 
+                    # dve slova v rodicoch
+                    if m_sub.group('rodic') and '((' in m_sub.group('rodic'):
+                        re_2rodic = re.compile(
+                            r"\(\('?(?P<rodic_slovo>.*?)'?\s*,\s*(?P<rodic_slovo_poradie>\d+)\)\s*,\s*'?(?P<rodic2_slovo>.*?)'?\s*,\s*(?P<rodic2_slovo_poradie>\d+)\)")
+
+                        m_2rodic = re.match(re_2rodic, m_sub.group('rodic'))
+
+                        r1 = daj_id_zo_slovnika(dic, m_2rodic.group('rodic_slovo'), m_2rodic.group('rodic_slovo_poradie'))
+
+                        if r1 and r1 > 0:
+                            zaloz_hierarchiu_sd(slovo_id, r1)
+
+                        r2 = daj_id_zo_slovnika(dic, m_2rodic.group('rodic2_slovo'), m_2rodic.group('rodic2_slovo_poradie'))
+
+                        if r2 and r2 > 0:
+                            zaloz_hierarchiu_sd(slovo_id, r2)
+
+                        print(f"R:{m_2rodic.group('rodic_slovo')}:R")
+                        print(f"P:{m_2rodic.group('rodic_slovo_poradie')}:P")
+                        print(f"R2:{m_2rodic.group('rodic2_slovo')}:R2")
+                        print(f"P2:{m_2rodic.group('rodic2_slovo_poradie')}:P2")
+                        print("koniec")
+
         if m_adj:
             if mode == "adj" or mode == "all":
                 print(f"Adjektivum ==> Slovo:{m_adj.group('slovo')} "
@@ -326,6 +349,7 @@ def spracuj_slovniky(mode):
                     rodic_id = None
 
                     if m_adj.group('rodic'):
+
                         rodic_id = daj_id_zo_slovnika(dic, m_adj.group('rodic'),
                                                       m_adj.group('rodic_poradie'))
 
@@ -342,8 +366,33 @@ def spracuj_slovniky(mode):
                     if m_adj.group('pom_tvar') and m_adj.group('pom_tvar') != "nil":
                         v2 = m_adj.group('pom_tvar')
 
-                    updatuj_prid_m(daj_koren_z_d(d),slovo_id, rodic_id, m_adj.group('pod_m_kategoria'), m_adj.group('prefix'),
+                    updatuj_prid_m(daj_koren_z_d(d), slovo_id, rodic_id, m_adj.group('pod_m_kategoria'), m_adj.group('prefix'),
                                    m_adj.group('sufix'), m_adj.group('vzor'), m_adj.group('prid_m_kategoria'), v2)
+
+                    # dve slova v rodicoch
+                    if m_adj.group('rodic') and '(' in m_adj.group('rodic'):
+                        re_2rodic = re.compile(
+                            r"\('?(?P<rodic_slovo>.*?)'?\s*,\s*(?P<rodic_slovo_poradie>\d+)\)\s*,\s*'?(?P<rodic2_slovo>.*)")
+
+                        m_2rodic = re.match(re_2rodic, m_adj.group('rodic'))
+
+                        print(f"R:{m_2rodic.group('rodic_slovo')}:R")
+                        print(f"P:{m_2rodic.group('rodic_slovo_poradie')}:P")
+                        print(f"R2:{m_2rodic.group('rodic2_slovo')}:R2")
+                        print(f"P2:{m_adj.group('rodic_poradie')}:P2")
+
+                        r1 = daj_id_zo_slovnika(dic, m_2rodic.group('rodic_slovo'), m_2rodic.group('rodic_slovo_poradie'))
+
+                        if r1 and r1 > 0:
+                            zaloz_hierarchiu_sd(slovo_id, r1)
+
+                        r2 = daj_id_zo_slovnika(dic, m_2rodic.group('rodic2_slovo'), m_adj.group('rodic_poradie'))
+
+                        if r2 and r2 > 0:
+                            zaloz_hierarchiu_sd(slovo_id, r2)
+
+                        print("koniec")
+
 
         if m_sl:
             if mode == "sl" or mode == "all":

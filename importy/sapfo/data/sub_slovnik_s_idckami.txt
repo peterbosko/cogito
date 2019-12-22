@@ -22,7 +22,7 @@ sub_cenovk_1>kmen((cenovk , 1),(cen , 1),sub,cat([vec],'',ovka,matka,poc)).:4466
 sub_cest_1>kmen((cest , 1),(cestov , 1),sub,cat([dej],'',a,'žena',poc)).:None:SELECT sd.*,sd_pod_m.* FROM sd_pod_m JOIN sd ON sd.id=sd_pod_m.id WHERE zak_tvar LIKE 'cest%' AND zak_tvar LIKE '%a'
 sub_cest_2>kmen((cest , 2),nil,sub,cat([lok],'','','žena',poc)).:None:SELECT sd.*,sd_pod_m.* FROM sd_pod_m JOIN sd ON sd.id=sd_pod_m.id WHERE zak_tvar LIKE 'cest%' AND zak_tvar LIKE '%'
 sub_cestičk_1>kmen(('cestičk' , 1),(cest , 2),sub,cat([lok],'','ička',matka,poc)).:446805:
-sub_cestopis_1>kmen((cestopis , 1),((cest , 1) , 'pís' , 1),sub,cat([vec],'','',med,poc)).:None:SELECT sd.*,sd_pod_m.* FROM sd_pod_m JOIN sd ON sd.id=sd_pod_m.id WHERE zak_tvar LIKE 'cestopis%' AND zak_tvar LIKE '%'
+sub_cestopis_1>kmen((cestopis , 1),((cest , 1) , 'pís' , 1),sub,cat([vec],'','',med,poc)).:446832:SELECT sd.*,sd_pod_m.* FROM sd_pod_m JOIN sd ON sd.id=sd_pod_m.id WHERE zak_tvar LIKE 'cestopis%' AND zak_tvar LIKE '%'
 sub_cestovateľ_1>kmen(('cestovateľ' , 1),(cestov , 1),sub,cat([osoba],'','teľ','peržan',poc)).:446875:
 sub_cestovateľk_1>kmen(('cestovateľk' , 1),('cestovateľ' , 1),sub,cat([osoba],'',ka,matka,poc)).:446876:
 sub_cestujúc_1>kmen(('cestujúc' , 1),(cestov , 1),sub,cat([osoba],'','úci','cestujúci',poc)).:446892:
@@ -341,7 +341,7 @@ sub_milovník_1>kmen(('milovník' , 1),(milov , 2),sub,cat([osoba],'','ník','vo
 sub_milovníčk_1>kmen(('milovníčk' , 1),('milovník' , 1),sub,cat([osoba],'',ka,'kráska',poc)).:43061:
 sub_minc_1>kmen((minc , 1),nil,sub,cat([vec],'','',funkcia,poc)).:43147:SELECT sd.*,sd_pod_m.* FROM sd_pod_m JOIN sd ON sd.id=sd_pod_m.id WHERE zak_tvar LIKE 'minc%' AND zak_tvar LIKE '%'
 sub_mincovň_1>kmen(('mincovň' , 1),(minc , 1),sub,cat([lok],'','ovňa','dlaň',poc)).:43155:
-sub_mor_1>kmen((mor , 1),nil,sub,cat([lok],'','',more,poc)).:44639:SELECT sd.*,sd_pod_m.* FROM sd_pod_m JOIN sd ON sd.id=sd_pod_m.id WHERE zak_tvar LIKE 'mor%' AND zak_tvar LIKE '%'
+sub_mor_1>kmen((mor , 1),nil,sub,cat([lok],'','',more,poc)).:44735:SELECT sd.*,sd_pod_m.* FROM sd_pod_m JOIN sd ON sd.id=sd_pod_m.id WHERE zak_tvar LIKE 'mor%' AND zak_tvar LIKE '%'
 sub_moreplavec_1>kmen((moreplavec , 1),((mor , 1) , plav , 1),sub,cat([osoba],'',ec,lovec,poc)).:44747:
 sub_možnosť_1>kmen(('možnosť' , 1),('môc' , 0),sub,cat([posmod],'','osť','kosť',poc)).:45083:
 sub_mág_1>kmen(('mág' , 1),('mági' , 1),sub,cat([osoba],'','','feláh',poc)).:39314:SELECT sd.*,sd_pod_m.* FROM sd_pod_m JOIN sd ON sd.id=sd_pod_m.id WHERE zak_tvar LIKE 'mág%' AND zak_tvar LIKE '%'
