@@ -69,6 +69,10 @@ def sp():
     loguj(request)
     return render_template("m_metadata/sp.jinja.html")
 
+@metadata_blueprint.route("/alternacie/")
+def alternacie():
+    loguj(request)
+    return render_template("m_metadata/alternacie.jinja.html")
 
 @metadata_blueprint.route("/daj_sp/", methods=["GET"])
 def daj_sp():

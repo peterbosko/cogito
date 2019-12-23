@@ -1036,3 +1036,14 @@ $(selector).select2({
         }
 
     }
+	
+(function($){
+	$(document).ready(function(){
+		$('ul.dropdown-menu [data-toggle=dropdown]').on('click', function(event) {
+			event.preventDefault(); 
+			event.stopPropagation(); 
+			$(this).parent().parent().find('.dropdown-menu').removeClass('show');
+			$(this).parent().find('.dropdown-menu').toggleClass('show');
+		});
+	});
+})(jQuery);
