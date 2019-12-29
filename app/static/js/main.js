@@ -187,22 +187,32 @@ function accept_word(that){
 	return false;
 }
 
-function add_word(that, is_new){
+function add_word(that, is_new, add_new_meaning){
+
+    add_new_meaning = add_new_meaning || false;
+
 	var main = $("iframe.cke_wysiwyg_frame").contents();
 	var slovo = '';
 	var sdid = '';
 	var sd = '';
 	var param = '';
 	var modal_title = '';
-	
-	if(is_new == true) {
+
+    sd = main.find('.active').attr('sd');
+
+
+	if(is_new == true && !add_new_meaning) {
 		slovo = main.find('.active').html();
-		param = '?slovo='+slovo;
+		param = '?slovo='+slovo+'&slovnyDruh='+sd;
+
 		loadTemplateIntoModal('#defaultModal', 'Pridanie slova','/pridaj_slovo_vyber_sd/'+param);
 	} else {
 		sdid = main.find('.active').attr('sdid');
-		sd = main.find('.active').attr('sd');
-		param = '&sd_id='+sdid;
+		param = '?sd_id='+sdid+'&slovnyDruh='+sd;
+
+		if (add_new_meaning)
+		    param = param+'&ulozAkoNoveSlovo=true';
+
 		if (sd=="OSTATNE"||
             sd=="CASTICA"||
             sd=="SPOJKA"||
@@ -228,9 +238,50 @@ function add_word(that, is_new){
         else if (sd=="PREDLOZKA"){
             modal_title = 'Pridať predložku';
         }
-		loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', modal_title,'/zmenit_sd/?pridavanyDruh='+sd+param);
+		loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', modal_title,'/zmenit_sd/'+param);
 	}
 	
+}
+
+function edit_sd(that){
+	var main = $("iframe.cke_wysiwyg_frame").contents();
+	var slovo = '';
+	var sdid = '';
+	var sd = '';
+	var param = '';
+	var modal_title = '';
+
+    sd = main.find('.active').attr('sd');
+
+	sdid = main.find('.active').attr('sdid');
+	param = '?sd_id='+sdid+'&slovnyDruh='+sd;
+
+    if (sd=="OSTATNE"||
+            sd=="CASTICA"||
+            sd=="SPOJKA"||
+            sd=="PRISLOVKA"||
+            sd=="CITOSLOVCE"){
+            modal_title = 'Zmeniť slovo iného druhu';
+    }
+    else if (sd=="POD_M"){
+			modal_title = 'Zmeniť podstatné meno';
+    }
+    else if (sd=="SLOVESO"){
+            modal_title = 'Zmeniť sloveso';
+    }
+    else if (sd=="ZAMENO"){
+            modal_title = 'Zmeniť zámeno';
+    }
+    else if (sd=="CISLOVKA"){
+            modal_title = 'Zmeniť číslovku';
+    }
+    else if (sd=="PRID_M"){
+            modal_title = 'Zmeniť prídavné meno';
+    }
+    else if (sd=="PREDLOZKA"){
+            modal_title = 'Zmeniť predložku';
+    }
+	loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', modal_title,'/zmenit_sd/'+param);
 }
 
 function setProgressBar(){
@@ -388,13 +439,17 @@ function load_slovo(that){
 		}
 	});
 	
-	var save_name = 'Potvrdiť slovo <i class="fa fa-check-double"></i>';
+	var save_name = 'Potvrdiť slovo v kontexte <i class="fa fa-check-double"></i>';
+
+	var editovat_sd = '<a href="#" onclick="edit_sd(this);" class="btn" style="position: absolute; right: 240px;">Editovať v slovníku <i class="fa fa-edit"></i></a>';
+
 	if(class_type == 's') {
-		save_name = 'Upraviť slovo <i class="fa fa-edit"></i>';
+		save_name = 'Upraviť slovo v kontexte <i class="fa fa-edit"></i>';
 	}
 	if(class_type != 'n') {
 		settings_row_buttons.find('.setting-accept_word').html('<a href="#" onclick="accept_word(this);" class="btn" style="position: absolute; right: 20px;">'+save_name+'</a>');
-		settings_row_buttons.find('.setting-accept_word').append('<a href="#" onclick="add_word(this, false);" class="btn" style="position: absolute; left: 200px;"><i class="fa fa-plus"></i> Pridať nový význam slova <i class="fa fa-info-circle"></i></a>');
+		settings_row_buttons.find('.setting-accept_word').append(editovat_sd);
+		settings_row_buttons.find('.setting-accept_word').append('<a href="#" onclick="add_word(this, false, true);" class="btn" style="position: absolute; left: 200px;"><i class="fa fa-plus"></i> Pridať nový význam slova <i class="fa fa-info-circle"></i></a>');
 	} else {
 		settings_row_buttons.find('.setting-accept_word').html('');
 	}

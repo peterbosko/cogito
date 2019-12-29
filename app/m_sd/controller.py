@@ -6,6 +6,7 @@ from sqlalchemy import alias
 from app.c_service import *
 from app.main_helper import *
 import jsonpickle
+from app.sd_service import *
 
 sd_blueprint = Blueprint("sd", __name__)
 
@@ -39,10 +40,10 @@ def daj_slova():
 
     if druh:
         sd_al = alias(SlovnyDruh, name="slov_d_al")
-        filtered = filtered.join(sd_al).filter(SlovnyDruh.typ == druh)
+        filtered = filtered.join(sd_al).filter(Slovo.sd_id == SlovnyDruh.id).filter(SlovnyDruh.typ == druh)
 
     if iba_anotovane.lower() == "true":
-        filtered = filtered.filter(Slovo.anotacia.isnot(None))
+        filtered = filtered.filter(Slovo.anotacia.isnot(None)).filter(Slovo.anotacia != '')
 
     if anotacia:
         filtered = filtered.filter(Slovo.anotacia.like(anotacia))
@@ -437,17 +438,35 @@ def zmenit_sd_post():
             else:
                 pm = PodstatneMeno()
 
-            pm.zak_tvar = export.zak_tvar
-            pm.popis = export.popis
-            pm.podrod = export.podrod
-            pm.rod = export.rod
-            pm.podrod = export.podrod
+            if export.tab == "zakladne":
 
-            if pm.sloveso_id and not export.sloveso_id:
-                pm.sloveso_id = None
+                pm.zak_tvar = export.zak_tvar
+                pm.popis = export.popis
+                pm.rod = export.rod
+                pm.podrod = export.podrod
 
-            if export.sloveso_id:
-                pm.sloveso_id = export.sloveso_id
+                if pm.sloveso_id and not export.sloveso_id:
+                    pm.sloveso_id = None
+
+                if export.sloveso_id:
+                    pm.sloveso_id = export.sloveso_id
+
+                if export.pocitatelnost:
+                    pm.pocitatelnost = export.pocitatelnost
+                else:
+                    pm.pocitatelnost = None
+
+                if export.sem_priznak_id:
+                    pm.sem_priznak_id = export.sem_priznak_id
+                else:
+                    pm.sem_priznak_id = None
+
+            elif export.tab == "slova":
+                pm.koren = export.koren
+                pm.vzor = export.vzor
+                pm.prefix = export.prefix
+                pm.sufix = export.sufix
+                pm.paradigma = export.paradigma
 
             db.session.add(pm)
             db.session.commit()
@@ -601,75 +620,56 @@ def zmenit_sd_post():
             db.session.commit()
             sd_id = spojka.id
 
-        idcka = []
+        if export.tab == "slova":
 
-        for sl in export.slova:
-            if sl['id']:
-                slovo = Slovo.query.get(sl['id'])
-            else:
-                slovo = Slovo()
-
-            slovo.tvar = sl['tvar']
-            slovo.rod = sl['rod']
-            slovo.podrod = sl['podrod']
-            slovo.stupen = sl['stupen']
-            slovo.pad = sl['pad']
-            slovo.sposob = sl['sposob']
-            slovo.osoba = sl['osoba']
-            slovo.cas = sl['cas']
-            slovo.pricastie = sl['pricastie']
-            slovo.cislo = sl['cislo']
-            slovo.zvratnost = sl["zvratnost"]
-            slovo.anotacia = sl['anotacia']
-            slovo.sd_id = sd_id
-
-            if export.typ == "SLOVESO":
-                if 'I' in sl['anotacia']:
-                    slovo.je_neurcitok = 'A'
+            for sl in export.slova:
+                if sl['id']:
+                    slovo = Slovo.query.get(sl['id'])
                 else:
-                    slovo.je_neurcitok = 'N'
-                if '-' in sl['anotacia']:
-                    slovo.je_negacia = 'A'
-                elif '+' in sl['anotacia']:
-                    slovo.je_negacia = 'N'
-                if 'H' in sl['anotacia']:
-                    slovo.je_prechodnik= 'A'
-                else:
-                    slovo.je_prechodnik = 'N'
+                    slovo = Slovo()
 
-            slovo.user_id = int(session["logged"])
-            slovo.zmenene = datetime.datetime.now()
+                slovo.tvar = sl['tvar']
+                slovo.rod = sl['rod']
+                slovo.podrod = sl['podrod']
+                slovo.stupen = sl['stupen']
+                slovo.pad = sl['pad']
+                slovo.sposob = sl['sposob']
+                slovo.osoba = sl['osoba']
+                slovo.cas = sl['cas']
+                slovo.pricastie = sl['pricastie']
+                slovo.cislo = sl['cislo']
+                slovo.zvratnost = sl["zvratnost"]
+                slovo.anotacia = sl['anotacia']
+                slovo.sd_id = sd_id
 
-            db.session.add(slovo)
-            db.session.commit()
+                if export.typ == "SLOVESO":
+                    if 'I' in sl['anotacia']:
+                        slovo.je_neurcitok = 'A'
+                    else:
+                        slovo.je_neurcitok = 'N'
+                    if '-' in sl['anotacia']:
+                        slovo.je_negacia = 'A'
+                    elif '+' in sl['anotacia']:
+                        slovo.je_negacia = 'N'
+                    if 'H' in sl['anotacia']:
+                        slovo.je_prechodnik= 'A'
+                    else:
+                        slovo.je_prechodnik = 'N'
 
-            export.id = slovo.id
+                slovo.user_id = int(session["logged"])
+                slovo.zmenene = datetime.datetime.now()
 
-            idcka.append(export.id)
+                db.session.add(slovo)
+                db.session.commit()
 
-        for slovo in Slovo.query.filter(Slovo.sd_id == sd_id):
-            if slovo.id not in idcka:
-                db.session.delete(slovo)
+            for slovo in export.zmazaneSlova:
+                slovo_id = int(slovo)
+                if slovo_id > 0:
+                    db.session.delete(Slovo.query.get(slovo_id))
 
         db.session.commit()
 
-    else:
-        response.status = ResponseStatus.ERROR
-        response.error_text = "Nedostatočné práva pre operáciu"
-
-    return json.dumps(response.__dict__)
-
-
-@sd_blueprint.route("/zmenit_slova_sd/", methods=['POST'])
-def zmenit_slova_sd():
-    loguj(request)
-    response = CommonResponse()
-
-    if som_admin_slov():
-        js = request.json
-        js["py/object"] = ".".join([SDExport.__module__, SDExport.__name__])
-        strjson = str(js).replace("'", '"')
-        export = jsonpickle.decode(strjson)
+        response.data = sd_id
 
     else:
         response.status = ResponseStatus.ERROR
@@ -749,20 +749,57 @@ def daj_autocomplete_slovies():
     return jsonpickle.encode(response)
 
 
+@sd_blueprint.route("/vrat_sd_id/", methods=["GET"])
+def vrat_sd_id():
+    sd_id = request.args.get("sd_id", "")
+    slovo = request.args.get("slovo", "")
+    sdruh = request.args.get("slovnyDruh", "")
+
+    if sd_id and sd_id != "None":
+        pass
+    else:
+        if slovo and slovo != "None":
+            sd_al = alias(SlovnyDruh, name="slov_d_al")
+            sl = db.session.query(Slovo).filter(Slovo.tvar == slovo)
+            sl = sl.join(sd_al).filter(Slovo.sd_id == SlovnyDruh.id).filter(SlovnyDruh.typ == sdruh)
+
+            if sl.count() >= 1:
+                sd_id = sl.first().sd_id
+            else:
+                sd_id = -1
+
+    response = CommonResponse()
+
+    if sd_id and sd_id != "None":
+        response.status = ResponseStatus.OK
+
+        response.data = sd_id
+
+    else:
+        response.status = ResponseStatus.ERROR
+        response.error_text = "Zlé parametre !"
+
+    return jsonpickle.encode(response)
+
+
 @sd_blueprint.route("/vrat_cely_slovny_druh/", methods=["GET"])
 def vrat_cely_slovny_druh():
     loguj(request)
     sd_id = request.args.get("sd_id", "")
 
-    sd = SlovnyDruh.query.get(sd_id)
-
-    sdExport = sd.exportujPlnySD()
-
     response = CommonResponse()
+
+    slovny_druh = SlovnyDruh.query.get(sd_id)
+
+    sd_export = slovny_druh.exportujPlnySD()
 
     response.status = ResponseStatus.OK
 
-    response.data = sdExport
+    response.data = sd_export
+
+    response.data.vzory = daj_vsetky_vzory()
+
+    response.data.prefix_sufix = daj_vsetky_prefix_sufix()
 
     return jsonpickle.encode(response)
 
@@ -822,3 +859,34 @@ def zmaz_cely_slovny_druh():
 
     return jsonpickle.encode(response)
 
+
+@sd_blueprint.route("/generuj_morfo/", methods=["POST"])
+def generuj_morfo():
+    loguj(request)
+    response = CommonResponse()
+
+    js = request.json
+    js["py/object"] = ".".join([MorfoFilter.__module__, MorfoFilter.__name__])
+    strjson = str(js).replace("'", '"')
+    morfo = jsonpickle.decode(strjson)
+
+    sd = SlovnyDruh.query.get(morfo.sd_id)
+
+    vysledok = []
+
+    if sd.typ == "POD_M":
+
+        podm = PodstatneMeno.query.get(morfo.sd_id)
+
+        vzor_obj = SDVzor.query.filter(SDVzor.vzor == morfo.vzor).filter(SDVzor.rod == podm.rod).first()
+
+        if not vzor_obj:
+            response.error_text = f"Nenašiel sa vzor: {morfo.vzor} rod:{podm.rod}"
+            response.status = ResponseStatus.ERROR
+        else:
+            vysledok = generuj_morfo_pm(morfo, vzor_obj.deklinacia, vzor_obj.alternacia, morfo.paradigma, podm.rod,
+                                        podm.podrod)
+
+    response.data = vysledok
+
+    return jsonpickle.encode(response)

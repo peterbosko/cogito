@@ -2,28 +2,41 @@
     <div class="row">
         <div class="col-2">
             <div class="nav flex-column nav-pills" id="nav-tab" role="tablist" aria-orientation="vertical">
-                <a class="nav-link active zakladne-tab" id="zakladne-tab" data-toggle="pill" href="#zakladne" role="tab" aria-controls="v-pills-home" aria-selected="true">Základné údaje</a>
+                <a class="nav-link zakladne-tab active" id="zakladne-tab" data-toggle="pill" href="#zakladne" role="tab" aria-controls="v-pills-home" aria-selected="true">Základné údaje</a>
                 <a class="nav-link rodicia-tab" id="rodicia-tab" data-toggle="pill" href="#rodicia" role="tab" aria-controls="v-pills-profile" aria-selected="false">Rodičia slova</a>
                 <a class="nav-link slova-tab" id="slova-tab" data-toggle="pill" href="#slova" role="tab" aria-controls="v-pills-messages" aria-selected="false">Slová druhu</a>
             </div>
         </div>
         <div class="col-10">
             <div class="tab-content" id="nav-tabContent">
-                  <div class="tab-pane fade show active" id="zakladne" role="tabpanel" aria-labelledby="zakladne-tab" data-target="{{url_for('sd.sd_zakladne_info')}}?slovnyDruh={{request.args.get('slovnyDruh')}}&sd_id=">
+                  <div class="tab-pane fade active show" id="zakladne" role="tabpanel" aria-labelledby="zakladne-tab"
+                       data-target="{{url_for('sd.sd_zakladne_info')}}?slovo={{request.args.get('slovo')}}&slovnyDruh={{request.args.get('slovnyDruh')}}&ulozAkoNoveSlovo={{request.args.get('ulozAkoNoveSlovo')}}&sd_id=">
                   </div>
-                  <div class="tab-pane fade" id="rodicia" role="tabpanel" aria-labelledby="rodicia-tab" data-target="{{url_for('sd.sd_rodicia')}}?slovnyDruh={{request.args.get('slovnyDruh')}}&sd_id=">
+                  <div class="tab-pane fade" id="rodicia" role="tabpanel" aria-labelledby="rodicia-tab"
+                       data-target="{{url_for('sd.sd_rodicia')}}?slovo={{request.args.get('slovo')}}&slovnyDruh={{request.args.get('slovnyDruh')}}&ulozAkoNoveSlovo={{request.args.get('ulozAkoNoveSlovo')}}&sd_id=">
                   </div>
-                  <div class="tab-pane fade" id="slova" role="tabpanel" aria-labelledby="slova-tab" data-target="{{url_for('sd.sd_slova_zmen')}}?slovnyDruh={{request.args.get('slovnyDruh')}}&sd_id=">
+                  <div class="tab-pane fade" id="slova" role="tabpanel" aria-labelledby="slova-tab"
+                       data-target="{{url_for('sd.sd_slova_zmen')}}?slovo={{request.args.get('slovo')}}&slovnyDruh={{request.args.get('slovnyDruh')}}&ulozAkoNoveSlovo={{request.args.get('ulozAkoNoveSlovo')}}&sd_id=">
                   </div>
             </div>
         </div>
     </div>
 </div>
 
-<input type="hidden" id="hdnSD_ID" value="0"/>
+<input type="hidden" id="hdn_SD_ID" value="0"/>
+<input type="hidden" id="hdn_Povodne_SD_ID" value="0"/>
 <script>
 
     var loadnuteTaby = {};
+
+
+    function setPovodneSD_ID(id){
+        $('#hdn_Povodne_SD_ID').val(id);
+    }
+
+    function getPovodneSD_ID(){
+        return $('#hdn_Povodne_SD_ID').val();
+    }
 
     function setSD_ID(id){
         $('#hdn_SD_ID').val(id);
@@ -35,12 +48,8 @@
 
     var currentTab = {};
 
-    function RefreshContent(e, data) {
-        reloadActiveTab();
-    }
-
     function reloadActiveTab() {
-        var selected = $('#nav-tab .active a');
+        var selected = $('#nav-tab a.active');
         selected.trigger("click");
     }
 
@@ -50,7 +59,15 @@
     }
 
     function show_tab(tab) {
-        var selected = $('#nav-tab .active a').attr('href');
+        var selected = $(currentTab).attr('id');
+
+        if (selected=="zakladne"){
+            if (loadnuteTaby["zakladne"]){
+                if (!ZmenSDZakladneInfo()){
+                    return;
+                }
+            }
+        }
 
         if (loadnuteTaby[$(tab).attr('id')]){
 
@@ -67,7 +84,8 @@
     function load_default_tab() {
         var tab = $('#nav-tab .active');
         tab.tab('show');
-        show_tab($('#' + tab.attr('href').substr(1)));
+        currentTab = tab;
+        show_tab($(tab.attr('href')));
     }
 
     function init_tabs() {
@@ -85,20 +103,66 @@
             });
      }
 
+function load_sd_id(){
+        AjaxMethods.getDataFromGetRequest('{{url_for("sd.vrat_sd_id")}}', "",
+            '?sd_id={{request.args.get("sd_id")}}&slovo={{request.args.get("slovo")}}&slovnyDruh={{request.args.get("slovnyDruh")}}', function(r){
+            if (r.status==responseOK){//OK vetva
+                if ('{{request.args.get("ulozAkoNoveSlovo")}}' == 'true'){
+                    setPovodneSD_ID(r.data);
+                    setSD_ID(0);
+                }
+                else
+                    setSD_ID(r.data);
+            } else{
+                   swal({ buttons: {},
+                       title  :  "Chyba",
+                       text   :  r.message_text,
+                       icon   :  "error"})
+            }
+        });
+}
 
 $(document).ready(function() {
+    var $modal =  $('#nav-tab').parents('.modal');
+    $modal.find('.btnCancel').removeClass('nodisplay');
+    var $btnSave = $modal.find('.btnSave').removeClass('nodisplay').html("<i class='fa fa-save'></i>&nbsp;Ďalej >>");
+    $btnSave.unbind("click");
+    $btnSave.click(function() {
+        DalsiTab();
+    });
+
+    if ('{{request.args.get("sd_id")}}'!="None"){
+        if ('{{request.args.get("ulozAkoNoveSlovo")}}' == 'true'){
+            setPovodneSD_ID('{{request.args.get("sd_id")}}');
+            setSD_ID(0);
+        }
+        else
+            setSD_ID('{{request.args.get("sd_id")}}');
+    } else if ('{{request.args.get("slovo")}}'!="None"){
+        load_sd_id();
+    }
+
     init_click();
     init_tabs();
 
-    var $modal =  $('#nav-tab').parents('.modal');
-    $modal.find('.btnCancel').removeClass('nodisplay');
-    var $btnSave = $modal.find('.btnSave').removeClass('nodisplay').html("<i class='fa fa-save'></i>&nbsp;Uložiť zmeny");
-    $btnSave.unbind("click");
-    $btnSave.click(function() {
-        UlozSD(true);
-    });
-
 });
 
+
+function DalsiTab(){
+    var selected = $(currentTab).attr('id');
+
+    if (selected == "zakladne"){
+
+        activateTab("rodicia-tab");
+
+    } else if (selected == "rodicia"){
+        activateTab("slova-tab");
+        var $modal =  $('#nav-tab').parents('.modal');
+        var $btnSave = $modal.find('.btnSave').removeClass('nodisplay').html("<i class='fa fa-save'></i>&nbsp;Uložiť");
+    }
+    else{
+        ZmenSlovaSD(true);
+    }
+}
 
 </script>

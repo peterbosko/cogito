@@ -114,13 +114,19 @@ class SlovnyDruh(db.Model):
         export.zak_tvar = self.zak_tvar
         export.popis = self.popis
         export.typ = self.typ
+        export.sem_priznak_id = self.sem_priznak_id
+        export.vzor = self.vzor
+        export.prefix = self.prefix
+        export.sufix = self.sufix
+        export.koren = self.koren
 
         if self.typ == "POD_M":
             pm = PodstatneMeno.query.get(self.id)
             export.rod = pm.rod
             export.podrod = pm.podrod
             export.sloveso_id = pm.sloveso_id
-            
+            export.pocitatelnost = pm.pocitatelnost
+
             if pm.sloveso_id:
                 slov = Sloveso.query.get(pm.sloveso_id)
 
@@ -202,6 +208,7 @@ class PodstatneMeno(SlovnyDruh):
     sloveso = relationship("Sloveso", foreign_keys=[sloveso_id])
     je_negacia = db.Column(db.String(1), nullable=True)
     pocitatelnost = db.Column(db.String(20), nullable=True)
+    paradigma = db.Column(db.String(1), nullable=True)
     __mapper_args__ = {
         'polymorphic_identity': 'POD_M',
     }
@@ -677,15 +684,29 @@ class IntencieSlovesaView(db.Model):
     )
 
 
-class SDVzory(db.Model):
-    __tablename__ = 'sd_vzory'
+class SDVzor(db.Model):
+    __tablename__ = 'sd_vzor'
     __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8mb4', 'mysql_collate': 'utf8mb4_bin'}
     id = db.Column(db.Integer, primary_key=True)
     typ = db.Column(db.String(20), nullable=False)
     rod = db.Column(db.String(1), nullable=False)
+    podrod = db.Column(db.String(1), nullable=True)
     vzor = db.Column(db.String(50), nullable=False)
     deklinacia = db.Column(db.String(500), nullable=False)
     alternacia = db.Column(db.String(50), nullable=True)
+    sklon_stup = db.Column(db.String(50), nullable=False)
+
+    def exportuj(self):
+        export = VzorExport()
+        export.id = self.id
+        export.typ = self.typ
+        export.vzor = self.vzor
+        export.rod = self.rod
+        export.podrod = self.podrod
+        export.deklinacia = self.deklinacia
+        export.alternacia = self.alternacia
+        export.sklon_stup = self.sklon_stup
+        return export
 
 
 class SDPrefixSufix(db.Model):
@@ -696,5 +717,11 @@ class SDPrefixSufix(db.Model):
     prefix_sufix = db.Column(db.String(1), nullable=False)
     hodnota = db.Column(db.String(50), nullable=False)
 
-
+    def exportuj(self):
+        export = PrefixSufixExport()
+        export.id = self.id
+        export.typ = self.typ
+        export.prefix_sufix = self.prefix_sufix
+        export.hodnota = self.hodnota
+        return export
 

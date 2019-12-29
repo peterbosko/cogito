@@ -179,7 +179,7 @@ def updatuj_cislovku(koren, slovo_id, rodic_id, sem_priznak, vzor, prefix, sufix
 
 def zaloz_vzor(druh, vz, rod, deklinacia, alter):
     with flask_app.app_context():
-        v = SDVzory.query.filter(SDVzory.vzor == vz).filter(SDVzory.typ == druh).first()
+        v = SDVzor.query.filter(SDVzor.vzor == vz).filter(SDVzor.typ == druh).first()
 
         r = "M"
 
@@ -189,7 +189,7 @@ def zaloz_vzor(druh, vz, rod, deklinacia, alter):
             r = "S"
 
         if not v:
-            v = SDVzory()
+            v = SDVzor()
 
         v.typ = druh
         v.rod = r

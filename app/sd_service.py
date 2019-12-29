@@ -128,3 +128,169 @@ def vrat_data_sem_stromu(sem_priznak_id, smer):
 
     return data
 
+
+def daj_vsetky_vzory():
+    data = []
+
+    for v in SDVzor.query.all():
+        data.append(v.exportuj())
+
+    return data
+
+
+def daj_vsetky_prefix_sufix():
+    data = []
+
+    for v in SDPrefixSufix.query.all():
+        data.append(v.exportuj())
+
+    return data
+
+
+def daj_anotaciu_pm(paradigma, rod, podrod, cislo, pad):
+
+    anot_rod = "m"
+
+    if rod == "M" and podrod == "Z":
+        anot_rod = "m"
+    elif rod == "M" and podrod == "N":
+        anot_rod = "i"
+    elif rod == "Z":
+        anot_rod = "f"
+    elif rod == "S":
+        anot_rod = "n"
+
+    anot_cislo = "s"
+
+    if cislo == "J":
+        anot_cislo = "s"
+    else:
+        anot_cislo = "p"
+
+    anot_pad = "1"
+
+    if pad == "Nom":
+        anot_pad = "1"
+    elif pad == "Gen":
+        anot_pad = "2"
+    elif pad == "Dat":
+        anot_pad = "3"
+    elif pad == "Aku":
+        anot_pad = "4"
+    elif pad == "Vok":
+        anot_pad = "5"
+    elif pad == "Lok":
+        anot_pad = "6"
+    elif pad == "Ins":
+        anot_pad = "7"
+
+    anotacia = f"S{paradigma}{anot_rod}{anot_cislo}{anot_pad}"
+
+    return anotacia
+
+
+def daj_tvar_pm(koren, deklinacia, alternacia, paradigma, rod, podrod, cislo, pad):
+    d = {"Nom": "", 'Gen': "", 'Dat': "", 'Aku': "", 'Lok': "", 'Ins': ""}
+
+    splitted = deklinacia.split(",")
+
+    if cislo == "J":
+        d["Nom"] = splitted[0]
+        d["Gen"] = splitted[1]
+        d["Dat"] = splitted[2]
+        d["Aku"] = splitted[3]
+        d["Lok"] = splitted[4]
+        d["Ins"] = splitted[5]
+    else:
+        d["Nom"] = splitted[6]
+        d["Gen"] = splitted[7]
+        d["Dat"] = splitted[8]
+        d["Aku"] = splitted[9]
+        d["Lok"] = splitted[10]
+        d["Ins"] = splitted[11]
+
+    return f"{koren}{d[pad]}", pad, cislo, daj_anotaciu_pm(paradigma, rod, podrod, cislo, pad)
+
+
+def generuj_morfo_pm(filter_obj, deklinacia, alternacia, paradigma, rod, podrod):
+
+    podm = PodstatneMeno.query.get(filter_obj.sd_id)
+
+    vysledok = []
+
+    if filter_obj.cislo == "" or filter_obj.cislo == "J":
+        if filter_obj.pad == "" or filter_obj.pad == "Nom":
+            morfo_res_obj = MorfoFilter()
+            morfo_res_obj.tvar, morfo_res_obj.pad, morfo_res_obj.cislo, morfo_res_obj.anotacia = \
+                daj_tvar_pm(filter_obj.koren, deklinacia, alternacia, paradigma, rod, podrod, "J", "Nom")
+            vysledok.append(morfo_res_obj)
+
+        if filter_obj.pad == "" or filter_obj.pad == "Gen":
+            morfo_res_obj = MorfoFilter()
+            morfo_res_obj.tvar, morfo_res_obj.pad, morfo_res_obj.cislo, morfo_res_obj.anotacia = \
+                daj_tvar_pm(filter_obj.koren, deklinacia, alternacia, paradigma, rod, podrod, "J", "Gen")
+            vysledok.append(morfo_res_obj)
+
+        if filter_obj.pad == "" or filter_obj.pad == "Dat":
+            morfo_res_obj = MorfoFilter()
+            morfo_res_obj.tvar, morfo_res_obj.pad, morfo_res_obj.cislo, morfo_res_obj.anotacia = \
+                daj_tvar_pm(filter_obj.koren, deklinacia, alternacia, paradigma, rod, podrod, "J", "Dat")
+            vysledok.append(morfo_res_obj)
+
+        if filter_obj.pad == "" or filter_obj.pad == "Aku":
+            morfo_res_obj = MorfoFilter()
+            morfo_res_obj.tvar, morfo_res_obj.pad, morfo_res_obj.cislo, morfo_res_obj.anotacia = \
+                daj_tvar_pm(filter_obj.koren, deklinacia, alternacia, paradigma, rod, podrod, "J", "Aku")
+            vysledok.append(morfo_res_obj)
+
+        if filter_obj.pad == "" or filter_obj.pad == "Lok":
+            morfo_res_obj = MorfoFilter()
+            morfo_res_obj.tvar, morfo_res_obj.pad, morfo_res_obj.cislo, morfo_res_obj.anotacia = \
+                daj_tvar_pm(filter_obj.koren, deklinacia, alternacia, paradigma, rod, podrod, "J", "Lok")
+            vysledok.append(morfo_res_obj)
+
+        if filter_obj.pad == "" or filter_obj.pad == "Ins":
+            morfo_res_obj = MorfoFilter()
+            morfo_res_obj.tvar, morfo_res_obj.pad, morfo_res_obj.cislo, morfo_res_obj.anotacia = \
+                daj_tvar_pm(filter_obj.koren, deklinacia, alternacia, paradigma, rod, podrod, "J", "Ins")
+            vysledok.append(morfo_res_obj)
+
+    if filter_obj.cislo == "" or filter_obj.cislo in ("M","P"):
+        if filter_obj.pad == "" or filter_obj.pad == "Nom":
+            morfo_res_obj = MorfoFilter()
+            morfo_res_obj.tvar, morfo_res_obj.pad, morfo_res_obj.cislo, morfo_res_obj.anotacia = \
+                daj_tvar_pm(filter_obj.koren, deklinacia, alternacia, paradigma, rod, podrod, "M", "Nom")
+            vysledok.append(morfo_res_obj)
+
+        if filter_obj.pad == "" or filter_obj.pad == "Gen":
+            morfo_res_obj = MorfoFilter()
+            morfo_res_obj.tvar, morfo_res_obj.pad, morfo_res_obj.cislo, morfo_res_obj.anotacia = \
+                daj_tvar_pm(filter_obj.koren, deklinacia, alternacia, paradigma, rod, podrod, "M", "Gen")
+            vysledok.append(morfo_res_obj)
+
+        if filter_obj.pad == "" or filter_obj.pad == "Dat":
+            morfo_res_obj = MorfoFilter()
+            morfo_res_obj.tvar, morfo_res_obj.pad, morfo_res_obj.cislo, morfo_res_obj.anotacia = \
+                daj_tvar_pm(filter_obj.koren, deklinacia, alternacia, paradigma, rod, podrod, "M", "Dat")
+            vysledok.append(morfo_res_obj)
+
+        if filter_obj.pad == "" or filter_obj.pad == "Aku":
+            morfo_res_obj = MorfoFilter()
+            morfo_res_obj.tvar, morfo_res_obj.pad, morfo_res_obj.cislo, morfo_res_obj.anotacia = \
+                daj_tvar_pm(filter_obj.koren, deklinacia, alternacia, paradigma, rod, podrod, "M", "Aku")
+            vysledok.append(morfo_res_obj)
+
+        if filter_obj.pad == "" or filter_obj.pad == "Lok":
+            morfo_res_obj = MorfoFilter()
+            morfo_res_obj.tvar, morfo_res_obj.pad, morfo_res_obj.cislo, morfo_res_obj.anotacia = \
+                daj_tvar_pm(filter_obj.koren, deklinacia, alternacia, paradigma, rod, podrod, "M", "Lok")
+            vysledok.append(morfo_res_obj)
+
+        if filter_obj.pad == "" or filter_obj.pad == "Ins":
+            morfo_res_obj = MorfoFilter()
+            morfo_res_obj.tvar, morfo_res_obj.pad, morfo_res_obj.cislo, morfo_res_obj.anotacia = \
+                daj_tvar_pm(filter_obj.koren, deklinacia, alternacia, paradigma, rod, podrod, "M", "Ins")
+            vysledok.append(morfo_res_obj)
+
+    return vysledok
+

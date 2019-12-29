@@ -7,7 +7,7 @@
                          Základný tvar:
                     </label>
                     <div class="col-sm-4">
-                        <input type="text" id="txtFormZakTvar" name="txtFormZakTvar" class="form-control" data-fv-row=".col-sm-4"
+                        <input type="text" id="txtFormZakTvar" name="txtFormZakTvar" class="form-control zmenaZakInfo" data-fv-row=".col-sm-4"
                          data-fv-notempty="true" data-fv-notempty-message="Základný tvar je povinný"
                          value="">
                     </div>
@@ -15,15 +15,25 @@
                          Popis slova:
                     </label>
                     <div class="col-sm-4">
-                        <input type="text" id="txtFormPopis" name="taFormPopis" class="form-control" name="txtFormPopis">
+                        <input type="text" id="txtFormPopis" name="txtFormPopis" class="form-control zmenaZakInfo">
                     </div>
                 </div>
+                <!--
+                <div class="row marginbottomDetailSD">
+                    <label class="col-sm-2" for="prepend">
+                         Tag významu:
+                    </label>
+                    <div class="col-sm-4">
+                        <input type="text" id="txtTagVyznamu" name="txtTagVyznamu" class="form-control">
+                    </div>
+                </div>
+                -->
                 <div class="row POD_M marginbottomDetailSD nodisplay">
                     <label class="col-sm-2" for="prepend">
                          Rod:
                     </label>
                     <div class="col-sm-2">
-                        <select id="txtPOD_M_ROD" class="form-control">
+                        <select id="txtPOD_M_ROD" class="form-control zmenaZakInfo">
                             <option value="M">M</option>
                             <option value="Z">Z</option>
                             <option value="S">S</option>
@@ -33,7 +43,7 @@
                          Podrod:
                     </label>
                     <div class="col-sm-2">
-                        <select id="txtPOD_M_PODROD" class="form-control">
+                        <select id="txtPOD_M_PODROD" class="form-control zmenaZakInfo">
                             <option value="">Žiaden</option>
                             <option value="Z">Z</option>
                             <option value="N">N</option>
@@ -43,7 +53,7 @@
                          Nav. na sloveso:
                     </label>
                     <div class="col-sm-3">
-                        <select id="ddlPOD_M_Sloveso" name="ddlPOD_M_Sloveso">
+                        <select id="ddlPOD_M_Sloveso" name="ddlPOD_M_Sloveso zmenaZakInfo">
                             <option></option>
                         </select>
                     </div>
@@ -53,7 +63,7 @@
                          Počítateľnosť:
                     </label>
                     <div class="col-sm-4">
-                        <select id="ddlPOD_M_pocitatelnost" class="form-control">
+                        <select id="ddlPOD_M_pocitatelnost" class="form-control zmenaZakInfo">
                             <option value="" selected>neurčené</option>
                             <option value="poc">Počitateľné</option>
                             <option value="hrom">Hromadné</option>
@@ -65,7 +75,7 @@
                          Zvratnost(sa/si):
                     </label>
                     <div class="col-sm-2">
-                        <select id="ddlSLOVESO_Zvratnost" name="ddlSLOVESO_Zvratnost" class="form-control">
+                        <select id="ddlSLOVESO_Zvratnost" name="ddlSLOVESO_Zvratnost" class="form-control zmenaZakInfo">
                             <option value="">Nezvratné</option>
                             <option value="sa">sa</option>
                             <option value="si">si</option>
@@ -75,13 +85,13 @@
                          Je negácia:
                     </label>
                     <div class="col-sm-1">
-                        <input type="checkbox" id="cbSLOVESO_je_negacia" name="cbSLOVESO_je_negacia"/>
+                        <input type="checkbox" id="cbSLOVESO_je_negacia" name="cbSLOVESO_je_negacia" class="zmenaZakInfo"/>
                     </div>
                     <label class="col-sm-3" for="prepend">
                          Pozitívne sloveso:
                     </label>
                     <div class="col-sm-3">
-                        <select id="ddlSLOVESO_Sloveso" name="ddlSLOVESO_Sloveso">
+                        <select id="ddlSLOVESO_Sloveso" name="ddlSLOVESO_Sloveso" class="zmenaZakInfo">
                             <option></option>
                         </select>
                     </div>
@@ -91,7 +101,7 @@
                          Rod:
                     </label>
                     <div class="col-sm-2">
-                        <select id="ddlZAMENO_ROD" class="form-control">
+                        <select id="ddlZAMENO_ROD" class="form-control zmenaZakInfo">
                             <option value="">Žiaden</option>
                             <option value="M">M</option>
                             <option value="Z">Z</option>
@@ -102,7 +112,7 @@
                          Podrod:
                     </label>
                     <div class="col-sm-2">
-                        <select id="ddlZAMENO_PODROD" class="form-control">
+                        <select id="ddlZAMENO_PODROD" class="form-control zmenaZakInfo">
                             <option value="">Žiaden</option>
                             <option value="Z">Z</option>
                             <option value="N">N</option>
@@ -112,7 +122,7 @@
                          Číslo:
                     </label>
                     <div class="col-sm-2">
-                        <select id="ddlZAMENO_CISLO" name="ddlZAMENO_CISLO" class="form-control">
+                        <select id="ddlZAMENO_CISLO" name="ddlZAMENO_CISLO" class="form-control zmenaZakInfo">
                             <option value="">Žiadne</option>
                             <option value="J">J</option>
                             <option value="M">M</option>
@@ -125,7 +135,7 @@
                          Rod:
                     </label>
                     <div class="col-sm-2">
-                        <select id="ddlCISLOVKA_ROD" class="form-control">
+                        <select id="ddlCISLOVKA_ROD" class="form-control zmenaZakInfo">
                             <option value="M">M</option>
                             <option value="Z">Z</option>
                             <option value="S">S</option>
@@ -135,7 +145,7 @@
                          Podrod:
                     </label>
                     <div class="col-sm-1">
-                        <select id="ddlCISLOVKA_PODROD" class="form-control">
+                        <select id="ddlCISLOVKA_PODROD" class="form-control zmenaZakInfo">
                             <option value="">Žiaden</option>
                             <option value="Z">Z</option>
                             <option value="N">N</option>
@@ -145,7 +155,7 @@
                          Číslo:
                     </label>
                     <div class="col-sm-1">
-                        <select id="ddlFormCISLOVKA_Cislo" name="ddlFormCISLOVKA_Cislo" class="form-control">
+                        <select id="ddlFormCISLOVKA_Cislo" name="ddlFormCISLOVKA_Cislo" class="form-control zmenaZakInfo">
                             <option value="">Žiadne</option>
                             <option value="J">J</option>
                             <option value="M">M</option>
@@ -156,25 +166,26 @@
                          Hodnota:
                     </label>
                     <div class="col-sm-3">
-                        <input type="text" id="txtFormCISLOVKA_HODNOTA" name="txtFormCISLOVKA_HODNOTA" class="form-control" data-fv-row=".col-sm-3"
+                        <input type="text" id="txtFormCISLOVKA_HODNOTA" name="txtFormCISLOVKA_HODNOTA"
+                               class="form-control zmenaZakInfo" data-fv-row=".col-sm-3"
                          data-fv-notempty="true" data-fv-notempty-message="Hodnora je povinná"
                          value="">
                     </div>
                 </div>
                 <div class="row PRID_M marginbottomDetailSD nodisplay">
-                    <label class="col-sm-2" for="prepend">
-                         Nav. na sloveso:
-                    </label>
-                    <div class="col-sm-4">
-                        <select id="ddlPRID_M_Sloveso" name="ddlPRID_M_Sloveso">
-                            <option></option>
-                        </select>
-                    </div>
                     <label class="col-sm-3" for="prepend">
                          Je privlastňovacie:
                     </label>
                     <div class="col-sm-3">
-                        <input type="checkbox" id="cbPRID_M_je_priv" name="cbPRID_M_je_priv"/>
+                        <input type="checkbox" id="cbPRID_M_je_priv" name="cbPRID_M_je_priv" class="zmenaZakInfo"/>
+                    </div>
+                    <label class="col-sm-2" for="prepend">
+                         Nav. na sloveso:
+                    </label>
+                    <div class="col-sm-4">
+                        <select id="ddlPRID_M_Sloveso" name="ddlPRID_M_Sloveso" class="zmenaZakInfo">
+                            <option></option>
+                        </select>
                     </div>
                 </div>
                 <div class="row PREDLOZKA marginbottomDetailSD nodisplay">
@@ -182,7 +193,7 @@
                          Pády predložky:
                     </label>
                     <div class="col-sm-4">
-                        <select id="ddlPREDLOZKA_Pady" name="ddlPREDLOZKA_Pady"  multiple="multiple">
+                        <select id="ddlPREDLOZKA_Pady" name="ddlPREDLOZKA_Pady"  multiple="multiple" class="zmenaZakInfo">
                             <option value="Gen">Gen</option>
                             <option value="Dat">Dat</option>
                             <option value="Aku">Aku</option>
@@ -197,8 +208,8 @@
                          Sémantický príznak:
                     </label>
                     <div class="col-sm-8">
-                        <select id="ddlSEM_PRIZ" class="form-control">
-                            <option value="">Nenastavený</option>
+                        <select id="ddlSEM_PRIZ" class="form-control zmenaZakInfo">
+                            <option value="" selected>Nenastavený</option>
                         {% for sempm in sem_priz_pod_m %}
                             <option value="{{ sempm.id }}">{{ "("+sempm.kod+") "+sempm.nazov }}</option>
                         {% endfor %}
@@ -210,8 +221,8 @@
                          Sémantický príznak prídavného mena:
                     </label>
                     <div class="col-sm-8">
-                        <select id="ddlSEM_PRIZ_PRID_M" class="form-control">
-                            <option value="">Nenastavený</option>
+                        <select id="ddlSEM_PRIZ_PRID_M" class="form-control zmenaZakInfo">
+                            <option value="" selected>Nenastavený</option>
                         {% for sempridm in sem_priz_prid_m %}
                             <option value="{{ sempridm.id }}">{{ "("+sempridm.kod+") "+sempridm.nazov }}</option>
                         {% endfor %}
@@ -223,8 +234,8 @@
                          Sémantický príznak číslovky:
                     </label>
                     <div class="col-sm-8">
-                        <select id="ddlSEM_PRIZ_CISLOVKA" class="form-control">
-                            <option value="">Nenastavený</option>
+                        <select id="ddlSEM_PRIZ_CISLOVKA" class="form-control zmenaZakInfo">
+                            <option value="" selected>Nenastavený</option>
                         {% for sempcis in sem_priz_cislovka %}
                             <option value="{{ sempcis.id }}">{{ "("+sempcis.kod+") "+sempcis.nazov }}</option>
                         {% endfor %}
@@ -236,22 +247,29 @@
 </div>
 <script>
 
+var zmenaVZakladneInfo = false;
+
 function NastavSloveso(itemid, id_slovesa, text_slovesa){
     if (id_slovesa)
         $(itemid).append("<option selected value='"+id_slovesa+"'>"+text_slovesa+"</option>");
 }
 
-
-function NacitajSD(id){
-        AjaxMethods.getDataFromGetRequest('{{url_for("sd.vrat_cely_slovny_druh")}}', "", "?sd_id="+id, function(r){
+function NacitajZakladneInfoSD(sd_id){
+        AjaxMethods.getDataFromGetRequest('{{url_for("sd.vrat_cely_slovny_druh")}}', "",
+        "?sd_id="+sd_id, function(r){
             if (r.status==responseOK){//OK vetva
                 $('#txtFormZakTvar').val(r.data.zak_tvar);
-                $('#taFormPopis').val(r.data.popis);
+                $('#txtFormPopis').val(r.data.popis);
+
+                if (r.data.sem_priznak_id)
+                    $('#ddlSEM_PRIZ').val(r.data.sem_priznak_id);
 
                 if (r.data.typ=="POD_M"){
                     $('#txtPOD_M_ROD').val(r.data.rod);
                     $('#txtPOD_M_PODROD').val(r.data.podrod);
                     NastavSloveso('#ddlPOD_M_Sloveso',r.data.sloveso_id,r.data.sloveso_tvar);
+                    if (r.data.pocitatelnost)
+                        $('#ddlPOD_M_pocitatelnost').val(r.data.pocitatelnost);
                 }
                 else if (r.data.typ=="PRID_M"){
                     $('#cbPRID_M_je_priv').prop('checked',r.data.je_privlastnovacie=="A");
@@ -266,7 +284,7 @@ function NacitajSD(id){
                     $('#ddlSLOVESO_Zvratnost').val(r.data.zvratnost);
                     $('#cbSLOVESO_je_negacia').prop('checked',r.data.je_negacia=="A");
                     NastavSloveso('#ddlSLOVESO_Sloveso',r.data.sloveso_id,r.data.sloveso_tvar);
-                }
+               }
                 else if (r.data.typ=="PREDLOZKA"){
                     var pady = r.data.pady;
                     $("#ddlPREDLOZKA_Pady").val(pady.split(';'));
@@ -278,9 +296,7 @@ function NacitajSD(id){
                     $('#txtFormCISLOVKA_HODNOTA').val(r.data.hodnota);
                 }
 
-                setupSlova(r.data.slova);
-
-                setupDruh(r.data.typ);
+                setupD(r.data.typ);
             } else{
                    swal({ buttons: {},
                        title  :  "Chyba",
@@ -290,21 +306,38 @@ function NacitajSD(id){
         });
 
 }
-function ZmenSD(closeScreen){
+
+function ZmenSDZakladneInfo(){
+
+    if (!zmenaVZakladneInfo && '{{request.args.get("ulozAkoNoveSlovo")}}' != 'true'){
+        return true;
+    }
+
     $('#SDForm').data('formValidation').validate();
     var formIsVald = $('#SDForm').data('formValidation').isValid();
 
     if (formIsVald) {
         var data={};
 
-        data.id = $('#txtFormSlovoId').val();
+        if ('{{request.args.get("ulozAkoNoveSlovo")}}' == 'true'){
+            data.id = 0;
+        }
+        else{
+            data.id = getSD_ID();
+        }
+
+
         data.zak_tvar = $('#txtFormZakTvar').val();
         data.popis = $('#txtFormPopis').val();
         data.typ = typ;
+        data.tab = $(currentTab).attr('id');
+
         if (typ == "POD_M"){
             data.rod = $('#txtPOD_M_ROD').val();
             data.podrod = $('#txtPOD_M_PODROD').val();
             data.sloveso_id = $('#ddlPOD_M_Sloveso').val();
+            data.sem_priznak_id = $('#ddlSEM_PRIZ').val();
+            data.pocitatelnost = $('#ddlPOD_M_pocitatelnost').val();
         }
         else if (typ == "PRID_M"){
             data.sloveso_id = $('#ddlPRID_M_Sloveso').val();
@@ -337,20 +370,12 @@ function ZmenSD(closeScreen){
             data.hodnota=$('#txtFormCISLOVKA_HODNOTA').val();
         }
 
-        data.slova = VratZoznamSlov();
+        var res=false;
 
         AjaxMethods.getDataFromPostRequest('{{url_for("sd.zmenit_sd")}}', "", data, function(r){
             if (r.status==responseOK){//OK vetva
-                swal({ buttons: {},
-                   title  :  "Úspech",
-                   text   :  "Slovný druh bol úspešne pridaný/zmenený",
-                   icon   :  "success"}).then(function(result) {
-                                                var $modal =  $('#txtFormZakTvar').parents('.modal');
-                                                if (closeScreen) $modal.modal('hide');
-                                                if (typeof ZnovuNacitajZaznamy === "function") {
-                                                    ZnovuNacitajZaznamy();
-                                                }
-                                              });
+                res=true;
+                setSD_ID(r.data);
             }
             else {
                    swal({ buttons: {},
@@ -366,35 +391,9 @@ function ZmenSD(closeScreen){
                    text   :  "Chyba validácie. Skontrolujte červené položky",
                    icon   :  "error"});
     }
+
+    return res;
 }
-
-var pocet_slov = 0;
-var typ = "POD_M";
-
-$(document).ready(function() {
-    $('#SDForm').formValidation();
-
-    var pridavanyDruh = "POD_M";
-
-    if ('{{request.args.get("sd_id")}}'!='None'){
-        $('#txtFormSlovoId').val('{{request.args.get("sd_id")}}');
-        NacitajSD($('#txtFormSlovoId').val());
-    }
-    else if ('{{request.args.get("pridavanyDruh")}}'!="" && '{{request.args.get("pridavanyDruh")}}'!="None"){
-        pridavanyDruh = '{{request.args.get("pridavanyDruh")}}';
-        setupDruh(pridavanyDruh);
-        PridajNoveSlovo();
-    }
-
-    bindSlovesoAutocomplete('#ddlPOD_M_Sloveso');
-    bindSlovesoAutocomplete('#ddlSLOVESO_Sloveso');
-    bindSlovesoAutocomplete('#ddlPRID_M_Sloveso');
-
-    $('#ddlPREDLOZKA_Pady').select2();
-
-    setupD('{{request.args.get('slovnyDruh')}}');
-
-});
 
 function setupD(pridavanyDruh){
     typ = pridavanyDruh;
@@ -417,11 +416,49 @@ function setupD(pridavanyDruh){
         $(".PREDLOZKA").removeClass('nodisplay');
     }
 
-
     if (pridavanyDruh == "POD_M" ||
         pridavanyDruh == "PRID_M"){
         $(".SEM_PRIZ_POD_M_PRID_M").removeClass('nodisplay');
     }
 }
+
+$(document).ready(function() {
+    $('#SDForm').formValidation();
+
+    var slovDruh = "{{request.args.get("slovnyDruh")}}";
+
+
+    if ('{{request.args.get("ulozAkoNoveSlovo")}}' == 'true'){
+        if (getPovodneSD_ID()>0)
+            NacitajZakladneInfoSD(getPovodneSD_ID());
+        else{
+            if ('{{request.args.get('slovo')}}'!='None'){
+                $('#txtFormZakTvar').val('{{request.args.get('slovo')}}');
+            }
+        }
+    }
+    else{
+        if (getSD_ID()>0)
+            NacitajZakladneInfoSD(getSD_ID());
+        else{
+            if ('{{request.args.get('slovo')}}'!='None'){
+                $('#txtFormZakTvar').val('{{request.args.get('slovo')}}');
+            }
+        }
+    }
+
+    $('#ddlPREDLOZKA_Pady').select2();
+
+    bindSlovesoAutocomplete('#ddlPOD_M_Sloveso');
+    bindSlovesoAutocomplete('#ddlSLOVESO_Sloveso');
+    bindSlovesoAutocomplete('#ddlPRID_M_Sloveso');
+
+    setupD(slovDruh);
+
+    $('.zmenaZakInfo').change(function(){
+        zmenaVZakladneInfo = true;
+    });
+
+});
 
 </script>

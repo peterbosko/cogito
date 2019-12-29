@@ -441,7 +441,10 @@ form label {
 }
 
 .tabulka_slov th {
-    font-weight:normal;0
+    font-weight:normal;
+}
+.tabulka_filtra th {
+    font-weight:normal;
 }
 
 .anotacia {
@@ -449,7 +452,7 @@ form label {
 }
 
 .slovo_ddl {
-    width : 70px;
+    width : 95px;
 }
 
 .slovo_tvar {
@@ -572,5 +575,5 @@ span.s {
   float:right;
   width:0;
   height:0;
-  margin-top:5px;margin-right:-10px;
+  margin-top:10px;margin-right:-10px;
 }
