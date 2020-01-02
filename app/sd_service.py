@@ -455,8 +455,11 @@ def daj_druhy_stupen_prid_m(vzor_stup, koren):
             return "kratš"
         else:
             return ""
+    elif vzor_stup == "sladký":
+        koren_pole_znakov = daj_pole_znakov(koren)
+        return zretaz_pole_znakov(koren_pole_znakov[:-1])+"š"
     elif vzor_stup == "nový":
-            return koren+"š"
+        return koren+"š"
 
 
 def daj_tvar_prid_m_pre_pad(vzor, vzor_stup, paradigma, koren, rod, podrod, cislo, pad, stupen):
