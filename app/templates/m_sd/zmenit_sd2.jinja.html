@@ -1,13 +1,13 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-2">
+        <div class="col-sm-2">
             <div class="nav flex-column nav-pills" id="nav-tab" role="tablist" aria-orientation="vertical">
                 <a class="nav-link zakladne-tab active" id="zakladne-tab" data-toggle="pill" href="#zakladne" role="tab" aria-controls="v-pills-home" aria-selected="true">Základné údaje</a>
                 <a class="nav-link rodicia-tab" id="rodicia-tab" data-toggle="pill" href="#rodicia" role="tab" aria-controls="v-pills-profile" aria-selected="false">Rodičia slova</a>
                 <a class="nav-link slova-tab" id="slova-tab" data-toggle="pill" href="#slova" role="tab" aria-controls="v-pills-messages" aria-selected="false">Slová druhu</a>
             </div>
         </div>
-        <div class="col-10">
+        <div class="col-sm-10">
             <div class="tab-content" id="nav-tabContent">
                   <div class="tab-pane fade active show" id="zakladne" role="tabpanel" aria-labelledby="zakladne-tab"
                        data-target="{{url_for('sd.sd_zakladne_info')}}?slovo={{request.args.get('slovo')}}&slovnyDruh={{request.args.get('slovnyDruh')}}&ulozAkoNoveSlovo={{request.args.get('ulozAkoNoveSlovo')}}&sd_id=">
@@ -22,13 +22,23 @@
         </div>
     </div>
 </div>
-
+</div>
 <input type="hidden" id="hdn_SD_ID" value="0"/>
 <input type="hidden" id="hdn_Povodne_SD_ID" value="0"/>
 <script>
 
     var loadnuteTaby = {};
 
+    function NastavUlozButton(tab){
+            var $modal =  $('#nav-tab').parents('.modal');
+
+            if (tab == "slova"){
+                var $btnSave = $modal.find('.btnSave').removeClass('nodisplay').html("<i class='fa fa-save'></i>&nbsp;Uložiť");
+            }
+            else{
+                var $btnSave = $modal.find('.btnSave').html("<i class='fa fa-save'></i>&nbsp;Ďalej >>");
+            }
+    }
 
     function setPovodneSD_ID(id){
         $('#hdn_Povodne_SD_ID').val(id);
@@ -70,12 +80,14 @@
         }
 
         if (loadnuteTaby[$(tab).attr('id')]){
-
+            NastavUlozButton($(tab).attr('id'));
         }
         else{
             loadnuteTaby[$(tab).attr('id')] = true;
             tab.html('<i class="fa fa-spinner fa-spin fa-lg"></i>');
             tab.load(tab.attr('data-target')+getSD_ID());
+
+            NastavUlozButton($(tab).attr('id'));
         }
 
         currentTab = tab;
@@ -103,7 +115,7 @@
             });
      }
 
-function load_sd_id(){
+    function load_sd_id(){
         AjaxMethods.getDataFromGetRequest('{{url_for("sd.vrat_sd_id")}}', "",
             '?sd_id={{request.args.get("sd_id")}}&slovo={{request.args.get("slovo")}}&slovnyDruh={{request.args.get("slovnyDruh")}}', function(r){
             if (r.status==responseOK){//OK vetva
@@ -120,7 +132,7 @@ function load_sd_id(){
                        icon   :  "error"})
             }
         });
-}
+    }
 
 $(document).ready(function() {
     var $modal =  $('#nav-tab').parents('.modal');
@@ -152,13 +164,9 @@ function DalsiTab(){
     var selected = $(currentTab).attr('id');
 
     if (selected == "zakladne"){
-
         activateTab("rodicia-tab");
-
     } else if (selected == "rodicia"){
         activateTab("slova-tab");
-        var $modal =  $('#nav-tab').parents('.modal');
-        var $btnSave = $modal.find('.btnSave').removeClass('nodisplay').html("<i class='fa fa-save'></i>&nbsp;Uložiť");
     }
     else{
         ZmenSlovaSD(true);

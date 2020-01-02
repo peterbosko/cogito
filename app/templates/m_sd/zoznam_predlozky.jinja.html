@@ -47,11 +47,11 @@
 
     function PridatZmenitSD(id){
         loadTemplateIntoLargeScreenModal('#defaultModal', 'largescreen', 'Zmena predložky',
-        '{{url_for("sd.zmenit_sd")}}'+'?sd_id='+id);
+        '{{url_for("sd.zmenit_sd")}}'+'?sd_id='+id+'&slovnyDruh='+'PREDLOZKA');
     }
 
     function PridatPREDLOZKU(){
-        loadTemplateIntoLargeScreenModal('#defaultModal', 'largescreen', 'Pridať predložku','{{url_for("sd.zmenit_sd")}}?pridavanyDruh='+'PREDLOZKA');
+        loadTemplateIntoLargeScreenModal('#defaultModal', 'largescreen', 'Pridať predložku','{{url_for("sd.zmenit_sd")}}?slovnyDruh='+'PREDLOZKA');
     }
 
     function predlozkaGridFormatter(data, type, row){

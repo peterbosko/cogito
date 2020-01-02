@@ -449,9 +449,9 @@ function load_slovo(that){
 	if(class_type != 'n') {
 		settings_row_buttons.find('.setting-accept_word').html('<a href="#" onclick="accept_word(this);" class="btn" style="position: absolute; right: 20px;">'+save_name+'</a>');
 		settings_row_buttons.find('.setting-accept_word').append(editovat_sd);
-		settings_row_buttons.find('.setting-accept_word').append('<a href="#" onclick="add_word(this, false, true);" class="btn" style="position: absolute; left: 200px;"><i class="fa fa-plus"></i> Pridať nový význam slova <i class="fa fa-info-circle"></i></a>');
+		settings_row_buttons.find('.setting-accept_word').append('<a href="#" onclick="add_word(this, false, true);" class="btn" style="position: absolute; left: 20px;"><i class="fa fa-plus"></i> Pridať nový význam slova <i class="fa fa-info-circle"></i></a>');
 	} else {
-		settings_row_buttons.find('.setting-accept_word').html('');
+		settings_row_buttons.find('.setting-accept_word').html('<a href="#" onclick="add_word(this, true);" class="btn" style="position: absolute; left: 20px;"><i class="fa fa-plus"></i> Pridať nové slovo</a>');
 	}
 	//$('select').niceSelect();
 

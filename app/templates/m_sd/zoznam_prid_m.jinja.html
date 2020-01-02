@@ -49,11 +49,11 @@
 
     function PridatZmenitSD(id){
         loadTemplateIntoLargeScreenModal('#defaultModal', 'largescreen', 'Zmena prídavného mena',
-        '{{url_for("sd.zmenit_sd")}}'+'?sd_id='+id);
+        '{{url_for("sd.zmenit_sd")}}'+'?sd_id='+id+'&slovnyDruh='+'PRID_M');
     }
 
     function PridatPRIDM(){
-        loadTemplateIntoLargeScreenModal('#defaultModal', 'largescreen', 'Pridať prídavné meno','{{url_for("sd.zmenit_sd")}}?pridavanyDruh='+'PRID_M');
+        loadTemplateIntoLargeScreenModal('#defaultModal', 'largescreen', 'Pridať prídavné meno','{{url_for("sd.zmenit_sd")}}?slovnyDruh='+'PRID_M');
     }
 
     function pmGridFormatter(data, type, row){

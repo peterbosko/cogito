@@ -68,11 +68,11 @@
 
     function PridatZmenitSD(id){
         loadTemplateIntoLargeScreenModal('#defaultModal', 'largescreen', 'Zmena slovesa',
-        '{{url_for("sd.zmenit_sd")}}'+'?sd_id='+id);
+        '{{url_for("sd.zmenit_sd")}}'+'?sd_id='+id+'&slovnyDruh='+'SLOVESO');
     }
 
     function PridatSLOVESO(){
-        loadTemplateIntoLargeScreenModal('#defaultModal', 'largescreen', 'Pridať sloveso','{{url_for("sd.zmenit_sd")}}?pridavanyDruh='+'SLOVESO');
+        loadTemplateIntoLargeScreenModal('#defaultModal', 'largescreen', 'Pridať sloveso','{{url_for("sd.zmenit_sd")}}?slovnyDruh='+'SLOVESO');
     }
 
     function slovesoGridFormatter(data, type, row){

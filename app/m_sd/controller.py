@@ -479,16 +479,26 @@ def zmenit_sd_post():
             else:
                 prm = PridavneMeno()
 
-            prm.zak_tvar = export.zak_tvar
-            prm.popis = export.popis
+            if export.tab == "zakladne":
+                prm.zak_tvar = export.zak_tvar
+                prm.popis = export.popis
+                prm.vzor_stup = export.vzor_stup
 
-            if prm.sloveso_id and not export.sloveso_id:
-                prm.sloveso_id = None
+                if prm.sloveso_id and not export.sloveso_id:
+                    prm.sloveso_id = None
 
-            if export.sloveso_id:
-                prm.sloveso_id = export.sloveso_id
+                if export.sloveso_id:
+                    prm.sloveso_id = export.sloveso_id
 
-            prm.je_privlastnovacie = export.je_privlastnovacie
+                prm.je_privlastnovacie = export.je_privlastnovacie
+
+            elif export.tab == "slova":
+                prm.koren = export.koren
+                prm.vzor = export.vzor
+                prm.prefix = export.prefix
+                prm.sufix = export.sufix
+                prm.paradigma = export.paradigma
+                prm.vzor_stup = export.vzor_stup
 
             db.session.add(prm)
             db.session.commit()
@@ -629,8 +639,13 @@ def zmenit_sd_post():
                     slovo = Slovo()
 
                 slovo.tvar = sl['tvar']
-                slovo.rod = sl['rod']
-                slovo.podrod = sl['podrod']
+                slovo.rod = sl['rod'][0]
+
+                if '/' in sl['rod']:
+                    slovo.podrod = sl['rod'][2]
+                else:
+                    slovo.podrod = ""
+
                 slovo.stupen = sl['stupen']
                 slovo.pad = sl['pad']
                 slovo.sposob = sl['sposob']
@@ -886,7 +901,17 @@ def generuj_morfo():
         else:
             vysledok = generuj_morfo_pm(morfo, vzor_obj.deklinacia, vzor_obj.alternacia, morfo.paradigma, podm.rod,
                                         podm.podrod)
+    elif sd.typ == "PRID_M":
+
+        pridm = PridavneMeno.query.get(morfo.sd_id)
+
+        if not morfo.vzor or not morfo.vzor_stup:
+            response.error_text = f"Nie je nastavený skloňovací alebo stupňovací vzor !"
+            response.status = ResponseStatus.ERROR
+        else:
+            vysledok = generuj_morfo_prid_m(morfo)
 
     response.data = vysledok
 
     return jsonpickle.encode(response)
+

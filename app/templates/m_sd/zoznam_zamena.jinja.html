@@ -59,11 +59,11 @@
 
     function PridatZmenitSD(id){
         loadTemplateIntoLargeScreenModal('#defaultModal', 'largescreen', 'Zmena zámena',
-        '{{url_for("sd.zmenit_sd")}}'+'?sd_id='+id);
+        '{{url_for("sd.zmenit_sd")}}'+'?sd_id='+id+'&slovnyDruh='+'ZAMENO');
     }
 
     function PridatZAMENO(){
-        loadTemplateIntoLargeScreenModal('#defaultModal', 'largescreen', 'Pridať zámeno','{{url_for("sd.zmenit_sd")}}?pridavanyDruh='+'ZAMENO');
+        loadTemplateIntoLargeScreenModal('#defaultModal', 'largescreen', 'Pridať zámeno','{{url_for("sd.zmenit_sd")}}?slovnyDruh='+'ZAMENO');
     }
 
     function zamenoGridFormatter(data, type, row){

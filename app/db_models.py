@@ -84,6 +84,7 @@ class SlovnyDruh(db.Model):
     sufix = db.Column(db.String(20, collation='utf8mb4_bin'), nullable=True)
     sem_priznak_id = db.Column(db.Integer, db.ForeignKey("sem.id"), nullable=True, index=True)
     sem_priznak = relationship("Semantika", foreign_keys=[sem_priznak_id])
+    paradigma = db.Column(db.String(1), nullable=True)
     # sd_hier = relationship("HierarchiaSD", primaryjoin="(SlovnyDruh.id==HierarchiaSD.sd_id)")
 
     __mapper_args__ = {
@@ -138,6 +139,7 @@ class SlovnyDruh(db.Model):
         elif self.typ == "PRID_M":
             prm = PridavneMeno.query.get(self.id)
             export.sloveso_id = prm.sloveso_id
+            export.vzor_stup = prm.vzor_stup
 
             if prm.sloveso_id:
                 slov = Sloveso.query.get(prm.sloveso_id)
@@ -208,7 +210,6 @@ class PodstatneMeno(SlovnyDruh):
     sloveso = relationship("Sloveso", foreign_keys=[sloveso_id])
     je_negacia = db.Column(db.String(1), nullable=True)
     pocitatelnost = db.Column(db.String(20), nullable=True)
-    paradigma = db.Column(db.String(1), nullable=True)
     __mapper_args__ = {
         'polymorphic_identity': 'POD_M',
     }
@@ -224,7 +225,7 @@ class PridavneMeno(SlovnyDruh):
     je_negacia = db.Column(db.String(1), nullable=True)
     sem_priznak_prid_m_id = db.Column(db.Integer, db.ForeignKey("sem.id"), nullable=True, index=True)
     sem_priznak_prid_m = relationship("Semantika", foreign_keys=[sem_priznak_prid_m_id])
-    vzor2 = db.Column(db.String(50), nullable=True)
+    vzor_stup = db.Column(db.String(50), nullable=True)
     __mapper_args__ = {
         'polymorphic_identity': 'PRID_M',
     }
@@ -695,6 +696,7 @@ class SDVzor(db.Model):
     deklinacia = db.Column(db.String(500), nullable=False)
     alternacia = db.Column(db.String(50), nullable=True)
     sklon_stup = db.Column(db.String(50), nullable=False)
+    popis = db.Column(db.String(500), nullable=True)
 
     def exportuj(self):
         export = VzorExport()
@@ -706,6 +708,7 @@ class SDVzor(db.Model):
         export.deklinacia = self.deklinacia
         export.alternacia = self.alternacia
         export.sklon_stup = self.sklon_stup
+        export.popis = self.popis
         return export
 
 

@@ -46,11 +46,11 @@
 
     function PridatZmenitSD(id){
         loadTemplateIntoLargeScreenModal('#defaultModal', 'largescreen', 'Zmena citoslovca',
-        '{{url_for("sd.zmenit_sd")}}'+'?sd_id='+id);
+        '{{url_for("sd.zmenit_sd")}}'+'?sd_id='+id+'&slovnyDruh='+'CITOSLOVCE');
     }
 
     function PridatCITOSLOVCE(){
-        loadTemplateIntoLargeScreenModal('#defaultModal', 'largescreen', 'Pridať citoslovce','{{url_for("sd.zmenit_sd")}}?pridavanyDruh='+'CITOSLOVCE');
+        loadTemplateIntoLargeScreenModal('#defaultModal', 'largescreen', 'Pridať citoslovce','{{url_for("sd.zmenit_sd")}}?slovnyDruh='+'CITOSLOVCE');
     }
 
     function citoslovceGridFormatter(data, type, row){

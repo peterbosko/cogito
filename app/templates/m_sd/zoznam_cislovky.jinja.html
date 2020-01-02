@@ -69,11 +69,11 @@
 
     function PridatZmenitSD(id){
         loadTemplateIntoLargeScreenModal('#defaultModal', 'largescreen', 'Zmena číslovky',
-        '{{url_for("sd.zmenit_sd")}}'+'?sd_id='+id);
+        '{{url_for("sd.zmenit_sd")}}'+'?sd_id='+id+'&slovnyDruh='+'CISLOVKA');
     }
 
     function PridatCISLOVKU(){
-        loadTemplateIntoLargeScreenModal('#defaultModal', 'largescreen', 'Pridať číslovku','{{url_for("sd.zmenit_sd")}}?pridavanyDruh='+'CISLOVKA');
+        loadTemplateIntoLargeScreenModal('#defaultModal', 'largescreen', 'Pridať číslovku','{{url_for("sd.zmenit_sd")}}?slovnyDruh='+'CISLOVKA');
     }
 
     function cislovkaGridFormatter(data, type, row){

@@ -46,11 +46,11 @@
 
     function PridatZmenitSD(id){
         loadTemplateIntoLargeScreenModal('#defaultModal', 'largescreen', 'Zmeniť ostatné',
-        '{{url_for("sd.zmenit_sd")}}'+'?sd_id='+id);
+        '{{url_for("sd.zmenit_sd")}}'+'?sd_id='+id+'&slovnyDruh='+'OSTATNE');
     }
 
     function PridatOSTATNE(){
-        loadTemplateIntoLargeScreenModal('#defaultModal', 'largescreen', 'Pridať ostatné','{{url_for("sd.zmenit_sd")}}?pridavanyDruh='+'OSTATNE');
+        loadTemplateIntoLargeScreenModal('#defaultModal', 'largescreen', 'Pridať ostatné','{{url_for("sd.zmenit_sd")}}?slovnyDruh='+'OSTATNE');
     }
 
     function ostatneGridFormatter(data, type, row){

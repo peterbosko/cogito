@@ -20,6 +20,8 @@ class SDExport(object):
     koren = None
     prefix = None
     sufix = None
+    vzor_stup = None
+    paradigma = None
 
     tab = None
 
@@ -44,6 +46,7 @@ class VzorExport(object):
     deklinacia = None
     alternacia = None
     sklon_stup = None
+    popis = None
 
 
 class PrefixSufixExport(object):
@@ -66,7 +69,7 @@ class MorfoFilter(object):
     pricastie = None
     anotacia = None
 
-    koren_slova = None
+    koren = None
     prefix = None
     sufix = None
     vzor = None

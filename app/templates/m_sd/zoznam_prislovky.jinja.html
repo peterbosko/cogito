@@ -47,11 +47,11 @@
 
     function PridatZmenitSD(id){
         loadTemplateIntoLargeScreenModal('#defaultModal', 'largescreen', 'Zmena príslovky',
-        '{{url_for("sd.zmenit_sd")}}'+'?sd_id='+id);
+        '{{url_for("sd.zmenit_sd")}}'+'?sd_id='+id+'&slovnyDruh='+'PRISLOVKA');
     }
 
     function PridatPRISLOVKU(){
-        loadTemplateIntoLargeScreenModal('#defaultModal', 'largescreen', 'Pridať príslovku','{{url_for("sd.zmenit_sd")}}?pridavanyDruh='+'PRISLOVKA');
+        loadTemplateIntoLargeScreenModal('#defaultModal', 'largescreen', 'Pridať príslovku','{{url_for("sd.zmenit_sd")}}?slovnyDruh='+'PRISLOVKA');
     }
 
     function prislovkaGridFormatter(data, type, row){

@@ -1,4 +1,9 @@
-<div class="row">
+<div id="slova_loader" class="row">
+    <div class="col-sm-12">
+        <i class="fa fa-spinner fa-spin fa-lg"></i>
+    </div>
+</div>
+<div id="slova_div" class="row nodisplay">
     <div class="col-sm-12">
         <form id="SDSlovaForm" data-fv-framework="bootstrap" method="post">
                 <div class="row marginbottomDetailSD ">
@@ -48,12 +53,35 @@
                         </select>
                     </div>
                 </div>
+                <div class="row PRID_M marginbottomDetailSD nodisplay">
+                    <label class="col-sm-2" for="prepend">
+                         Paradigma:
+                    </label>
+                    <div class="col-sm-8">
+                        <select id="ddlParadigma_PRID_M" class="form-control">
+                            <option value="A">A - ajektívna - napr. pekný, cudzí, páví</option>
+                            <option value="F">F - zmiešaná - otcov, matkin</option>
+                            <option value="U">U - neúplná - napr. super, nanič, hoden, rád, rada</option>
+                            <option value="k">k - Particípum - aktívne - pracujúci, visiaci, píšuci, platiaci</option>
+                            <option value="t">t - Particípum - pasívne - robený, kosený, obratý, zožatý</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row PRID_M marginbottomDetailSD nodisplay">
+                    <label class="col-sm-2" for="prepend">
+                         Stupňovací vzor:
+                    </label>
+                    <div class="col-sm-8">
+                        <select id="ddlVzorStup" class="form-control">
+                        </select>
+                    </div>
+                </div>
 
                 <fieldset class="border p-2">
                     <legend>Údaje slov</legend>
                 <div class="row">
                     <div class="col-xs-12" style="margin:0 auto;display:block;">
-                            <button id="btnFilter" type='button' style="margin-top:10px;margin-bottom:10px;" class="btn btn-primary" onclick="ToggleFilter();"><i class="fa fa-plus"></i>&nbsp;Filter a generovanie slov</button>
+                            <button id="btnFilter" type='button' style="margin-top:20px;margin-bottom:20px;" class="btn btn-primary" onclick="ToggleFilter();"><i class="fa fa-plus"></i>&nbsp;Filter a generovanie slov</button>
                     </div>
                 </div>
                 <div id="divSFiltrom" class="col-xs-12 nodisplay">
@@ -61,8 +89,7 @@
                         <thead>
                             <th class="nodisplay">Id</th>
                             <th>Tvar</th>
-                            <th class="c_rod">Rod</th>
-                            <th class="c_podrod">Podrod</th>
+                            <th class="c_rod">Rod/podrod</th>
                             <th class="c_pad">Pád</th>
                             <th class="c_cislo">Číslo</th>
                             <th class="c_osoba">Osoba</th>
@@ -88,21 +115,16 @@
                             </td>
                             <td class="c_rod">
                                 <select class="form-control slovo_ddl changed_f" id="rod_f" name="rod_f">
-                                    <option value="" selected>Všetky</option>
-                                    <option value="M">M</option>
+                                    <option value="" selected>Všet.</option>
+                                    <option value="M/Z">M/Z</option>
+                                    <option value="M/N">M/N</option>
                                     <option value="Z">Z</option>
                                     <option value="S">S</option>
                                 </select>
                             </td>
-                            <td class="c_podrod">
-                                <select id="podrod_f" class="form-control slovo_ddl changed_f">
-                                    <option value="" selected>Všetky</option>
-                                    <option value="Z">Z</option>
-                                    <option value="N">N</option>
-                                </select>
                             <td class="c_pad">
                                 <select id="pad_f" class="form-control slovo_ddl changed_f">
-                                    <option value="" selected>Všetky</option>
+                                    <option value="" selected>Všet.</option>
                                     <option value="Nom">Nom</option>
                                     <option value="Gen">Gen</option>
                                     <option value="Dat">Dat</option>
@@ -114,7 +136,7 @@
                             </td>
                             <td class="c_cislo">
                                 <select id="cislo_f" class="form-control slovo_ddl changed_f">
-                                    <option value="" selected>Všetky</option>
+                                    <option value="" selected>Všet.</option>
                                     <option value="J">J</option>
                                     <option value="M">M</option>
                                     <option value="P">P</option>
@@ -122,7 +144,7 @@
                             </td>
                             <td class="c_osoba">
                                 <select id="osoba_f" class="form-control slovo_ddl changed_f">
-                                    <option value="" selected>Všetky</option>
+                                    <option value="" selected>Všet.</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -130,7 +152,7 @@
                             </td>
                             <td class="c_cas">
                                 <select id="cas_f" class="form-control slovo_ddl changed_f">
-                                    <option value="" selected>Všetky</option>
+                                    <option value="" selected>Všet.</option>
                                     <option value="P">P</option>
                                     <option value="M">M</option>
                                     <option value="B">B</option>
@@ -138,14 +160,14 @@
                             </td>
                             <td class="c_sposob">
                                 <select id="sposob_f" class="form-control slovo_ddl changed_f">
-                                    <option value="" selected>Všetky</option>
+                                    <option value="" selected>Všet.</option>
                                     <option value="O">O</option>
                                     <option value="R">R</option>
                                 </select>
                             </td>
                             <td class="c_stupen">
                                 <select id="stupen_f"  class="form-control slovo_ddl changed_f">
-                                    <option value="" selected>Všetky</option>
+                                    <option value="" selected>Všet.</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -153,7 +175,7 @@
                             </td>
                             <td class="c_pricastie">
                                 <select id="pricastie_f" class="form-control slovo_ddl changed_f">
-                                    <option value="" selected>Všetky</option>
+                                    <option value="" selected>Všet.</option>
                                     <option value="T">T</option>
                                     <option value="C">C</option>
                                     <option value="M">M</option>
@@ -170,15 +192,16 @@
                     </table>
                     <div class="row">
                         <div class="col-12" style="margin:0 auto;display:block;">
-                            <div class="text-center POD_M nodisplay">
-                                <a href="#" id="genDefTvaryPOD_M" onclick="GenerujDefaultTvaryPOD_M();" class="btn"><i class="fa fa-plus"></i>&nbsp;Generovať default tvary</a>
-                                <a href="#" id="genAnotaciuPOD_M" onclick="GenerujAnotaciu();" class="btn"><i class="fa fa-plus"></i>&nbsp;Generovať anotáciu</a>
-                                <a href="#" id="zmazTvaryPOD_M" onclick="ZmazVsetkyTvaryVyhovujuceFiltru();" class="btn"><i class="fa fa-trash"></i>&nbsp;Zmazať všetky tvary vyhovujúce filtru</a>
+                            <div class="text-center">
+                                <a href="#" id="genDefTvary" onclick="GenerujDefaultTvary();" class="btn"><i class="fa fa-plus"></i>&nbsp;Generovať default tvary</a>
+                                <a href="#" id="genAnotaciu" onclick="GenerujAnotaciu();" class="btn"><i class="fa fa-plus"></i>&nbsp;Generovať anotáciu</a>
+                                <a href="#" id="zmazTvary" onclick="ZmazVsetkyTvaryVyhovujuceFiltru();" class="btn"><i class="fa fa-trash"></i>&nbsp;Zmazať všetky tvary vyhovujúce filtru</a>
+                                <a href="#" id="zmazAnotaciu" onclick="ZmazAnotaciu();" class="btn"><i class="fa fa-trash"></i>&nbsp;Zmazať anotáciu vyhovujúcu filtru</a>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-12" style="margin:0 auto;display:block;">
+                        <div class="col-xs-12" style="margin:0 auto;display:block;margin-bottom:20px;">
                                 <a href="#" id="aFiltruj" onclick="FiltrujSlova();" class="btn"><i class="fa fa-search"></i>&nbsp;Aplikovať filter</a>
                         </div>
                     </div>
@@ -189,8 +212,7 @@
                         <thead>
                             <th class="nodisplay">Id</th>
                             <th>Tvar</th>
-                            <th class="c_rod">Rod</th>
-                            <th class="c_podrod">Podrod</th>
+                            <th class="c_rod">Rod/podrod</th>
                             <th class="c_pad">Pád</th>
                             <th class="c_cislo">Číslo</th>
                             <th class="c_osoba">Osoba</th>
@@ -216,21 +238,16 @@
                             </td>
                             <td class="c_rod">
                                 <select class="form-control slovo_ddl changed_sl" id="rod_0" name="rod_0">
-                                    <option value="">Žiaden</option>
-                                    <option value="M">M</option>
+                                    <option value="" selected>Žiad.</option>
+                                    <option value="M/Z">M/Z</option>
+                                    <option value="M/N">M/N</option>
                                     <option value="Z">Z</option>
                                     <option value="S">S</option>
                                 </select>
                             </td>
-                            <td class="c_podrod">
-                                <select id="podrod_0" class="form-control slovo_ddl changed_sl">
-                                    <option value="">Žiaden</option>
-                                    <option value="Z">Z</option>
-                                    <option value="N">N</option>
-                                </select>
                             <td class="c_pad">
                                 <select id="pad_0" class="form-control slovo_ddl changed_sl">
-                                    <option value="">Žiaden</option>
+                                    <option value="" selected>Žiad.</option>
                                     <option value="Nom">Nom</option>
                                     <option value="Gen">Gen</option>
                                     <option value="Dat">Dat</option>
@@ -242,7 +259,7 @@
                             </td>
                             <td class="c_cislo">
                                 <select id="cislo_0" class="form-control slovo_ddl changed_sl">
-                                    <option value="">Žiadne</option>
+                                    <option value="" selected>Žiad.</option>
                                     <option value="J">J</option>
                                     <option value="M">M</option>
                                     <option value="P">P</option>
@@ -250,7 +267,7 @@
                             </td>
                             <td class="c_osoba">
                                 <select id="osoba_0" class="form-control slovo_ddl changed_sl">
-                                    <option value="">Žiadna</option>
+                                    <option value="" selected>Žiad.</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -258,7 +275,7 @@
                             </td>
                             <td class="c_cas">
                                 <select id="cas_0" class="form-control slovo_ddl changed_sl">
-                                    <option value="">Žiaden</option>
+                                    <option value="" selected>Žiad.</option>
                                     <option value="P">P</option>
                                     <option value="M">M</option>
                                     <option value="B">B</option>
@@ -266,14 +283,14 @@
                             </td>
                             <td class="c_sposob">
                                 <select id="sposob_0" class="form-control slovo_ddl changed_sl">
-                                    <option value="">Žiaden</option>
+                                    <option value="" selected>Žiad.</option>
                                     <option value="O">O</option>
                                     <option value="R">R</option>
                                 </select>
                             </td>
                             <td class="c_stupen">
                                 <select id="stupen_0" class="form-control slovo_ddl changed_sl">
-                                    <option value="">Žiaden</option>
+                                    <option value="" selected>Žiad.</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -281,7 +298,7 @@
                             </td>
                             <td class="c_pricastie">
                                 <select id="pricastie_0" class="form-control slovo_ddl changed_sl">
-                                    <option value="">Žiaden</option>
+                                    <option value="" selected>Žiad.</option>
                                     <option value="T">T</option>
                                     <option value="C">C</option>
                                     <option value="M">M</option>
@@ -318,20 +335,54 @@ var pocet_slov = 0;
 /******************** GENEROVANIE TVAROV A ANOTACIE **********************/
 /******************** GENEROVANIE TVAROV A ANOTACIE **********************/
 
-function PridajPM(tvar, pad, cislo, anotacia){
+function PridajVygenerovaneSlovo(tvar, rod, podrod, pad, cislo, osoba, cas, sposob, stupen, pricastie, anotacia){
     PridajNoveSlovo(true);
     $('#tvar_'+pocet_slov).val(tvar);
+
+    rod_value = GetRodValue(rod, podrod);
+
+    $('#rod_'+pocet_slov).val(rod_value);
     $('#pad_'+pocet_slov).val(pad);
     $('#cislo_'+pocet_slov).val(cislo);
+    $('#osoba_'+pocet_slov).val(osoba);
+    $('#cas_'+pocet_slov).val(cas);
+    $('#sposob_'+pocet_slov).val(sposob);
+    $('#stupen_'+pocet_slov).val(stupen);
+    $('#pricastie_'+pocet_slov).val(pricastie);
     $('#anotacia_'+pocet_slov).val(anotacia);
 }
 
-function NastavAnotaciuPM(tvar, pad, cislo, anotacia){
+function NastavAnotaciu(tvar, rod, podrod, pad, cislo, osoba, cas, sposob, stupen, pricastie, anotacia){
     $("#divSTabulkou tr[id^='zaznam_']").each(function () {
         var j=$(this).attr('id').replace('zaznam_','');
         if (j!="0"){
             if (ZaznamVyhovujeFiltru(j)){
-                if ($('#pad_'+j).val() == pad && $('#cislo_'+j).val() == cislo){
+                if (!rod)
+                    rod = "";
+                else
+                    rod = GetRodValue(rod, podrod);
+                if (!podrod)
+                    podrod = "";
+                if (!pad)
+                    pad = "";
+                if (!cislo)
+                    cislo = "";
+                if (!osoba)
+                    osoba = "";
+                if (!cas)
+                    cas = "";
+                if (!sposob)
+                    sposob = "";
+                if (!stupen)
+                    stupen = "";
+                if (!pricastie)
+                    pricastie = "";
+
+
+                if ($('#rod_'+j).val() == rod && $('#pad_'+j).val() == pad &&
+                $('#cislo_'+j).val() == cislo && $('#osoba_'+j).val() == osoba && $('#cas_'+j).val() == cas &&
+                $('#sposob_'+j).val() == sposob && $('#stupen_'+j).val() == stupen &&
+                $('#pricastie_'+j).val() == pricastie){
                     $('#anotacia_'+j).val(anotacia);
                     $('#hdn_changed_'+j).val("true");
                 }
@@ -341,21 +392,43 @@ function NastavAnotaciuPM(tvar, pad, cislo, anotacia){
 
 }
 
-function GenerujDefaultTvaryPOD_M(){
+function GenerujDefaultTvary(){
     var filter = GetFilterValues();
 
     filter.koren = $('#ddlKorenSlova').val();
     filter.prefix = $('#ddlPrefix').val();
     filter.sufix = $('#ddlSufix').val();
     filter.vzor = $('#ddlVzor').val();
-    filter.vzor_stup = $('#ddlVzor').val();
-    filter.paradigma = $('#ddlParadigma_POD_M').val();
+    filter.vzor_stup = $('#ddlVzorStup').val();
+
+    if ('{{request.args.get("slovnyDruh")}}'=='POD_M')
+        filter.paradigma = $('#ddlParadigma_POD_M').val();
+    else if ('{{request.args.get("slovnyDruh")}}'=='PRID_M')
+        filter.paradigma = $('#ddlParadigma_PRID_M').val();
+
     filter.sd_id = getSD_ID();
+
+/*
+    swal({ buttons: {},
+                       title  :  "Generovanie",
+                       text   :  'Prebieha generovanie tvarov...',
+                       icon   :  "info",
+                       closeOnClickOutside : false,
+                       closeModal : false,
+                       closeOnEsc : false,
+                       });
+*/
+    //$('#genDefTvary').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Generujem default tvary');
 
     AjaxMethods.getDataFromPostRequest('{{url_for("sd.generuj_morfo")}}', "", filter, function(r){
             if (r.status==responseOK){//OK vetva
                 for (var i=0;i<r.data.length;i++){
-                    PridajPM(r.data[i].tvar, r.data[i].pad, r.data[i].cislo, r.data[i].anotacia);
+                    PridajVygenerovaneSlovo(r.data[i].tvar, r.data[i].rod, r.data[i].podrod,
+                        r.data[i].pad, r.data[i].cislo, r.data[i].osoba, r.data[i].cas, r.data[i].sposob,
+                        r.data[i].stupen, r.data[i].pricastie,
+                        r.data[i].anotacia);
+                        //swal.close();
+                        //$('#genDefTvary').html('<i class="fa fa-plus"></i>&nbsp;Generovať default tvary');
                 }
             }
             else{
@@ -375,14 +448,20 @@ function GenerujAnotaciu(){
     filter.prefix = $('#ddlPrefix').val();
     filter.sufix = $('#ddlSufix').val();
     filter.vzor = $('#ddlVzor').val();
-    filter.vzor_stup = $('#ddlVzor').val();
-    filter.paradigma = $('#ddlParadigma_POD_M').val();
+    filter.vzor_stup = $('#ddlVzorStup').val();
+    if ('{{request.args.get("slovnyDruh")}}'=='POD_M')
+        filter.paradigma = $('#ddlParadigma_POD_M').val();
+    else if ('{{request.args.get("slovnyDruh")}}'=='PRID_M')
+        filter.paradigma = $('#ddlParadigma_PRID_M').val();
     filter.sd_id = getSD_ID();
 
     AjaxMethods.getDataFromPostRequest('{{url_for("sd.generuj_morfo")}}', "", filter, function(r){
             if (r.status==responseOK){//OK vetva
                 for (var i=0;i<r.data.length;i++){
-                    NastavAnotaciuPM(r.data[i].tvar, r.data[i].pad, r.data[i].cislo, r.data[i].anotacia);
+                    NastavAnotaciu(r.data[i].tvar, r.data[i].rod, r.data[i].podrod,
+                        r.data[i].pad, r.data[i].cislo, r.data[i].osoba, r.data[i].cas, r.data[i].sposob,
+                        r.data[i].stupen, r.data[i].pricastie,
+                        r.data[i].anotacia);
                 }
             }
             else{
@@ -396,10 +475,34 @@ function GenerujAnotaciu(){
 
 }
 
-/**************** SPOLOCNE FUNKCIE POUZIVANE NAPRIEC *********************/
-/**************** SPOLOCNE FUNKCIE POUZIVANE NAPRIEC *********************/
-/**************** SPOLOCNE FUNKCIE POUZIVANE NAPRIEC *********************/
+function ZmazAnotaciu(){
+    if ($('#hdn_changed_f').val()=="true") {
+        swal({ buttons: {},
+                       title  :  "Chyba",
+                       text   :  "Filter sa zmenil. Najskôr aplikujte filter",
+                       icon   :  "error"});
+        return;
+    }
 
+    $("#divSTabulkou tr[id^='zaznam_']").each(function () {
+       var j=$(this).attr('id').replace('zaznam_','');
+       if (j!="0" && ZaznamVyhovujeFiltru(j))
+           $('#anotacia_'+j).val('');
+    });
+}
+
+/**************** SPOLOCNE FUNKCIE POUZIVANE NAPRIEC *********************/
+/**************** SPOLOCNE FUNKCIE POUZIVANE NAPRIEC *********************/
+/**************** SPOLOCNE FUNKCIE POUZIVANE NAPRIEC *********************/
+function GetRodValue(rod, podrod){
+    var rod_value=rod;
+    if (rod == "M")
+        if (podrod == "Z")
+            rod_value="M/Z";
+        else
+            rod_value="M/N";
+    return rod_value;
+}
 function PridajNoveSlovo(nastavAkoZmenene){
    pocet_slov++;
    var htmlRiadku = $('#zaznam_0').html();
@@ -441,7 +544,13 @@ function GetFilterValues(){
     var fObj = {};
     fObj.tvar = $('#tvar_f').val();
     fObj.rod = $('#rod_f').val();
-    fObj.podrod = $('#podrod_f').val();
+    fObj.podrod = "";
+
+    if (fObj.rod.includes('/')){
+        fObj.podrod = fObj.rod.substring(2);
+        fObj.rod = "M";
+    }
+
     fObj.pad = $('#pad_f').val();
     fObj.cislo = $('#cislo_f').val();
     fObj.osoba = $('#osoba_f').val();
@@ -457,7 +566,7 @@ function GetFilterValues(){
 function VyhovujeRetazecFiltru(filter, retazec){
     filter = filter.replace(/%/g, '.*');
     filter = filter.replace(/_/g, '.');
-    var regex = new RegExp(filter, 'g' );
+    var regex = new RegExp('^'+filter+'$', 'g' );
     var res = regex.test(retazec);
 
     return res;
@@ -475,13 +584,6 @@ function ZaznamVyhovujeFiltru(j){
           $('#rod_f').val()==$('#rod_'+j).val())
        )
        v_rod=false;
-
-
-    var v_podrod = true;
-    if (!($('#podrod_f').val()=="" ||
-          $('#podrod_f').val()==$('#podrod_'+j).val())
-       )
-       v_podrod=false;
 
 
     var v_pad = true;
@@ -537,7 +639,7 @@ function ZaznamVyhovujeFiltru(j){
                                $('#anotacia_'+j).val()))
         v_anotacia=false;
 
-    return v_tvar && v_rod && v_podrod && v_pad && v_cislo && v_osoba && v_cas && v_sposob && v_stupen && v_pricastie && v_anotacia;
+    return v_tvar && v_rod && v_pad && v_cislo && v_osoba && v_cas && v_sposob && v_stupen && v_pricastie && v_anotacia;
 }
 
 function FiltrujSlova(){
@@ -594,8 +696,7 @@ function setupSlova(a){
         var j=i+1;
         $('#id_'+j).html(a[i].id);
         $('#tvar_'+j).val(a[i].tvar);
-        $('#rod_'+j).val(a[i].rod);
-        $('#podrod_'+j).val(a[i].podrod);
+        $('#rod_'+j).val(GetRodValue(a[i].rod,a[i].podrod));
         $('#pad_'+j).val(a[i].pad);
         $('#cislo_'+j).val(a[i].cislo);
         $('#osoba_'+j).val(a[i].osoba);
@@ -634,6 +735,11 @@ function NacitajSDSlova(id){
                         $('#ddlParadigma_POD_M').val(r.data.paradigma);
                 }
                 else if (r.data.typ=="PRID_M"){
+                    if (r.data.paradigma)
+                        $('#ddlParadigma_PRID_M').val(r.data.paradigma);
+                    if (r.data.vzor_stup){
+                        $('#ddlVzorStup').val(r.data.vzor_stup);
+                    }
                 }
                 else if (r.data.typ=="ZAMENO"){
                 }
@@ -668,7 +774,6 @@ function VratZoznamZmenenychSlov(vratAjNezmeneneZaznamy){
                     o.id = 0;
                 o.tvar = $('#tvar_'+j).val();
                 o.rod = $('#rod_'+j).val();
-                o.podrod = $('#podrod_'+j).val();
                 o.pad = $('#pad_'+j).val();
                 o.cislo = $('#cislo_'+j).val();
                 o.osoba = $('#osoba_'+j).val();
@@ -706,12 +811,13 @@ function ZmenSlovaSD(closeScreen){
 
         if (typ == "POD_M"){
             data.rod = $('#txtPOD_M_ROD').val();
-            data.podrod = $('#txtPOD_M_PODROD').val();
             data.sloveso_id = $('#ddlPOD_M_Sloveso').val();
             data.paradigma = $('#ddlParadigma_POD_M').val();
         }
         else if (typ == "PRID_M"){
             data.sloveso_id = $('#ddlPRID_M_Sloveso').val();
+            data.paradigma = $('#ddlParadigma_PRID_M').val();
+            data.vzor_stup = $('#ddlVzorStup').val();
 
             if ($('#cbPRID_M_je_priv').prop('checked'))
                 data.je_privlastnovacie = 'A';
@@ -720,7 +826,6 @@ function ZmenSlovaSD(closeScreen){
         }
         else if (typ == "ZAMENO"){
             data.rod = $('#ddlZAMENO_ROD').val();
-            data.podrod = $('#ddlZAMENO_PODROD').val();
             data.cislo = $('#ddlZAMENO_CISLO').val();
         }
         else if (typ == "SLOVESO"){
@@ -736,7 +841,6 @@ function ZmenSlovaSD(closeScreen){
         }
         else if (typ=="CISLOVKA"){
             data.rod=$('#ddlCISLOVKA_ROD').val();
-            data.podrod=$('#ddlCISLOVKA_PODROD').val();
             data.cislo=$('#ddlFormCISLOVKA_Cislo').val();
             data.hodnota=$('#txtFormCISLOVKA_HODNOTA').val();
         }
@@ -807,27 +911,26 @@ function SetUpPrefixSufix(ps){
     var oldSufix = $('#ddlSufix').val();
 
     $('#ddlPrefix').empty();
-    $('#ddlPrefix').append("<option value=''>Žiaden</option>");
+    $('#ddlPrefix').append("<option value='' selected>Žiaden</option>");
+    $('#ddlSufix').empty();
+    $('#ddlSufix').append("<option value='' selected>Žiaden</option>");
 
-    for (i=0;i<ps.length;i++){
+    for (var i=0;i<ps.length;i++){
         if ('{{request.args.get("slovnyDruh")}}'=='POD_M'){
             if (ps[i].prefix_sufix == "P" && ps[i].typ=="POD_M")
                 $('#ddlPrefix').append("<option value='"+ps[i].hodnota+"'>"+ps[i].hodnota+"</option>");
+            else if (ps[i].prefix_sufix == "S" && ps[i].typ=="POD_M")
+                $('#ddlSufix').append("<option value='"+ps[i].hodnota+"'>"+ps[i].hodnota+"</option>");
+        } else if ('{{request.args.get("slovnyDruh")}}'=='PRID_M'){
+            if (ps[i].prefix_sufix == "P" && ps[i].typ=="PRID_M")
+                $('#ddlPrefix').append("<option value='"+ps[i].hodnota+"'>"+ps[i].hodnota+"</option>");
+            else if (ps[i].prefix_sufix == "S" && ps[i].typ=="PRID_M")
+                $('#ddlSufix').append("<option value='"+ps[i].hodnota+"'>"+ps[i].hodnota+"</option>");
         }
     }
 
     if (oldPrefix){
         $('#ddlPrefix').val(oldPrefix);
-    }
-
-    $('#ddlSufix').empty();
-    $('#ddlSufix').append("<option value=''>Žiaden</option>");
-
-    for (i=0;i<ps.length;i++){
-        if ('{{request.args.get("slovnyDruh")}}'=='POD_M'){
-            if (ps[i].prefix_sufix == "S" && ps[i].typ=="POD_M")
-                $('#ddlSufix').append("<option value='"+ps[i].hodnota+"'>"+ps[i].hodnota+"</option>");
-        }
     }
 
     if (oldSufix){
@@ -837,19 +940,40 @@ function SetUpPrefixSufix(ps){
 
 function SetUpVzory(v){
     var oldValue = $('#ddlVzor').val();
+    var oldValueStup = $('#ddlVzorStup').val();
 
     $('#ddlVzor').empty();
     $('#ddlVzor').append("<option value='' selected>Nenastavený</option>");
+    $('#ddlVzorStup').empty();
+    $('#ddlVzorStup').append("<option value='' selected>Nenastavený</option>");
 
     for (i=0;i<v.length;i++){
         if ('{{request.args.get("slovnyDruh")}}'=='POD_M'){
-            if (v[i].rod == $('#txtPOD_M_ROD').val() && v[i].typ=="POD_M")
-                $('#ddlVzor').append("<option value='"+v[i].vzor+"'>"+v[i].vzor+" dekl :("+v[i].deklinacia+") alt:("+v[i].alternacia+")</option>");
+            if (v[i].rod == $('#txtPOD_M_ROD').val() && v[i].typ=="POD_M" && v[i].sklon_stup=="sklon")
+                $('#ddlVzor').append("<option value='"+v[i].vzor+"'>"+v[i].vzor+" - "+v[i].popis+")</option>");
+        } else if ('{{request.args.get("slovnyDruh")}}'=='PRID_M'){
+            if ($('#ddlVzor option[value='+v[i].vzor+']').length == 0 && v[i].typ=="PRID_M" && v[i].sklon_stup=="sklon")
+                $('#ddlVzor').append("<option value='"+v[i].vzor+"'>"+v[i].vzor+" - " + v[i].popis + "</option>");
         }
     }
 
     if (oldValue){
         $('#ddlVzor').val(oldValue);
+    }
+
+    for (i=0;i<v.length;i++){
+        if ('{{request.args.get("slovnyDruh")}}'=='PRID_M'){
+            if (v[i].typ=="PRID_M" && v[i].sklon_stup=="stup")
+                $('#ddlVzorStup').append("<option value='"+v[i].vzor+"'>"+v[i].vzor+" - "+v[i].popis+"</option>");
+        }
+    }
+
+    if (oldValue){
+        $('#ddlVzor').val(oldValue);
+    }
+
+    if (oldValueStup){
+        $('#ddlVzorStup').val(oldValueStup);
     }
 }
 
@@ -857,7 +981,6 @@ function setupSlovaDruh(pridavanyDruh){
     typ = pridavanyDruh;
     if (pridavanyDruh == "POD_M"){
         $(".c_rod").addClass('nodisplay');
-        $(".c_podrod").addClass('nodisplay');
         $(".c_osoba").addClass('nodisplay');
         $(".c_cas").addClass('nodisplay');
         $(".c_stupen").addClass('nodisplay');
@@ -896,7 +1019,6 @@ function setupSlovaDruh(pridavanyDruh){
         $(".PREDLOZKA").removeClass('nodisplay');
         $(".c_cislo").addClass('nodisplay');
         $(".c_rod").addClass('nodisplay');
-        $(".c_podrod").addClass('nodisplay');
         $(".c_osoba").addClass('nodisplay');
         $(".c_cas").addClass('nodisplay');
         $(".c_stupen").addClass('nodisplay');
@@ -912,7 +1034,6 @@ function setupSlovaDruh(pridavanyDruh){
 
         $(".c_cislo").addClass('nodisplay');
         $(".c_rod").addClass('nodisplay');
-        $(".c_podrod").addClass('nodisplay');
         $(".c_osoba").addClass('nodisplay');
         $(".c_cas").addClass('nodisplay');
         if (pridavanyDruh != "PRISLOVKA")
@@ -925,8 +1046,14 @@ function setupSlovaDruh(pridavanyDruh){
 
 $(document).ready(function() {
     pridavanyDruh = '{{request.args.get("slovnyDruh")}}';
+
     if (pridavanyDruh == "POD_M"){
         $('.POD_M').removeClass('nodisplay');
+        $('#tvar_0').removeClass('slovo_tvar').addClass('pm_slovo_tvar');
+        $('#tvar_f').removeClass('slovo_tvar').addClass('pm_slovo_tvar');
+    }
+    else if (pridavanyDruh == "PRID_M"){
+        $('.PRID_M').removeClass('nodisplay');
         $('#tvar_0').removeClass('slovo_tvar').addClass('pm_slovo_tvar');
         $('#tvar_f').removeClass('slovo_tvar').addClass('pm_slovo_tvar');
     }
@@ -956,17 +1083,25 @@ $(document).ready(function() {
     }
 
     $('#ddlVzor').select2();
+    $('#ddlVzorStup').select2();
+    $('#ddlPrefix').select2();
+    $('#ddlSufix').select2();
+    $('#ddlParadigma_POD_M').select2();
+    $('#ddlParadigma_PRID_M').select2();
 
     $('.changed_f').change(function (){
         $('#hdn_changed_f').val('true');
     });
 
-    $(window).keydown(function(event){
+    $('#SDSlovaForm').keydown(function(event){
         if(event.keyCode == 13) {
             event.preventDefault();
             return false;
         }
     });
+    $('#slova_loader').addClass('nodisplay');
+    $('#slova_div').fadeIn( "slow", function() {
+                          }).removeClass('nodisplay');
 });
 
 </script>

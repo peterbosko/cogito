@@ -1,4 +1,9 @@
-<div class="row">
+<div id="zakladne_loader" class="row">
+    <div class="col-sm-12">
+        <i class="fa fa-spinner fa-spin fa-lg"></i>
+    </div>
+</div>
+<div id="zakladne_div" class="row nodisplay" >
     <div class="col-sm-12">
         <form id="SDForm" data-fv-framework="bootstrap" method="post">
                 <div class="row marginbottomDetailSD">
@@ -423,6 +428,7 @@ function setupD(pridavanyDruh){
 }
 
 $(document).ready(function() {
+
     $('#SDForm').formValidation();
 
     var slovDruh = "{{request.args.get("slovnyDruh")}}";
@@ -459,6 +465,9 @@ $(document).ready(function() {
         zmenaVZakladneInfo = true;
     });
 
+    $('#zakladne_div').fadeIn( "slow", function() {
+                                }).removeClass('nodisplay');
+    $('#zakladne_loader').addClass('nodisplay');
 });
 
 </script>

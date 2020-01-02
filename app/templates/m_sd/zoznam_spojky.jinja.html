@@ -46,11 +46,11 @@
 
     function PridatZmenitSD(id){
         loadTemplateIntoLargeScreenModal('#defaultModal', 'largescreen', 'Zmena spojky',
-        '{{url_for("sd.zmenit_sd")}}'+'?sd_id='+id);
+        '{{url_for("sd.zmenit_sd")}}'+'?sd_id='+id+'&slovnyDruh='+'SPOJKA');
     }
 
     function PridatSPOJKU(){
-        loadTemplateIntoLargeScreenModal('#defaultModal', 'largescreen', 'Pridať spojku','{{url_for("sd.zmenit_sd")}}?pridavanyDruh='+'SPOJKA');
+        loadTemplateIntoLargeScreenModal('#defaultModal', 'largescreen', 'Pridať spojku','{{url_for("sd.zmenit_sd")}}?slovnyDruh='+'SPOJKA');
     }
 
     function spojkaGridFormatter(data, type, row){
