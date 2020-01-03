@@ -69,10 +69,12 @@ def sp():
     loguj(request)
     return render_template("m_metadata/sp.jinja.html")
 
-@metadata_blueprint.route("/alternacie/")
-def alternacie():
+
+@metadata_blueprint.route("/vzory/")
+def vzory():
     loguj(request)
-    return render_template("m_metadata/alternacie.jinja.html")
+    return render_template("m_metadata/vzory.jinja.html")
+
 
 @metadata_blueprint.route("/daj_sp/", methods=["GET"])
 def daj_sp():
@@ -332,5 +334,42 @@ def daj_sem_strom():
     data = vrat_data_sem_stromu(sem_priznak, smer)
 
     return jsonpickle.encode(data)
+
+
+@metadata_blueprint.route("/daj_vzory/", methods=["GET"])
+def daj_vzory():
+    loguj(request)
+
+    filtered = db.session.query(SDVzor)
+
+    typ = request.args.get("typ", "")
+    vzor = request.args.get("vzor", "")
+    deklinacia = request.args.get("deklinacia", "")
+    alternacia = request.args.get("alternacia", "")
+
+    if typ:
+        filtered = filtered.filter(SDVzor.typ == typ)
+
+    if vzor:
+        filtered = filtered.filter(SDVzor.vzor.like(vzor))
+
+    if deklinacia:
+        filtered = filtered.filter(SDVzor.deklinacia.like(deklinacia))
+
+    if alternacia:
+        filtered = filtered.filter(SDVzor.alternacia.like(alternacia))
+
+    table = DataTable(request.args, SDVzor, filtered, [
+            "id",
+            "typ",
+            "rod",
+            "podrod",
+            "vzor",
+            "deklinacia",
+            "alternacia",
+            "popis"
+    ])
+
+    return json.dumps(table.json())
 
 

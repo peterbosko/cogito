@@ -397,7 +397,7 @@ def daj_pole_znakov(string):
                     index += 1
         elif string[index] == "i":
             if len(string) >= index+1:
-                if string[index+1] in ("a", "e", "i"):
+                if string[index+1] in ("a", "e", "u"):
                     result.append("i"+string[index+1])
                     index += 2
                 else:
@@ -642,11 +642,11 @@ def generuj_morfo_prid_m(filter_obj):
                 stupen = "1"
                 vysledok.extend(daj_tvar_prid_m(filter_obj.vzor, filter_obj.vzor_stup, filter_obj.paradigma,
                                                 filter_obj.koren, rod, podrod, cislo, filter_obj.pad, stupen))
-            if filter_obj.cislo == "" or filter_obj.cislo == "J":
+            if filter_obj.stupen == "" or filter_obj.stupen == "2":
                 stupen = "2"
                 vysledok.extend(daj_tvar_prid_m(filter_obj.vzor, filter_obj.vzor_stup, filter_obj.paradigma,
                                                 filter_obj.koren, rod, podrod, cislo, filter_obj.pad, stupen))
-            if filter_obj.stupen == "" or filter_obj.stupen == "1":
+            if filter_obj.stupen == "" or filter_obj.stupen == "3":
                 stupen = "3"
                 vysledok.extend(daj_tvar_prid_m(filter_obj.vzor, filter_obj.vzor_stup, filter_obj.paradigma,
                                                 filter_obj.koren, rod, podrod, cislo, filter_obj.pad, stupen))
@@ -656,11 +656,11 @@ def generuj_morfo_prid_m(filter_obj):
                 stupen = "1"
                 vysledok.extend(daj_tvar_prid_m(filter_obj.vzor, filter_obj.vzor_stup, filter_obj.paradigma,
                                                 filter_obj.koren, rod, podrod, cislo, filter_obj.pad, stupen))
-            if filter_obj.cislo == "" or filter_obj.cislo == "J":
+            if filter_obj.stupen == "" or filter_obj.cislo == "2":
                 stupen = "2"
                 vysledok.extend(daj_tvar_prid_m(filter_obj.vzor, filter_obj.vzor_stup, filter_obj.paradigma,
                                                 filter_obj.koren, rod, podrod, cislo, filter_obj.pad, stupen))
-            if filter_obj.stupen == "" or filter_obj.stupen == "1":
+            if filter_obj.stupen == "" or filter_obj.stupen == "3":
                 stupen = "3"
                 vysledok.extend(daj_tvar_prid_m(filter_obj.vzor, filter_obj.vzor_stup, filter_obj.paradigma,
                                                 filter_obj.koren, rod, podrod, cislo, filter_obj.pad, stupen))
@@ -674,11 +674,11 @@ def generuj_morfo_prid_m(filter_obj):
                 stupen = "1"
                 vysledok.extend(daj_tvar_prid_m(filter_obj.vzor, filter_obj.vzor_stup, filter_obj.paradigma,
                                                 filter_obj.koren, rod, podrod, cislo, filter_obj.pad, stupen))
-            if filter_obj.cislo == "" or filter_obj.cislo == "J":
+            if filter_obj.stupen == "" or filter_obj.stupen == "2":
                 stupen = "2"
                 vysledok.extend(daj_tvar_prid_m(filter_obj.vzor, filter_obj.vzor_stup, filter_obj.paradigma,
                                                 filter_obj.koren, rod, podrod, cislo, filter_obj.pad, stupen))
-            if filter_obj.stupen == "" or filter_obj.stupen == "1":
+            if filter_obj.stupen == "" or filter_obj.stupen == "3":
                 stupen = "3"
                 vysledok.extend(daj_tvar_prid_m(filter_obj.vzor, filter_obj.vzor_stup, filter_obj.paradigma,
                                                 filter_obj.koren, rod, podrod, cislo, filter_obj.pad, stupen))
@@ -688,11 +688,11 @@ def generuj_morfo_prid_m(filter_obj):
                 stupen = "1"
                 vysledok.extend(daj_tvar_prid_m(filter_obj.vzor, filter_obj.vzor_stup, filter_obj.paradigma,
                                                 filter_obj.koren, rod, podrod, cislo, filter_obj.pad, stupen))
-            if filter_obj.cislo == "" or filter_obj.cislo == "J":
+            if filter_obj.stupen == "" or filter_obj.stupen == "2":
                 stupen = "2"
                 vysledok.extend(daj_tvar_prid_m(filter_obj.vzor, filter_obj.vzor_stup, filter_obj.paradigma,
                                                 filter_obj.koren, rod, podrod, cislo, filter_obj.pad, stupen))
-            if filter_obj.stupen == "" or filter_obj.stupen == "1":
+            if filter_obj.stupen == "" or filter_obj.stupen == "3":
                 stupen = "3"
                 vysledok.extend(daj_tvar_prid_m(filter_obj.vzor, filter_obj.vzor_stup, filter_obj.paradigma,
                                                 filter_obj.koren, rod, podrod, cislo, filter_obj.pad, stupen))

@@ -85,6 +85,7 @@ class SlovnyDruh(db.Model):
     sem_priznak_id = db.Column(db.Integer, db.ForeignKey("sem.id"), nullable=True, index=True)
     sem_priznak = relationship("Semantika", foreign_keys=[sem_priznak_id])
     paradigma = db.Column(db.String(1), nullable=True)
+    vzor_stup = db.Column(db.String(500), nullable=True)
     # sd_hier = relationship("HierarchiaSD", primaryjoin="(SlovnyDruh.id==HierarchiaSD.sd_id)")
 
     __mapper_args__ = {
@@ -120,6 +121,7 @@ class SlovnyDruh(db.Model):
         export.prefix = self.prefix
         export.sufix = self.sufix
         export.koren = self.koren
+        export.vzor_stup = self.vzor_stup
 
         if self.typ == "POD_M":
             pm = PodstatneMeno.query.get(self.id)
@@ -139,7 +141,6 @@ class SlovnyDruh(db.Model):
         elif self.typ == "PRID_M":
             prm = PridavneMeno.query.get(self.id)
             export.sloveso_id = prm.sloveso_id
-            export.vzor_stup = prm.vzor_stup
 
             if prm.sloveso_id:
                 slov = Sloveso.query.get(prm.sloveso_id)
@@ -225,7 +226,6 @@ class PridavneMeno(SlovnyDruh):
     je_negacia = db.Column(db.String(1), nullable=True)
     sem_priznak_prid_m_id = db.Column(db.Integer, db.ForeignKey("sem.id"), nullable=True, index=True)
     sem_priznak_prid_m = relationship("Semantika", foreign_keys=[sem_priznak_prid_m_id])
-    vzor_stup = db.Column(db.String(50), nullable=True)
     __mapper_args__ = {
         'polymorphic_identity': 'PRID_M',
     }

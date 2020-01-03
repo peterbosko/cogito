@@ -482,7 +482,6 @@ def zmenit_sd_post():
             if export.tab == "zakladne":
                 prm.zak_tvar = export.zak_tvar
                 prm.popis = export.popis
-                prm.vzor_stup = export.vzor_stup
 
                 if prm.sloveso_id and not export.sloveso_id:
                     prm.sloveso_id = None

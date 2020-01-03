@@ -139,7 +139,7 @@ def updatuj_prislovku(koren, slovo_id, rodic_id, sem_pad, vzor, prefix, sufix, k
         adv.sp = s_id
         adv.prefix = prefix
         adv.sufix = sufix
-        adv.vzor = vzor
+        adv.vzor_stup = vzor
         adv.koncovka = koncovka
         adv.koren = koren
 
