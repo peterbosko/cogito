@@ -346,6 +346,7 @@ def daj_vzory():
     vzor = request.args.get("vzor", "")
     deklinacia = request.args.get("deklinacia", "")
     alternacia = request.args.get("alternacia", "")
+    sklon_stup = request.args.get("SklonStupCas", "")
 
     if typ:
         filtered = filtered.filter(SDVzor.typ == typ)
@@ -359,12 +360,16 @@ def daj_vzory():
     if alternacia:
         filtered = filtered.filter(SDVzor.alternacia.like(alternacia))
 
+    if sklon_stup:
+        filtered = filtered.filter(SDVzor.sklon_stup == sklon_stup)
+
     table = DataTable(request.args, SDVzor, filtered, [
             "id",
             "typ",
             "rod",
             "podrod",
             "vzor",
+            "sklon_stup",
             "deklinacia",
             "alternacia",
             "popis"

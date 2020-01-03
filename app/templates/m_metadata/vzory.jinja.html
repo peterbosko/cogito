@@ -25,7 +25,17 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <input id="txtFDeklinacia" class="form-control SearchOnChange SearchOnEnter" type="text" placeholder="Vložte deklináčný pattern" aria-label="Search">
+                                        <select id="ddlFSklonStupCas" class="SearchOnChange SearchOnEnter form-control">
+                                            <option value="" selected>Všetky</option>
+                                            <option value="sklon">Skloňovacie vzory</option>
+                                            <option value="stup">Stupňovacie vzory</option>
+                                            <option value="cas">Časovacie vzory</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <input id="txtFDeklinacia" class="form-control SearchOnChange SearchOnEnter" type="text" placeholder="Vložte deklinačný pattern" aria-label="Search">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -47,6 +57,7 @@
                             <th>Rod</th>
                             <th>Podrod</th>
                             <th>Vzor</th>
+                            <th>Skloň./Stup./Čas.</th>
                             <th>Deklinácia</th>
                             <th>Alternácia</th>
                             <th class="none">Popis</th>
@@ -86,10 +97,12 @@
         ajax: {
             url : "{{ url_for("metadata.daj_vzory") }}",
             data : function ( d ) {
+
                 d.vzor = $('#txtFVzor').val();
                 d.typ = $('#ddlFDruh').val();
                 d.deklinacia = $('#txtFDeklinacia').val();
                 d.alternacia = $('#txtFAlternacia').val();
+                d.SklonStupCas = $('#ddlFSklonStupCas').val();
             },
         },
         columns: [
@@ -98,6 +111,7 @@
             { data: "rod" },
             { data: "podrod" },
             { data: "vzor" },
+            { data: "sklon_stup" },
             { data: "deklinacia" },
             { data: "alternacia" },
             { data: "popis" },
