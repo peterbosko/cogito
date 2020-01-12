@@ -27,6 +27,7 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-md-12">
+                                        <input id="txtFZoSlovesa" class="form-control SearchOnChange SearchOnEnter" type="text" placeholder="Odvodené od slovesa">
                                     </div>
                                 </div>
                             </fieldset>
@@ -122,6 +123,7 @@
             data : function ( d ) {
                 d.hladaj_tvar = $('#txtFTvar').val();
                 d.hladaj_rod = $('#ddlFRod').val();
+                d.hladaj_zo_slovesa = $('#txtFZoSlovesa').val();
             },
         },
         columns: [

@@ -6,6 +6,8 @@ from sqlalchemy import alias
 from app.c_service import *
 from app.main_helper import *
 import jsonpickle
+from app.morfo_service import *
+from sqlalchemy import exc
 from app.sd_service import *
 
 sd_blueprint = Blueprint("sd", __name__)
@@ -145,20 +147,13 @@ def zoznam_ostatne():
     return render_template("m_sd/zoznam_ostatne.jinja.html")
 
 
-def daj_zakladny_tvar_sd(idsd):
-    if not idsd:
-        return ""
-    else:
-        sd = SlovnyDruh.query.get(idsd)
-        return sd.zak_tvar
-
-
 @sd_blueprint.route("/daj_pm/", methods=["GET"])
 def daj_pm():
     loguj(request)
-    tvar = request.args.get("hladaj_tvar", "")
 
+    tvar = request.args.get("hladaj_tvar", "")
     rod = request.args.get("hladaj_rod", "")
+    zo_slovesa = request.args.get("hladaj_zo_slovesa", "")
 
     filtered = db.session.query(PodstatneMeno)
 
@@ -167,6 +162,18 @@ def daj_pm():
 
     if rod:
         filtered = filtered.filter(PodstatneMeno.rod == rod)
+
+    if zo_slovesa:
+        filtered_tmp = db.session.query(PodstatneMeno, SlovnyDruh).outerjoin(Sloveso, Sloveso.id ==
+                                                                            PodstatneMeno.sloveso_id)
+        filtered_tmp = filtered_tmp.filter(Sloveso.zak_tvar.like(zo_slovesa)).all()
+
+        pole_idciek = []
+
+        for f in filtered_tmp:
+            pole_idciek.append(f.PodstatneMeno.id)
+
+        filtered = filtered.filter(PodstatneMeno.id.in_(pole_idciek))
 
     table = DataTable(request.args, PodstatneMeno, filtered, [
             "id",
@@ -186,14 +193,28 @@ def daj_pm():
 @sd_blueprint.route("/daj_prid_m/", methods=["GET"])
 def daj_prid_m():
     loguj(request)
+
     tvar = request.args.get("hladaj_tvar", "")
+    zo_slovesa = request.args.get("hladaj_zo_slovesa", "")
 
     filtered = db.session.query(PridavneMeno)
 
     if tvar:
         filtered = filtered.filter(PridavneMeno.zak_tvar.like(tvar))
 
-    table = DataTable(request.args, PodstatneMeno, filtered, [
+    if zo_slovesa:
+        filtered_tmp = db.session.query(PridavneMeno, SlovnyDruh).outerjoin(Sloveso, Sloveso.id ==
+                                                                            PridavneMeno.sloveso_id)
+        filtered_tmp = filtered_tmp.filter(Sloveso.zak_tvar.like(zo_slovesa)).all()
+
+        pole_idciek = []
+
+        for f in filtered_tmp:
+            pole_idciek.append(f.PridavneMeno.id)
+
+        filtered = filtered.filter(PridavneMeno.id.in_(pole_idciek))
+
+    table = DataTable(request.args, PridavneMeno, filtered, [
             "id",
             "id",
             "zak_tvar",
@@ -866,7 +887,12 @@ def zmaz_cely_slovny_druh():
             sloveso = Sloveso.query.get(sd_id)
             db.session.delete(sloveso)
 
-        db.session.commit()
+        try:
+            db.session.commit()
+        except exc.IntegrityError as e:
+            response.status = ResponseStatus.ERROR
+            response.error_text = "Chyba integrity. Na slovo existuje cudzí kľúč ! V prípade slovesa " \
+                                  "skontroluje prídavné, podstatné mená a slovesá !"
     else:
         response.status = ResponseStatus.ERROR
         response.error_text = "Nedostatočné práva pre operáciu"

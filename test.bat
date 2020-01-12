@@ -1,0 +1,1 @@
+python -m pytest importy\setup_sd\test_vzory.py

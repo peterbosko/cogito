@@ -1,5 +1,5 @@
 {% extends "_main.jinja.html" %}
-{% block title %}Alternácie podstatných mient{% endblock %}
+{% block title %}Morfologické vzory{% endblock %}
 {% block main %}
     <div class="container-fluid" style="padding-top:80px; margin-bottom:30px;">
         <div class="row">
@@ -53,10 +53,10 @@
                     <thead>
                         <tr>
                             <th></th>
+                            <th>Vzor</th>
                             <th>Slovesný druh</th>
                             <th>Rod</th>
                             <th>Podrod</th>
-                            <th>Vzor</th>
                             <th>Skloň./Stup./Čas.</th>
                             <th>Deklinácia</th>
                             <th>Alternácia</th>
@@ -107,10 +107,10 @@
         },
         columns: [
             { data: "id" },
+            { data: "vzor" },
             { data: "typ" },
             { data: "rod" },
             { data: "podrod" },
-            { data: "vzor" },
             { data: "sklon_stup" },
             { data: "deklinacia" },
             { data: "alternacia" },

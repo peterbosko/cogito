@@ -5,6 +5,12 @@ SPEC_ZNAKY = [".", ",", "!", "?", "\"", "'", ":"]
 SPEC_ZNAKY_regexstr = "\\.|\\,|\\!|\\?|\\\"|\\'|\\:"
 
 
+def rchop(thestring, ending):
+    if thestring.endswith(ending) and ending != "":
+        return thestring[:-len(ending)]
+    return thestring
+
+
 class ResponseStatus(object):
     OK = 1
     ERROR = 2

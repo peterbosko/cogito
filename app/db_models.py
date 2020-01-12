@@ -86,6 +86,8 @@ class SlovnyDruh(db.Model):
     sem_priznak = relationship("Semantika", foreign_keys=[sem_priznak_id])
     paradigma = db.Column(db.String(1), nullable=True)
     vzor_stup = db.Column(db.String(500), nullable=True)
+    status = db.Column(db.String(2), nullable=True)
+    chyba = db.Column(db.String(2000), nullable=True)
     # sd_hier = relationship("HierarchiaSD", primaryjoin="(SlovnyDruh.id==HierarchiaSD.sd_id)")
 
     __mapper_args__ = {

@@ -44,7 +44,7 @@
                     <label class="col-sm-2" for="prepend">
                          Paradigma:
                     </label>
-                    <div class="col-sm-8">
+                    <div class="col-sm-10">
                         <select id="ddlParadigma_POD_M" class="form-control">
                             <option value="S">S - substantívna - napr. chlap, žena, srdce</option>
                             <option value="A">A - adjektívna - napr. hlavný, vedúci, Mastný, starká, Slaná, vstupné</option>
@@ -57,7 +57,7 @@
                     <label class="col-sm-2" for="prepend">
                          Paradigma:
                     </label>
-                    <div class="col-sm-8">
+                    <div class="col-sm-10">
                         <select id="ddlParadigma_PRID_M" class="form-control">
                             <option value="A">A - ajektívna - napr. pekný, cudzí, páví</option>
                             <option value="F">F - zmiešaná - otcov, matkin</option>
@@ -950,7 +950,7 @@ function SetUpVzory(v){
     for (i=0;i<v.length;i++){
         if ('{{request.args.get("slovnyDruh")}}'=='POD_M'){
             if (v[i].rod == $('#txtPOD_M_ROD').val() && v[i].typ=="POD_M" && v[i].sklon_stup=="sklon")
-                $('#ddlVzor').append("<option value='"+v[i].vzor+"'>"+v[i].vzor+" - "+v[i].popis+")</option>");
+                $('#ddlVzor').append("<option value='"+v[i].vzor+"'>"+v[i].vzor+" - "+v[i].popis+"</option>");
         } else if ('{{request.args.get("slovnyDruh")}}'=='PRID_M'){
             if ($('#ddlVzor option[value='+v[i].vzor+']').length == 0 && v[i].typ=="PRID_M" && v[i].sklon_stup=="sklon")
                 $('#ddlVzor').append("<option value='"+v[i].vzor+"'>"+v[i].vzor+" - " + v[i].popis + "</option>");

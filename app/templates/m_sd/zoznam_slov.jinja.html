@@ -103,7 +103,7 @@
         if ('{{som_admin_slov()}}' == 'True'){
             e = "<li><a href='javascript:PridatZmenitSD(" + row.sd_id + ");' title='Zmeniť slovný druh'><span class='fa fa-pencil-alt fa-sm'></span>&nbsp;Zmeniť slovný druh</a></li>";
             f = "<li><a href='javascript:ZmazSlovo(" + row.id + ", function(){ nacitajSlova(); });' title='Zmazať slovo'><span class='fa fa-trash-alt fa-sm'></span>&nbsp;Zmazať slovo</a></li>";
-            g = "<li><a href='javascript:ZmazSlovnyDruh(" + row.id + ", function(){ nacitajSlova(); });' title='Zmazať celý slovný druh'><span class='fa fa-trash-alt fa-sm'></span>&nbsp;Zmazať celý slovný druh</a></li>";
+            g = "<li><a href='javascript:ZmazSlovnyDruh(" + row.sd_id + ", function(){ nacitajSlova(); });' title='Zmazať celý slovný druh'><span class='fa fa-trash-alt fa-sm'></span>&nbsp;Zmazať celý slovný druh</a></li>";
         }
 
         return gridButtonFormater(d+e+f+g, '', true, "240px");

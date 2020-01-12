@@ -365,10 +365,10 @@ def daj_vzory():
 
     table = DataTable(request.args, SDVzor, filtered, [
             "id",
+            "vzor",
             "typ",
             "rod",
             "podrod",
-            "vzor",
             "sklon_stup",
             "deklinacia",
             "alternacia",
