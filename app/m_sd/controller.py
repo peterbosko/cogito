@@ -348,6 +348,7 @@ def daj_slovesa():
             "je_negacia",
             "int_ramec_kod",
             "int_ramec_nazov",
+            "vzor",
     ])
 
     return json.dumps(table.json())

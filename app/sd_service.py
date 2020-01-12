@@ -156,12 +156,10 @@ def daj_slovesne_vzory():
 
         v = gr[0]
 
-        if not v:
-            v = "Žiaden"
-
-        stat.vzor = v
-        stat.pocet = str(gr[1])
-        vysledok.append(stat)
+        if v:
+            stat.vzor = v
+            stat.pocet = str(gr[1])
+            vysledok.append(stat)
 
     return vysledok
 
