@@ -16,7 +16,8 @@ def daj_koren(sloveso):
 
 def updatuj_slovesa(start):
     with flask_app.app_context():
-        slovesa = Sloveso.query.filter(Sloveso.id >= start).filter(Sloveso.status == "E").order_by(Sloveso.id.asc())
+        # filter(Sloveso.status == "E")
+        slovesa = Sloveso.query.filter(Sloveso.id >= start).order_by(Sloveso.id.asc())
 
         for sloveso in slovesa:
             infinitiv = sloveso.zak_tvar

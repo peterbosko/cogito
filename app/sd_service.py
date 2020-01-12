@@ -1,6 +1,7 @@
 from app.db_models import *
 from sqlalchemy import and_
 from sqlalchemy.sql.expression import func
+import operator
 
 
 def daj_pocet_intencii_sp(id):
@@ -144,5 +145,24 @@ def daj_zakladny_tvar_sd(idsd):
                 zvrat = " " + sloveso.zvratnost
 
         return sd.zak_tvar + zvrat
+
+
+def daj_slovesne_vzory():
+    vysledok = []
+
+    for gr in db.session.query(Sloveso.vzor, func.count(Sloveso.vzor)).group_by(Sloveso.vzor).\
+            order_by(func.count(Sloveso.vzor).desc()).all():
+        stat = VzorSoStatistikou()
+
+        v = gr[0]
+
+        if not v:
+            v = "Žiaden"
+
+        stat.vzor = v
+        stat.pocet = str(gr[1])
+        vysledok.append(stat)
+
+    return vysledok
 
 

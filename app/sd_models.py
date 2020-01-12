@@ -77,3 +77,8 @@ class MorfoFilter(object):
     paradigma = None
     sd_id = None
 
+
+class VzorSoStatistikou(object):
+    vzor = None
+    pocet = None
+

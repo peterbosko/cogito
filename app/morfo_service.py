@@ -19,7 +19,7 @@ def daj_pole_znakov(string):
 
     while index < len(string):
         if string[index] == "d":
-            if len(string) >= index+1:
+            if len(string) > index+1:
                 if string[index+1] == "z":
                     result.append("dz")
                     index += 2
@@ -34,7 +34,7 @@ def daj_pole_znakov(string):
                 index += 1
 
         elif string[index] == "c":
-            if len(string) >= index+1:
+            if len(string) > index+1:
                 if string[index+1] == "h":
                     result.append("ch")
                     index += 2
@@ -42,7 +42,7 @@ def daj_pole_znakov(string):
                     result.append(string[index])
                     index += 1
         elif string[index] == "i":
-            if len(string) >= index+1:
+            if len(string) > index+1:
                 if string[index+1] in ("a", "e", "u"):
                     result.append("i"+string[index+1])
                     index += 2
@@ -181,6 +181,8 @@ def vrat_meta_info_o_slovese(infinitiv, jednotne_1os, mnozne_3os):
         elif koncovka_pred_indik == "i":
             if je_spoluhlaska(pole_znakov_jednotne_1os[-3]) and je_spoluhlaska(pole_znakov_jednotne_1os[-2]):
                 vzor = potencionalny_vzor.filter(SDVzor.vzor == "krášliť").first()
+            elif pole_znakov_jednotne_1os[-3] == "j":
+                vzor = potencionalny_vzor.filter(SDVzor.vzor == "bájiť").first()
             else:
                 vzor = potencionalny_vzor.filter(SDVzor.vzor == "kúpiť").first()
         elif koncovka_pred_indik == "í":

@@ -1,4 +1,4 @@
-{% extends "_main.jinja.html" %}
+    {% extends "_main.jinja.html" %}
 
 {% block title %}Zoznam slovies{% endblock %}
 
@@ -27,6 +27,26 @@
                                             <option value="-1">S nastaveným intenčným rámcom</option>
                                             {% for k in intencne_ramce %}
                                             <option value="{{ k.id }}">{{ k.kod + ' - ' + k.nazov }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <input id="txtFKoren" class="form-control SearchOnChange SearchOnEnter" type="text" placeholder="Koreň slovesa">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <input id="txtFpzkmen" class="form-control SearchOnChange SearchOnEnter" type="text" placeholder="Prézentný kmeň">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <select id="ddlFVzor" class="SearchOnChange SearchOnEnter form-control">
+                                            <option value="" selected>Všetky</option>
+                                            {% for k in slovesne_vzory %}
+                                            <option value="{{ k.vzor }}">{{ k.vzor + " - počet slovies :" }} {{k.pocet}}</option>
                                             {% endfor %}
                                         </select>
                                     </div>
@@ -106,6 +126,7 @@
             $('#btnPridajSLOVESO').removeClass('nodisplay');
         }
         $('#ddlFIntencnyRamec').select2();
+        $('#ddlFVzor').select2();
     });
 
     function nacitajSlovesa(){
@@ -127,6 +148,9 @@
                 d.hladaj_tvar = $('#txtFTvar').val();
                 d.hladaj_popis = $('#txtFPopis').val();
                 d.hladaj_ir = $('#ddlFIntencnyRamec').val();
+                d.koren = $('#txtFKoren').val();
+                d.pzkmen = $('#txtFpzkmen').val();
+                d.vzor = $('#ddlFVzor').val();
             },
         },
         columns: [

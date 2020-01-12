@@ -113,8 +113,9 @@ def zoznam_slovesa():
     loguj(request)
 
     ir = IntencnyRamec.query.order_by(IntencnyRamec.kod)
+    slovesne_vzory = daj_slovesne_vzory()
 
-    return render_template("m_sd/zoznam_slovesa.jinja.html", intencne_ramce=ir)
+    return render_template("m_sd/zoznam_slovesa.jinja.html", intencne_ramce=ir, slovesne_vzory=slovesne_vzory)
 
 
 @sd_blueprint.route("/zoznam_spojky/", methods=["GET"])
@@ -165,7 +166,7 @@ def daj_pm():
 
     if zo_slovesa:
         filtered_tmp = db.session.query(PodstatneMeno, SlovnyDruh).outerjoin(Sloveso, Sloveso.id ==
-                                                                            PodstatneMeno.sloveso_id)
+                                                                             PodstatneMeno.sloveso_id)
         filtered_tmp = filtered_tmp.filter(Sloveso.zak_tvar.like(zo_slovesa)).all()
 
         pole_idciek = []
@@ -312,6 +313,9 @@ def daj_slovesa():
     tvar = request.args.get("hladaj_tvar", "")
     popis = request.args.get("hladaj_popis", "")
     ir = request.args.get("hladaj_ir", "")
+    koren = request.args.get("koren", "")
+    pzkmen = request.args.get("pzkmen", "")
+    vzor = request.args.get("vzor", "")
 
     filtered = db.session.query(SlovesoView)
 
@@ -326,6 +330,15 @@ def daj_slovesa():
             filtered = filtered.filter(SlovesoView.int_ramec_id.isnot(None))
         else:
             filtered = filtered.filter(SlovesoView.int_ramec_id == int(ir))
+
+    if koren:
+        filtered = filtered.filter(SlovesoView.koren.like(koren))
+
+    if pzkmen:
+        filtered = filtered.filter(SlovesoView.pzkmen.like(pzkmen))
+
+    if vzor:
+        filtered = filtered.filter(SlovesoView.vzor == vzor)
 
     table = DataTable(request.args, SlovesoView, filtered, [
             "id",

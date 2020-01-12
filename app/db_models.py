@@ -634,6 +634,9 @@ class SlovesoView(db.Model):
             [
                 Sloveso.sd_id.label('id'),
                 SlovnyDruh.zak_tvar,
+                SlovnyDruh.koren,
+                Sloveso.pzkmen,
+                SlovnyDruh.vzor,
                 Sloveso.popis,
                 Sloveso.zvratnost,
                 Sloveso.vid,
