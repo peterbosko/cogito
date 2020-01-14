@@ -260,7 +260,7 @@ function NastavSloveso(itemid, id_slovesa, text_slovesa){
 }
 
 function NacitajZakladneInfoSD(sd_id){
-        AjaxMethods.getDataFromGetRequest('{{url_for("sd.vrat_cely_slovny_druh")}}', "",
+        AjaxMethods.getDataFromGetRequest('{{url_for("sd.vrat_zakladne_info_sd")}}', "",
         "?sd_id="+sd_id, function(r){
             if (r.status==responseOK){//OK vetva
                 $('#txtFormZakTvar').val(r.data.zak_tvar);

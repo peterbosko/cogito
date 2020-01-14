@@ -79,7 +79,7 @@ class SlovnyDruh(db.Model):
     koren = db.Column(db.String(500, collation='utf8mb4_bin'), nullable=False)
     popis = db.Column(db.String(2000), nullable=True)
     slova = relationship("Slovo", back_populates="SlovnyDruh")
-    vzor = db.Column(db.String(500, collation='utf8mb4_bin'), nullable=True)
+    vzor = db.Column(db.String(500, collation='utf8mb4_bin'), nullable=True, index=True)
     prefix = db.Column(db.String(20, collation='utf8mb4_bin'), nullable=True)
     sufix = db.Column(db.String(20, collation='utf8mb4_bin'), nullable=True)
     sem_priznak_id = db.Column(db.Integer, db.ForeignKey("sem.id"), nullable=True, index=True)
@@ -103,18 +103,8 @@ class SlovnyDruh(db.Model):
         #export.parent_sd_id = self.parent_sd_id
         return export
 
-    def exportujSem(self):
+    def exportuj_zak_info(self):
         export = SlovnyDruhExport()
-        export.id = self.id
-        export.zak_tvar = self.zak_tvar
-        export.typ = self.typ
-        if self.sem_priznak.id:
-            odvodene = SemHierarchia.query.filter(SemHierarchia.sem_id == sem_priznak.id)
-        
-        return export
-
-    def exportujPlnySD(self):
-        export = SDExport()
         export.zak_tvar = self.zak_tvar
         export.popis = self.popis
         export.typ = self.typ
@@ -163,6 +153,7 @@ class SlovnyDruh(db.Model):
             export.zvratnost = s.zvratnost
             export.je_negacia = s.je_negacia
             export.sloveso_id = s.pozitivne_sloveso_id
+            export.pzkmen = s.pzkmen
 
             if s.pozitivne_sloveso_id:
                 slov = Sloveso.query.get(s.pozitivne_sloveso_id)
@@ -180,6 +171,21 @@ class SlovnyDruh(db.Model):
             export.podrod = cis.podrod
             export.cislo = cis.cislo
             export.hodnota = cis.hodnota
+
+        return export
+
+    def exportujSem(self):
+        export = SlovnyDruhExport()
+        export.id = self.id
+        export.zak_tvar = self.zak_tvar
+        export.typ = self.typ
+        if self.sem_priznak.id:
+            odvodene = SemHierarchia.query.filter(SemHierarchia.sem_id == sem_priznak.id)
+        
+        return export
+
+    def exportuj_plny_sd(self):
+        export = self.exportuj_zak_info()
 
         export.slova = Slovo.query.filter(Slovo.sd_id == self.id).all()
 

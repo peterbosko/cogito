@@ -20,6 +20,26 @@
                                         <input id="txtFZoSlovesa" class="form-control SearchOnChange SearchOnEnter" type="text" placeholder="Odvodené od slovesa">
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <select id="ddlFVzor" class="SearchOnChange SearchOnEnter form-control">
+                                            <option value="" selected>Všetky skloňovacie vzory</option>
+                                            {% for k in sklon_vzory %}
+                                            <option value="{{ k.hodnota }}">{{ k.vzor + " - počet príd. mien :" }} {{k.pocet}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <select id="ddlFStupVzor" class="SearchOnChange SearchOnEnter form-control">
+                                            <option value="" selected>Všetky stupňovacie vzory</option>
+                                            {% for k in stup_vzory %}
+                                            <option value="{{ k.hodnota }}">{{ k.vzor + " - počet príd. mien :" }} {{k.pocet}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
                             </fieldset>
                        </div>
                   </div>
@@ -35,6 +55,8 @@
                             <th>Popis</th>
                             <th>Zo slovesa</th>
                             <th>Je negácia</th>
+                            <th>Skloň. vzor</th>
+                            <th>Stup. vzor</th>
                         </tr>
                     </thead>
                 <tbody>
@@ -91,7 +113,8 @@
         if ('{{som_admin_slov()}}'=='True'){
             $('#btnPridajPRIDM').removeClass('nodisplay');
         }
-
+        $('#ddlFVzor').select2();
+        $('#ddlFStupVzor').select2();
     });
 
     function nacitajPridM(){
@@ -113,6 +136,8 @@
                 d.hladaj_tvar = $('#txtFTvar').val();
                 d.hladaj_rod = $('#ddlFRod').val();
                 d.hladaj_zo_slovesa = $('#txtFZoSlovesa').val();
+                d.vzor = $('#ddlFVzor').val();
+                d.vzor_stup = $('#ddlFStupVzor').val();
             },
         },
         columns: [
@@ -124,6 +149,8 @@
             { data: "popis" },
             { data: "sloveso_id" },
             { data: "je_negacia" },
+            { data: "vzor" },
+            { data: "vzor_stup" },
         ]
         });
 </script>

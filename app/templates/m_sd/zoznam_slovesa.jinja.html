@@ -23,7 +23,7 @@
                                 <div class="form-group">
                                     <div class="col-md-12">
                                         <select id="ddlFIntencnyRamec" class="SearchOnChange SearchOnEnter form-control">
-                                            <option value="" selected>Všetky</option>
+                                            <option value="" selected>Všetky intenčné rámce</option>
                                             <option value="-1">S nastaveným intenčným rámcom</option>
                                             {% for k in intencne_ramce %}
                                             <option value="{{ k.id }}">{{ k.kod + ' - ' + k.nazov }}</option>
@@ -44,9 +44,9 @@
                                 <div class="form-group">
                                     <div class="col-md-12">
                                         <select id="ddlFVzor" class="SearchOnChange SearchOnEnter form-control">
-                                            <option value="" selected>Všetky</option>
+                                            <option value="" selected>Všetky časovacie vzory</option>
                                             {% for k in slovesne_vzory %}
-                                            <option value="{{ k.vzor }}">{{ k.vzor + " - počet slovies :" }} {{k.pocet}}</option>
+                                            <option value="{{ k.hodnota }}">{{ k.vzor + " - počet slovies :" }} {{k.pocet}}</option>
                                             {% endfor %}
                                         </select>
                                     </div>

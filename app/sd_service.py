@@ -2,6 +2,7 @@ from app.db_models import *
 from sqlalchemy import and_
 from sqlalchemy.sql.expression import func
 import operator
+from sqlalchemy import or_
 
 
 def daj_pocet_intencii_sp(id):
@@ -150,6 +151,8 @@ def daj_zakladny_tvar_sd(idsd):
 def daj_slovesne_vzory():
     vysledok = []
 
+    nenastavene = None
+
     for gr in db.session.query(Sloveso.vzor, func.count(Sloveso.vzor)).group_by(Sloveso.vzor).\
             order_by(func.count(Sloveso.vzor).desc()).all():
         stat = VzorSoStatistikou()
@@ -158,9 +161,159 @@ def daj_slovesne_vzory():
 
         if v:
             stat.vzor = v
-            stat.pocet = str(gr[1])
+            stat.hodnota = v
+            stat.pocet = gr[1]
+            vobj = SDVzor.query.filter(SDVzor.typ == "SLOVESO").filter(SDVzor.vzor == v).first()
+
+            if vobj:
+                stat.popis = vobj.popis
+
+            if not stat.popis:
+                stat.popis = ""
+
             vysledok.append(stat)
+        else:
+
+            stat.pocet = gr[1]
+            stat.vzor = "nenastavený"
+            stat.hodnota = "-1"
+            stat.popis = ""
+
+            if not nenastavene:
+                stat.pocet = db.session.query(Sloveso).filter(or_(Sloveso.vzor.is_(None), Sloveso.vzor == "")).count()
+                nenastavene = stat
+                vysledok.append(stat)
+            else:
+                pass
 
     return vysledok
 
+
+def daj_pm_vzory():
+    vysledok = []
+
+    nenastavene = None
+
+    for gr in db.session.query(PodstatneMeno.vzor, func.count(PodstatneMeno.vzor)).group_by(PodstatneMeno.vzor).\
+            order_by(func.count(PodstatneMeno.vzor).desc()).all():
+        stat = VzorSoStatistikou()
+
+        v = gr[0]
+
+        if v:
+            stat.vzor = v
+            stat.hodnota = v
+            stat.pocet = gr[1]
+            vobj = SDVzor.query.filter(SDVzor.typ == "POD_M").filter(SDVzor.vzor == v).first()
+
+            if vobj:
+                stat.popis = vobj.popis
+
+            if not stat.popis:
+                stat.popis = ""
+
+            vysledok.append(stat)
+        else:
+
+            stat.pocet = gr[1]
+            stat.vzor = "nenastavený"
+            stat.hodnota = "-1"
+            stat.popis = ""
+
+            if not nenastavene:
+                stat.pocet = db.session.query(PodstatneMeno).filter(or_(PodstatneMeno.vzor.is_(None),
+                                                                        PodstatneMeno.vzor == "")).count()
+                nenastavene = stat
+                vysledok.append(stat)
+            else:
+                pass
+
+    return vysledok
+
+
+def daj_prid_m_vzory():
+    vysledok = []
+
+    nenastavene = None
+
+    for gr in db.session.query(PridavneMeno.vzor, func.count(PridavneMeno.vzor)).group_by(PridavneMeno.vzor).\
+            order_by(func.count(PridavneMeno.vzor).desc()).all():
+        stat = VzorSoStatistikou()
+
+        v = gr[0]
+
+        if v:
+            stat.vzor = v
+            stat.hodnota = v
+            stat.pocet = gr[1]
+            vobj = SDVzor.query.filter(SDVzor.typ == "PRID_M").filter(SDVzor.sklon_stup == "sklon").\
+                filter(SDVzor.vzor == v).first()
+
+            if vobj:
+                stat.popis = vobj.popis
+
+            if not stat.popis:
+                stat.popis = ""
+
+            vysledok.append(stat)
+        else:
+
+            stat.pocet = gr[1]
+            stat.vzor = "nenastavený"
+            stat.hodnota = "-1"
+            stat.popis = ""
+
+            if not nenastavene:
+                stat.pocet = db.session.query(PridavneMeno).filter(or_(PridavneMeno.vzor.is_(None),
+                                                                       PridavneMeno.vzor == "")).count()
+                nenastavene = stat
+                vysledok.append(stat)
+            else:
+                pass
+
+    return vysledok
+
+
+def daj_prid_m_stup_vzory():
+    vysledok = []
+
+    nenastavene = None
+
+    for gr in db.session.query(PridavneMeno.vzor_stup, func.count(PridavneMeno.vzor_stup)).\
+            group_by(PridavneMeno.vzor_stup).\
+            order_by(func.count(PridavneMeno.vzor_stup).desc()).all():
+        stat = VzorSoStatistikou()
+
+        v = gr[0]
+
+        if v:
+            stat.vzor = v
+            stat.hodnota = v
+            stat.pocet = gr[1]
+            vobj = SDVzor.query.filter(SDVzor.typ == "PRID_M").filter(SDVzor.sklon_stup == "stup").\
+                filter(SDVzor.vzor == v).first()
+
+            if vobj:
+                stat.popis = vobj.popis
+
+            if not stat.popis:
+                stat.popis = ""
+
+            vysledok.append(stat)
+        else:
+
+            stat.pocet = gr[1]
+            stat.vzor = "nenastavený"
+            stat.hodnota = "-1"
+            stat.popis = ""
+
+            if not nenastavene:
+                stat.pocet = db.session.query(PridavneMeno).filter(or_(PridavneMeno.vzor_stup.is_(None),
+                                                                       PridavneMeno.vzor_stup == "")).count()
+                nenastavene = stat
+                vysledok.append(stat)
+            else:
+                pass
+
+    return vysledok
 

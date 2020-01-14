@@ -2,21 +2,13 @@ from app.db_models import *
 from app.app import flask_app
 from sqlalchemy import or_
 from app.morfo_service import *
-
+from app.morfo_sloveso_service import *
 
 db.init_app(flask_app)
 
 
-def daj_koren(sloveso):
-    with flask_app.app_context():
-        slovo = Slovo.query.filter(Slovo.sd_id == sloveso.id)
-
-    return ""
-
-
 def updatuj_slovesa(start):
     with flask_app.app_context():
-        # filter(Sloveso.status == "E")
         slovesa = Sloveso.query.filter(Sloveso.id >= start).order_by(Sloveso.id.asc())
 
         for sloveso in slovesa:
@@ -43,14 +35,14 @@ def updatuj_slovesa(start):
                 print(f"Chyba pri spracovávaní slovesa:{infinitiv} chyba:{chyba}")
 
             if not chyba:
-                koren, pzkmen, vzor, prefix, sufix, chyba_do_tabulky = vrat_meta_info_o_slovese(infinitiv, jednotne_1os.tvar,
-                                                                                                mnozne_3os.tvar)
+                koren, pzkmen, vzor, chyba_do_tabulky = vrat_kpv_o_slovese(infinitiv, jednotne_1os.tvar,
+                                                                           mnozne_3os.tvar)
 
             if chyba_do_tabulky:
                 sloveso.status = "E"
                 sloveso.chyba = chyba_do_tabulky
             else:
-                sloveso.status = None
+                sloveso.status = "OK"
                 sloveso.chyba = None
                 sloveso.vzor = vzor
                 sloveso.koren = koren
@@ -90,8 +82,8 @@ def checkni_vyplnene_slovesa(start):
 
             if not chyba:
 
-                koren, pzkmen, vzor, prefix, sufix, chyba = vrat_meta_info_o_slovese(infinitiv, jednotne_1os.tvar,
-                                                                                     mnozne_3os.tvar)
+                koren, pzkmen, vzor, chyba = vrat_kpv_o_slovese(infinitiv, jednotne_1os.tvar,
+                                                                mnozne_3os.tvar)
 
                 if chyba:
                     chyba_do_tabulky += f"{chyba}"

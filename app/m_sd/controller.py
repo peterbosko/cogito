@@ -7,6 +7,7 @@ from app.c_service import *
 from app.main_helper import *
 import jsonpickle
 from app.morfo_service import *
+from app.morfo_sloveso_service import *
 from sqlalchemy import exc
 from app.sd_service import *
 
@@ -81,13 +82,21 @@ def zoznam_slov():
 @sd_blueprint.route("/zoznam_pm/", methods=["GET"])
 def zoznam_pm():
     loguj(request)
-    return render_template("m_sd/zoznam_pm.jinja.html")
+
+    sklon_vzory = daj_pm_vzory()
+
+    return render_template("m_sd/zoznam_pm.jinja.html", sklon_vzory=sklon_vzory)
 
 
 @sd_blueprint.route("/zoznam_prid_m/", methods=["GET"])
 def zoznam_prid_m():
     loguj(request)
-    return render_template("m_sd/zoznam_prid_m.jinja.html")
+
+    sklon_vzory = daj_prid_m_vzory()
+
+    stup_vzory = daj_prid_m_stup_vzory()
+
+    return render_template("m_sd/zoznam_prid_m.jinja.html", sklon_vzory=sklon_vzory, stup_vzory=stup_vzory)
 
 
 @sd_blueprint.route("/zoznam_zamena/", methods=["GET"])
@@ -155,6 +164,7 @@ def daj_pm():
     tvar = request.args.get("hladaj_tvar", "")
     rod = request.args.get("hladaj_rod", "")
     zo_slovesa = request.args.get("hladaj_zo_slovesa", "")
+    vzor = request.args.get("vzor", "")
 
     filtered = db.session.query(PodstatneMeno)
 
@@ -163,6 +173,12 @@ def daj_pm():
 
     if rod:
         filtered = filtered.filter(PodstatneMeno.rod == rod)
+
+    if vzor:
+        if vzor == "-1":
+            filtered = filtered.filter(or_(PodstatneMeno.vzor.is_(None),PodstatneMeno.vzor == ""))
+        else:
+            filtered = filtered.filter(PodstatneMeno.vzor.like(vzor))
 
     if zo_slovesa:
         filtered_tmp = db.session.query(PodstatneMeno, SlovnyDruh).outerjoin(Sloveso, Sloveso.id ==
@@ -185,7 +201,7 @@ def daj_pm():
             "podrod",
             ("sloveso_id", lambda i: daj_zakladny_tvar_sd(i.sloveso_id)),
             "je_negacia",
-
+            "vzor",
     ])
 
     return json.dumps(table.json())
@@ -197,6 +213,8 @@ def daj_prid_m():
 
     tvar = request.args.get("hladaj_tvar", "")
     zo_slovesa = request.args.get("hladaj_zo_slovesa", "")
+    vzor = request.args.get("vzor", "")
+    vzor_stup = request.args.get("vzor_stup", "")
 
     filtered = db.session.query(PridavneMeno)
 
@@ -215,6 +233,18 @@ def daj_prid_m():
 
         filtered = filtered.filter(PridavneMeno.id.in_(pole_idciek))
 
+    if vzor:
+        if vzor == "-1":
+            filtered = filtered.filter(or_(PridavneMeno.vzor.is_(None), PridavneMeno.vzor == ""))
+        else:
+            filtered = filtered.filter(PridavneMeno.vzor.like(vzor))
+
+    if vzor_stup:
+        if vzor_stup == "-1":
+            filtered = filtered.filter(or_(PridavneMeno.vzor_stup.is_(None), PridavneMeno.vzor_stup== ""))
+        else:
+            filtered = filtered.filter(PridavneMeno.vzor_stup.like(vzor_stup))
+
     table = DataTable(request.args, PridavneMeno, filtered, [
             "id",
             "id",
@@ -222,6 +252,8 @@ def daj_prid_m():
             "popis",
             ("sloveso_id", lambda i: daj_zakladny_tvar_sd(i.sloveso_id)),
             "je_negacia",
+            "vzor",
+            "vzor_stup",
     ])
 
     return json.dumps(table.json())
@@ -338,7 +370,10 @@ def daj_slovesa():
         filtered = filtered.filter(SlovesoView.pzkmen.like(pzkmen))
 
     if vzor:
-        filtered = filtered.filter(SlovesoView.vzor == vzor)
+        if vzor == "-1":
+            filtered = filtered.filter(or_(SlovesoView.vzor == "", SlovesoView.vzor.is_(None)))
+        else:
+            filtered = filtered.filter(SlovesoView.vzor == vzor)
 
     table = DataTable(request.args, SlovesoView, filtered, [
             "id",
@@ -751,7 +786,22 @@ def sd_zakladne_info():
 @sd_blueprint.route("/sd_slova_zmen/", methods=["GET"])
 def sd_slova_zmen():
     loguj(request)
-    return render_template("m_sd/sd_slova_zmen.jinja.html")
+
+    slovny_druh = SlovnyDruh.query.get(request.args.get("sd_id", ""))
+
+    vzory = []
+
+    stupnovacie_vzory = []
+
+    if slovny_druh.typ == "SLOVESO":
+        vzory = daj_slovesne_vzory()
+    elif slovny_druh.typ == "PRID_M":
+        vzory = daj_prid_m_vzory()
+        stupnovacie_vzory = daj_prid_m_stup_vzory()
+    elif slovny_druh.typ == "POD_M":
+        vzory = daj_pm_vzory()
+
+    return render_template("m_sd/sd_slova_zmen.jinja.html", vzory=vzory, stupnovacie_vzory=stupnovacie_vzory)
 
 
 @sd_blueprint.route("/sd_rodicia/", methods=["GET"])
@@ -831,6 +881,28 @@ def vrat_sd_id():
     return jsonpickle.encode(response)
 
 
+@sd_blueprint.route("/vrat_zakladne_info_sd/", methods=["GET"])
+def vrat_zakladne_info_sd():
+    loguj(request)
+    sd_id = request.args.get("sd_id", "")
+
+    response = CommonResponse()
+
+    slovny_druh = SlovnyDruh.query.get(sd_id)
+
+    sd_export = slovny_druh.exportuj_zak_info()
+
+    response.status = ResponseStatus.OK
+
+    response.data = sd_export
+
+    response.data.vzory = daj_vsetky_vzory()
+
+    response.data.prefix_sufix = daj_vsetky_prefix_sufix()
+
+    return jsonpickle.encode(response)
+
+
 @sd_blueprint.route("/vrat_cely_slovny_druh/", methods=["GET"])
 def vrat_cely_slovny_druh():
     loguj(request)
@@ -840,7 +912,7 @@ def vrat_cely_slovny_druh():
 
     slovny_druh = SlovnyDruh.query.get(sd_id)
 
-    sd_export = slovny_druh.exportujPlnySD()
+    sd_export = slovny_druh.exportuj_plny_sd()
 
     response.status = ResponseStatus.OK
 
@@ -949,6 +1021,21 @@ def generuj_morfo():
             response.status = ResponseStatus.ERROR
         else:
             vysledok = generuj_morfo_prid_m(morfo)
+
+    elif sd.typ == "SLOVESO":
+
+        sloveso = Sloveso.query.get(morfo.sd_id)
+
+        morfo.afirmacia = sloveso.je_negacia == "N"
+
+        if not morfo.vzor:
+            response.error_text = f"Nie je nastavený časovací vzor !"
+            response.status = ResponseStatus.ERROR
+        else:
+            vzor = SDVzor.query.filter(SDVzor.typ == "SLOVESO").filter(SDVzor.Vzor == morfo.vzor).first()
+
+            if morfo.pricastie == "l":
+                vysledok = generuj_sloveso_ltvar(morfo, vzor.split(",")[1])
 
     response.data = vysledok
 

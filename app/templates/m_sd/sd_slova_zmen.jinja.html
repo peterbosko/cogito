@@ -15,12 +15,26 @@
                         </select>
                     </div>
                 </div>
-                <div class="row VZOR marginbottomDetailSD nodisplay">
+                <div class="row marginbottomDetailSD SLOVESO nodisplay">
                     <label class="col-sm-2" for="prepend">
+                         Prézentný kmeň:
+                    </label>
+                    <div class="col-sm-5">
+                        <input type="text" id="txtPzkmen" class="form-control" name="txtPzkmen"/>
+                    </div>
+                </div>
+                <div class="row VZOR marginbottomDetailSD nodisplay">
+                    <label class="col-sm-2 nodisplay PRID_M POD_M" for="prepend">
                          Skloňovací vzor:
+                    </label>
+                    <label class="col-sm-2 nodisplay SLOVESO" for="prepend">
+                         Časovací vzor:
                     </label>
                     <div class="col-sm-10">
                         <select id="ddlVzor" class="form-control">
+                            {% for k in vzory %}
+                            <option value="{{ k.hodnota }}">{{ k.vzor + " - počet slovies :" }} {{k.pocet}}</option>
+                            {% endfor %}
                         </select>
                     </div>
                 </div>
@@ -73,6 +87,9 @@
                     </label>
                     <div class="col-sm-10">
                         <select id="ddlVzorStup" class="form-control">
+                            {% for k in stupnovacie_vzory %}
+                            <option value="{{ k.hodnota }}">{{ k.vzor + " - počet slovies :" }} {{k.pocet}}</option>
+                            {% endfor %}
                         </select>
                     </div>
                 </div>
@@ -715,8 +732,6 @@ function NacitajSDSlova(id){
         AjaxMethods.getDataFromGetRequest('{{url_for("sd.vrat_cely_slovny_druh")}}', "", "?sd_id="+id, function(r){
             if (r.status==responseOK){//OK vetva
 
-                SetUpVzory(r.data.vzory);
-                SetUpPrefixSufix(r.data.prefix_sufix);
                 SetUpKoren(r.data.zak_tvar);
 
                 if (r.data.vzor)
@@ -724,6 +739,9 @@ function NacitajSDSlova(id){
 
                 if (r.data.koren)
                     $('#ddlKorenSlova').val(r.data.koren);
+
+                if (r.data.pzkmen)
+                    $('#txtPzkmen').val(r.data.pzkmen);
 
                 if (r.data.prefix)
                     $('#ddlPrefix').val(r.data.prefix);
@@ -806,6 +824,7 @@ function ZmenSlovaSD(closeScreen){
         data.vzor = $('#ddlVzor').val();
         data.prefix = $('#ddlPrefix').val();
         data.sufix = $('#ddlSufix').val();
+        data.pzkmen = $('#txtPzkmen').val();
 
         data.zmazaneSlova = zmazaneSlova;
 
@@ -829,12 +848,6 @@ function ZmenSlovaSD(closeScreen){
             data.cislo = $('#ddlZAMENO_CISLO').val();
         }
         else if (typ == "SLOVESO"){
-            data.zvratnost = $('#ddlSLOVESO_Zvratnost').val();
-            if ($('#cbSLOVESO_je_negacia').prop('checked'))
-                data.je_negacia = 'A';
-            else
-                data.je_negacia = 'N';
-            data.sloveso_id = $('#ddlSLOVESO_Sloveso').val();
         }
         else if (typ == "PREDLOZKA"){
             data.pady = $('#ddlPREDLOZKA_Pady').val().join(';');
@@ -906,76 +919,6 @@ function SetUpKoren(slovo){
     }
 }
 
-function SetUpPrefixSufix(ps){
-    var oldPrefix = $('#ddlPrefix').val();
-    var oldSufix = $('#ddlSufix').val();
-
-    $('#ddlPrefix').empty();
-    $('#ddlPrefix').append("<option value='' selected>Žiaden</option>");
-    $('#ddlSufix').empty();
-    $('#ddlSufix').append("<option value='' selected>Žiaden</option>");
-
-    for (var i=0;i<ps.length;i++){
-        if ('{{request.args.get("slovnyDruh")}}'=='POD_M'){
-            if (ps[i].prefix_sufix == "P" && ps[i].typ=="POD_M")
-                $('#ddlPrefix').append("<option value='"+ps[i].hodnota+"'>"+ps[i].hodnota+"</option>");
-            else if (ps[i].prefix_sufix == "S" && ps[i].typ=="POD_M")
-                $('#ddlSufix').append("<option value='"+ps[i].hodnota+"'>"+ps[i].hodnota+"</option>");
-        } else if ('{{request.args.get("slovnyDruh")}}'=='PRID_M'){
-            if (ps[i].prefix_sufix == "P" && ps[i].typ=="PRID_M")
-                $('#ddlPrefix').append("<option value='"+ps[i].hodnota+"'>"+ps[i].hodnota+"</option>");
-            else if (ps[i].prefix_sufix == "S" && ps[i].typ=="PRID_M")
-                $('#ddlSufix').append("<option value='"+ps[i].hodnota+"'>"+ps[i].hodnota+"</option>");
-        }
-    }
-
-    if (oldPrefix){
-        $('#ddlPrefix').val(oldPrefix);
-    }
-
-    if (oldSufix){
-        $('#ddlSufix').val(oldSufix);
-    }
-}
-
-function SetUpVzory(v){
-    var oldValue = $('#ddlVzor').val();
-    var oldValueStup = $('#ddlVzorStup').val();
-
-    $('#ddlVzor').empty();
-    $('#ddlVzor').append("<option value='' selected>Nenastavený</option>");
-    $('#ddlVzorStup').empty();
-    $('#ddlVzorStup').append("<option value='' selected>Nenastavený</option>");
-
-    for (i=0;i<v.length;i++){
-        if ('{{request.args.get("slovnyDruh")}}'=='POD_M'){
-            if (v[i].rod == $('#txtPOD_M_ROD').val() && v[i].typ=="POD_M" && v[i].sklon_stup=="sklon")
-                $('#ddlVzor').append("<option value='"+v[i].vzor+"'>"+v[i].vzor+" - "+v[i].popis+"</option>");
-        } else if ('{{request.args.get("slovnyDruh")}}'=='PRID_M'){
-            if ($('#ddlVzor option[value='+v[i].vzor+']').length == 0 && v[i].typ=="PRID_M" && v[i].sklon_stup=="sklon")
-                $('#ddlVzor').append("<option value='"+v[i].vzor+"'>"+v[i].vzor+" - " + v[i].popis + "</option>");
-        }
-    }
-
-    if (oldValue){
-        $('#ddlVzor').val(oldValue);
-    }
-
-    for (i=0;i<v.length;i++){
-        if ('{{request.args.get("slovnyDruh")}}'=='PRID_M'){
-            if (v[i].typ=="PRID_M" && v[i].sklon_stup=="stup")
-                $('#ddlVzorStup').append("<option value='"+v[i].vzor+"'>"+v[i].vzor+" - "+v[i].popis+"</option>");
-        }
-    }
-
-    if (oldValue){
-        $('#ddlVzor').val(oldValue);
-    }
-
-    if (oldValueStup){
-        $('#ddlVzorStup').val(oldValueStup);
-    }
-}
 
 function setupSlovaDruh(pridavanyDruh){
     typ = pridavanyDruh;
@@ -992,6 +935,7 @@ function setupSlovaDruh(pridavanyDruh){
         $(".SLOVESO").removeClass('nodisplay');
         $(".c_pricastie").addClass('nodisplay');
         $(".c_pad").addClass('nodisplay');
+        $(".c_stupen").addClass('nodisplay');
     }
     else if (pridavanyDruh == "ZAMENO"){
         $(".ZAMENO").removeClass('nodisplay');
@@ -1056,6 +1000,9 @@ $(document).ready(function() {
         $('.PRID_M').removeClass('nodisplay');
         $('#tvar_0').removeClass('slovo_tvar').addClass('pm_slovo_tvar');
         $('#tvar_f').removeClass('slovo_tvar').addClass('pm_slovo_tvar');
+    }
+    else if (pridavanyDruh == "SLOVESO"){
+        $('.SLOVESO').removeClass('nodisplay');
     }
 
     $('#SDSlovaForm').formValidation();
