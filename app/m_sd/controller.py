@@ -349,6 +349,7 @@ def daj_slovesa():
     pzkmen = request.args.get("pzkmen", "")
     vzor = request.args.get("vzor", "")
     sd_id = request.args.get("sd_id", "")
+    user_id = request.args.get("user_id", "")
 
     filtered = db.session.query(SlovesoView)
 
@@ -378,6 +379,9 @@ def daj_slovesa():
             filtered = filtered.filter(or_(SlovesoView.vzor == "", SlovesoView.vzor.is_(None)))
         else:
             filtered = filtered.filter(SlovesoView.vzor == vzor)
+
+    if user_id:
+        filtered = filtered.filter(SlovesoView.user_id == user_id)
 
     table = DataTable(request.args, SlovesoView, filtered, [
             "id",

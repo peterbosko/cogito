@@ -37,3 +37,31 @@ def popis():
 def potrebne_prihlasenie():
     loguj(request)
     return render_template("m_main/potrebne_prihlasenie.jinja.html")
+
+
+@main_blueprint.route("/daj_autocomplete_user/", methods=["GET"])
+def daj_autocomplete_slovies():
+    loguj(request)
+    term = request.args.get("term", "")
+
+    filtered = User.query.filter(User.priezvisko.like(term+'%'))
+
+    if filtered.count() == 0:
+        filtered = User.query.filter(User.meno.like(term + "%"))
+
+    autoc = []
+
+    for u in filtered:
+        rr = AutocompleteSingleResponse()
+        rr.id = u.id
+        rr.text = f"{u.meno} {u.priezvisko}"
+        autoc.append(rr)
+
+    response = CommonResponse()
+
+    response.status = ResponseStatus.OK
+
+    response.data = autoc
+
+    return jsonpickle.encode(response)
+

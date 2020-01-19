@@ -1010,6 +1010,82 @@ $(selector).select2({
 });
 }
 
+function bindUserAutocomplete(selector){
+$(selector).select2({
+    language: {
+            errorLoading: function () {
+                return "Výsledky sa nepodarilo načítať.";
+            },
+            inputTooLong: function (args) {
+                var overChars = args.input.length - args.maximum;
+                return "Prosím, zadajte o"+ ' ' + overChars + ' ' + 'znak/znaky/znakov menej';
+            },
+            inputTooShort: function (args) {
+                var remainingChars = args.minimum - args.input.length;
+                return "Prosím zadajte ďalšie" + ' ' + remainingChars + ' ' + 'znaky';
+            },
+            loadingMore: function () {
+                return 'Načítavam viac výsledkov...';
+            },
+            maximumSelected: function (args) {
+                return 'Môžete vybrať maximálne' + ' ' + args.maximum + ' ' + 'položiek';
+            },
+            noResults: function () {
+                return 'Nenašli sa žiadne záznamy';
+            },
+            searching: function () {
+                return 'Vyhľadávamie';
+            }
+        },
+  allowClear: true,
+  ajax: {
+    url: "/daj_autocomplete_user",
+    dataType: 'json',
+    delay: 250,
+    data: function (params) {
+      return {
+        term: params.term, // search term
+        page: params.page
+      };
+    },
+    processResults: function (data, params) {
+      // parse the results into the format expected by Select2
+      // since we are using custom formatting functions we do not need to
+      // alter the remote JSON data, except to indicate that infinite
+      // scrolling can be used
+      params.page = params.page || 1;
+
+      return {
+        results: data.data,
+        pagination: {
+          more: (params.page * 30) < data.total_count
+        }
+      };
+    },
+    cache: true
+  },
+  placeholder: 'Hľadaj používateľa',
+  minimumInputLength: 3,
+  templateResult: function formatSloveso (sloveso) {
+      if (sloveso.loading) {
+        return sloveso.text;
+      }
+
+      var $container = $(
+        "<div class='select2-result-user clearfix'>" +
+            "<div class='select2-result-user-text'></div>"+
+        "</div>");
+
+      $container.find(".select2-result-user-text").html(sloveso.text);
+
+      return $container;
+    },
+  templateSelection: function formatSlovesoSelection (s) {
+      return s.text;
+    }
+});
+}
+
     function ZmazSlovnyDruh(id, func){
         swal({
             title: "Potvrdenie",
