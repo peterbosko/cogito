@@ -89,6 +89,8 @@ class SlovnyDruh(db.Model):
     status = db.Column(db.String(2), nullable=True)
     chyba = db.Column(db.String(2000), nullable=True)
     vzor_temp = db.Column(db.String(500, collation='utf8mb4_bin'), nullable=True)
+    zmenene = db.Column(db.DateTime(), nullable=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("u.id"), nullable=True)
     # sd_hier = relationship("HierarchiaSD", primaryjoin="(SlovnyDruh.id==HierarchiaSD.sd_id)")
 
     __mapper_args__ = {
@@ -655,6 +657,8 @@ class SlovesoView(db.Model):
                     .label('int_ramec_nazov'),
                 Sloveso.je_negacia,
                 Sloveso.pozitivne_sloveso_id,
+                Sloveso.zmenene,
+                Sloveso.user_id,
             ],
             from_obj=Sloveso.__table__.join(SlovnyDruh, SlovnyDruh.id == Sloveso.sd_id)
         ),

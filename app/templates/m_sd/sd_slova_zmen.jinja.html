@@ -128,7 +128,20 @@
                     <legend>Údaje slov</legend>
                 <div class="row">
                     <div class="col-xs-12" style="margin:0 auto;display:block;">
-                            <button id="btnFilter" type='button' style="margin-top:20px;margin-bottom:20px;" class="btn btn-primary" onclick="ToggleFilter();"><i class="fa fa-plus"></i>&nbsp;Filter a generovanie slov</button>
+                            <div class="btn-group" role="group" style="margin-bottom:20px;">
+                              <button type="button" class="btn btn-primary"  id="btnHFilter" onclick="ToggleFilter('H', true);">Hrubý filter</button>
+                              <button type="button" class="btn btn-primary" id="btnJFilter" onclick="ToggleFilter('J', true);">Jemný filter a generovanie slov</button>
+                            </div>
+                    </div>
+                </div>
+                <div id="divSHFiltrom" class="col-xs-12 nodisplay" style="margin-bottom:20px;">
+                    <div class="row SLOVESO nodisplay">
+                        <label class="col-sm-2"><input type="checkbox" class="sloveso_HFilter" id="cbIndikativy" checked/> Indikatívy</label>
+                        <label class="col-sm-2"><input type="checkbox" class="sloveso_HFilter" id="cbImperativy"/> Imperatívy</label>
+                        <label class="col-sm-2"><input type="checkbox" class="sloveso_HFilter" id="cbLTvary"/> L-tvary</label>
+                        <label class="col-sm-2"><input type="checkbox" class="sloveso_HFilter" id="cbInfinitiv"/> Infinitív</label>
+                        <label class="col-sm-2"><input type="checkbox" class="sloveso_HFilter" id="cbPrechodnik"/> Prechodník</label>
+                        <label class="col-sm-2"><input type="checkbox" onclick="VsetkySlovesaHFilter()" id="cbVsetky"/> Všetko</label>
                     </div>
                 </div>
                 <div id="divSFiltrom" class="col-xs-12 nodisplay">
@@ -616,6 +629,23 @@ function ZmazSlovo(id){
 /*************************** PRACA S FILTROM **************************/
 /*************************** PRACA S FILTROM **************************/
 /*************************** PRACA S FILTROM **************************/
+function VsetkySlovesaHFilter(){
+    if ($('#cbVsetky').prop('checked')){
+        $('#cbIndikativy').prop('checked',true);
+        $('#cbImperativy').prop('checked',true);
+        $('#cbLTvary').prop('checked',true);
+        $('#cbInfinitiv').prop('checked',true);
+        $('#cbPrechodnik').prop('checked',true);
+    }
+    else{
+        $('#cbIndikativy').prop('checked',false);
+        $('#cbImperativy').prop('checked',false);
+        $('#cbLTvary').prop('checked',false);
+        $('#cbInfinitiv').prop('checked',false);
+        $('#cbPrechodnik').prop('checked',false);
+    }
+    UrobHrubyFilter();
+}
 
 function GetFilterValues(){
     var fObj = {};
@@ -734,15 +764,101 @@ function FiltrujSlova(){
     $('#hdn_changed_f').val('false');
 }
 
-function ToggleFilter(){
+function JeLTvar(tvar){
+    if (tvar.endsWith('l') || tvar.endsWith('lo') || tvar.endsWith('la') || tvar.endsWith('li'))
+        return true;
+    return false;
+}
+
+function JeInfinitiv(tvar){
+    if (tvar.endsWith('ť'))
+        return true;
+    return false;
+}
+
+function JePrechodnik(tvar){
+    if (tvar.endsWith('c'))
+        return true;
+    return false;
+}
+
+function JeLTvar(tvar){
+    if (tvar.endsWith('l') || tvar.endsWith('lo') || tvar.endsWith('la') || tvar.endsWith('li'))
+        return true;
+    return false;
+}
+
+function ZaznamVyhovujeJednoduchemuFiltru(j){
+
+    var je_indikativ = $('#cas_'+j).val() == "P" || $('#cbVsetky').prop('checked');
+    var je_imperativ = $('#sposob_'+j).val() == "R" || $('#cbVsetky').prop('checked');
+    var je_l_tvar = JeLTvar($('#tvar_'+j).val()) || $('#cbVsetky').prop('checked');
+    var je_infinitiv = JeInfinitiv($('#tvar_'+j).val()) || $('#cbVsetky').prop('checked');
+    var je_prechodnik = JePrechodnik($('#tvar_'+j).val()) || $('#cbVsetky').prop('checked');
+
+    return (je_indikativ && $('#cbIndikativy').prop('checked')) ||
+           (je_imperativ && $('#cbImperativy').prop('checked')) ||
+           (je_l_tvar && $('#cbLTvary').prop('checked')) ||
+           (je_infinitiv && $('#cbInfinitiv').prop('checked')) ||
+           (je_prechodnik && $('#cbPrechodnik').prop('checked'));
+}
+
+function UrobHrubyFilter(){
+    $("#divSTabulkou tr[id^='zaznam_']").each(function () {
+        var j=$(this).attr('id').replace('zaznam_','');
+        if (j!="0"){
+            if (ZaznamVyhovujeJednoduchemuFiltru(j)){
+                $('#zaznam_'+j).removeClass('nodisplay')
+            }
+            else{
+                $('#zaznam_'+j).addClass('nodisplay')
+            }
+        }
+    });
+}
+
+function ToggleFilter(filter, performDisplayCheck){
+
+    if (performDisplayCheck){
+        if (filter=="J") {
+            if (!$('#divSFiltrom').hasClass('nodisplay')){
+                return;
+            }
+        }
+        else {
+            if (!$('#divSHFiltrom').hasClass('nodisplay')){
+                return;
+            }
+        }
+    }
+
+    if (filter=="J"){
+        if (!$('#divSHFiltrom').hasClass('nodisplay')) {
+            ToggleFilter('H', false);
+        }
         if ($('#divSFiltrom').hasClass('nodisplay')){
-            $('#btnFilter').html("<span class='fa fa-minus fa-sm'></span>&nbsp;Filter a generovanie slov");
             $("#divSFiltrom").slideToggle("slow").removeClass('nodisplay');
+            $('#btnJFilter').html('<i class="fa fa-check"></i>&nbsp;Jemný filter a generovanie slov');
+            $('#btnHFilter').html('Hrubý filter');
         }
         else{
-            $('#btnFilter').html("<span class='fa fa-plus fa-sm'></span>&nbsp;Filter a generovanie slov");
             $("#divSFiltrom").slideToggle("slow").addClass('nodisplay');
         }
+    }
+    else{
+        if (!$('#divSFiltrom').hasClass('nodisplay')) {
+            ToggleFilter('J', false);
+        }
+
+        if ($('#divSHFiltrom').hasClass('nodisplay')){
+            $("#divSHFiltrom").slideToggle("slow").removeClass('nodisplay');
+            $('#btnJFilter').html('Jemný filter a generovanie slov');
+            $('#btnHFilter').html('<i class="fa fa-check"></i>&nbsp;Hrubý filter');
+        }
+        else{
+            $("#divSHFiltrom").slideToggle("slow").addClass('nodisplay');
+        }
+    }
 }
 
 function ZmazVsetkyTvaryVyhovujuceFiltru(){
@@ -837,6 +953,9 @@ function NacitajSDSlova(id){
 
                 setupSlova(r.data.slova);
 
+                if (r.data.typ=="SLOVESO"){
+                    UrobHrubyFilter();
+                }
             } else{
                    swal({ buttons: {},
                        title  :  "Chyba",
@@ -1121,6 +1240,10 @@ $(document).ready(function() {
     $('#slova_loader').addClass('nodisplay');
     $('#slova_div').fadeIn( "slow", function() {
                           }).removeClass('nodisplay');
+    ToggleFilter('H');
+    $('.sloveso_HFilter').change(function(){
+        UrobHrubyFilter();
+    });
 });
 
 </script>

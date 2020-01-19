@@ -388,6 +388,7 @@ def daj_slovesa():
             "int_ramec_kod",
             "int_ramec_nazov",
             "vzor",
+            ("zmenene", "zmenene", lambda i: formatuj_datum(i.zmenene)),
     ])
 
     return json.dumps(table.json())
@@ -512,6 +513,9 @@ def zmenit_sd_post():
             else:
                 pm = PodstatneMeno()
 
+            pm.user_id = int(session["logged"])
+            pm.zmenene = datetime.datetime.now()
+
             if export.tab == "zakladne":
 
                 pm.zak_tvar = export.zak_tvar
@@ -553,6 +557,9 @@ def zmenit_sd_post():
             else:
                 prm = PridavneMeno()
 
+            prm.user_id = int(session["logged"])
+            prm.zmenene = datetime.datetime.now()
+
             if export.tab == "zakladne":
                 prm.zak_tvar = export.zak_tvar
                 prm.popis = export.popis
@@ -584,6 +591,9 @@ def zmenit_sd_post():
             else:
                 zam = Zameno()
 
+            zam.user_id = int(session["logged"])
+            zam.zmenene = datetime.datetime.now()
+
             zam.zak_tvar = export.zak_tvar
             zam.popis = export.popis
 
@@ -601,6 +611,9 @@ def zmenit_sd_post():
                 s = Sloveso.query.get(export.id)
             else:
                 s = Sloveso()
+
+            s.user_id = int(session["logged"])
+            s.zmenene = datetime.datetime.now()
 
             if export.tab == "zakladne":
                 s.zak_tvar = export.zak_tvar
@@ -632,6 +645,9 @@ def zmenit_sd_post():
             else:
                 pr = Predlozka()
 
+            pr.user_id = int(session["logged"])
+            pr.zmenene = datetime.datetime.now()
+
             pr.zak_tvar = export.zak_tvar
             pr.popis = export.popis
 
@@ -646,6 +662,10 @@ def zmenit_sd_post():
                 cis = Cislovka.query.get(export.id)
             else:
                 cis = Cislovka()
+
+            cis.user_id = int(session["logged"])
+            cis.zmenene = datetime.datetime.now()
+
             cis.zak_tvar = export.zak_tvar
             cis.popis = export.popis
 
@@ -663,6 +683,10 @@ def zmenit_sd_post():
                 cit = Citoslovce.query.get(export.id)
             else:
                 cit = Citoslovce()
+
+            cit.user_id = int(session["logged"])
+            cit.zmenene = datetime.datetime.now()
+
             cit.zak_tvar = export.zak_tvar
             cit.popis = export.popis
             db.session.add(cit)
@@ -673,6 +697,10 @@ def zmenit_sd_post():
                 castica = Castica.query.get(export.id)
             else:
                 castica = Castica()
+
+            castica.user_id = int(session["logged"])
+            castica.zmenene = datetime.datetime.now()
+
             castica.zak_tvar = export.zak_tvar
             castica.popis = export.popis
             db.session.add(castica)
@@ -683,6 +711,10 @@ def zmenit_sd_post():
                 ostatne = Ostatne.query.get(export.id)
             else:
                 ostatne = Ostatne()
+
+            ostatne.user_id = int(session["logged"])
+            ostatne.zmenene = datetime.datetime.now()
+
             ostatne.zak_tvar = export.zak_tvar
             ostatne.popis = export.popis
 
@@ -694,6 +726,10 @@ def zmenit_sd_post():
                 prislovka = Prislovka.query.get(export.id)
             else:
                 prislovka = Prislovka()
+
+            prislovka.user_id = int(session["logged"])
+            prislovka.zmenene = datetime.datetime.now()
+
             prislovka.zak_tvar = export.zak_tvar
             prislovka.popis = export.popis
 
@@ -705,6 +741,10 @@ def zmenit_sd_post():
                 spojka = Spojka.query.get(export.id)
             else:
                 spojka = Spojka()
+
+            spojka.user_id = int(session["logged"])
+            spojka.zmenene = datetime.datetime.now()
+
             spojka.zak_tvar = export.zak_tvar
             spojka.popis = export.popis
 

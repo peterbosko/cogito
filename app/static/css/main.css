@@ -587,3 +587,10 @@ span.s {
 .select2-container--default .select2-selection--single .select2-selection__rendered {
     color:#6d757d;
 }
+.select2-container--default .select2-selection--single{
+    border-color:#ced3d9;
+}
+
+table.tabulka_slov thead th, table.tabulka_filtra thead th{
+    border-bottom: 7px solid white;
+}
