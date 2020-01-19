@@ -56,7 +56,7 @@ class PrefixSufixExport(object):
     hodnota = None
 
 
-class MorfoFilter(object):
+class SlovoFilterExport(object):
     tvar = None
     rod = None
     podrod = None
@@ -70,14 +70,26 @@ class MorfoFilter(object):
     anotacia = None
 
     koren = None
+    pzkmen = None
     prefix = None
     sufix = None
     vzor = None
     vzor_stup = None
     paradigma = None
     sd_id = None
+    vid = None
 
     afirmacia = None
+
+    deklin1 = None
+    deklin2 = None
+    deklin3 = None
+    deklin4 = None
+    deklin5 = None
+    deklin6 = None
+    deklin7 = None
+
+    co_generovat = None
 
 
 class VzorSoStatistikou(object):

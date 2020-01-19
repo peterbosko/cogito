@@ -7,20 +7,30 @@
     <div class="col-sm-12">
         <form id="SDSlovaForm" data-fv-framework="bootstrap" method="post">
                 <div class="row marginbottomDetailSD ">
-                    <label class="col-sm-2" for="prepend">
-                         Koreň slova:
-                    </label>
-                    <div class="col-sm-5">
-                        <select id="ddlKorenSlova" class="form-control" name="ddlKorenSlova">
-                        </select>
-                    </div>
-                </div>
-                <div class="row marginbottomDetailSD SLOVESO nodisplay">
-                    <label class="col-sm-2" for="prepend">
-                         Prézentný kmeň:
-                    </label>
-                    <div class="col-sm-5">
-                        <input type="text" id="txtPzkmen" class="form-control" name="txtPzkmen"/>
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <label class="col-sm-4" for="prepend">
+                                         Koreň slova:
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <select id="ddlKorenSlova" class="form-control" name="ddlKorenSlova">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 nodisplay SLOVESO">
+                                <div class="row">
+                                    <label class="col-sm-4" for="prepend">
+                                         Prézentný kmeň (1.os j.č. bez 2 hlások):
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input type="text" id="txtPzkmen" class="form-control" name="txtPzkmen"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row VZOR marginbottomDetailSD nodisplay">
@@ -33,7 +43,7 @@
                     <div class="col-sm-10">
                         <select id="ddlVzor" class="form-control">
                             {% for k in vzory %}
-                            <option value="{{ k.hodnota }}">{{ k.vzor + " - počet slovies :" }} {{k.pocet}}</option>
+                            <option value="{{ k.hodnota }}">{{ k.vzor + " - počet slov :" }} {{k.pocet}}</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -44,6 +54,10 @@
                     </label>
                     <div class="col-sm-4">
                         <select id="ddlPrefix" class="form-control">
+                            <option value="" selected>Žiadny prefix</option>
+                            {% for k in prefixy %}
+                            <option value="{{ k.hodnota }}">{{ k.hodnota }}</option>
+                            {% endfor %}
                         </select>
                     </div>
                     <label class="col-sm-2" for="prepend">
@@ -51,6 +65,10 @@
                     </label>
                     <div class="col-sm-4">
                         <select id="ddlSufix" class="form-control" name="ddlSufix">
+                            <option value="" selected>Žiadny sufix</option>
+                            {% for k in sufixy %}
+                            <option value="{{ k.hodnota }}">{{ k.hodnota }}</option>
+                            {% endfor %}
                         </select>
                     </div>
                 </div>
@@ -93,7 +111,19 @@
                         </select>
                     </div>
                 </div>
-
+                <div class="row SLOVESO marginbottomDetailSD nodisplay">
+                    <label class="col-sm-2" for="prepend">
+                         Vid slovesa:
+                    </label>
+                    <div class="col-sm-10">
+                        <select id="ddlVid" class="form-control">
+                            <option value="dok">dokonavý</option>
+                            <option value="nedok">nedokonavý</option>
+                            <option value="oboj">obojvidový</option>
+                            <option value="opak">opakujúce sa</option>
+                        </select>
+                    </div>
+                </div>
                 <fieldset class="border p-2">
                     <legend>Údaje slov</legend>
                 <div class="row">
@@ -137,6 +167,8 @@
                                     <option value="M/N">M/N</option>
                                     <option value="Z">Z</option>
                                     <option value="S">S</option>
+                                    <option value="h">h</option>
+                                    <option value="o">o</option>
                                 </select>
                             </td>
                             <td class="c_pad">
@@ -210,10 +242,15 @@
                     <div class="row">
                         <div class="col-12" style="margin:0 auto;display:block;">
                             <div class="text-center">
-                                <a href="#" id="genDefTvary" onclick="GenerujDefaultTvary();" class="btn"><i class="fa fa-plus"></i>&nbsp;Generovať default tvary</a>
+                                <a href="#" id="genlTvary" onclick="GenerujSlovesneTvary('l');" class="btn nodisplay SLOVESO"><i class="fa fa-plus"></i>&nbsp;Generovať L tvary</a>
+                                <a href="#" id="genlIndikativ" onclick="GenerujSlovesneTvary('i');" class="btn nodisplay SLOVESO"><i class="fa fa-plus"></i>&nbsp;Generovať indikatívy</a>
+                                <a href="#" id="genlInfinitiv" onclick="GenerujSlovesneTvary('f');" class="btn nodisplay SLOVESO"><i class="fa fa-plus"></i>&nbsp;Generovať infinitív</a>
+                                <a href="#" id="genlImper" onclick="GenerujSlovesneTvary('!');" class="btn nodisplay SLOVESO"><i class="fa fa-plus"></i>&nbsp;Generovať imperatívy</a>
+                                <a href="#" id="genlPrechod" onclick="GenerujSlovesneTvary('p');" class="btn nodisplay SLOVESO"><i class="fa fa-plus"></i>&nbsp;Generovať prechodník</a>
+                                <a href="#" id="genDefTvary" onclick="GenerujDefaultTvary();" class="btn nodisplay POD_M PRID_M"><i class="fa fa-plus"></i>&nbsp;Generovať všetky default tvary</a>
                                 <a href="#" id="genAnotaciu" onclick="GenerujAnotaciu();" class="btn"><i class="fa fa-plus"></i>&nbsp;Generovať anotáciu</a>
+                                <a href="#" id="zmazAnotaciu" onclick="ZmazAnotaciu();" class="btn"><i class="fa fa-trash"></i>&nbsp;Zmazať anotáciu záznamom vyhovujúcu filtru</a>
                                 <a href="#" id="zmazTvary" onclick="ZmazVsetkyTvaryVyhovujuceFiltru();" class="btn"><i class="fa fa-trash"></i>&nbsp;Zmazať všetky tvary vyhovujúce filtru</a>
-                                <a href="#" id="zmazAnotaciu" onclick="ZmazAnotaciu();" class="btn"><i class="fa fa-trash"></i>&nbsp;Zmazať anotáciu vyhovujúcu filtru</a>
                             </div>
                         </div>
                     </div>
@@ -260,6 +297,8 @@
                                     <option value="M/N">M/N</option>
                                     <option value="Z">Z</option>
                                     <option value="S">S</option>
+                                    <option value="h">h</option>
+                                    <option value="o">o</option>
                                 </select>
                             </td>
                             <td class="c_pad">
@@ -425,17 +464,38 @@ function GenerujDefaultTvary(){
 
     filter.sd_id = getSD_ID();
 
-/*
-    swal({ buttons: {},
-                       title  :  "Generovanie",
-                       text   :  'Prebieha generovanie tvarov...',
-                       icon   :  "info",
-                       closeOnClickOutside : false,
-                       closeModal : false,
-                       closeOnEsc : false,
-                       });
-*/
-    //$('#genDefTvary').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Generujem default tvary');
+    AjaxMethods.getDataFromPostRequest('{{url_for("sd.generuj_morfo")}}', "", filter, function(r){
+            if (r.status==responseOK){//OK vetva
+                for (var i=0;i<r.data.length;i++){
+                    PridajVygenerovaneSlovo(r.data[i].tvar, r.data[i].rod, r.data[i].podrod,
+                        r.data[i].pad, r.data[i].cislo, r.data[i].osoba, r.data[i].cas, r.data[i].sposob,
+                        r.data[i].stupen, r.data[i].pricastie,
+                        r.data[i].anotacia);
+                }
+            }
+            else{
+                swal({ buttons: {},
+                       title  :  "Chyba",
+                       text   :  r.error_text,
+                       icon   :  "error"});
+
+            }
+        });
+}
+
+function GenerujSlovesneTvary(t){
+    var filter = GetFilterValues();
+
+    filter.koren = $('#ddlKorenSlova').val();
+    filter.pzkmen = $('#txtPzkmen').val();
+    filter.prefix = $('#ddlPrefix').val();
+    filter.sufix = $('#ddlSufix').val();
+    filter.vzor = $('#ddlVzor').val();
+    filter.vid = $('#ddlVid').val();
+
+    filter.co_generovat = t;
+
+    filter.sd_id = getSD_ID();
 
     AjaxMethods.getDataFromPostRequest('{{url_for("sd.generuj_morfo")}}', "", filter, function(r){
             if (r.status==responseOK){//OK vetva
@@ -444,8 +504,6 @@ function GenerujDefaultTvary(){
                         r.data[i].pad, r.data[i].cislo, r.data[i].osoba, r.data[i].cas, r.data[i].sposob,
                         r.data[i].stupen, r.data[i].pricastie,
                         r.data[i].anotacia);
-                        //swal.close();
-                        //$('#genDefTvary').html('<i class="fa fa-plus"></i>&nbsp;Generovať default tvary');
                 }
             }
             else{
@@ -538,7 +596,9 @@ function PridajNoveSlovo(nastavAkoZmenene){
    $('#SDSlovaForm').formValidation('addField', 'tvar_' + pocet_slov, mandatoryValidator);
 
    $("#divSTabulkou tr[id='zaznam_"+pocet_slov+"'] .changed_sl").change(function (){
-        $('#hdn_changed_'+pocet_slov).val('true');
+        var id_stlpca=$(this).attr('id');
+        var j = id_stlpca.substring(id_stlpca.indexOf("_")+1);
+        $('#hdn_changed_'+j).val('true');
     });
 
     if (nastavAkoZmenene){
@@ -734,9 +794,12 @@ function NacitajSDSlova(id){
 
                 SetUpKoren(r.data.zak_tvar);
 
-                if (r.data.vzor)
+                if (r.data.vzor){
                     $('#ddlVzor').val(r.data.vzor);
-
+                }
+                else{
+                    $('#ddlVzor').val("-1"); // nastavenie vzoru nenastaveny
+                }
                 if (r.data.koren)
                     $('#ddlKorenSlova').val(r.data.koren);
 
@@ -758,10 +821,14 @@ function NacitajSDSlova(id){
                     if (r.data.vzor_stup){
                         $('#ddlVzorStup').val(r.data.vzor_stup);
                     }
+                    else{
+                        $('#ddlVzorStup').val("-1"); // nastavenie vzoru nenastaveny
+                    }
                 }
                 else if (r.data.typ=="ZAMENO"){
                 }
                 else if (r.data.typ=="SLOVESO"){
+                    $('#ddlVid').val(r.data.vid);
                 }
                 else if (r.data.typ=="PREDLOZKA"){
                 }
@@ -784,8 +851,10 @@ function VratZoznamZmenenychSlov(vratAjNezmeneneZaznamy){
     var zoznam = [];
     $("#divSTabulkou tr[id^='zaznam_']").each(function () {
         var j=$(this).attr('id').replace('zaznam_','');
+
         if ($('#hdn_changed_'+j).val()=="true" || vratAjNezmeneneZaznamy){
             if (j!="0"){
+
                 var o = {};
                 o.id = $('#id_'+j).html()||0;
                 if (vratAjNezmeneneZaznamy)
@@ -848,6 +917,7 @@ function ZmenSlovaSD(closeScreen){
             data.cislo = $('#ddlZAMENO_CISLO').val();
         }
         else if (typ == "SLOVESO"){
+            data.vid = $('#ddlVid').val();
         }
         else if (typ == "PREDLOZKA"){
             data.pady = $('#ddlPREDLOZKA_Pady').val().join(';');
@@ -1003,6 +1073,8 @@ $(document).ready(function() {
     }
     else if (pridavanyDruh == "SLOVESO"){
         $('.SLOVESO').removeClass('nodisplay');
+        $('#tvar_0').removeClass('slovo_tvar').addClass('pm_slovo_tvar');
+        $('#tvar_f').removeClass('slovo_tvar').addClass('pm_slovo_tvar');
     }
 
     $('#SDSlovaForm').formValidation();

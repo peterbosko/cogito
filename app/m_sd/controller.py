@@ -348,6 +348,7 @@ def daj_slovesa():
     koren = request.args.get("koren", "")
     pzkmen = request.args.get("pzkmen", "")
     vzor = request.args.get("vzor", "")
+    sd_id = request.args.get("sd_id", "")
 
     filtered = db.session.query(SlovesoView)
 
@@ -356,6 +357,9 @@ def daj_slovesa():
 
     if popis:
         filtered = filtered.filter(SlovesoView.popis.like(popis))
+
+    if sd_id:
+        filtered = filtered.filter(SlovesoView.id == sd_id)
 
     if ir:
         if ir == "-1":
@@ -592,21 +596,30 @@ def zmenit_sd_post():
 
             sd_id = zam.id
         elif export.typ == "SLOVESO":
+
             if export.id is not None and int(export.id) > 0:
                 s = Sloveso.query.get(export.id)
             else:
                 s = Sloveso()
-            s.zak_tvar = export.zak_tvar
-            s.popis = export.popis
 
-            s.zvratnost = export.zvratnost
-            s.je_negacia = export.je_negacia
+            if export.tab == "zakladne":
+                s.zak_tvar = export.zak_tvar
+                s.popis = export.popis
 
-            if s.pozitivne_sloveso_id and not export.sloveso_id:
-                s.pozitivne_sloveso_id = None
+                s.zvratnost = export.zvratnost
+                s.je_negacia = export.je_negacia
 
-            if export.sloveso_id:
-                s.pozitivne_sloveso_id = export.sloveso_id
+                if s.pozitivne_sloveso_id and not export.sloveso_id:
+                    s.pozitivne_sloveso_id = None
+
+                if export.sloveso_id:
+                    s.pozitivne_sloveso_id = export.sloveso_id
+            elif export.tab == "slova":
+                s.vid = export.vid
+                s.koren = export.koren
+                s.vzor = export.vzor
+                s.prefix = export.prefix
+                s.sufix = export.sufix
 
             db.session.add(s)
             db.session.commit()
@@ -708,11 +721,16 @@ def zmenit_sd_post():
                     slovo = Slovo()
 
                 slovo.tvar = sl['tvar']
-                slovo.rod = sl['rod'][0]
 
-                if '/' in sl['rod']:
-                    slovo.podrod = sl['rod'][2]
+                if slovo.rod:
+                    slovo.rod = sl['rod'][0]
+
+                    if '/' in sl['rod']:
+                        slovo.podrod = sl['rod'][2]
+                    else:
+                        slovo.podrod = ""
                 else:
+                    slovo.rod = ""
                     slovo.podrod = ""
 
                 slovo.stupen = sl['stupen']
@@ -736,7 +754,7 @@ def zmenit_sd_post():
                     elif '+' in sl['anotacia']:
                         slovo.je_negacia = 'N'
                     if 'H' in sl['anotacia']:
-                        slovo.je_prechodnik= 'A'
+                        slovo.je_prechodnik = 'A'
                     else:
                         slovo.je_prechodnik = 'N'
 
@@ -801,7 +819,11 @@ def sd_slova_zmen():
     elif slovny_druh.typ == "POD_M":
         vzory = daj_pm_vzory()
 
-    return render_template("m_sd/sd_slova_zmen.jinja.html", vzory=vzory, stupnovacie_vzory=stupnovacie_vzory)
+    prefixy = daj_prefixy_sufixy(slovny_druh.typ, "P")
+    sufixy = daj_prefixy_sufixy(slovny_druh.typ, "S")
+
+    return render_template("m_sd/sd_slova_zmen.jinja.html", vzory=vzory, stupnovacie_vzory=stupnovacie_vzory,
+                           prefixy=prefixy, sufixy=sufixy)
 
 
 @sd_blueprint.route("/sd_rodicia/", methods=["GET"])
@@ -992,7 +1014,7 @@ def generuj_morfo():
     response = CommonResponse()
 
     js = request.json
-    js["py/object"] = ".".join([MorfoFilter.__module__, MorfoFilter.__name__])
+    js["py/object"] = ".".join([SlovoFilterExport.__module__, SlovoFilterExport.__name__])
     strjson = str(js).replace("'", '"')
     morfo = jsonpickle.decode(strjson)
 
@@ -1032,10 +1054,7 @@ def generuj_morfo():
             response.error_text = f"Nie je nastavený časovací vzor !"
             response.status = ResponseStatus.ERROR
         else:
-            vzor = SDVzor.query.filter(SDVzor.typ == "SLOVESO").filter(SDVzor.Vzor == morfo.vzor).first()
-
-            if morfo.pricastie == "l":
-                vysledok = generuj_sloveso_ltvar(morfo, vzor.split(",")[1])
+            vysledok = vrat_tvary_pre_sloveso(morfo, sloveso)
 
     response.data = vysledok
 

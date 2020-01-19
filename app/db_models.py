@@ -88,6 +88,7 @@ class SlovnyDruh(db.Model):
     vzor_stup = db.Column(db.String(500), nullable=True)
     status = db.Column(db.String(2), nullable=True)
     chyba = db.Column(db.String(2000), nullable=True)
+    vzor_temp = db.Column(db.String(500, collation='utf8mb4_bin'), nullable=True)
     # sd_hier = relationship("HierarchiaSD", primaryjoin="(SlovnyDruh.id==HierarchiaSD.sd_id)")
 
     __mapper_args__ = {
@@ -154,6 +155,7 @@ class SlovnyDruh(db.Model):
             export.je_negacia = s.je_negacia
             export.sloveso_id = s.pozitivne_sloveso_id
             export.pzkmen = s.pzkmen
+            export.vid = s.vid
 
             if s.pozitivne_sloveso_id:
                 slov = Sloveso.query.get(s.pozitivne_sloveso_id)
@@ -723,6 +725,19 @@ class SDVzor(db.Model):
         return export
 
 
+class SDVzorTemp(db.Model):
+    __tablename__ = 'sd_vzor_temp'
+    __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8mb4', 'mysql_collate': 'utf8mb4_bin'}
+    id = db.Column(db.Integer, primary_key=True)
+    typ = db.Column(db.String(20), nullable=False)
+    rod = db.Column(db.String(1), nullable=False)
+    podrod = db.Column(db.String(1), nullable=True)
+    vzor = db.Column(db.String(50), nullable=False)
+    deklinacia = db.Column(db.String(500), nullable=False)
+    alternacia = db.Column(db.String(50), nullable=True)
+    popis = db.Column(db.String(500), nullable=True)
+
+
 class SDPrefixSufix(db.Model):
     __tablename__ = 'sd_prefix_sufix'
     __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8mb4', 'mysql_collate': 'utf8mb4_bin'}
@@ -739,3 +754,26 @@ class SDPrefixSufix(db.Model):
         export.hodnota = self.hodnota
         return export
 
+
+class SlovoRozdiel(db.Model):
+    __tablename__ = 'sl_rozdiel'
+    __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8mb4', 'mysql_collate': 'utf8mb4_bin'}
+    id = db.Column(db.Integer, primary_key=True)
+    sl_id = db.Column(db.Integer)
+    vygen_status = db.Column(db.String(10), nullable=True)
+    tvar = db.Column(db.String(500, collation='utf8mb4_bin'), nullable=False, index=True)
+    anotacia = db.Column(db.String(10), nullable=True)
+    rod = db.Column(db.String(1), nullable=True)
+    podrod = db.Column(db.String(1), nullable=True)
+    pad = db.Column(db.String(3), nullable=True)
+    stupen = db.Column(db.String(1), nullable=True)
+    sposob = db.Column(db.String(1), nullable=True)
+    osoba = db.Column(db.String(1), nullable=True)
+    cas = db.Column(db.String(1), nullable=True)
+    pricastie = db.Column(db.String(1), nullable=True)
+    cislo = db.Column(db.String(1), nullable=True)
+    sd_id = db.Column('sd_id', db.Integer)
+
+    __mapper_args__ = {
+        'polymorphic_identity': 'sl_rozdiel',
+    }

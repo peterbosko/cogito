@@ -56,6 +56,7 @@ class SlovnyDruhHierExport(object):
     sd = None
     parent_sd = None
 
+
 class slovo_data(object):
     data = []
     cisla = []

@@ -153,8 +153,11 @@ def daj_slovesne_vzory():
 
     nenastavene = None
 
-    for gr in db.session.query(Sloveso.vzor, func.count(Sloveso.vzor)).group_by(Sloveso.vzor).\
+    for gr in db.session.query(SDVzor.vzor, func.count(Sloveso.vzor)).filter(SDVzor.typ == "SLOVESO").\
+            outerjoin(Sloveso, SDVzor.vzor == Sloveso.vzor).\
+            group_by(SDVzor.vzor).\
             order_by(func.count(Sloveso.vzor).desc()).all():
+
         stat = VzorSoStatistikou()
 
         v = gr[0]
@@ -194,7 +197,9 @@ def daj_pm_vzory():
 
     nenastavene = None
 
-    for gr in db.session.query(PodstatneMeno.vzor, func.count(PodstatneMeno.vzor)).group_by(PodstatneMeno.vzor).\
+    for gr in db.session.query(SDVzor.vzor, func.count(PodstatneMeno.vzor)).filter(SDVzor.typ == "POD_M").\
+            outerjoin(PodstatneMeno, SDVzor.vzor == PodstatneMeno.vzor).\
+            group_by(PodstatneMeno.vzor).\
             order_by(func.count(PodstatneMeno.vzor).desc()).all():
         stat = VzorSoStatistikou()
 
@@ -236,8 +241,12 @@ def daj_prid_m_vzory():
 
     nenastavene = None
 
-    for gr in db.session.query(PridavneMeno.vzor, func.count(PridavneMeno.vzor)).group_by(PridavneMeno.vzor).\
+    for gr in db.session.query(SDVzor.vzor, func.count(PridavneMeno.vzor)).filter(SDVzor.typ == "PRID_M").\
+            filter(SDVzor.sklon_stup == "sklon").\
+            outerjoin(PridavneMeno, SDVzor.vzor == PridavneMeno.vzor).\
+            group_by(SDVzor.vzor).\
             order_by(func.count(PridavneMeno.vzor).desc()).all():
+
         stat = VzorSoStatistikou()
 
         v = gr[0]
@@ -279,9 +288,12 @@ def daj_prid_m_stup_vzory():
 
     nenastavene = None
 
-    for gr in db.session.query(PridavneMeno.vzor_stup, func.count(PridavneMeno.vzor_stup)).\
-            group_by(PridavneMeno.vzor_stup).\
+    for gr in db.session.query(SDVzor.vzor, func.count(PridavneMeno.vzor_stup)).filter(SDVzor.typ == "PRID_M").\
+            filter(SDVzor.sklon_stup == "stup").\
+            outerjoin(PridavneMeno, SDVzor.vzor == PridavneMeno.vzor_stup).\
+            group_by(SDVzor.vzor).\
             order_by(func.count(PridavneMeno.vzor_stup).desc()).all():
+
         stat = VzorSoStatistikou()
 
         v = gr[0]
@@ -316,4 +328,23 @@ def daj_prid_m_stup_vzory():
                 pass
 
     return vysledok
+
+
+def daj_prefixy_sufixy(sld, pref_suf):
+    vysledok = []
+
+    for ps in db.session.query(SDPrefixSufix).filter(SDPrefixSufix.typ == sld).\
+            filter(SDPrefixSufix.prefix_sufix == pref_suf).all():
+        stat = VzorSoStatistikou()
+        stat.hodnota = ps.hodnota
+        vysledok.append(stat)
+
+    return vysledok
+
+
+def daj_pridavne_meno_k_slovesu(sloveso, je_negacia):
+    prm = db.session.query(PridavneMeno).filter(PridavneMeno.sloveso_id == sloveso).\
+        filter(PridavneMeno.je_negacia == je_negacia).first()
+
+    return prm
 

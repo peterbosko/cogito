@@ -11,6 +11,12 @@ def rchop(thestring, ending):
     return thestring
 
 
+def lchop(thestring, start):
+    if thestring.startswith(start) and start != "":
+        return thestring[len(start):]
+    return thestring
+
+
 class ResponseStatus(object):
     OK = 1
     ERROR = 2

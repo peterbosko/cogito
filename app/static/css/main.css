@@ -577,3 +577,13 @@ span.s {
   height:0;
   margin-top:10px;margin-right:-10px;
 }
+
+/* vyrovnanie select2 s ostatnymi typmi policok */
+.select2-container .select2-selection--single .select2-selection__rendered {
+    padding-left:13px;
+}
+
+/* farba select2 s ostatnymi typmi policok */
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color:#6d757d;
+}
