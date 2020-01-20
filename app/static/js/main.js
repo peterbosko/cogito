@@ -1010,7 +1010,8 @@ $(selector).select2({
 });
 }
 
-function bindUserAutocomplete(selector){
+function bindUserAutocomplete(selector, placeholderText){
+placeholderText = placeholderText || "Hľadaj používateľa";
 $(selector).select2({
     language: {
             errorLoading: function () {
@@ -1064,7 +1065,7 @@ $(selector).select2({
     },
     cache: true
   },
-  placeholder: 'Hľadaj používateľa',
+  placeholder: placeholderText,
   minimumInputLength: 3,
   templateResult: function formatSloveso (sloveso) {
       if (sloveso.loading) {

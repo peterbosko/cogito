@@ -91,7 +91,7 @@
                     </label>
                     <div class="col-sm-10">
                         <select id="ddlParadigma_PRID_M" class="form-control">
-                            <option value="A">A - ajektívna - napr. pekný, cudzí, páví</option>
+                            <option value="A">A - adjektívna - napr. pekný, cudzí, páví</option>
                             <option value="F">F - zmiešaná - otcov, matkin</option>
                             <option value="U">U - neúplná - napr. super, nanič, hoden, rád, rada</option>
                             <option value="k">k - Particípum - aktívne - pracujúci, visiaci, píšuci, platiaci</option>
@@ -106,7 +106,7 @@
                     <div class="col-sm-10">
                         <select id="ddlVzorStup" class="form-control">
                             {% for k in stupnovacie_vzory %}
-                            <option value="{{ k.hodnota }}">{{ k.vzor + " - počet slovies :" }} {{k.pocet}}</option>
+                            <option value="{{ k.hodnota }}">{{ k.vzor + " - počet slov :" }} {{k.pocet}}</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -117,6 +117,7 @@
                     </label>
                     <div class="col-sm-10">
                         <select id="ddlVid" class="form-control">
+                            <option value="" selected>neurčený</option>
                             <option value="dok">dokonavý</option>
                             <option value="nedok">nedokonavý</option>
                             <option value="oboj">obojvidový</option>

@@ -13,67 +13,67 @@ metadata_blueprint = Blueprint("metadata", __name__)
 @metadata_blueprint.route("/sem_priznak_strom/")
 def sem_priznak_strom():
     loguj(request)
-    return render_template("m_metadata/sem_priznak_strom.jinja.html")
+    return render_template("m_metadata/sem_priznak_strom.jinja.html", pocty_sd=daj_pocty_sd_a_sl())
 
 
 @metadata_blueprint.route("/slova_sem_priz/")
 def slova_sem_priz():
     loguj(request)
-    return render_template("m_metadata/slova_sem_priz.jinja.html")
+    return render_template("m_metadata/slova_sem_priz.jinja.html", pocty_sd=daj_pocty_sd_a_sl())
 
 
 @metadata_blueprint.route("/sem_priznaky_typ/")
 def sem_priznaky_typ():
     loguj(request)
-    return render_template("m_metadata/sem_priznaky_typ.jinja.html")
+    return render_template("m_metadata/sem_priznaky_typ.jinja.html", pocty_sd=daj_pocty_sd_a_sl())
 
 
 @metadata_blueprint.route("/sem_priznaky/")
 def sem_priznaky():
     loguj(request)
-    return render_template("m_metadata/sem_priznaky.jinja.html")
+    return render_template("m_metadata/sem_priznaky.jinja.html", pocty_sd=daj_pocty_sd_a_sl())
 
 
 @metadata_blueprint.route("/intencne_ramce/")
 def intencne_ramce():
     loguj(request)
-    return render_template("m_metadata/intencne_ramce.jinja.html")
+    return render_template("m_metadata/intencne_ramce.jinja.html", pocty_sd=daj_pocty_sd_a_sl())
 
 
 @metadata_blueprint.route("/slovesa_ir/")
 def slovesa_ir():
     loguj(request)
-    return render_template("m_metadata/slovesa_ir.jinja.html")
+    return render_template("m_metadata/slovesa_ir.jinja.html", pocty_sd=daj_pocty_sd_a_sl())
 
 
 @metadata_blueprint.route("/slovesa_sp/")
 def slovesa_sp():
     loguj(request)
-    return render_template("m_metadata/slovesa_sp.jinja.html")
+    return render_template("m_metadata/slovesa_sp.jinja.html", pocty_sd=daj_pocty_sd_a_sl())
 
 
 @metadata_blueprint.route("/intencie_sp/")
 def intencie_sp():
     loguj(request)
-    return render_template("m_metadata/intencie_sp.jinja.html")
+    return render_template("m_metadata/intencie_sp.jinja.html", pocty_sd=daj_pocty_sd_a_sl())
 
 
 @metadata_blueprint.route("/intencie_ir/")
 def intencie_ir():
     loguj(request)
-    return render_template("m_metadata/intencie_ir.jinja.html")
+    return render_template("m_metadata/intencie_ir.jinja.html", pocty_sd=daj_pocty_sd_a_sl())
 
 
 @metadata_blueprint.route("/sp/")
 def sp():
     loguj(request)
-    return render_template("m_metadata/sp.jinja.html")
+    return render_template("m_metadata/sp.jinja.html", pocty_sd=daj_pocty_sd_a_sl())
 
 
 @metadata_blueprint.route("/vzory/")
 def vzory():
     loguj(request)
-    return render_template("m_metadata/vzory.jinja.html")
+    return render_template("m_metadata/vzory.jinja.html", pocty_sd=daj_pocty_sd_a_sl())
 
 
 @metadata_blueprint.route("/daj_sp/", methods=["GET"])

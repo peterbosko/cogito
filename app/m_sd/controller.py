@@ -85,7 +85,7 @@ def zoznam_pm():
 
     sklon_vzory = daj_pm_vzory()
 
-    return render_template("m_sd/zoznam_pm.jinja.html", sklon_vzory=sklon_vzory)
+    return render_template("m_sd/zoznam_pm.jinja.html", sklon_vzory=sklon_vzory, pocty_sd=daj_pocty_sd_a_sl())
 
 
 @sd_blueprint.route("/zoznam_prid_m/", methods=["GET"])
@@ -96,25 +96,26 @@ def zoznam_prid_m():
 
     stup_vzory = daj_prid_m_stup_vzory()
 
-    return render_template("m_sd/zoznam_prid_m.jinja.html", sklon_vzory=sklon_vzory, stup_vzory=stup_vzory)
+    return render_template("m_sd/zoznam_prid_m.jinja.html", sklon_vzory=sklon_vzory, stup_vzory=stup_vzory,
+                           pocty_sd=daj_pocty_sd_a_sl())
 
 
 @sd_blueprint.route("/zoznam_zamena/", methods=["GET"])
 def zoznam_zamena():
     loguj(request)
-    return render_template("m_sd/zoznam_zamena.jinja.html")
+    return render_template("m_sd/zoznam_zamena.jinja.html", pocty_sd=daj_pocty_sd_a_sl())
 
 
 @sd_blueprint.route("/zoznam_cislovky/", methods=["GET"])
 def zoznam_cislovky():
     loguj(request)
-    return render_template("m_sd/zoznam_cislovky.jinja.html")
+    return render_template("m_sd/zoznam_cislovky.jinja.html", pocty_sd=daj_pocty_sd_a_sl())
 
 
 @sd_blueprint.route("/zoznam_prislovky/", methods=["GET"])
 def zoznam_prislovky():
     loguj(request)
-    return render_template("m_sd/zoznam_prislovky.jinja.html")
+    return render_template("m_sd/zoznam_prislovky.jinja.html", pocty_sd=daj_pocty_sd_a_sl())
 
 
 @sd_blueprint.route("/zoznam_slovesa/", methods=["GET"])
@@ -124,37 +125,38 @@ def zoznam_slovesa():
     ir = IntencnyRamec.query.order_by(IntencnyRamec.kod)
     slovesne_vzory = daj_slovesne_vzory()
 
-    return render_template("m_sd/zoznam_slovesa.jinja.html", intencne_ramce=ir, slovesne_vzory=slovesne_vzory)
+    return render_template("m_sd/zoznam_slovesa.jinja.html", intencne_ramce=ir, slovesne_vzory=slovesne_vzory,
+                           pocty_sd=daj_pocty_sd_a_sl())
 
 
 @sd_blueprint.route("/zoznam_spojky/", methods=["GET"])
 def zoznam_spojky():
     loguj(request)
-    return render_template("m_sd/zoznam_spojky.jinja.html")
+    return render_template("m_sd/zoznam_spojky.jinja.html", pocty_sd=daj_pocty_sd_a_sl())
 
 
 @sd_blueprint.route("/zoznam_castice/", methods=["GET"])
 def zoznam_castice():
     loguj(request)
-    return render_template("m_sd/zoznam_castice.jinja.html")
+    return render_template("m_sd/zoznam_castice.jinja.html", pocty_sd=daj_pocty_sd_a_sl())
 
 
 @sd_blueprint.route("/zoznam_predlozky/", methods=["GET"])
 def zoznam_predlozky():
     loguj(request)
-    return render_template("m_sd/zoznam_predlozky.jinja.html")
+    return render_template("m_sd/zoznam_predlozky.jinja.html", pocty_sd=daj_pocty_sd_a_sl())
 
 
 @sd_blueprint.route("/zoznam_citoslovcia/", methods=["GET"])
 def zoznam_citoslovcia():
     loguj(request)
-    return render_template("m_sd/zoznam_citoslovcia.jinja.html")
+    return render_template("m_sd/zoznam_citoslovcia.jinja.html", pocty_sd=daj_pocty_sd_a_sl())
 
 
 @sd_blueprint.route("/zoznam_ostatne/", methods=["GET"])
 def zoznam_ostatne():
     loguj(request)
-    return render_template("m_sd/zoznam_ostatne.jinja.html")
+    return render_template("m_sd/zoznam_ostatne.jinja.html", pocty_sd=daj_pocty_sd_a_sl())
 
 
 @sd_blueprint.route("/daj_pm/", methods=["GET"])

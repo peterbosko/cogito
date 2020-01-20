@@ -94,3 +94,11 @@ def formatuj_datum(dt):
     if dt:
         return dt.strftime('%d.%m.%Y %H:%M:%S')
     return ""
+
+
+def formatuj_cislo(cislo):
+    if isinstance(cislo, int):
+        return f'{cislo:,}'
+    else:
+        return cislo
+

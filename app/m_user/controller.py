@@ -8,6 +8,7 @@ from app.c_helper import *
 from app.c_service import *
 from sqlalchemy import and_
 import json
+from app.sd_service import *
 
 user_blueprint = Blueprint("user", __name__)
 
@@ -18,9 +19,9 @@ def login():
 
     if 'logged' in session.keys():
         user = User.query.filter_by(id=session["logged"]).first()
-        return render_template("m_user/prihlaseny_user.jinja.html",user=user)
+        return render_template("m_user/prihlaseny_user.jinja.html", user=user, pocty_sd=daj_pocty_sd_a_sl())
     else:
-        return render_template("m_user/login.jinja.html")
+        return render_template("m_user/login.jinja.html", pocty_sd=daj_pocty_sd_a_sl())
 
 
 @user_blueprint.route("/login/", methods=['POST'])
@@ -131,5 +132,5 @@ def odhlas_ma():
 @user_blueprint.route("/registracia/", methods=['GET'])
 def registracia():
     loguj(request)
-    return render_template("m_user/registracia.jinja.html")
+    return render_template("m_user/registracia.jinja.html", pocty_sd=daj_pocty_sd_a_sl())
 

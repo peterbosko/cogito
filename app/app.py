@@ -25,4 +25,5 @@ flask_app.register_blueprint(metadata_blueprint)
 flask_app.jinja_env.globals.update(som_admin=som_admin)
 flask_app.jinja_env.globals.update(som_metadata_admin=som_metadata_admin)
 flask_app.jinja_env.globals.update(som_admin_slov=som_admin_slov)
+flask_app.jinja_env.globals.update(daj_typ_z_poctov_sd=daj_typ_z_poctov_sd)
 

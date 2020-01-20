@@ -348,3 +348,11 @@ def daj_pridavne_meno_k_slovesu(sloveso, je_negacia):
 
     return prm
 
+
+def daj_pocty_sd_a_sl():
+    # q = db.session.query(SlovnyDruh, func.count(SlovnyDruh.typ)).group_by(SlovnyDruh.typ).all()
+
+    q = {""}
+
+    return q
+

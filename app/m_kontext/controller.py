@@ -11,7 +11,7 @@ from sqlalchemy.exc import *
 import json
 from flask import redirect, url_for
 import urllib.parse
-
+from app.sd_service import *
 
 kontext_blueprint = Blueprint("kontext", __name__)
 
@@ -24,7 +24,7 @@ def pridat_kontext():
         return redirect(url_for("main.potrebne_prihlasenie")+"?redirect="+urllib.parse.quote_plus(
             url_for("kontext.pridat_kontext")))
 
-    return render_template("m_kontext/pridat_kontext.jinja.html")
+    return render_template("m_kontext/pridat_kontext.jinja.html", pocty_sd=daj_pocty_sd_a_sl())
 
 
 @kontext_blueprint.route("/kontexty/", methods=["GET"])
@@ -35,7 +35,7 @@ def kontexty():
     paginate = Kontext.query.filter(or_(Kontext.nazov.like('%' + search_term + '%'),
                                         Kontext.text.like('%' + search_term + '%'))).paginate(page, 5, False)
     return render_template("m_kontext/kontexty.jinja.html", kontexty=paginate.items, paginate=paginate,
-                           search_term=search_term)
+                           search_term=search_term, pocty_sd=daj_pocty_sd_a_sl())
 
 
 @kontext_blueprint.route("/moje_kontexty/", methods=["GET"])
@@ -46,7 +46,8 @@ def moje_kontexty():
         user = int(session["logged"])
     page = request.args.get("page", 1, type=int)
     paginate = Kontext.query.filter(Kontext.autor_id == user).paginate(page, 5, False)
-    return render_template("m_kontext/moje_kontexty.jinja.html", kontexty=paginate.items, paginate=paginate)
+    return render_template("m_kontext/moje_kontexty.jinja.html", kontexty=paginate.items, paginate=paginate,
+                           pocty_sd=daj_pocty_sd_a_sl())
 
 
 @kontext_blueprint.route("/kontexty/<int:kt_id>/")
@@ -54,8 +55,8 @@ def zobraz_kontext(kt_id):
     loguj(request)
     kt = Kontext.query.filter_by(id=kt_id).first()
     if kt:
-        return render_template("m_kontext/pridat_kontext.jinja.html", kontext=kt)
-    return render_template("m_kontext/kontext_sa_nenasiel.jinja.html", kontext=kt_id)
+        return render_template("m_kontext/pridat_kontext.jinja.html", kontext=kt, pocty_sd=daj_pocty_sd_a_sl())
+    return render_template("m_kontext/kontext_sa_nenasiel.jinja.html", kontext=kt_id, pocty_sd=daj_pocty_sd_a_sl())
 
 
 @kontext_blueprint.route("/pridat_kontext/", methods=["POST"])
@@ -207,8 +208,8 @@ def dopytuj_kontext():
     kt_id = request.args.get("kontext_id", "")
     kt = Kontext.query.filter_by(id=kt_id).first()
     if kt:
-        return render_template("m_kontext/dopytovat_kontext.jinja.html", kontext=kt)
-    return render_template("m_kontext/kontext_sa_nenasiel.jinja.html", kontext=kt_id)
+        return render_template("m_kontext/dopytovat_kontext.jinja.html", kontext=kt, pocty_sd=daj_pocty_sd_a_sl())
+    return render_template("m_kontext/kontext_sa_nenasiel.jinja.html", kontext=kt_id, pocty_sd=daj_pocty_sd_a_sl())
 
 
 @kontext_blueprint.route("/daj_unit_testy/", methods=["GET"])
@@ -237,7 +238,7 @@ def zoznam_ut():
 
     kt_id = request.args.get("kontext_id", "")
 
-    return render_template("m_kontext/zoznam_ut.jinja.html", kontext_id=kt_id)
+    return render_template("m_kontext/zoznam_ut.jinja.html", kontext_id=kt_id, pocty_sd=daj_pocty_sd_a_sl())
 
 
 @kontext_blueprint.route("/pridat_zmenit_unit_test/", methods=["GET"])
@@ -267,7 +268,7 @@ def pridat_zmenit_unit_test():
         kontext = kts.first().id
 
     return render_template("m_kontext/pridat_unit_test.jinja.html", unit_test=ut, kontexty=kts, kontext_id=kontext,
-                           spustil=spustil, datum_spustenia=datum_spustenia)
+                           spustil=spustil, datum_spustenia=datum_spustenia, pocty_sd=daj_pocty_sd_a_sl())
 
 
 @kontext_blueprint.route("/pridat_zmenit_unit_test/", methods=["POST"])
@@ -394,7 +395,8 @@ def vsetky_unit_testy():
 
     funkcie = db.session.query(UnitTest.funkcia).distinct().all()
 
-    return render_template("m_kontext/vsetky_unit_testy.jinja.html", kontexty=kts, funkcie=funkcie)
+    return render_template("m_kontext/vsetky_unit_testy.jinja.html", kontexty=kts, funkcie=funkcie,
+                           pocty_sd=daj_pocty_sd_a_sl())
 
 
 @kontext_blueprint.route("/daj_vsetky_unit_testy/", methods=["GET"])

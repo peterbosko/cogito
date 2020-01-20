@@ -3,6 +3,7 @@ from flask import render_template
 from flask import request
 from app.db_models import Kontext
 from app.c_service import *
+from app.sd_service import *
 
 main_blueprint = Blueprint("main", __name__)
 
@@ -12,7 +13,8 @@ def vitaj():
 
     page = request.args.get("page", 1, type=int)
     paginate = Kontext.query.order_by(Kontext.id.desc()).paginate(page, 4, False)
-    return render_template("m_main/uvod.jinja.html", kontexty=paginate.items, paginate=paginate)
+    return render_template("m_main/uvod.jinja.html", kontexty=paginate.items, paginate=paginate,
+                           pocty_sd=daj_pocty_sd_a_sl())
 
 
 @main_blueprint.route("/")
@@ -30,13 +32,13 @@ def uvod():
 @main_blueprint.route("/popis_cogita/")
 def popis():
     loguj(request)
-    return render_template("m_main/popis_cogita.jinja.html")
+    return render_template("m_main/popis_cogita.jinja.html", pocty_sd=daj_pocty_sd_a_sl())
 
 
 @main_blueprint.route("/potrebne_prihlasenie/")
 def potrebne_prihlasenie():
     loguj(request)
-    return render_template("m_main/potrebne_prihlasenie.jinja.html")
+    return render_template("m_main/potrebne_prihlasenie.jinja.html", pocty_sd=daj_pocty_sd_a_sl())
 
 
 @main_blueprint.route("/daj_autocomplete_user/", methods=["GET"])

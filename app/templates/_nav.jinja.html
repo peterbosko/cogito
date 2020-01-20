@@ -17,18 +17,18 @@
         {% endif %}">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Slová</a>
         <div class="dropdown-menu" aria-labelledby="dropdown04">
-          <a class="dropdown-item" href="{{ url_for("sd.zoznam_slov") }}">Zoznam slov</a>
-          <a class="dropdown-item" href="{{ url_for("sd.zoznam_pm") }}">Podstatné mená</a>
-          <a class="dropdown-item" href="{{ url_for("sd.zoznam_prid_m") }}">Prídavné mená</a>
-          <a class="dropdown-item" href="{{ url_for("sd.zoznam_zamena") }}">Zámená</a>
-          <a class="dropdown-item" href="{{ url_for("sd.zoznam_cislovky") }}">Číslovky</a>
-          <a class="dropdown-item" href="{{ url_for("sd.zoznam_prislovky") }}">Príslovky</a>
-          <a class="dropdown-item" href="{{ url_for("sd.zoznam_slovesa") }}">Slovesá</a>
-          <a class="dropdown-item" href="{{ url_for("sd.zoznam_predlozky") }}">Predložky</a>
-          <a class="dropdown-item" href="{{ url_for("sd.zoznam_spojky") }}">Spojky</a>
-          <a class="dropdown-item" href="{{ url_for("sd.zoznam_castice") }}">Častice</a>
-          <a class="dropdown-item" href="{{ url_for("sd.zoznam_citoslovcia") }}">Citoslovcia</a>
-          <a class="dropdown-item" href="{{ url_for("sd.zoznam_ostatne") }}">Ostatné</a>
+          <a class="dropdown-item" href="{{ url_for("sd.zoznam_slov") }}">Zoznam slov ({{ daj_typ_z_poctov_sd(pocty_sd, "SL")}})</a>
+          <a class="dropdown-item" href="{{ url_for("sd.zoznam_pm") }}">Podstatné mená ({{ daj_typ_z_poctov_sd(pocty_sd, "POD_M")}})</a>
+          <a class="dropdown-item" href="{{ url_for("sd.zoznam_prid_m") }}">Prídavné mená ({{ daj_typ_z_poctov_sd(pocty_sd, "PRID_M")}})</a>
+          <a class="dropdown-item" href="{{ url_for("sd.zoznam_zamena") }}">Zámená ({{ daj_typ_z_poctov_sd(pocty_sd, "ZAMENO")}})</a>
+          <a class="dropdown-item" href="{{ url_for("sd.zoznam_cislovky") }}">Číslovky ({{ daj_typ_z_poctov_sd(pocty_sd, "CISLOVKA")}})</a>
+          <a class="dropdown-item" href="{{ url_for("sd.zoznam_prislovky") }}">Príslovky ({{ daj_typ_z_poctov_sd(pocty_sd, "PRISLOVKA")}})</a>
+          <a class="dropdown-item" href="{{ url_for("sd.zoznam_slovesa") }}">Slovesá ({{ daj_typ_z_poctov_sd(pocty_sd, "SLOVESO")}})</a>
+          <a class="dropdown-item" href="{{ url_for("sd.zoznam_predlozky") }}">Predložky ({{ daj_typ_z_poctov_sd(pocty_sd, "PREDLOZKA")}})</a>
+          <a class="dropdown-item" href="{{ url_for("sd.zoznam_spojky") }}">Spojky ({{ daj_typ_z_poctov_sd(pocty_sd, "SPOJKA")}})</a>
+          <a class="dropdown-item" href="{{ url_for("sd.zoznam_castice") }}">Častice ({{ daj_typ_z_poctov_sd(pocty_sd, "CASTICA")}})</a>
+          <a class="dropdown-item" href="{{ url_for("sd.zoznam_citoslovcia") }}">Citoslovcia ({{ daj_typ_z_poctov_sd(pocty_sd, "CITOSLOVCE")}})</a>
+          <a class="dropdown-item" href="{{ url_for("sd.zoznam_ostatne") }}">Ostatné ({{ daj_typ_z_poctov_sd(pocty_sd, "OSTATNE")}})</a>
         </div>
       </li>
 
