@@ -781,3 +781,12 @@ class SlovoRozdiel(db.Model):
     __mapper_args__ = {
         'polymorphic_identity': 'sl_rozdiel',
     }
+
+
+class SlovnyDruhStat(db.Model):
+    __tablename__ = 'sd_stat'
+    __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8mb4', 'mysql_collate': 'utf8mb4_bin'}
+    id = db.Column(db.Integer, primary_key=True)
+    typ = db.Column(db.String(20), nullable=False, index=True)
+    pocet = db.Column(db.Integer, nullable=True)
+

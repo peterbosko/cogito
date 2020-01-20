@@ -40,35 +40,9 @@ def som_admin_slov():
 
 def daj_typ_z_poctov_sd(rows, typ):
     pocet = 0
-    # for r in rows:
-    #    if r.SlovnyDruh.typ == typ:
-    #        pocet = r[1]
-
-    if typ == "POD_M":
-        pocet = "174 tis"
-    elif typ == "PRID_M":
-        pocet = "180 tis"
-    elif typ == "ZAMENO":
-        pocet = "800"
-    elif typ == "CISLOVKA":
-        pocet = "1,750"
-    elif typ == "PRISLOVKA":
-        pocet = "11 tis"
-    elif typ == "SLOVESO":
-        pocet = "70 tis"
-    elif typ == "PREDLOZKA":
-        pocet = "180"
-    elif typ == "SPOJKA":
-        pocet = "150"
-    elif typ == "CASTICA":
-        pocet = "480"
-    elif typ == "CITOSLOVCE":
-        pocet = "1,140"
-    elif typ == "OSTATNE":
-        pocet = "1,500"
-
-    if pocet == 0:
-        pocet = "21 453 tis"  # db.session.query(Slovo).count()
+    for r in rows:
+        if r.typ == typ:
+            pocet = r.pocet
 
     return formatuj_cislo(pocet)
 

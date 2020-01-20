@@ -350,9 +350,23 @@ def daj_pridavne_meno_k_slovesu(sloveso, je_negacia):
 
 
 def daj_pocty_sd_a_sl():
-    # q = db.session.query(SlovnyDruh, func.count(SlovnyDruh.typ)).group_by(SlovnyDruh.typ).all()
-
-    q = {""}
+    q = db.session.query(SlovnyDruhStat).all()
 
     return q
+
+
+def prepocitaj_sd_stat():
+    SlovnyDruhStat.query.delete()
+    for r in db.session.query(SlovnyDruh.typ, func.count(SlovnyDruh.typ)).group_by(SlovnyDruh.typ).all():
+        s = SlovnyDruhStat()
+        s.typ = r[0]
+        s.pocet = r[1]
+        db.session.add(s)
+        db.session.commit()
+
+    s2 = SlovnyDruhStat()
+    s2.typ = "SL"
+    s2.pocet = Slovo.query.count()
+    db.session.add(s2)
+    db.session.commit()
 

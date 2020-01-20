@@ -76,7 +76,7 @@ def daj_slova():
 @sd_blueprint.route("/zoznam_slov/", methods=["GET"])
 def zoznam_slov():
     loguj(request)
-    return render_template("m_sd/zoznam_slov.jinja.html")
+    return render_template("m_sd/zoznam_slov.jinja.html", pocty_sd=daj_pocty_sd_a_sl())
 
 
 @sd_blueprint.route("/zoznam_pm/", methods=["GET"])
@@ -817,6 +817,8 @@ def zmenit_sd_post():
 
         db.session.commit()
 
+        prepocitaj_sd_stat()
+
         response.data = sd_id
 
     else:
@@ -1047,6 +1049,7 @@ def zmaz_cely_slovny_druh():
             response.status = ResponseStatus.ERROR
             response.error_text = "Chyba integrity. Na slovo existuje cudzí kľúč ! V prípade slovesa " \
                                   "skontroluje prídavné, podstatné mená a slovesá !"
+        prepocitaj_sd_stat()
     else:
         response.status = ResponseStatus.ERROR
         response.error_text = "Nedostatočné práva pre operáciu"

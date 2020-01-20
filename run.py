@@ -1,5 +1,6 @@
 from app.app import flask_app
 from app.db_models import *
+from app.sd_service import *
 import sys
 
 db.init_app(flask_app)
@@ -41,6 +42,8 @@ def init_db(app):
             db.session.add(usr_bosko)
             db.session.commit()
             print("user bosko was created")
+
+        prepocitaj_sd_stat()
 
 
 if __name__ == "__main__":
