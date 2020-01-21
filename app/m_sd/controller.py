@@ -865,7 +865,8 @@ def sd_slova_zmen():
         vzory = daj_prid_m_vzory()
         stupnovacie_vzory = daj_prid_m_stup_vzory()
     elif slovny_druh.typ == "POD_M":
-        vzory = daj_pm_vzory()
+        pm = PodstatneMeno.query.get(request.args.get("sd_id", ""))
+        vzory = daj_pm_vzory(pm.rod)
 
     prefixy = daj_prefixy_sufixy(slovny_druh.typ, "P")
     sufixy = daj_prefixy_sufixy(slovny_druh.typ, "S")

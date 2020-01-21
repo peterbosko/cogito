@@ -192,15 +192,20 @@ def daj_slovesne_vzory():
     return vysledok
 
 
-def daj_pm_vzory():
+def daj_pm_vzory(rod=None):
     vysledok = []
 
     nenastavene = None
 
-    for gr in db.session.query(SDVzor.vzor, func.count(PodstatneMeno.vzor)).filter(SDVzor.typ == "POD_M").\
-            outerjoin(PodstatneMeno, SDVzor.vzor == PodstatneMeno.vzor).\
-            group_by(PodstatneMeno.vzor).\
-            order_by(func.count(PodstatneMeno.vzor).desc()).all():
+    vzory = db.session.query(SDVzor.vzor, func.count(PodstatneMeno.vzor)).filter(SDVzor.typ == "POD_M").\
+        outerjoin(PodstatneMeno, SDVzor.vzor == PodstatneMeno.vzor).\
+        group_by(PodstatneMeno.vzor).\
+        order_by(func.count(PodstatneMeno.vzor).desc())
+
+    if rod:
+        vzory = vzory.filter(SDVzor.rod == rod)
+
+    for gr in vzory.all():
         stat = VzorSoStatistikou()
 
         v = gr[0]

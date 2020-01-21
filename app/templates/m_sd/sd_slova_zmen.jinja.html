@@ -43,7 +43,7 @@
                     <div class="col-sm-10">
                         <select id="ddlVzor" class="form-control">
                             {% for k in vzory %}
-                            <option value="{{ k.hodnota }}">{{ k.vzor + " - počet slov :" }} {{k.pocet}}</option>
+                            <option value="{{ k.hodnota }}">{{ k.vzor + " - počet slov :" }} {{k.pocet}} {{ k.popis }}</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -143,6 +143,25 @@
                         <label class="col-sm-2"><input type="checkbox" class="sloveso_HFilter" id="cbInfinitiv"/> Infinitív</label>
                         <label class="col-sm-2"><input type="checkbox" class="sloveso_HFilter" id="cbPrechodnik"/> Prechodník</label>
                         <label class="col-sm-2"><input type="checkbox" onclick="VsetkySlovesaHFilter()" id="cbVsetky"/> Všetko</label>
+                    </div>
+                    <div class="row POD_M nodisplay text-center">
+                        <label class="col-sm-6"><input type="checkbox" class="pod_m_HFilter" id="cb_POD_M_JednotneCislo" checked/> Jednotné číslo</label>
+                        <label class="col-sm-6"><input type="checkbox" class="pod_m_HFilter" id="cb_POD_M_MnozneCislo" /> Množné číslo</label>
+                    </div>
+                    <div class="row PRID_M nodisplay text-center">
+                        <label class="col-sm-2"><input type="checkbox" class="prid_m_HFilter" id="cb_PRID_M_MuzskyRod" checked/> Mužský rod</label>
+                        <label class="col-sm-2"><input type="checkbox" class="prid_m_HFilter" id="cb_PRID_M_ZenskyRod" /> Ženský rod</label>
+                        <label class="col-sm-2"><input type="checkbox" class="prid_m_HFilter" id="cb_PRID_M_StrednyRod" /> Stredný rod</label>
+                        <label class="col-sm-2"><input type="checkbox" class="prid_m_HFilter" id="cb_PRID_M_PrvyStupen" checked/> Prvý stupeň</label>
+                        <label class="col-sm-2"><input type="checkbox" class="prid_m_HFilter" id="cb_PRID_M_DruhyStupen" /> Druhý stupeň</label>
+                        <label class="col-sm-2"><input type="checkbox" class="prid_m_HFilter" id="cb_PRID_M_TretiStupen" /> Tretí stupeň</label>
+                    </div>
+                    <div class="row PRID_M nodisplay text-center">
+                        <label class="col-sm-6"><input type="checkbox" class="prid_m_HFilter" id="cb_PRID_M_JednotneCislo" checked/> Jednotné číslo</label>
+                        <label class="col-sm-6"><input type="checkbox" class="prid_m_HFilter" id="cb_PRID_M_MnozneCislo" /> Množné číslo</label>
+                    </div>
+                    <div class="row PRID_M nodisplay text-center">
+                        <label class="col-sm-12"><input type="checkbox" class="prid_m_HFilter" id="cb_PRID_M_Vsetky"/> Všetky</label>
                     </div>
                 </div>
                 <div id="divSFiltrom" class="col-xs-12 nodisplay">
@@ -453,8 +472,28 @@ function NastavAnotaciu(tvar, rod, podrod, pad, cislo, osoba, cas, sposob, stupe
                 $('#cislo_'+j).val() == cislo && $('#osoba_'+j).val() == osoba && $('#cas_'+j).val() == cas &&
                 $('#sposob_'+j).val() == sposob && $('#stupen_'+j).val() == stupen &&
                 $('#pricastie_'+j).val() == pricastie){
-                    $('#anotacia_'+j).val(anotacia);
-                    $('#hdn_changed_'+j).val("true");
+                    if ('{{request.args.get("slovnyDruh")}}'=='SLOVESO'){
+                        var zhoda = false;
+                        if (JeInfinitiv($('#tvar_'+j).val())){
+                            if (anotacia.substring(1,2)=="I")
+                                zhoda=true;
+                        }else if (JePrechodnik($('#tvar_'+j).val())) {
+                            if (anotacia.substring(1,2)=="H")
+                                zhoda=true;
+                        }
+                        else{
+                            zhoda = true;
+                        }
+
+                        if (zhoda){
+                            $('#anotacia_'+j).val(anotacia);
+                            $('#hdn_changed_'+j).val("true");
+                        }
+                    }
+                    else{
+                        $('#anotacia_'+j).val(anotacia);
+                        $('#hdn_changed_'+j).val("true");
+                    }
                 }
             }
         }
@@ -468,8 +507,11 @@ function GenerujDefaultTvary(){
     filter.koren = $('#ddlKorenSlova').val();
     filter.prefix = $('#ddlPrefix').val();
     filter.sufix = $('#ddlSufix').val();
-    filter.vzor = $('#ddlVzor').val();
-    filter.vzor_stup = $('#ddlVzorStup').val();
+    filter.vzor = $('#ddlVzor').val() || '';
+    filter.vzor_stup = $('#ddlVzorStup').val() || '';
+    filter.pzkmen = '';
+    filter.vid = '';
+
 
     if ('{{request.args.get("slovnyDruh")}}'=='POD_M')
         filter.paradigma = $('#ddlParadigma_POD_M').val();
@@ -531,18 +573,28 @@ function GenerujSlovesneTvary(t){
 }
 
 function GenerujAnotaciu(){
+    if ($('#hdn_changed_f').val()=="true") {
+        swal({ buttons: {},
+                       title  :  "Chyba",
+                       text   :  "Filter sa zmenil. Najskôr aplikujte filter",
+                       icon   :  "error"});
+        return;
+    }
+
     var filter = GetFilterValues();
 
     filter.koren = $('#ddlKorenSlova').val();
     filter.prefix = $('#ddlPrefix').val();
     filter.sufix = $('#ddlSufix').val();
-    filter.vzor = $('#ddlVzor').val();
-    filter.vzor_stup = $('#ddlVzorStup').val();
+    filter.vzor = $('#ddlVzor').val() || '';
+    filter.vzor_stup = $('#ddlVzorStup').val()||'';
     if ('{{request.args.get("slovnyDruh")}}'=='POD_M')
-        filter.paradigma = $('#ddlParadigma_POD_M').val();
+        filter.paradigma = $('#ddlParadigma_POD_M').val()||'';
     else if ('{{request.args.get("slovnyDruh")}}'=='PRID_M')
-        filter.paradigma = $('#ddlParadigma_PRID_M').val();
+        filter.paradigma = $('#ddlParadigma_PRID_M').val()||'';
     filter.sd_id = getSD_ID();
+    filter.vid = $('#ddlVid').val()||'';
+    filter.co_generovat = "*";
 
     AjaxMethods.getDataFromPostRequest('{{url_for("sd.generuj_morfo")}}', "", filter, function(r){
             if (r.status==responseOK){//OK vetva
@@ -645,7 +697,7 @@ function VsetkySlovesaHFilter(){
         $('#cbInfinitiv').prop('checked',false);
         $('#cbPrechodnik').prop('checked',false);
     }
-    UrobHrubyFilter();
+    FiltrujHrubyFilter();
 }
 
 function GetFilterValues(){
@@ -789,26 +841,59 @@ function JeLTvar(tvar){
     return false;
 }
 
-function ZaznamVyhovujeJednoduchemuFiltru(j){
+function ZaznamVyhovujeHrubemuFiltru(j){
 
-    var je_indikativ = $('#cas_'+j).val() == "P" || $('#cbVsetky').prop('checked');
-    var je_imperativ = $('#sposob_'+j).val() == "R" || $('#cbVsetky').prop('checked');
-    var je_l_tvar = JeLTvar($('#tvar_'+j).val()) || $('#cbVsetky').prop('checked');
-    var je_infinitiv = JeInfinitiv($('#tvar_'+j).val()) || $('#cbVsetky').prop('checked');
-    var je_prechodnik = JePrechodnik($('#tvar_'+j).val()) || $('#cbVsetky').prop('checked');
+    if ('{{request.args.get("slovnyDruh")}}'=='SLOVESO') {
+        var je_indikativ = $('#cas_'+j).val() == "P" || $('#cbVsetky').prop('checked');
+        var je_imperativ = $('#sposob_'+j).val() == "R" || $('#cbVsetky').prop('checked');
+        var je_l_tvar = JeLTvar($('#tvar_'+j).val()) || $('#cbVsetky').prop('checked');
+        var je_infinitiv = JeInfinitiv($('#tvar_'+j).val()) || $('#cbVsetky').prop('checked');
+        var je_prechodnik = JePrechodnik($('#tvar_'+j).val()) || $('#cbVsetky').prop('checked');
 
-    return (je_indikativ && $('#cbIndikativy').prop('checked')) ||
-           (je_imperativ && $('#cbImperativy').prop('checked')) ||
-           (je_l_tvar && $('#cbLTvary').prop('checked')) ||
-           (je_infinitiv && $('#cbInfinitiv').prop('checked')) ||
-           (je_prechodnik && $('#cbPrechodnik').prop('checked'));
+        return (je_indikativ && $('#cbIndikativy').prop('checked')) ||
+               (je_imperativ && $('#cbImperativy').prop('checked')) ||
+               (je_l_tvar && $('#cbLTvary').prop('checked')) ||
+               (je_infinitiv && $('#cbInfinitiv').prop('checked')) ||
+               (je_prechodnik && $('#cbPrechodnik').prop('checked'));
+    } else if ('{{request.args.get("slovnyDruh")}}'=='POD_M') {
+        var je_jednotne = $('#cislo_'+j).val() == "J";
+        var je_mnozne = ! je_jednotne;
+        return (je_jednotne && $('#cb_POD_M_JednotneCislo').prop('checked')) ||
+               (je_mnozne && $('#cb_POD_M_MnozneCislo').prop('checked')) ||
+               $('#cb_POD_M_Vsetky').prop('checked');
+    } else if ('{{request.args.get("slovnyDruh")}}'=='PRID_M') {
+        var sedi_rod = false;
+        if (($('#rod_'+j).val().substring(0,1)=="M" && $('#cb_PRID_M_MuzskyRod').prop('checked')) ||
+            ($('#rod_'+j).val().substring(0,1)=="Z" && $('#cb_PRID_M_ZenskyRod').prop('checked')) ||
+            ($('#rod_'+j).val().substring(0,1)=="S" && $('#cb_PRID_M_StrednyRod').prop('checked'))
+           )
+           sedi_rod = true;
+        var sedi_stupen = false;
+        if (($('#stupen_'+j).val()=="1" && $('#cb_PRID_M_PrvyStupen').prop('checked')) ||
+            ($('#stupen_'+j).val()=="2" && $('#cb_PRID_M_DruhyStupen').prop('checked')) ||
+            ($('#stupen_'+j).val()=="3" && $('#cb_PRID_M_TretiStupen').prop('checked'))
+           )
+           sedi_stupen = true;
+
+        var sedi_cislo = false;
+        if (($('#cislo_'+j).val()=="J" && $('#cb_PRID_M_JednotneCislo').prop('checked')) ||
+            ($('#cislo_'+j).val()!="J" && $('#cb_PRID_M_MnozneCislo').prop('checked'))
+           )
+           sedi_cislo = true;
+
+
+        return (sedi_rod && sedi_stupen && sedi_cislo) || $('#cb_PRID_M_Vsetky').prop('checked');
+    }
+    else{
+        return true;
+    }
 }
 
-function UrobHrubyFilter(){
+function FiltrujHrubyFilter(){
     $("#divSTabulkou tr[id^='zaznam_']").each(function () {
         var j=$(this).attr('id').replace('zaznam_','');
         if (j!="0"){
-            if (ZaznamVyhovujeJednoduchemuFiltru(j)){
+            if (ZaznamVyhovujeHrubemuFiltru(j)){
                 $('#zaznam_'+j).removeClass('nodisplay')
             }
             else{
@@ -859,6 +944,8 @@ function ToggleFilter(filter, performDisplayCheck){
         else{
             $("#divSHFiltrom").slideToggle("slow").addClass('nodisplay');
         }
+
+        FiltrujHrubyFilter();
     }
 }
 
@@ -906,6 +993,7 @@ function setupSlova(a){
 }
 
 function NacitajSDSlova(id){
+
         AjaxMethods.getDataFromGetRequest('{{url_for("sd.vrat_cely_slovny_druh")}}', "", "?sd_id="+id, function(r){
             if (r.status==responseOK){//OK vetva
 
@@ -955,7 +1043,7 @@ function NacitajSDSlova(id){
                 setupSlova(r.data.slova);
 
                 if (r.data.typ=="SLOVESO"){
-                    UrobHrubyFilter();
+                    FiltrujHrubyFilter();
                 }
             } else{
                    swal({ buttons: {},
@@ -1179,6 +1267,7 @@ function setupSlovaDruh(pridavanyDruh){
 }
 
 $(document).ready(function() {
+
     pridavanyDruh = '{{request.args.get("slovnyDruh")}}';
 
     if (pridavanyDruh == "POD_M"){
@@ -1198,7 +1287,6 @@ $(document).ready(function() {
     }
 
     $('#SDSlovaForm').formValidation();
-
 
     if ('{{request.args.get("ulozAkoNoveSlovo")}}' == 'true'){
         if (getPovodneSD_ID()>0)
@@ -1242,8 +1330,18 @@ $(document).ready(function() {
     $('#slova_div').fadeIn( "slow", function() {
                           }).removeClass('nodisplay');
     ToggleFilter('H');
+    $('#hdn_changed_f').val('true');
     $('.sloveso_HFilter').change(function(){
-        UrobHrubyFilter();
+        $('#hdn_changed_f').val('true');
+        FiltrujHrubyFilter();
+    });
+    $('.pod_m_HFilter').change(function(){
+        $('#hdn_changed_f').val('true');
+        FiltrujHrubyFilter();
+    });
+    $('.prid_m_HFilter').change(function(){
+        $('#hdn_changed_f').val('true');
+        FiltrujHrubyFilter();
     });
 });
 
