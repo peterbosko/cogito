@@ -768,7 +768,7 @@ def zmenit_sd_post():
 
                 slovo.tvar = sl['tvar']
 
-                if slovo.rod:
+                if sl['rod']:
                     slovo.rod = sl['rod'][0]
 
                     if '/' in sl['rod']:

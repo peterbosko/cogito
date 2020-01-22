@@ -73,6 +73,7 @@
 
         if (selected=="zakladne"){
             if (loadnuteTaby["zakladne"]){
+
                 if (!ZmenSDZakladneInfo()){
                     return;
                 }
@@ -161,6 +162,8 @@ $(document).ready(function() {
 
 
 function DalsiTab(){
+    $('.btnSave').focus();
+
     var selected = $(currentTab).attr('id');
 
     if (selected == "zakladne"){

@@ -95,13 +95,13 @@
     </div>
 <script>
     function slovoGridFormatter(data, type, row){
-        var d = "<li><a href='javascript:PridatZmenitSD(" + row.sd_id + ");' title='Detail slovného druhu'><span class='fa fa-eye fa-sm'></span>&nbsp;Detail slovného druhu</a></li>";
+        var d = "<li><a href='javascript:PridatZmenitSD(" + row.sd_id + ",\"" + row.slovny_druh + "\");' title='Detail slovného druhu'><span class='fa fa-eye fa-sm'></span>&nbsp;Detail slovného druhu</a></li>";
         var e = '';
         var f = '';
         var g = '';
 
         if ('{{som_admin_slov()}}' == 'True'){
-            e = "<li><a href='javascript:PridatZmenitSD(" + row.sd_id + ");' title='Zmeniť slovný druh'><span class='fa fa-pencil-alt fa-sm'></span>&nbsp;Zmeniť slovný druh</a></li>";
+            e = "<li><a href='javascript:PridatZmenitSD(" + row.sd_id + ",\"" + row.slovny_druh + "\");' title='Zmeniť slovný druh'><span class='fa fa-pencil-alt fa-sm'></span>&nbsp;Zmeniť slovný druh</a></li>";
             f = "<li><a href='javascript:ZmazSlovo(" + row.id + ", function(){ nacitajSlova(); });' title='Zmazať slovo'><span class='fa fa-trash-alt fa-sm'></span>&nbsp;Zmazať slovo</a></li>";
             g = "<li><a href='javascript:ZmazSlovnyDruh(" + row.sd_id + ", function(){ nacitajSlova(); });' title='Zmazať celý slovný druh'><span class='fa fa-trash-alt fa-sm'></span>&nbsp;Zmazať celý slovný druh</a></li>";
         }
@@ -109,9 +109,9 @@
         return gridButtonFormater(d+e+f+g, '', true, "240px");
     }
 
-    function PridatZmenitSD(id){
+    function PridatZmenitSD(id, slovnyDruh){
         loadTemplateIntoLargeScreenModal('#defaultModal', 'largescreen', 'Zmena slovného druhu',
-        '{{url_for("sd.zmenit_sd")}}'+'?sd_id='+id);
+        '{{url_for("sd.zmenit_sd")}}'+'?sd_id='+id+'&slovnyDruh='+slovnyDruh);
     }
 
     function PridatSDaSlovo(id){

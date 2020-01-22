@@ -314,7 +314,7 @@ function NacitajZakladneInfoSD(sd_id){
 
 function ZmenSDZakladneInfo(){
 
-    if (!zmenaVZakladneInfo && '{{request.args.get("ulozAkoNoveSlovo")}}' != 'true'){
+    if (!zmenaVZakladneInfo && '{{request.args.get("ulozAkoNoveSlovo")}}' != 'true' && getSD_ID() != -1){
         return true;
     }
 
@@ -381,6 +381,7 @@ function ZmenSDZakladneInfo(){
             if (r.status==responseOK){//OK vetva
                 res=true;
                 setSD_ID(r.data);
+                zmenaVZakladneInfo = false;
             }
             else {
                    swal({ buttons: {},
