@@ -98,3 +98,9 @@ class VzorSoStatistikou(object):
     popis = None
     pocet = None
 
+
+class DotiahniVzor(object):
+    koren = None
+    pzkmen = None
+    vzor = None
+

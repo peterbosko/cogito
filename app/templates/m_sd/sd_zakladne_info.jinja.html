@@ -38,7 +38,7 @@
                          Rod:
                     </label>
                     <div class="col-sm-2">
-                        <select id="txtPOD_M_ROD" class="form-control zmenaZakInfo">
+                        <select id="txtPOD_M_ROD" class="form-control zmenaZakInfo rodPole">
                             <option value="M">M</option>
                             <option value="Z">Z</option>
                             <option value="S">S</option>
@@ -106,7 +106,7 @@
                          Rod:
                     </label>
                     <div class="col-sm-2">
-                        <select id="ddlZAMENO_ROD" class="form-control zmenaZakInfo">
+                        <select id="ddlZAMENO_ROD" class="form-control zmenaZakInfo rodPole">
                             <option value="">Žiaden</option>
                             <option value="M">M</option>
                             <option value="Z">Z</option>
@@ -140,7 +140,7 @@
                          Rod:
                     </label>
                     <div class="col-sm-2">
-                        <select id="ddlCISLOVKA_ROD" class="form-control zmenaZakInfo">
+                        <select id="ddlCISLOVKA_ROD" class="form-control zmenaZakInfo rodPole">
                             <option value="M">M</option>
                             <option value="Z">Z</option>
                             <option value="S">S</option>
@@ -377,7 +377,12 @@ function ZmenSDZakladneInfo(){
 
         var res=false;
 
+        //var $modal =  $('#nav-tab').parents('.modal');
+        //var $btnSave = $modal.find('.btnSave');
+        //$btnSave.html('<i class="fa fa-spinner fa-spin"></i>&nbsp;Ukladám');
+
         AjaxMethods.getDataFromPostRequest('{{url_for("sd.zmenit_sd")}}', "", data, function(r){
+            //$btnSave.html("<i class='fa fa-save'></i>&nbsp;Ďalej >>");
             if (r.status==responseOK){//OK vetva
                 res=true;
                 setSD_ID(r.data);
@@ -469,6 +474,17 @@ $(document).ready(function() {
     $('#zakladne_div').fadeIn( "slow", function() {
                                 }).removeClass('nodisplay');
     $('#zakladne_loader').addClass('nodisplay');
+
+    $('.rodPole').change(function(){
+        if (loadnuteTaby["slova"]) {
+            swal({ buttons: {},
+                   title  :  "Chyba",
+                   text   :  "Pre prejavenie všetkých zmien súvisiacich so zmenou rodu (napr. zoznam vzorov)"+
+                             " je potrebné odísť z obrazovky a otvoriť ju nanovo",
+                   icon   :  "error"});
+        }
+    });
+
 });
 
 </script>

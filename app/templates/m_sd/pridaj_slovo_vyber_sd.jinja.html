@@ -34,7 +34,9 @@
 $(document).ready(function() {
 
     var $modal =  $('#ddlVyberDruh').parents('.modal');
-	
+
+	var slovoParam = '';
+
 	if ('{{request.args.get("slovo")}}'!='None'){
  		slovoParam = '&slovo={{request.args.get("slovo")}}';
     }

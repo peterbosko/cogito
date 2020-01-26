@@ -817,7 +817,8 @@ def zmenit_sd_post():
 
         db.session.commit()
 
-        prepocitaj_sd_stat()
+        if export.tab == "slova":
+            prepocitaj_sd_stat()
 
         response.data = sd_id
 
@@ -1107,6 +1108,29 @@ def generuj_morfo():
             vysledok = vrat_tvary_pre_sloveso(morfo, sloveso)
 
     response.data = vysledok
+
+    return jsonpickle.encode(response)
+
+
+@sd_blueprint.route("/dotiahni_vzor/", methods=["GET"])
+def dotiahni_vzor():
+    loguj(request)
+
+    response = CommonResponse()
+
+    i = request.args.get("infinitiv", "")
+    _1osjc = request.args.get("1osjc", "")
+    _3osmc = request.args.get("3osmc", "")
+
+    vzor = DotiahniVzor()
+
+    vzor.koren, vzor.pzkmen, vzor.vzor, chyba = vrat_kpv_o_slovese(i, _1osjc, _3osmc)
+
+    if chyba:
+        response.status = ResponseStatus.ERROR
+        response.error_text = chyba
+    else:
+        response.data = vzor
 
     return jsonpickle.encode(response)
 

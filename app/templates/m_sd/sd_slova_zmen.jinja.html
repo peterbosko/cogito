@@ -40,14 +40,35 @@
                     <label class="col-sm-2 nodisplay SLOVESO" for="prepend">
                          Časovací vzor:
                     </label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-8">
                         <select id="ddlVzor" class="form-control">
                             {% for k in vzory %}
                             <option value="{{ k.hodnota }}">{{ k.vzor + " - počet slov :" }} {{k.pocet}} {{ k.popis }}</option>
                             {% endfor %}
                         </select>
                     </div>
+                    <button id="btnUrciVzor" class="btn btn-primary col-sm-2 nodisplay SLOVESO" onclick="UrciVzorToggle();" type="button"><i class="fa fa-question"></i>&nbsp;Urči vzor</button>
                 </div>
+                <div id="divSUrciVzor" class="row URCIVZOR marginbottomDetailSD nodisplay">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <label class="col-sm-2" for="prepend">
+                                 1 os j.č.:
+                            </label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" id="txt1osjc" name="txt1osjc"/>
+                            </div>
+                            <label class="col-sm-2" for="prepend">
+                                 3 os m.č.:
+                            </label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" id="txt3osmc" name="txt3osmc"/>
+                            </div>
+                            <button id="btnDotiahniVzor" class="btn btn-primary col-sm-2" onclick="DotiahniVzor();" type="button">Dotiahni vzor</button>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row VZOR marginbottomDetailSD nodisplay">
                     <label class="col-sm-2" for="prepend">
                          Prefix:
@@ -420,9 +441,56 @@
 var zmazaneSlova = [];
 var pocet_slov = 0;
 
+/******************** URCOVANIE VZORU **********************/
+/******************** URCOVANIE VZORU **********************/
+/******************** URCOVANIE VZORU **********************/
+
+function UrciVzorToggle(){
+    if ($('#divSUrciVzor').hasClass('nodisplay')){
+       $("#divSUrciVzor").slideToggle("slow").removeClass('nodisplay');
+    }
+    else {
+       $("#divSUrciVzor").slideToggle("slow").addClass('nodisplay');
+    }
+}
+
+function DotiahniVzor(){
+
+    if ($('#txt1osjc').val()=="" || $('#txt3osmc').val()==""){
+                swal({ buttons: {},
+                       title  :  "Chyba",
+                       text   :  "Zadajte najskôr 1 osobu jednotného a 3 osoobu množného čísla",
+                       icon   :  "error"});
+        return;
+    }
+
+    AjaxMethods.getDataFromGetRequest('{{url_for("sd.dotiahni_vzor")}}',
+        "?infinitiv="+$('#txtFormZakTvar').val()+"&1osjc="+$('#txt1osjc').val()+"&3osmc="+$('#txt3osmc').val(), "", function(r){
+            if (r.status==responseOK){//OK vetva
+                swal({ buttons: [  "Zrušiť", "Ok"],
+                       title  :  "Správa",
+                       text   :  "Bol odhadnutý vzor:"+r.data.vzor+"\n"+"Koreň:"+r.data.koren+"\n"+"Prézentný kmeň:"+r.data.pzkmen,
+                       icon   :  "info"}).then((prijat) => {
+                           if (prijat) {
+                                $('#ddlVzor').val(r.data.vzor);
+                                $('#ddlVzor').select2();
+                           }
+                       });
+            }
+            else{
+                swal({ buttons: {},
+                       title  :  "Chyba",
+                       text   :  r.error_text,
+                       icon   :  "error"});
+            }
+        });
+
+}
+
 /******************** GENEROVANIE TVAROV A ANOTACIE **********************/
 /******************** GENEROVANIE TVAROV A ANOTACIE **********************/
 /******************** GENEROVANIE TVAROV A ANOTACIE **********************/
+
 
 function PridajVygenerovaneSlovo(tvar, rod, podrod, pad, cislo, osoba, cas, sposob, stupen, pricastie, anotacia){
     PridajNoveSlovo(true);
@@ -869,7 +937,8 @@ function ZaznamVyhovujeHrubemuFiltru(j){
            )
            sedi_rod = true;
         var sedi_stupen = false;
-        if (($('#stupen_'+j).val()=="1" && $('#cb_PRID_M_PrvyStupen').prop('checked')) ||
+        if (($('#stupen_'+j).val()=="" && $('#cb_PRID_M_PrvyStupen').prop('checked')) ||
+            ($('#stupen_'+j).val()=="1" && $('#cb_PRID_M_PrvyStupen').prop('checked')) ||
             ($('#stupen_'+j).val()=="2" && $('#cb_PRID_M_DruhyStupen').prop('checked')) ||
             ($('#stupen_'+j).val()=="3" && $('#cb_PRID_M_TretiStupen').prop('checked'))
            )
