@@ -80,8 +80,6 @@ def vrat_kpv_o_slovese(infinitiv, jednotne_1os, mnozne_3os):
         elif koncovka_pred_indik == "i":
             if je_spoluhlaska(pole_znakov_jednotne_1os[-3]) and je_spoluhlaska(pole_znakov_jednotne_1os[-2]):
                 vzor = potencionalny_vzor.filter(SDVzor.vzor == "krášliť").first()
-            elif pole_znakov_jednotne_1os[-3] == "j":
-                vzor = potencionalny_vzor.filter(SDVzor.vzor == "bájiť").first()
             else:
                 vzor = potencionalny_vzor.filter(SDVzor.vzor == "kúpiť").first()
         elif koncovka_pred_indik == "í":
@@ -143,10 +141,6 @@ def vrat_kpv_o_slovese(infinitiv, jednotne_1os, mnozne_3os):
             elif slovo_bez_t.endswith("u"):
                 if potencionalny_vzor.filter(SDVzor.vzor == "vládnuť").count() > 0:
                     vzor = potencionalny_vzor.filter(SDVzor.vzor == "vládnuť").first()
-                else:
-                    vzor = potencionalny_vzor.filter(SDVzor.vzor == "vzlietnuť").first()
-            elif slovo_bez_t.endswith("ia"):
-                vzor = potencionalny_vzor.filter(SDVzor.vzor == "predsavziať").first()
             elif slovo_bez_t.endswith("a"):
                 if potencionalny_vzor.filter(SDVzor.vzor == "česať").count() > 0:
                     vzor = potencionalny_vzor.filter(SDVzor.vzor == "česať").first()
@@ -154,8 +148,6 @@ def vrat_kpv_o_slovese(infinitiv, jednotne_1os, mnozne_3os):
                     vzor = potencionalny_vzor.filter(SDVzor.vzor == "lámať").first()
             elif slovo_bez_t.endswith("ä"):
                 vzor = potencionalny_vzor.filter(SDVzor.vzor == "päť").first()
-            elif infinitiv.endswith("ísť") or infinitiv.endswith("jsť"):
-                vzor = potencionalny_vzor.filter(SDVzor.vzor == "ísť").first()
             elif infinitiv.endswith("chcieť"):
                 vzor = potencionalny_vzor.filter(SDVzor.vzor == "chcieť").first()
     elif potencionalny_vzor.count() == 1:

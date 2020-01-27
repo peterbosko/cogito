@@ -459,7 +459,7 @@ function DotiahniVzor(){
     if ($('#txt1osjc').val()=="" || $('#txt3osmc').val()==""){
                 swal({ buttons: {},
                        title  :  "Chyba",
-                       text   :  "Zadajte najskôr 1 osobu jednotného a 3 osoobu množného čísla",
+                       text   :  "Zadajte najskôr 1. osobu jednotného a 3. osobu množného čísla",
                        icon   :  "error"});
         return;
     }
@@ -474,6 +474,8 @@ function DotiahniVzor(){
                            if (prijat) {
                                 $('#ddlVzor').val(r.data.vzor);
                                 $('#ddlVzor').select2();
+                                $('#txtPzkmen').val(r.data.pzkmen);
+                                $('#ddlKorenSlova').val(r.data.koren);
                            }
                        });
             }
