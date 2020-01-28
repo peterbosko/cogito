@@ -355,7 +355,7 @@ def daj_druhy_stupen_prid_m(vzor_stup, koren):
         koren_pole_znakov = daj_pole_znakov(koren)
         parsam = daj_parhlaska(koren_pole_znakov[1])
         return f"{koren_pole_znakov[0]}{parsam}{zretaz_pole_znakov(koren_pole_znakov[2:])}š"
-    elif vzor_stup == "suplet":
+    elif vzor_stup == "samovzor":
         if koren[0:4] == "dobr":
             return "lepš"
         elif koren[0:4] == "pekn":

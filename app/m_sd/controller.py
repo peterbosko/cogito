@@ -116,7 +116,8 @@ def zoznam_cislovky():
 @sd_blueprint.route("/zoznam_prislovky/", methods=["GET"])
 def zoznam_prislovky():
     loguj(request)
-    return render_template("m_sd/zoznam_prislovky.jinja.html", pocty_sd=daj_pocty_sd_a_sl())
+    stup_vzory = daj_prislovka_stup_vzory()
+    return render_template("m_sd/zoznam_prislovky.jinja.html", pocty_sd=daj_pocty_sd_a_sl(), stup_vzory=stup_vzory)
 
 
 @sd_blueprint.route("/zoznam_slovesa/", methods=["GET"])
@@ -332,15 +333,21 @@ def daj_prislovky():
     loguj(request)
     tvar = request.args.get("hladaj_tvar", "")
 
+    vzor_stup = request.args.get("vzor_stup", "")
+
     filtered = db.session.query(Prislovka)
 
     if tvar:
         filtered = filtered.filter(Prislovka.zak_tvar.like(tvar))
 
+    if vzor_stup:
+        filtered = filtered.filter(Prislovka.vzor_stup == vzor_stup)
+
     table = DataTable(request.args, Zameno, filtered, [
             "id",
             "zak_tvar",
             "popis",
+            "vzor_stup",
     ])
 
     return json.dumps(table.json())
