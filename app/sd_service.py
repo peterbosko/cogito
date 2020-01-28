@@ -335,6 +335,99 @@ def daj_prid_m_stup_vzory():
     return vysledok
 
 
+def daj_prislovka_stup_vzory():
+    vysledok = []
+
+    nenastavene = None
+
+    for gr in db.session.query(SDVzor.vzor, func.count(PridavneMeno.vzor_stup)).filter(SDVzor.typ == "PRISLOVKA").\
+            filter(SDVzor.sklon_stup == "stup").\
+            outerjoin(Prislovka, SDVzor.vzor == Prislovka.vzor_stup).\
+            group_by(SDVzor.vzor).\
+            order_by(func.count(SDVzor.vzor).desc()).all():
+
+        stat = VzorSoStatistikou()
+
+        v = gr[0]
+
+        if v:
+            stat.vzor = v
+            stat.hodnota = v
+            stat.pocet = gr[1]
+            vobj = SDVzor.query.filter(SDVzor.typ == "PRISLOVKA").filter(SDVzor.sklon_stup == "stup").\
+                filter(SDVzor.vzor == v).first()
+
+            if vobj:
+                stat.popis = vobj.popis
+
+            if not stat.popis:
+                stat.popis = ""
+
+            vysledok.append(stat)
+        else:
+
+            stat.pocet = gr[1]
+            stat.vzor = "nenastavený"
+            stat.hodnota = "-1"
+            stat.popis = ""
+
+            if not nenastavene:
+                stat.pocet = db.session.query(Prislovka).filter(or_(Prislovka.vzor_stup.is_(None),
+                                                                    Prislovka.vzor_stup == "")).count()
+                nenastavene = stat
+                vysledok.append(stat)
+            else:
+                pass
+
+    return vysledok
+
+
+def daj_cislovka_vzory():
+    vysledok = []
+
+    nenastavene = None
+
+    vzory = db.session.query(SDVzor.vzor, func.count(Cislovka.vzor)).filter(SDVzor.typ == "CISLOVKA").\
+        outerjoin(Cislovka, SDVzor.vzor == Cislovka.vzor).\
+        group_by(SDVzor.vzor).\
+        order_by(func.count(SDVzor.vzor).desc())
+
+    for gr in vzory.all():
+        stat = VzorSoStatistikou()
+
+        v = gr[0]
+
+        if v:
+            stat.vzor = v
+            stat.hodnota = v
+            stat.pocet = gr[1]
+            vobj = SDVzor.query.filter(SDVzor.typ == "CISLOVKA").filter(SDVzor.vzor == v).first()
+
+            if vobj:
+                stat.popis = vobj.popis
+
+            if not stat.popis:
+                stat.popis = ""
+
+            vysledok.append(stat)
+        else:
+
+            stat.pocet = gr[1]
+            stat.vzor = "nenastavený"
+            stat.hodnota = "-1"
+            stat.popis = ""
+
+            if not nenastavene:
+                stat.pocet = db.session.query(Cislovka).filter(or_(Cislovka.vzor.is_(None),
+                                                                   Cislovka.vzor == "")).count()
+                nenastavene = stat
+                vysledok.append(stat)
+            else:
+                pass
+
+    return vysledok
+
+
 def daj_prefixy_sufixy(sld, pref_suf):
     vysledok = []
 

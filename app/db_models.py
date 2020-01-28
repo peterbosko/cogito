@@ -498,6 +498,7 @@ class SemantickyPad(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     kod = db.Column(db.String(20, collation='utf8mb4_bin'), nullable=False)
     nazov = db.Column(db.String(500, collation='utf8mb4_bin'), nullable=False)
+    popis = db.Column(db.String(500, collation='utf8mb4_bin'), nullable=True)
 
 
 class Semantika(db.Model):

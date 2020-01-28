@@ -33,8 +33,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="row VZOR marginbottomDetailSD nodisplay">
-                    <label class="col-sm-2 nodisplay PRID_M POD_M" for="prepend">
+                <div class="row SLOVESO PRID_M POD_M CISLOVKA marginbottomDetailSD nodisplay">
+                    <label class="col-sm-2 nodisplay PRID_M POD_M CISLOVKA" for="prepend">
                          Skloňovací vzor:
                     </label>
                     <label class="col-sm-2 nodisplay SLOVESO" for="prepend">
@@ -42,6 +42,7 @@
                     </label>
                     <div class="col-sm-8">
                         <select id="ddlVzor" class="form-control">
+                            <option value="" selected>Nenastavený</option>
                             {% for k in vzory %}
                             <option value="{{ k.hodnota }}">{{ k.vzor + " - počet slov :" }} {{k.pocet}} {{ k.popis }}</option>
                             {% endfor %}
@@ -69,7 +70,7 @@
                     </div>
                 </div>
 
-                <div class="row VZOR marginbottomDetailSD nodisplay">
+                <div class="row AFIX marginbottomDetailSD nodisplay">
                     <label class="col-sm-2" for="prepend">
                          Prefix:
                     </label>
@@ -120,12 +121,28 @@
                         </select>
                     </div>
                 </div>
-                <div class="row PRID_M marginbottomDetailSD nodisplay">
+                <div class="row CISLOVKA marginbottomDetailSD nodisplay">
+                    <label class="col-sm-2" for="prepend">
+                         Paradigma:
+                    </label>
+                    <div class="col-sm-10">
+                        <select id="ddlParadigma_CISLOVKA" class="form-control">
+                            <option value="S">S - substantívna - nula, milión, státisíce, raz</option>
+                            <option value="A">A - ajektívna - jediný, prvý, dvojitý, mnohonásobný, obojaký</option>
+                            <option value="N">N - číslovková - dva, dvaja, oba, obaja, obidva, tri, štyri</option>
+                            <option value="F">F - zmiešaná - jeden, jedna, jedno</option>
+                            <option value="U">U - Neúplná - sto, tisíc, päť, šesť, dvanásť, šesťdesiat, dvoje, tisícoro, byľu, veľa, plno, málo</option>
+                            <option value="D">D - príslovková - prvýkrát, sedemkrát, dvojmo, neraz, mnohorako</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row PRID_M PRISLOVKA marginbottomDetailSD nodisplay">
                     <label class="col-sm-2" for="prepend">
                          Stupňovací vzor:
                     </label>
                     <div class="col-sm-10">
                         <select id="ddlVzorStup" class="form-control">
+                            <option value="" selected>Nenastavený</option>
                             {% for k in stupnovacie_vzory %}
                             <option value="{{ k.hodnota }}">{{ k.vzor + " - počet slov :" }} {{k.pocet}}</option>
                             {% endfor %}
@@ -301,7 +318,7 @@
                                 <a href="#" id="genlInfinitiv" onclick="GenerujSlovesneTvary('f');" class="btn nodisplay SLOVESO"><i class="fa fa-plus"></i>&nbsp;Generovať infinitív</a>
                                 <a href="#" id="genlImper" onclick="GenerujSlovesneTvary('!');" class="btn nodisplay SLOVESO"><i class="fa fa-plus"></i>&nbsp;Generovať imperatívy</a>
                                 <a href="#" id="genlPrechod" onclick="GenerujSlovesneTvary('p');" class="btn nodisplay SLOVESO"><i class="fa fa-plus"></i>&nbsp;Generovať prechodník</a>
-                                <a href="#" id="genDefTvary" onclick="GenerujDefaultTvary();" class="btn nodisplay POD_M PRID_M"><i class="fa fa-plus"></i>&nbsp;Generovať všetky default tvary</a>
+                                <a href="#" id="genDefTvary" onclick="GenerujDefaultTvary();" class="btn nodisplay POD_M PRID_M CISLOVKA PRISLOVKA"><i class="fa fa-plus"></i>&nbsp;Generovať všetky default tvary</a>
                                 <a href="#" id="genAnotaciu" onclick="GenerujAnotaciu();" class="btn"><i class="fa fa-plus"></i>&nbsp;Generovať anotáciu</a>
                                 <a href="#" id="zmazAnotaciu" onclick="ZmazAnotaciu();" class="btn"><i class="fa fa-trash"></i>&nbsp;Zmazať anotáciu záznamom vyhovujúcu filtru</a>
                                 <a href="#" id="zmazTvary" onclick="ZmazVsetkyTvaryVyhovujuceFiltru();" class="btn"><i class="fa fa-trash"></i>&nbsp;Zmazať všetky tvary vyhovujúce filtru</a>
@@ -582,11 +599,12 @@ function GenerujDefaultTvary(){
     filter.pzkmen = '';
     filter.vid = '';
 
-
     if ('{{request.args.get("slovnyDruh")}}'=='POD_M')
         filter.paradigma = $('#ddlParadigma_POD_M').val();
     else if ('{{request.args.get("slovnyDruh")}}'=='PRID_M')
         filter.paradigma = $('#ddlParadigma_PRID_M').val();
+    else if ('{{request.args.get("slovnyDruh")}}'=='CISLOVKA')
+        filter.paradigma = $('#ddlParadigma_CISLOVKA').val();
 
     filter.sd_id = getSD_ID();
 
@@ -1356,6 +1374,16 @@ $(document).ready(function() {
         $('#tvar_0').removeClass('slovo_tvar').addClass('pm_slovo_tvar');
         $('#tvar_f').removeClass('slovo_tvar').addClass('pm_slovo_tvar');
     }
+    else if (pridavanyDruh == "PRISLOVKA"){
+        $('.PRISLOVKA').removeClass('nodisplay');
+        $('#tvar_0').removeClass('slovo_tvar').addClass('pm_slovo_tvar');
+        $('#tvar_f').removeClass('slovo_tvar').addClass('pm_slovo_tvar');
+    }
+    else if (pridavanyDruh == "CISLOVKA"){
+        $('.CISLOVKA').removeClass('nodisplay');
+        $('#tvar_0').removeClass('slovo_tvar').addClass('pm_slovo_tvar');
+        $('#tvar_f').removeClass('slovo_tvar').addClass('pm_slovo_tvar');
+    }
 
     $('#SDSlovaForm').formValidation();
 
@@ -1377,7 +1405,7 @@ $(document).ready(function() {
         pridavanyDruh == "PRID_M" ||
         pridavanyDruh == "PRISLOVKA" ||
         pridavanyDruh == "CISLOVKA"){
-        $(".VZOR").removeClass('nodisplay');
+        $(".AFIX").removeClass('nodisplay');
     }
 
     $('#ddlVzor').select2();
@@ -1386,6 +1414,7 @@ $(document).ready(function() {
     $('#ddlSufix').select2();
     $('#ddlParadigma_POD_M').select2();
     $('#ddlParadigma_PRID_M').select2();
+    $('#ddlParadigma_CISLOVKA').select2();
 
     $('.changed_f').change(function (){
         $('#hdn_changed_f').val('true');

@@ -79,26 +79,31 @@
                     <label class="col-sm-2" for="prepend">
                          Zvratnost(sa/si):
                     </label>
-                    <div class="col-sm-2">
+                    <div class="col-sm-4">
                         <select id="ddlSLOVESO_Zvratnost" name="ddlSLOVESO_Zvratnost" class="form-control zmenaZakInfo">
                             <option value="">Nezvratné</option>
                             <option value="sa">sa</option>
                             <option value="si">si</option>
                         </select>
                     </div>
-                    <label class="col-sm-1" for="prepend">
-                         Je negácia:
+                    <label class="col-sm-2" for="prepend">
+                         Pozit. sloveso:
                     </label>
-                    <div class="col-sm-1">
-                        <input type="checkbox" id="cbSLOVESO_je_negacia" name="cbSLOVESO_je_negacia" class="zmenaZakInfo"/>
-                    </div>
-                    <label class="col-sm-3" for="prepend">
-                         Pozitívne sloveso:
-                    </label>
-                    <div class="col-sm-3">
+                    <div class="col-sm-4">
                         <select id="ddlSLOVESO_Sloveso" name="ddlSLOVESO_Sloveso" class="zmenaZakInfo">
                             <option></option>
                         </select>
+                    </div>
+                </div>
+                <div class="row SLOVESO marginbottomDetailSD nodisplay">
+                    <label class="col-sm-2" for="prepend">
+                         Je negácia:
+                    </label>
+                    <div class="col-sm-4">
+                        <input type="checkbox" id="cbSLOVESO_je_negacia" name="cbSLOVESO_je_negacia" class="zmenaZakInfo"/>
+                    </div>
+                    <div class="col-sm-6">
+                        &nbsp;
                     </div>
                 </div>
                 <div class="row ZAMENO marginbottomDetailSD nodisplay">
@@ -139,8 +144,9 @@
                     <label class="col-sm-2" for="prepend">
                          Rod:
                     </label>
-                    <div class="col-sm-2">
+                    <div class="col-sm-3">
                         <select id="ddlCISLOVKA_ROD" class="form-control zmenaZakInfo rodPole">
+                            <option value="">Žiaden</option>
                             <option value="M">M</option>
                             <option value="Z">Z</option>
                             <option value="S">S</option>
@@ -149,7 +155,7 @@
                     <label class="col-sm-1" for="prepend">
                          Podrod:
                     </label>
-                    <div class="col-sm-1">
+                    <div class="col-sm-3">
                         <select id="ddlCISLOVKA_PODROD" class="form-control zmenaZakInfo">
                             <option value="">Žiaden</option>
                             <option value="Z">Z</option>
@@ -159,7 +165,7 @@
                     <label class="col-sm-1" for="prepend">
                          Číslo:
                     </label>
-                    <div class="col-sm-1">
+                    <div class="col-sm-2">
                         <select id="ddlFormCISLOVKA_Cislo" name="ddlFormCISLOVKA_Cislo" class="form-control zmenaZakInfo">
                             <option value="">Žiadne</option>
                             <option value="J">J</option>
@@ -167,14 +173,19 @@
                             <option value="P">P</option>
                         </select>
                     </div>
-                    <label class="col-sm-1" for="prepend">
+                </div>
+                <div class="row CISLOVKA marginbottomDetailSD nodisplay">
+                    <label class="col-sm-2" for="prepend">
                          Hodnota:
                     </label>
-                    <div class="col-sm-3">
+                    <div class="col-sm-4">
                         <input type="text" id="txtFormCISLOVKA_HODNOTA" name="txtFormCISLOVKA_HODNOTA"
                                class="form-control zmenaZakInfo" data-fv-row=".col-sm-3"
                          data-fv-notempty="true" data-fv-notempty-message="Hodnora je povinná"
                          value="">
+                    </div>
+                    <div class="col-sm-6">
+                        &nbsp;
                     </div>
                 </div>
                 <div class="row PRID_M marginbottomDetailSD nodisplay">
@@ -209,10 +220,10 @@
                     </div>
                 </div>
                 <div class="row SEM_PRIZ_POD_M_PRID_M marginbottomDetailSD nodisplay">
-                    <label class="col-sm-4" for="prepend">
-                         Sémantický príznak:
+                    <label class="col-sm-2" for="prepend">
+                         Sém. príznak:
                     </label>
-                    <div class="col-sm-8">
+                    <div class="col-sm-10">
                         <select id="ddlSEM_PRIZ" class="form-control zmenaZakInfo">
                             <option value="" selected>Nenastavený</option>
                         {% for sempm in sem_priz_pod_m %}
@@ -235,10 +246,10 @@
                     </div>
                 </div>
                 <div class="row CISLOVKA marginbottomDetailSD nodisplay">
-                    <label class="col-sm-4" for="prepend">
-                         Sémantický príznak číslovky:
+                    <label class="col-sm-2" for="prepend">
+                         Sém. príznak:
                     </label>
-                    <div class="col-sm-8">
+                    <div class="col-sm-10">
                         <select id="ddlSEM_PRIZ_CISLOVKA" class="form-control zmenaZakInfo">
                             <option value="" selected>Nenastavený</option>
                         {% for sempcis in sem_priz_cislovka %}

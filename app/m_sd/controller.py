@@ -109,7 +109,8 @@ def zoznam_zamena():
 @sd_blueprint.route("/zoznam_cislovky/", methods=["GET"])
 def zoznam_cislovky():
     loguj(request)
-    return render_template("m_sd/zoznam_cislovky.jinja.html", pocty_sd=daj_pocty_sd_a_sl())
+    sklon_vzory = daj_cislovka_vzory()
+    return render_template("m_sd/zoznam_cislovky.jinja.html", pocty_sd=daj_pocty_sd_a_sl(), sklon_vzory=sklon_vzory)
 
 
 @sd_blueprint.route("/zoznam_prislovky/", methods=["GET"])
@@ -297,16 +298,21 @@ def daj_cislovky():
 
     cislo = request.args.get("hladaj_cislo", "")
 
+    vzor = request.args.get("vzor", "")
+
     filtered = db.session.query(Cislovka)
 
     if tvar:
-        filtered = filtered.filter(Cislovka.zak_tvar == tvar)
+        filtered = filtered.filter(Cislovka.zak_tvar.like(tvar))
 
     if rod:
         filtered = filtered.filter(Cislovka.rod == rod)
 
     if cislo:
         filtered = filtered.filter(Cislovka.cislo == cislo)
+
+    if vzor:
+        filtered = filtered.filter(Cislovka.vzor == vzor)
 
     table = DataTable(request.args, Zameno, filtered, [
             "id",
@@ -672,13 +678,18 @@ def zmenit_sd_post():
             cis.user_id = int(session["logged"])
             cis.zmenene = datetime.datetime.now()
 
-            cis.zak_tvar = export.zak_tvar
-            cis.popis = export.popis
-
-            cis.rod = export.rod
-            cis.podrod = export.podrod
-            cis.cislo = export.cislo
-            cis.hodnota = export.hodnota
+            if export.tab == "zakladne":
+                cis.zak_tvar = export.zak_tvar
+                cis.popis = export.popis
+                cis.rod = export.rod
+                cis.podrod = export.podrod
+                cis.cislo = export.cislo
+                cis.hodnota = export.hodnota
+            elif export.tab == "slova":
+                cis.prefix = export.prefix
+                cis.sufix = export.sufix
+                cis.koren = export.koren
+                cis.vzor = export.vzor
 
             db.session.add(cis)
             db.session.commit()
@@ -868,6 +879,10 @@ def sd_slova_zmen():
     elif slovny_druh.typ == "POD_M":
         pm = PodstatneMeno.query.get(request.args.get("sd_id", ""))
         vzory = daj_pm_vzory(pm.rod)
+    elif slovny_druh.typ == "CISLOVKA":
+        vzory = daj_cislovka_vzory()
+    elif slovny_druh.typ == "PRISLOVKA":
+        stupnovacie_vzory = daj_prislovka_stup_vzory()
 
     prefixy = daj_prefixy_sufixy(slovny_druh.typ, "P")
     sufixy = daj_prefixy_sufixy(slovny_druh.typ, "S")
@@ -1059,6 +1074,29 @@ def zmaz_cely_slovny_druh():
     return jsonpickle.encode(response)
 
 
+@sd_blueprint.route("/dotiahni_vzor/", methods=["GET"])
+def dotiahni_vzor():
+    loguj(request)
+
+    response = CommonResponse()
+
+    i = request.args.get("infinitiv", "")
+    _1osjc = request.args.get("1osjc", "")
+    _3osmc = request.args.get("3osmc", "")
+
+    vzor = DotiahniVzor()
+
+    vzor.koren, vzor.pzkmen, vzor.vzor, chyba = vrat_kpv_o_slovese(i, _1osjc, _3osmc)
+
+    if chyba:
+        response.status = ResponseStatus.ERROR
+        response.error_text = chyba
+    else:
+        response.data = vzor
+
+    return jsonpickle.encode(response)
+
+
 @sd_blueprint.route("/generuj_morfo/", methods=["POST"])
 def generuj_morfo():
     loguj(request)
@@ -1107,30 +1145,26 @@ def generuj_morfo():
         else:
             vysledok = vrat_tvary_pre_sloveso(morfo, sloveso)
 
+    elif sd.typ == "CISLOVKA":
+
+        cislovka = Cislovka.query.get(morfo.sd_id)
+
+        if not morfo.vzor:
+            response.error_text = f"Nie je nastavený skloňovací vzor !"
+            response.status = ResponseStatus.ERROR
+        else:
+            vysledok = generuj_morfo_cislovka(morfo, cislovka)
+
+    elif sd.typ == "PRISLOVKA":
+
+        if not morfo.vzor_stup:
+            response.error_text = f"Nie je nastavený stupňovací vzor !"
+            response.status = ResponseStatus.ERROR
+        else:
+            vysledok = generuj_morfo_prislovka(morfo)
+
     response.data = vysledok
 
     return jsonpickle.encode(response)
 
-
-@sd_blueprint.route("/dotiahni_vzor/", methods=["GET"])
-def dotiahni_vzor():
-    loguj(request)
-
-    response = CommonResponse()
-
-    i = request.args.get("infinitiv", "")
-    _1osjc = request.args.get("1osjc", "")
-    _3osmc = request.args.get("3osmc", "")
-
-    vzor = DotiahniVzor()
-
-    vzor.koren, vzor.pzkmen, vzor.vzor, chyba = vrat_kpv_o_slovese(i, _1osjc, _3osmc)
-
-    if chyba:
-        response.status = ResponseStatus.ERROR
-        response.error_text = chyba
-    else:
-        response.data = vzor
-
-    return jsonpickle.encode(response)
 
