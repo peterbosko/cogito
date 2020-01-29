@@ -18,6 +18,11 @@ if __name__ == "__main__":
             generuj_a_porovnaj_slovesa(start)
         elif command == "zisti_vzory_slovies":
             zisti_vzory_slovies(start)
+        elif command == "zjednot_zamena":
+            zjednot_zamena()
+        elif command == "zjednot_cislovky":
+            zjednot_cislovky()
 
     else:
-        print("usage:\n\n\trun_setup.py updatuj_slovesa | checkni_vyplnene_slovesa")
+        print("usage:\n\n\trun_setup.py updatuj_slovesa | checkni_vyplnene_slovesa | generuj_a_porovnaj_slovesa "
+              "| zisti_vzory_slovies | zjednot_zamena")

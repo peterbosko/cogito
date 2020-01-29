@@ -1,4 +1,4 @@
-from app.morfo_service import *
+from app.morfo.morfo_service import *
 
 
 def vrat_slovo_slovesa(sd_id, osoba, cislo, cas=None, koncovka=None, rod=None, podrod=None, sposob=None):

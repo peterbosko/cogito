@@ -1,3 +1,4 @@
+from sqlalchemy import exc
 from app.db_models import *
 from sqlalchemy import and_
 from sqlalchemy.sql.expression import func
@@ -467,4 +468,55 @@ def prepocitaj_sd_stat():
     s2.pocet = Slovo.query.count()
     db.session.add(s2)
     db.session.commit()
+
+
+def zmaz_cely_slovny_druh(sd_id):
+
+    chyba = ""
+
+    Slovo.query.filter(Slovo.sd_id == sd_id).delete()
+
+    sd = SlovnyDruh.query.get(sd_id)
+
+    if sd.typ == "POD_M":
+        pm = PodstatneMeno.query.get(sd_id)
+        db.session.delete(pm)
+    elif sd.typ == "PRID_M":
+        prm = PridavneMeno.query.get(sd_id)
+        db.session.delete(prm)
+    elif sd.typ == "ZAMENO":
+        zam = Zameno.query.get(sd_id)
+        db.session.delete(zam)
+    elif sd.typ == "CISLOVKA":
+        cislovka = Cislovka.query.get(sd_id)
+        db.session.delete(cislovka)
+    elif sd.typ == "SPOJKA":
+        sp = Spojka.query.get(sd_id)
+        db.session.delete(sp)
+    elif sd.typ == "PREDLOZKA":
+        predlo = Predlozka.query.get(sd_id)
+        db.session.delete(predlo)
+    elif sd.typ == "OSTATNE":
+        os = Ostatne.query.get(sd_id)
+        db.session.delete(os)
+    elif sd.typ == "CITOSLOVCE":
+        cit = Citoslovce.query.get(sd_id)
+        db.session.delete(cit)
+    elif sd.typ == "CASTICA":
+        c = Castica.query.get(sd_id)
+        db.session.delete(c)
+    elif sd.typ == "PRISLOVKA":
+        prisl = Prislovka.query.get(sd_id)
+        db.session.delete(prisl)
+    elif sd.typ == "SLOVESO":
+        sloveso = Sloveso.query.get(sd_id)
+        db.session.delete(sloveso)
+
+    try:
+        db.session.commit()
+    except exc.IntegrityError as e:
+        chyba = "Chyba integrity. Na slovo existuje cudzí kľúč ! V prípade slovesa " \
+                "skontroluje prídavné, podstatné mená a slovesá !"
+
+    return chyba
 

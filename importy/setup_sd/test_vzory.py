@@ -1,5 +1,4 @@
 from importy.setup_sd.service import *
-from app.morfo_service import *
 
 
 def test_zakladne_vzory():

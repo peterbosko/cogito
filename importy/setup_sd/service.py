@@ -1,8 +1,5 @@
-from app.db_models import *
 from app.app import flask_app
-from sqlalchemy import or_
-from app.morfo_service import *
-from app.morfo_sloveso_service import *
+from app.morfo.morfo_sloveso_service import *
 from app.sd_service import *
 
 db.init_app(flask_app)
@@ -303,3 +300,71 @@ def zisti_vzory_slovies(start):
                 print(f"Založil som nový vzor:{vt.vzor} deklin:{deklin}")
 
             db.session.commit()
+
+
+def zjednot_zamena():
+    with flask_app.app_context():
+        for z in db.session.query(Zameno.zak_tvar, func.count(Zameno.zak_tvar)). \
+                group_by(Zameno.zak_tvar).having(func.count(Zameno.zak_tvar) > 1).all():
+
+            prve_zameno = Zameno.query.filter(Zameno.zak_tvar == z[0]).order_by(Zameno.id).first()
+
+            for rovnake_zameno in Zameno.query.filter(Zameno.zak_tvar == z[0]).filter(Zameno.id != prve_zameno.id):
+                for slovo in Slovo.query.filter(Slovo.sd_id == rovnake_zameno.id):
+                    print(f"kopirujem slovo:{slovo.tvar}")
+                    nove_slovo = Slovo()
+                    nove_slovo.tvar = slovo.tvar
+                    nove_slovo.rod = slovo.rod
+                    nove_slovo.podrod = slovo.podrod
+                    nove_slovo.stuper = slovo.stupen
+                    nove_slovo.pad = slovo.pad
+                    nove_slovo.sposob = slovo.sposob
+                    nove_slovo.osoba = slovo.osoba
+                    nove_slovo.cas = slovo.cas
+                    nove_slovo.pricastie = slovo.pricastie
+                    nove_slovo.cislo = slovo.cislo
+                    nove_slovo.zvratnost = slovo.zvratnost
+                    nove_slovo.anotacia = slovo.anotacia
+                    nove_slovo.sd_id = prve_zameno.id
+
+                    db.session.add(nove_slovo)
+
+                chyba = zmaz_cely_slovny_druh(rovnake_zameno.id)
+
+                print(f"Pokusil som sa zmazat slovny druh id:{rovnake_zameno.id} chyba bola:{chyba}")
+
+                db.session.commit()
+
+
+def zjednot_cislovky():
+    with flask_app.app_context():
+        for z in db.session.query(Cislovka.zak_tvar, func.count(Cislovka.zak_tvar)). \
+                group_by(Cislovka.zak_tvar).having(func.count(Cislovka.zak_tvar) > 1).all():
+
+            prva_cislovka = Cislovka.query.filter(Cislovka.zak_tvar == z[0]).order_by(Cislovka.id).first()
+
+            for rovnake_cis in Cislovka.query.filter(Cislovka.zak_tvar == z[0]).filter(Cislovka.id != prva_cislovka.id):
+                for slovo in Slovo.query.filter(Slovo.sd_id == rovnake_cis.id):
+                    print(f"kopirujem slovo:{slovo.tvar}")
+                    nove_slovo = Slovo()
+                    nove_slovo.tvar = slovo.tvar
+                    nove_slovo.rod = slovo.rod
+                    nove_slovo.podrod = slovo.podrod
+                    nove_slovo.stuper = slovo.stupen
+                    nove_slovo.pad = slovo.pad
+                    nove_slovo.sposob = slovo.sposob
+                    nove_slovo.osoba = slovo.osoba
+                    nove_slovo.cas = slovo.cas
+                    nove_slovo.pricastie = slovo.pricastie
+                    nove_slovo.cislo = slovo.cislo
+                    nove_slovo.zvratnost = slovo.zvratnost
+                    nove_slovo.anotacia = slovo.anotacia
+                    nove_slovo.sd_id = prva_cislovka.id
+
+                    db.session.add(nove_slovo)
+
+                chyba = zmaz_cely_slovny_druh(rovnake_cis.id)
+
+                print(f"Pokusil som sa zmazat slovny druh id:{rovnake_cis.id} chyba bola:{chyba}")
+
+                db.session.commit()

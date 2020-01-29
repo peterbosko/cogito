@@ -1,4 +1,4 @@
-from app.morfo_service import *
+from app.morfo.morfo_service import *
 # ----------------------------- METODY PRE PRIDAVNE MENA --------------------------------
 # ----------------------------- METODY PRE PRIDAVNE MENA --------------------------------
 # ----------------------------- METODY PRE PRIDAVNE MENA --------------------------------

@@ -6,10 +6,8 @@ from sqlalchemy import alias
 from app.c_service import *
 from app.main_helper import *
 import jsonpickle
-from app.morfo_service import *
-from app.morfo_prid_m_service import *
-from app.morfo_sloveso_service import *
-from sqlalchemy import exc
+from app.morfo.morfo_prid_m_service import *
+from app.morfo.morfo_sloveso_service import *
 from app.sd_service import *
 
 sd_blueprint = Blueprint("sd", __name__)
@@ -1033,52 +1031,13 @@ def zmaz_cely_slovny_druh():
     response.status = ResponseStatus.OK
 
     if som_admin_slov():
+        chyba = zmaz_cely_slovny_druh(sd_id)
 
-        Slovo.query.filter(Slovo.sd_id == sd_id).delete()
-
-        sd = SlovnyDruh.query.get(sd_id)
-
-        if sd.typ == "POD_M":
-            pm = PodstatneMeno.query.get(sd_id)
-            db.session.delete(pm)
-        elif sd.typ == "PRID_M":
-            prm = PridavneMeno.query.get(sd_id)
-            db.session.delete(prm)
-        elif sd.typ == "ZAMENO":
-            zam = Zameno.query.get(sd_id)
-            db.session.delete(zam)
-        elif sd.typ == "CISLOVKA":
-            cislovka = Cislovka.query.get(sd_id)
-            db.session.delete(cislovka)
-        elif sd.typ == "SPOJKA":
-            sp = Spojka.query.get(sd_id)
-            db.session.delete(sp)
-        elif sd.typ == "PREDLOZKA":
-            predlo = Predlozka.query.get(sd_id)
-            db.session.delete(predlo)
-        elif sd.typ == "OSTATNE":
-            os = Ostatne.query.get(sd_id)
-            db.session.delete(os)
-        elif sd.typ == "CITOSLOVCE":
-            cit = Citoslovce.query.get(sd_id)
-            db.session.delete(cit)
-        elif sd.typ == "CASTICA":
-            c = Castica.query.get(sd_id)
-            db.session.delete(c)
-        elif sd.typ == "PRISLOVKA":
-            prisl = Prislovka.query.get(sd_id)
-            db.session.delete(prisl)
-        elif sd.typ == "SLOVESO":
-            sloveso = Sloveso.query.get(sd_id)
-            db.session.delete(sloveso)
-
-        try:
-            db.session.commit()
-        except exc.IntegrityError as e:
+        if chyba:
             response.status = ResponseStatus.ERROR
-            response.error_text = "Chyba integrity. Na slovo existuje cudzí kľúč ! V prípade slovesa " \
-                                  "skontroluje prídavné, podstatné mená a slovesá !"
-        prepocitaj_sd_stat()
+            response.error_text = chyba
+        else:
+            prepocitaj_sd_stat()
     else:
         response.status = ResponseStatus.ERROR
         response.error_text = "Nedostatočné práva pre operáciu"
