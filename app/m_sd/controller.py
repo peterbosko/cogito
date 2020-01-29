@@ -1102,7 +1102,7 @@ def generuj_morfo():
             response.error_text = f"Nie je nastavený skloňovací alebo stupňovací vzor !"
             response.status = ResponseStatus.ERROR
         else:
-            if pridm.sloveso_id > 0:
+            if pridm.sloveso_id and pridm.sloveso_id > 0:
                 sloveso = Sloveso.query.get(pridm.sloveso_id)
 
                 morfo.koren_slovesa = sloveso.koren
@@ -1143,6 +1143,10 @@ def generuj_morfo():
             response.status = ResponseStatus.ERROR
         else:
             vysledok = generuj_morfo_prislovka(morfo)
+
+    elif sd.typ == "ZAMENO":
+
+        vysledok = generuj_morfo_zamena(morfo, morfo.paradigma)
 
     response.data = vysledok
 

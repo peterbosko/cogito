@@ -364,7 +364,7 @@ def generuj_morfo_prid_m(filter_obj, sloveso_id):
     if not sloveso_id:
         vysledok.extend(generuj_pricastie(filter_obj, pricastie))
 
-    if sloveso_id > 0:
+    if sloveso_id and sloveso_id > 0:
         if filter_obj.co_generovat == "*" or filter_obj.co_generovat == "C":
             pricastie = "C"
             vysledok.extend(generuj_pricastie(filter_obj, pricastie))

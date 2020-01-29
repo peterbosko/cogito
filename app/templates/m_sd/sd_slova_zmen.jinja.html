@@ -107,6 +107,21 @@
                         </select>
                     </div>
                 </div>
+                <div class="row ZAMENO marginbottomDetailSD nodisplay">
+                    <label class="col-sm-2" for="prepend">
+                         Paradigma:
+                    </label>
+                    <div class="col-sm-10">
+                        <select id="ddlParadigma_ZAMENO" class="form-control">
+                            <option value="S">S - substantívna - koľkátka, všetučko</option>
+                            <option value="A">A - adjektívna - aký, ktorá, inakšie, samý</option>
+                            <option value="P">P - zámenná - ja, ty, my, vy, seba, sebe</option>
+                            <option value="F">F - zmiešaná - on, ona, ono, kto, ten, môj, všetok, čo, žiaden</option>
+                            <option value="U">U - neúplná - koľko, jeho, jej, ich</option>
+                            <option value="D">D - príslovková - ako, kam, kde, kade, vtedy, začo</option>
+                        </select>
+                    </div>
+                </div>
                 <div class="row PRID_M marginbottomDetailSD nodisplay">
                     <label class="col-sm-2" for="prepend">
                          Paradigma:
@@ -557,7 +572,6 @@ function NastavAnotaciu(tvar, rod, podrod, pad, cislo, osoba, cas, sposob, stupe
                 if (!pricastie)
                     pricastie = "";
 
-
                 if ($('#rod_'+j).val() == rod && $('#pad_'+j).val() == pad &&
                 $('#cislo_'+j).val() == cislo && $('#osoba_'+j).val() == osoba && $('#cas_'+j).val() == cas &&
                 $('#sposob_'+j).val() == sposob && (  $('#stupen_'+j).val() == stupen || (stupen == "1" && $('#stupen_'+j).val() == "") ) &&
@@ -731,6 +745,11 @@ function GenerujAnotaciu(){
         filter.paradigma = $('#ddlParadigma_POD_M').val()||'';
     else if ('{{request.args.get("slovnyDruh")}}'=='PRID_M')
         filter.paradigma = $('#ddlParadigma_PRID_M').val()||'';
+    else if ('{{request.args.get("slovnyDruh")}}'=='CISLOVKA')
+        filter.paradigma = $('#ddlParadigma_CISLOVKA').val()||'';
+    else if ('{{request.args.get("slovnyDruh")}}'=='ZAMENO')
+        filter.paradigma = $('#ddlParadigma_ZAMENO').val()||'';
+
     filter.sd_id = getSD_ID();
     filter.vid = $('#ddlVid').val()||'';
     filter.co_generovat = "*";
@@ -1473,6 +1492,7 @@ $(document).ready(function() {
     $('#ddlParadigma_POD_M').select2();
     $('#ddlParadigma_PRID_M').select2();
     $('#ddlParadigma_CISLOVKA').select2();
+    $('#ddlParadigma_ZAMENO').select2();
 
     $('.changed_f').change(function (){
         $('#hdn_changed_f').val('true');

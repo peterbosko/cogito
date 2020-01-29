@@ -587,3 +587,139 @@ def generuj_morfo_prislovka(filter_obj):
     return vysledok
 
 
+# ----------------------------- METODY PRE ZAMENA  --------------------------------
+# ----------------------------- METODY PRE ZAMENA --------------------------------
+# ----------------------------- METODY PRE ZAMENA --------------------------------
+
+
+def daj_anotaciu_zamena(paradigma, rod, podrod, cislo, pad):
+    anot_rod = daj_anotaciu_rodu(rod, podrod)
+
+    anot_cislo = daj_anotaciu_cisla(cislo)
+
+    anot_pad = daj_anotaciu_padu(pad)
+
+    anotacia = f"P{paradigma}{anot_rod}{anot_cislo}{anot_pad}"
+
+    return anotacia
+
+
+def daj_tvar_zamena(koren, paradigma, rod, podrod, cislo, pad):
+    return koren, rod, podrod, pad, cislo, daj_anotaciu_zamena(paradigma, rod, podrod, cislo, pad)
+
+
+def generuj_morfo_zamena_rod_podrod(filter_obj, paradigma, rod, podrod):
+
+    vysledok = []
+
+    if filter_obj.cislo == "" or filter_obj.cislo == "J":
+        if filter_obj.pad == "" or filter_obj.pad == "Nom":
+            morfo_res_obj = SlovoFilterExport()
+            morfo_res_obj.tvar, morfo_res_obj.rod, morfo_res_obj.podrod,\
+                morfo_res_obj.pad,\
+                morfo_res_obj.cislo, morfo_res_obj.anotacia = \
+                daj_tvar_zamena(filter_obj.koren, paradigma, rod, podrod, "J", "Nom")
+            vysledok.append(morfo_res_obj)
+
+        if filter_obj.pad == "" or filter_obj.pad == "Gen":
+            morfo_res_obj = SlovoFilterExport()
+            morfo_res_obj.tvar, morfo_res_obj.rod, morfo_res_obj.podrod,\
+                morfo_res_obj.pad,\
+                morfo_res_obj.cislo, morfo_res_obj.anotacia = \
+                daj_tvar_zamena(filter_obj.koren, paradigma, rod, podrod, "J", "Gen")
+            vysledok.append(morfo_res_obj)
+
+        if filter_obj.pad == "" or filter_obj.pad == "Dat":
+            morfo_res_obj = SlovoFilterExport()
+            morfo_res_obj.tvar, morfo_res_obj.rod, morfo_res_obj.podrod,\
+                morfo_res_obj.pad,\
+                morfo_res_obj.cislo, morfo_res_obj.anotacia = \
+                daj_tvar_zamena(filter_obj.koren, paradigma, rod, podrod, "J", "Dat")
+            vysledok.append(morfo_res_obj)
+
+        if filter_obj.pad == "" or filter_obj.pad == "Aku":
+            morfo_res_obj = SlovoFilterExport()
+            morfo_res_obj.tvar, morfo_res_obj.rod, morfo_res_obj.podrod,\
+                morfo_res_obj.pad,\
+                morfo_res_obj.cislo, morfo_res_obj.anotacia = \
+                daj_tvar_zamena(filter_obj.koren, paradigma, rod, podrod, "J", "Aku")
+            vysledok.append(morfo_res_obj)
+
+        if filter_obj.pad == "" or filter_obj.pad == "Lok":
+            morfo_res_obj = SlovoFilterExport()
+            morfo_res_obj.tvar, morfo_res_obj.rod, morfo_res_obj.podrod,\
+                morfo_res_obj.pad,\
+                morfo_res_obj.cislo, morfo_res_obj.anotacia = \
+                daj_tvar_zamena(filter_obj.koren, paradigma, rod, podrod, "J", "Lok")
+            vysledok.append(morfo_res_obj)
+
+        if filter_obj.pad == "" or filter_obj.pad == "Ins":
+            morfo_res_obj = SlovoFilterExport()
+            morfo_res_obj.tvar, morfo_res_obj.rod, morfo_res_obj.podrod,\
+                morfo_res_obj.pad,\
+                morfo_res_obj.cislo, morfo_res_obj.anotacia = \
+                daj_tvar_zamena(filter_obj.koren, paradigma, rod, podrod, "J", "Ins")
+            vysledok.append(morfo_res_obj)
+
+    if filter_obj.cislo == "" or filter_obj.cislo in ("M", "P"):
+        if filter_obj.pad == "" or filter_obj.pad == "Nom":
+            morfo_res_obj = SlovoFilterExport()
+            morfo_res_obj.tvar, morfo_res_obj.rod, morfo_res_obj.podrod,\
+                morfo_res_obj.pad,\
+                morfo_res_obj.cislo, morfo_res_obj.anotacia = \
+                daj_tvar_zamena(filter_obj.koren, paradigma, rod, podrod, "M", "Nom")
+            vysledok.append(morfo_res_obj)
+
+        if filter_obj.pad == "" or filter_obj.pad == "Gen":
+            morfo_res_obj = SlovoFilterExport()
+            morfo_res_obj.tvar, morfo_res_obj.rod, morfo_res_obj.podrod,\
+                morfo_res_obj.pad,\
+                morfo_res_obj.cislo, morfo_res_obj.anotacia = \
+                daj_tvar_zamena(filter_obj.koren, paradigma, rod, podrod, "M", "Gen")
+            vysledok.append(morfo_res_obj)
+
+        if filter_obj.pad == "" or filter_obj.pad == "Dat":
+            morfo_res_obj = SlovoFilterExport()
+            morfo_res_obj.tvar, morfo_res_obj.rod, morfo_res_obj.podrod,\
+                morfo_res_obj.pad,\
+                morfo_res_obj.cislo, morfo_res_obj.anotacia = \
+                daj_tvar_zamena(filter_obj.koren, paradigma, rod, podrod, "M", "Dat")
+            vysledok.append(morfo_res_obj)
+
+        if filter_obj.pad == "" or filter_obj.pad == "Aku":
+            morfo_res_obj = SlovoFilterExport()
+            morfo_res_obj.tvar, morfo_res_obj.rod, morfo_res_obj.podrod,\
+                morfo_res_obj.pad,\
+                morfo_res_obj.cislo, morfo_res_obj.anotacia = \
+                daj_tvar_zamena(filter_obj.koren, paradigma, rod, podrod, "M", "Aku")
+            vysledok.append(morfo_res_obj)
+
+        if filter_obj.pad == "" or filter_obj.pad == "Lok":
+            morfo_res_obj = SlovoFilterExport()
+            morfo_res_obj.tvar, morfo_res_obj.rod, morfo_res_obj.podrod,\
+                morfo_res_obj.pad,\
+                morfo_res_obj.cislo, morfo_res_obj.anotacia = \
+                daj_tvar_zamena(filter_obj.koren, paradigma, rod, podrod, "M", "Lok")
+            vysledok.append(morfo_res_obj)
+
+        if filter_obj.pad == "" or filter_obj.pad == "Ins":
+            morfo_res_obj = SlovoFilterExport()
+            morfo_res_obj.tvar, morfo_res_obj.rod, morfo_res_obj.podrod,\
+                morfo_res_obj.pad,\
+                morfo_res_obj.cislo, morfo_res_obj.anotacia = \
+                daj_tvar_zamena(filter_obj.koren, paradigma, rod, podrod, "M", "Ins")
+            vysledok.append(morfo_res_obj)
+
+    return vysledok
+
+
+def generuj_morfo_zamena(filter_obj, paradigma):
+    vysledok = []
+
+    vysledok.extend(generuj_morfo_zamena_rod_podrod(filter_obj, paradigma, "M", "Z"))
+    vysledok.extend(generuj_morfo_zamena_rod_podrod(filter_obj, paradigma, "M", "N"))
+    vysledok.extend(generuj_morfo_zamena_rod_podrod(filter_obj, paradigma, "Z", ""))
+    vysledok.extend(generuj_morfo_zamena_rod_podrod(filter_obj, paradigma, "S", ""))
+
+    return vysledok
+
