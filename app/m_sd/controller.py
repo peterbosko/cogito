@@ -7,6 +7,7 @@ from app.c_service import *
 from app.main_helper import *
 import jsonpickle
 from app.morfo_service import *
+from app.morfo_prid_m_service import *
 from app.morfo_sloveso_service import *
 from sqlalchemy import exc
 from app.sd_service import *
@@ -417,11 +418,15 @@ def daj_slovesa():
 def daj_predlozky():
     loguj(request)
     tvar = request.args.get("hladaj_tvar", "")
+    pad = request.args.get("pad", "")
 
     filtered = db.session.query(Predlozka)
 
     if tvar:
         filtered = filtered.filter(Predlozka.zak_tvar == tvar)
+
+    if pad:
+        filtered = filtered.filter(Predlozka.pady.like('%'+pad+'%'))
 
     table = DataTable(request.args, Predlozka, filtered, [
             "id",
@@ -1138,7 +1143,17 @@ def generuj_morfo():
             response.error_text = f"Nie je nastavený skloňovací alebo stupňovací vzor !"
             response.status = ResponseStatus.ERROR
         else:
-            vysledok = generuj_morfo_prid_m(morfo)
+            if pridm.sloveso_id > 0:
+                sloveso = Sloveso.query.get(pridm.sloveso_id)
+
+                morfo.koren_slovesa = sloveso.koren
+
+                vzor_slovesa = SDVzor.query.filter(SDVzor.typ == "SLOVESO").filter(SDVzor.vzor == sloveso.vzor).first()
+
+                morfo.pricastie_sufix_m = vzor_slovesa.deklinacia.split(",")[2]
+                morfo.pricastie_sufix_t = vzor_slovesa.deklinacia.split(",")[3]
+
+            vysledok = generuj_morfo_prid_m(morfo, pridm.sloveso_id)
 
     elif sd.typ == "SLOVESO":
 

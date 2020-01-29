@@ -320,6 +320,9 @@
                                 <a href="#" id="genlPrechod" onclick="GenerujSlovesneTvary('p');" class="btn nodisplay SLOVESO"><i class="fa fa-plus"></i>&nbsp;Generovať prechodník</a>
                                 <a href="#" id="genDefTvary" onclick="GenerujDefaultTvary();" class="btn nodisplay POD_M PRID_M CISLOVKA PRISLOVKA"><i class="fa fa-plus"></i>&nbsp;Generovať všetky default tvary</a>
                                 <a href="#" id="genAnotaciu" onclick="GenerujAnotaciu();" class="btn"><i class="fa fa-plus"></i>&nbsp;Generovať anotáciu</a>
+                                <a href="#" id="genCPAR" onclick="GenerujTvaryPridM('C');" class="btn nodisplay PRID_M_SO_SLOVESOM"><i class="fa fa-plus"></i>&nbsp;Generovať činné príčastie</a>
+                                <a href="#" id="genTPAR" onclick="GenerujTvaryPridM('T');" class="btn nodisplay PRID_M_SO_SLOVESOM"><i class="fa fa-plus"></i>&nbsp;Generovať trpné príčastie</a>
+                                <a href="#" id="genMPAR" onclick="GenerujTvaryPridM('M');" class="btn nodisplay PRID_M_SO_SLOVESOM"><i class="fa fa-plus"></i>&nbsp;Generovať minulé príčastie</a>
                                 <a href="#" id="zmazAnotaciu" onclick="ZmazAnotaciu();" class="btn"><i class="fa fa-trash"></i>&nbsp;Zmazať anotáciu záznamom vyhovujúcu filtru</a>
                                 <a href="#" id="zmazTvary" onclick="ZmazVsetkyTvaryVyhovujuceFiltru();" class="btn"><i class="fa fa-trash"></i>&nbsp;Zmazať všetky tvary vyhovujúce filtru</a>
                             </div>
@@ -557,7 +560,7 @@ function NastavAnotaciu(tvar, rod, podrod, pad, cislo, osoba, cas, sposob, stupe
 
                 if ($('#rod_'+j).val() == rod && $('#pad_'+j).val() == pad &&
                 $('#cislo_'+j).val() == cislo && $('#osoba_'+j).val() == osoba && $('#cas_'+j).val() == cas &&
-                $('#sposob_'+j).val() == sposob && $('#stupen_'+j).val() == stupen &&
+                $('#sposob_'+j).val() == sposob && (  $('#stupen_'+j).val() == stupen || (stupen == "1" && $('#stupen_'+j).val() == "") ) &&
                 $('#pricastie_'+j).val() == pricastie){
                     if ('{{request.args.get("slovnyDruh")}}'=='SLOVESO'){
                         var zhoda = false;
@@ -576,6 +579,13 @@ function NastavAnotaciu(tvar, rod, podrod, pad, cislo, osoba, cas, sposob, stupe
                             $('#anotacia_'+j).val(anotacia);
                             $('#hdn_changed_'+j).val("true");
                         }
+                    }
+                    else if ('{{request.args.get("slovnyDruh")}}'=='PRID_M'){
+                        if (pricastie!="" && $('#stupen_'+j).val()=="" && stupen=="1"){
+                            $('#stupen_'+j).val("1");
+                        }
+                        $('#anotacia_'+j).val(anotacia);
+                        $('#hdn_changed_'+j).val("true");
                     }
                     else{
                         $('#anotacia_'+j).val(anotacia);
@@ -598,6 +608,47 @@ function GenerujDefaultTvary(){
     filter.vzor_stup = $('#ddlVzorStup').val() || '';
     filter.pzkmen = '';
     filter.vid = '';
+    filter.co_generovat = '*';
+
+    if ('{{request.args.get("slovnyDruh")}}'=='POD_M')
+        filter.paradigma = $('#ddlParadigma_POD_M').val();
+    else if ('{{request.args.get("slovnyDruh")}}'=='PRID_M')
+        filter.paradigma = $('#ddlParadigma_PRID_M').val();
+    else if ('{{request.args.get("slovnyDruh")}}'=='CISLOVKA')
+        filter.paradigma = $('#ddlParadigma_CISLOVKA').val();
+
+    filter.sd_id = getSD_ID();
+
+    AjaxMethods.getDataFromPostRequest('{{url_for("sd.generuj_morfo")}}', "", filter, function(r){
+            if (r.status==responseOK){//OK vetva
+                for (var i=0;i<r.data.length;i++){
+                    PridajVygenerovaneSlovo(r.data[i].tvar, r.data[i].rod, r.data[i].podrod,
+                        r.data[i].pad, r.data[i].cislo, r.data[i].osoba, r.data[i].cas, r.data[i].sposob,
+                        r.data[i].stupen, r.data[i].pricastie,
+                        r.data[i].anotacia);
+                }
+            }
+            else{
+                swal({ buttons: {},
+                       title  :  "Chyba",
+                       text   :  r.error_text,
+                       icon   :  "error"});
+
+            }
+        });
+}
+
+function GenerujTvaryPridM(co_generovat){
+    var filter = GetFilterValues();
+
+    filter.koren = $('#ddlKorenSlova').val();
+    filter.prefix = $('#ddlPrefix').val();
+    filter.sufix = $('#ddlSufix').val();
+    filter.vzor = $('#ddlVzor').val() || '';
+    filter.vzor_stup = $('#ddlVzorStup').val() || '';
+    filter.pzkmen = '';
+    filter.vid = '';
+    filter.co_generovat = co_generovat;
 
     if ('{{request.args.get("slovnyDruh")}}'=='POD_M')
         filter.paradigma = $('#ddlParadigma_POD_M').val();
@@ -891,10 +942,12 @@ function ZaznamVyhovujeFiltru(j){
 }
 
 function FiltrujSlova(){
+    var pocetZaznamov = 0;
     $("#divSTabulkou tr[id^='zaznam_']").each(function () {
         var j=$(this).attr('id').replace('zaznam_','');
         if (j!="0"){
             if (ZaznamVyhovujeFiltru(j)){
+                pocetZaznamov++;
                 $('#zaznam_'+j).removeClass('nodisplay')
             }
             else{
@@ -903,6 +956,7 @@ function FiltrujSlova(){
         }
     });
     $('#hdn_changed_f').val('false');
+    $('#aFiltruj').html('<i class="fa fa-search"></i>&nbsp;Aplikovať filter - Práve zobrazených '+pocetZaznamov+' záznamov');
 }
 
 function JeLTvar(tvar){
@@ -1118,6 +1172,10 @@ function NacitajSDSlova(id){
                     else{
                         $('#ddlVzorStup').val("-1"); // nastavenie vzoru nenastaveny
                     }
+                    if (r.data.sloveso_id>0){
+                        $('.PRID_M_SO_SLOVESOM').removeClass('nodisplay');
+                    }
+
                 }
                 else if (r.data.typ=="ZAMENO"){
                 }

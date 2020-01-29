@@ -68,6 +68,10 @@ class SlovoFilterExport(object):
     stupen = None
     pricastie = None
     anotacia = None
+    pricastie_sufix = None
+    pricastie_sufix_m = None
+    pricastie_sufix_t = None
+    koren_slovesa = None
 
     koren = None
     pzkmen = None
