@@ -487,6 +487,8 @@ def anotuj_slovesa(start):
                     db.session.commit()
                     pocet_zaznamov = 0
 
+        db.session.commit()
+
 
 def anotuj_pod_m(start):
     pocet_zaznamov = 0
@@ -515,6 +517,8 @@ def anotuj_pod_m(start):
                 if pocet_zaznamov >= 500:
                     db.session.commit()
                     pocet_zaznamov = 0
+
+        db.session.commit()
 
 
 def anotuj_prid_m(start):
@@ -545,4 +549,5 @@ def anotuj_prid_m(start):
                     db.session.commit()
                     pocet_zaznamov = 0
 
+        db.session.commit()
 
