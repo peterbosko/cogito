@@ -13,7 +13,10 @@ def daj_anotaciu_prid_m(paradigma, rod, podrod, cislo, pad, stupen, pricastie):
 
     anot_typ = "A"
 
-    if paradigma in ('A', 'F', 'U'):
+    if not paradigma or paradigma == "":
+        paradigma = "?"
+
+    if paradigma in ('A', 'F', 'U', "?"):
         anot_typ = "A"
     else:
         anot_typ = "G"

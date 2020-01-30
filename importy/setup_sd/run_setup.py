@@ -22,6 +22,20 @@ if __name__ == "__main__":
             zjednot_zamena()
         elif command == "zjednot_cislovky":
             zjednot_cislovky()
+        elif command == "anotuj_predlozky":
+            anotuj_predlozky()
+        elif command == "anotuj_cislovky":
+            anotuj_cislovky()
+        elif command == "anotuj_zamena":
+            anotuj_zamena()
+        elif command == "anotuj_prislovky":
+            anotuj_prislovky()
+        elif command == "anotuj_slovesa":
+            anotuj_slovesa(start)
+        elif command == "anotuj_pod_m":
+            anotuj_pod_m(start)
+        elif command == "anotuj_prid_m":
+            anotuj_prid_m(start)
 
     else:
         print("usage:\n\n\trun_setup.py updatuj_slovesa | checkni_vyplnene_slovesa | generuj_a_porovnaj_slovesa "

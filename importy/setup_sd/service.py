@@ -1,6 +1,8 @@
 from app.app import flask_app
 from app.morfo.morfo_sloveso_service import *
 from app.sd_service import *
+import datetime
+from app.morfo.morfo_prid_m_service import *
 
 db.init_app(flask_app)
 
@@ -368,3 +370,179 @@ def zjednot_cislovky():
                 print(f"Pokusil som sa zmazat slovny druh id:{rovnake_cis.id} chyba bola:{chyba}")
 
                 db.session.commit()
+
+
+def anotuj_predlozky():
+    with flask_app.app_context():
+        for c in Predlozka.query.join(Slovo, Predlozka.id == Slovo.sd_id).filter(Slovo.anotacia.is_(None)):
+            print(f"Ide predlozka:{c.zak_tvar}")
+            pad = c.pady[0:3]
+            print(f"Pad:{pad}")
+            for s in c.slova:
+                vokaliz = "u"
+                if s.tvar[-1] == "o":
+                    vokaliz = "v"
+                p = daj_anotaciu_padu(pad)
+
+                slovo = Slovo.query.get(s.id)
+
+                slovo.anotacia = f"E{vokaliz}{p}"
+
+                db.session.add(slovo)
+
+                db.session.commit()
+
+
+def anotuj_cislovky():
+    with flask_app.app_context():
+        for c in Cislovka.query.join(Slovo, Cislovka.id == Slovo.sd_id).filter(Slovo.anotacia.is_(None)):
+            print(f"Ide cislovka:{c.zak_tvar}")
+            for s in c.slova:
+                a = daj_anotaciu_cislovky(c.paradigma, s.rod, s.podrod, s.cislo, s.pad)
+
+                slovo = Slovo.query.get(s.id)
+
+                slovo.anotacia = a
+
+                print(f"Nastavil som anotaciu slovu:{slovo.tvar} anotacia:{a}")
+
+                db.session.add(slovo)
+
+                db.session.commit()
+
+
+def anotuj_zamena():
+    with flask_app.app_context():
+        for c in Zameno.query.join(Slovo, Zameno.id == Slovo.sd_id).filter(Slovo.anotacia.is_(None)):
+            print(f"Ide zameno:{c.zak_tvar}")
+            for s in c.slova:
+                a = daj_anotaciu_zamena(c.paradigma, s.rod, s.podrod, s.cislo, s.pad)
+
+                slovo = Slovo.query.get(s.id)
+
+                slovo.anotacia = a
+
+                print(f"Nastavil som anotaciu slovu:{slovo.tvar} anotacia:{a}")
+
+                db.session.add(slovo)
+
+                db.session.commit()
+
+
+def anotuj_prislovky():
+    with flask_app.app_context():
+        for c in Prislovka.query.join(Slovo, Prislovka.id == Slovo.sd_id).filter(Slovo.anotacia.is_(None)):
+            print(f"Ide prislovka:{c.zak_tvar}")
+            for s in c.slova:
+                a = daj_anotaciu_prislovky(s.stupen)
+
+                slovo = Slovo.query.get(s.id)
+
+                slovo.anotacia = a
+
+                print(f"Nastavil som anotaciu slovu:{slovo.tvar} anotacia:{a}")
+
+                db.session.add(slovo)
+
+                db.session.commit()
+
+
+def anotuj_slovesa(start):
+    pocet_zaznamov = 0
+    with flask_app.app_context():
+        for c in Sloveso.query.filter(Sloveso.id >= start).order_by(Sloveso.id).all():
+            print(f"Ide sloveso:{c.zak_tvar} Id:{c.id}")
+            afirmacia = c.je_negacia == "N"
+
+            for s in Slovo.query.filter(Slovo.sd_id == c.id).filter(or_(Slovo.anotacia.is_(None),
+                                                                        Slovo.anotacia == "")):
+
+                a = ""
+
+                if s.tvar.endswith("l") or s.tvar.endswith("la") or s.tvar.endswith("lo") or s.tvar.endswith("li"):
+                    a = daj_anotaciu_l_tvaru(s.rod, s.podrod, s.cislo, s.osoba, afirmacia, c.vid)
+                elif s.je_neurcitok == "A":
+                    a = daj_anotaciu_infinitivu(afirmacia, c.vid)
+                elif s.je_prechodnik == "A":
+                    a = daj_anotaciu_prechodniku(afirmacia, c.vid)
+                elif s.sposob == "R":
+                    a = daj_anotaciu_immperativu(s.cislo, s.osoba, afirmacia, c.vid)
+                else:
+                    a = daj_anotaciu_indik(s.cislo, s.osoba, afirmacia, c.vid)
+
+                slovo = Slovo.query.get(s.id)
+
+                slovo.anotacia = a
+
+                slovo.zmenene = datetime.datetime.now()
+                slovo.user_id = 1
+
+                print(f"Nastavil som anotaciu slovu:{slovo.tvar} anotacia:{a}")
+
+                db.session.add(slovo)
+
+                pocet_zaznamov += 1
+
+                if pocet_zaznamov >= 500:
+                    db.session.commit()
+                    pocet_zaznamov = 0
+
+
+def anotuj_pod_m(start):
+    pocet_zaznamov = 0
+    with flask_app.app_context():
+        for c in PodstatneMeno.query.filter(PodstatneMeno.id >= start).order_by(PodstatneMeno.id).all():
+            print(f"Ide pm:{c.zak_tvar} Id:{c.id}")
+
+            for s in Slovo.query.filter(Slovo.sd_id == c.id).filter(or_(Slovo.anotacia.is_(None),
+                                                                        Slovo.anotacia == "")):
+
+                a = daj_anotaciu_pm(c.paradigma, s.rod, s.podrod, s.cislo, s.pad)
+
+                slovo = Slovo.query.get(s.id)
+
+                slovo.anotacia = a
+
+                slovo.zmenene = datetime.datetime.now()
+                slovo.user_id = 1
+
+                print(f"Nastavil som anotaciu slovu:{slovo.tvar} anotacia:{a}")
+
+                db.session.add(slovo)
+
+                pocet_zaznamov += 1
+
+                if pocet_zaznamov >= 500:
+                    db.session.commit()
+                    pocet_zaznamov = 0
+
+
+def anotuj_prid_m(start):
+    pocet_zaznamov = 0
+    with flask_app.app_context():
+        for c in PridavneMeno.query.filter(PridavneMeno.id >= start).order_by(PridavneMeno.id).all():
+            print(f"Ide pridm:{c.zak_tvar} Id:{c.id}")
+
+            for s in Slovo.query.filter(Slovo.sd_id == c.id).filter(or_(Slovo.anotacia.is_(None),
+                                                                        Slovo.anotacia == "")):
+
+                a = daj_anotaciu_prid_m(c.paradigma, s.rod, s.podrod, s.cislo, s.pad, s.stupen, s.pricastie)
+
+                slovo = Slovo.query.get(s.id)
+
+                slovo.anotacia = a
+
+                slovo.zmenene = datetime.datetime.now()
+                slovo.user_id = 1
+
+                print(f"Nastavil som anotaciu slovu:{slovo.tvar} anotacia:{a}")
+
+                db.session.add(slovo)
+
+                pocet_zaznamov += 1
+
+                if pocet_zaznamov >= 500:
+                    db.session.commit()
+                    pocet_zaznamov = 0
+
+

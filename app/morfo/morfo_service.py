@@ -199,6 +199,9 @@ def daj_anotaciu_pm(paradigma, rod, podrod, cislo, pad):
 
     anot_pad = daj_anotaciu_padu(pad)
 
+    if not paradigma or paradigma == "":
+        paradigma = "?"
+
     anotacia = f"S{paradigma}{anot_rod}{anot_cislo}{anot_pad}"
 
     return anotacia
@@ -380,6 +383,9 @@ def daj_anotaciu_cislovky(paradigma, rod, podrod, cislo, pad):
 
     anot_pad = daj_anotaciu_padu(pad)
 
+    if not paradigma or paradigma == "":
+        paradigma = "?"
+
     anotacia = f"N{paradigma}{anot_rod}{anot_cislo}{anot_pad}"
 
     return anotacia
@@ -549,6 +555,9 @@ def daj_anotaciu_prislovky(stupen):
     elif stupen == "3":
         anot_stupen = "z"
 
+    if not stupen or stupen =="":
+        anot_stupen = ""
+
     anotacia = f"D{anot_stupen}"
 
     return anotacia
@@ -598,6 +607,9 @@ def daj_anotaciu_zamena(paradigma, rod, podrod, cislo, pad):
     anot_cislo = daj_anotaciu_cisla(cislo)
 
     anot_pad = daj_anotaciu_padu(pad)
+
+    if not paradigma or paradigma=="":
+        paradigma = "?"
 
     anotacia = f"P{paradigma}{anot_rod}{anot_cislo}{anot_pad}"
 
