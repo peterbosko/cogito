@@ -470,7 +470,7 @@ def prepocitaj_sd_stat():
     db.session.commit()
 
 
-def zmaz_cely_slovny_druh(sd_id):
+def zmaz_cely_s_druh(sd_id):
 
     chyba = ""
 

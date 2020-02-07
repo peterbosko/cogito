@@ -1031,7 +1031,7 @@ def zmaz_cely_slovny_druh():
     response.status = ResponseStatus.OK
 
     if som_admin_slov():
-        chyba = zmaz_cely_slovny_druh(sd_id)
+        chyba = zmaz_cely_s_druh(sd_id)
 
         if chyba:
             response.status = ResponseStatus.ERROR
