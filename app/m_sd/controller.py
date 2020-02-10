@@ -274,16 +274,10 @@ def daj_zamena():
     if tvar:
         filtered = filtered.filter(Zameno.zak_tvar.like(tvar))
 
-    if rod:
-        filtered = filtered.filter(Zameno.rod == rod)
-
     table = DataTable(request.args, Zameno, filtered, [
             "id",
             "zak_tvar",
             "popis",
-            "cislo",
-            "rod",
-            "podrod",
     ])
 
     return json.dumps(table.json())
@@ -305,12 +299,6 @@ def daj_cislovky():
     if tvar:
         filtered = filtered.filter(Cislovka.zak_tvar.like(tvar))
 
-    if rod:
-        filtered = filtered.filter(Cislovka.rod == rod)
-
-    if cislo:
-        filtered = filtered.filter(Cislovka.cislo == cislo)
-
     if vzor:
         filtered = filtered.filter(Cislovka.vzor == vzor)
 
@@ -319,9 +307,6 @@ def daj_cislovky():
             "zak_tvar",
             "popis",
             "hodnota",
-            "rod",
-            "podrod",
-            "cislo",
     ])
 
     return json.dumps(table.json())
@@ -619,10 +604,6 @@ def zmenit_sd_post():
             zam.zak_tvar = export.zak_tvar
             zam.popis = export.popis
 
-            zam.rod = export.rod
-            zam.podrod = export.podrod
-            zam.cislo = export.cislo
-
             db.session.add(zam)
             db.session.commit()
 
@@ -691,9 +672,6 @@ def zmenit_sd_post():
             if export.tab == "zakladne":
                 cis.zak_tvar = export.zak_tvar
                 cis.popis = export.popis
-                cis.rod = export.rod
-                cis.podrod = export.podrod
-                cis.cislo = export.cislo
                 cis.hodnota = export.hodnota
             elif export.tab == "slova":
                 cis.prefix = export.prefix

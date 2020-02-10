@@ -106,74 +106,6 @@
                         &nbsp;
                     </div>
                 </div>
-                <div class="row ZAMENO marginbottomDetailSD nodisplay">
-                    <label class="col-sm-2" for="prepend">
-                         Rod:
-                    </label>
-                    <div class="col-sm-2">
-                        <select id="ddlZAMENO_ROD" class="form-control zmenaZakInfo rodPole">
-                            <option value="">Žiaden</option>
-                            <option value="M">M</option>
-                            <option value="Z">Z</option>
-                            <option value="S">S</option>
-                        </select>
-                    </div>
-                    <label class="col-sm-2" for="prepend">
-                         Podrod:
-                    </label>
-                    <div class="col-sm-2">
-                        <select id="ddlZAMENO_PODROD" class="form-control zmenaZakInfo">
-                            <option value="">Žiaden</option>
-                            <option value="Z">Z</option>
-                            <option value="N">N</option>
-                        </select>
-                    </div>
-                    <label class="col-sm-2" for="prepend">
-                         Číslo:
-                    </label>
-                    <div class="col-sm-2">
-                        <select id="ddlZAMENO_CISLO" name="ddlZAMENO_CISLO" class="form-control zmenaZakInfo">
-                            <option value="">Žiadne</option>
-                            <option value="J">J</option>
-                            <option value="M">M</option>
-                            <option value="P">P</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row CISLOVKA marginbottomDetailSD nodisplay">
-                    <label class="col-sm-2" for="prepend">
-                         Rod:
-                    </label>
-                    <div class="col-sm-3">
-                        <select id="ddlCISLOVKA_ROD" class="form-control zmenaZakInfo rodPole">
-                            <option value="">Žiaden</option>
-                            <option value="M">M</option>
-                            <option value="Z">Z</option>
-                            <option value="S">S</option>
-                        </select>
-                    </div>
-                    <label class="col-sm-1" for="prepend">
-                         Podrod:
-                    </label>
-                    <div class="col-sm-3">
-                        <select id="ddlCISLOVKA_PODROD" class="form-control zmenaZakInfo">
-                            <option value="">Žiaden</option>
-                            <option value="Z">Z</option>
-                            <option value="N">N</option>
-                        </select>
-                    </div>
-                    <label class="col-sm-1" for="prepend">
-                         Číslo:
-                    </label>
-                    <div class="col-sm-2">
-                        <select id="ddlFormCISLOVKA_Cislo" name="ddlFormCISLOVKA_Cislo" class="form-control zmenaZakInfo">
-                            <option value="">Žiadne</option>
-                            <option value="J">J</option>
-                            <option value="M">M</option>
-                            <option value="P">P</option>
-                        </select>
-                    </div>
-                </div>
                 <div class="row CISLOVKA marginbottomDetailSD nodisplay">
                     <label class="col-sm-2" for="prepend">
                          Hodnota:
@@ -292,9 +224,6 @@ function NacitajZakladneInfoSD(sd_id){
                     NastavSloveso('#ddlPRID_M_Sloveso',r.data.sloveso_id,r.data.sloveso_tvar);
                 }
                 else if (r.data.typ=="ZAMENO"){
-                    $('#ddlZAMENO_ROD').val(r.data.rod);
-                    $('#ddlZAMENO_PODROD').val(r.data.podrod);
-                    $('#ddlZAMENO_CISLO').val(r.data.cislo);
                 }
                 else if (r.data.typ=="SLOVESO"){
                     $('#ddlSLOVESO_Zvratnost').val(r.data.zvratnost);
@@ -306,9 +235,6 @@ function NacitajZakladneInfoSD(sd_id){
                     $("#ddlPREDLOZKA_Pady").val(pady.split(';'));
                 }
                 else if (r.data.typ=="CISLOVKA"){
-                    $('#ddlCISLOVKA_ROD').val(r.data.rod);
-                    $('#ddlCISLOVKA_PODROD').val(r.data.podrod);
-                    $('#ddlFormCISLOVKA_Cislo').val(r.data.cislo);
                     $('#txtFormCISLOVKA_HODNOTA').val(r.data.hodnota);
                 }
 
@@ -364,9 +290,6 @@ function ZmenSDZakladneInfo(){
                 data.je_privlastnovacie = 'N';
         }
         else if (typ == "ZAMENO"){
-            data.rod = $('#ddlZAMENO_ROD').val();
-            data.podrod = $('#ddlZAMENO_PODROD').val();
-            data.cislo = $('#ddlZAMENO_CISLO').val();
         }
         else if (typ == "SLOVESO"){
             data.zvratnost = $('#ddlSLOVESO_Zvratnost').val();
@@ -380,9 +303,6 @@ function ZmenSDZakladneInfo(){
             data.pady = $('#ddlPREDLOZKA_Pady').val().join(';');
         }
         else if (typ=="CISLOVKA"){
-            data.rod=$('#ddlCISLOVKA_ROD').val();
-            data.podrod=$('#ddlCISLOVKA_PODROD').val();
-            data.cislo=$('#ddlFormCISLOVKA_Cislo').val();
             data.hodnota=$('#txtFormCISLOVKA_HODNOTA').val();
         }
 

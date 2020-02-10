@@ -148,9 +148,6 @@ class SlovnyDruh(db.Model):
             export.je_privlastnovacie = prm.je_privlastnovacie
         elif self.typ == "ZAMENO":
             zam = Zameno.query.get(self.id)
-            export.rod = zam.rod
-            export.podrod = zam.podrod
-            export.cislo = zam.cislo
         elif self.typ == "SLOVESO":
             s = Sloveso.query.get(self.id)
             export.zvratnost = s.zvratnost
@@ -171,9 +168,6 @@ class SlovnyDruh(db.Model):
             export.pady = pr.pady
         elif self.typ == "CISLOVKA":
             cis = Cislovka.query.get(self.id)
-            export.rod = cis.rod
-            export.podrod = cis.podrod
-            export.cislo = cis.cislo
             export.hodnota = cis.hodnota
 
         return export
@@ -247,9 +241,6 @@ class Zameno(SlovnyDruh):
     __tablename__ = 'sd_zameno'
     __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8mb4', 'mysql_collate': 'utf8mb4_bin'}
     zameno_id = db.Column('id', db.Integer, db.ForeignKey('sd.id'), primary_key=True)
-    cislo = db.Column(db.String(1), nullable=True)
-    rod = db.Column(db.String(1), nullable=True)
-    podrod = db.Column(db.String(1), nullable=True)
     __mapper_args__ = {
         'polymorphic_identity': 'ZAMENO',
     }
@@ -272,9 +263,6 @@ class Cislovka(SlovnyDruh):
     __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8mb4', 'mysql_collate': 'utf8mb4_bin'}
     cislovka_id = db.Column('id', db.Integer, db.ForeignKey('sd.id'), primary_key=True)
     hodnota = db.Column(db.String(50), nullable=True)
-    rod = db.Column(db.String(1), nullable=True)
-    podrod = db.Column(db.String(1), nullable=True)
-    cislo = db.Column(db.String(1), nullable=True)
     __mapper_args__ = {
         'polymorphic_identity': 'CISLOVKA',
     }

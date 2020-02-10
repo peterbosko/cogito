@@ -15,16 +15,6 @@
                                         <input id="txtFTvar" class="form-control SearchOnChange SearchOnEnter" type="text" placeholder="Základný tvar zámena">
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <select id="ddlFRod" class="SearchOnChange SearchOnEnter form-control">
-                                            <option value="" selected>Všetky</option>
-                                            <option value="M">Mužský</option>
-                                            <option value="Z">Ženský</option>
-                                            <option value="S">Stredný</option>
-                                        </select>
-                                    </div>
-                                </div>
                             </fieldset>
                        </div>
                   </div>
@@ -38,9 +28,6 @@
                             <th>Id</th>
                             <th>Základný tvar</th>
                             <th>Popis</th>
-                            <th>Číslo</th>
-                            <th>Rod</th>
-                            <th>Podrod</th>
                         </tr>
                     </thead>
                 <tbody>
@@ -116,7 +103,6 @@
             url : "{{ url_for("sd.daj_zamena") }}",
             data : function ( d ) {
                 d.hladaj_tvar = $('#txtFTvar').val();
-                d.hladaj_rod = $('#ddlFRod').val();
             },
         },
         columns: [
@@ -126,9 +112,6 @@
             { data: "id" },
             { data: "zak_tvar" },
             { data: "popis" },
-            { data: "cislo" },
-            { data: "rod" },
-            { data: "podrod" },
         ]
         });
 </script>
