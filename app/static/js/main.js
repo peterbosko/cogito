@@ -297,6 +297,42 @@ function setProgressBar(){
 	
 	progressInfo.html(uspesnost+" %");
 	progressBar.css("width", uspesnost+"%");
+	
+	if(uspesnost == 100) {
+		var data = {};
+
+		data.id=$("#kt_id").val();
+		data.status = 'V';
+		data.nazov = $("#txtContextName").val();
+		data.obsah = CKEDITOR.instances['txtContext'].getData();
+		data.text= CKEDITOR.instances['txtContext'].document.getBody().getText();
+		
+		var wrapped = $("<div>" + data.obsah + "</div>");
+		wrapped.find('span').removeClass('active m n ns no-select').removeAttr('ondblclick onselectstart sdid sd');
+		data.obsah = wrapped.html();
+		
+		
+		console.log(data);
+		
+		var result=AjaxMethods.getDataFromPostRequest('/pridat_kontext/', '', data,
+            function (r){
+                if (r.status==responseOK){//OK vetva
+                    swal({ buttons: {},
+                       title  :  "Úspech",
+                       text   :  'Text je na 100% zvalidovaný.',
+                       icon   :  "success"}).then(function(result) {
+                                                window.location.replace("/moje_kontexty/");
+
+                                              });
+                } else {
+                   swal({ buttons: {},
+                       title  :  "Chyba",
+                       text   :  r.error_text,
+                       icon   :  "error"});
+				}
+			}
+		);
+	}
 }
 
 function load_slovo(that){
@@ -816,6 +852,74 @@ function loadNeededScriptsAndStyles(script, style, callback) {
 
         CKEDITOR.addCss('span.s { background-color: #ffffff; }');
 		
+		if(settingsToolbar.length > 0) {
+			settingsToolbar = settingsToolbar;
+		} else {	
+			var legend = '<div class="legend">'+
+					'<span style="background-color: #ffeec2;">slovo</span> - nepotvrdené slovo<br />'+
+					'<span style="background-color: #ffaab2;">slovo</span> - slovo sa nenachádza v databáze<br />'+
+					'<span style="background-color: #afe5ff;">slovo</span> - aktuálne vybraté slovo<br /><br />'+
+					
+					'<i class="fa fa-angle-left"></i><i class="fa fa-angle-right"></i> - Skok na nasledujúce / predchádzajúce slovo<br>'+
+					'<i class="fa fa-angle-double-left"></i><i class="fa fa-angle-double-right"></i> - Skok na nasledujúce / predchádzajúce nepotvrdené slovo<br> '+
+					'dvojklik - Výber slova '+
+				'</div>';
+	
+			var settingsToolbar = $('<span id="settings-rows" class="cke_top settings-disabled" style="height: 80px; user-select: none;padding: 6px 8px 20px;">'+
+								'<span class="cke_voice_label">Settings row</span>'+
+								'<span class="cke_toolbox">'+
+									'<span class="cke_toolbar cke_toolbar_last">'+
+										'<span class="cke_voice_label"></span>'+
+										'<span class="cke_toolbar_start"></span>'+
+										'<span class="cke_toolgroup">'+
+											'<a class="cke_button cke_button__source cke_button_disabled" href="#" title="">'+
+												'<span class="cke_button_label cke_button__source_label" style="height: 24px;">'+
+													'Gramatika pre tvar <i class="fa fa-long-arrow-alt-right"></i> <b><el class="setting-tvar"></el></b>'+
+												'</span>'+
+											'</a>'+
+											'<a class="cke_button cke_button__source cke_button_disabled" id="setting-legend" href="#" title="" style="position: absolute; right: 30px;">'+
+												'<span class="cke_button_label cke_button__source_label" >'+
+													'Legenda <i class="fa fa-bars"></i>'+legend+
+												'</span>'+
+											'</a><br />'+
+											
+											'<a class="cke_button cke_button__source cke_button_disabled" href="#" title="">'+
+												'<span class="cke_button_label cke_button__source_label">'+
+													'<el class="setting-slovny_druh"></el>'+
+												'</span>'+
+											'</a><br />'+
+											'<a class="cke_button cke_button__source cke_button_disabled" href="#" title="">'+
+												'<span class="cke_button_label cke_button__source_label">'+
+													'<el class="setting-odvodene"></el>'+
+												'</span>'+
+											'</a>'+
+										'</span>'+
+										'<span class="cke_toolbar_end"></span>'+
+									'</span>'+
+									'<span class="cke_toolbar_break"></span>'+
+								'</span>'+
+							'</span>'+
+							'<span  id="settings-rows-buttons" class="cke_top settings-disabled" style="height: auto; user-select: none;">'+
+								'<span class="cke_voice_label">Progress Bar</span>'+
+								'<span class="cke_toolbox">'+
+									'<div class="progress">'+
+										'<div id="kontextProgressText" class="progress-bar-text"></div> '+                      
+										'<div id="kontextProgress" class="progress-bar"></div> '+                      
+									'</div>'+
+									'<div style="text-align: center;">'+
+										'<a href="#" class="btn" onclick="prev_word(this);" title="Predchádzajúce slovo"><i class="fa fa-angle-left"></i></a>'+
+										'<a href="#" class="btn" onclick="prev_valid_word(this);" title="Predchádzajúce nezvalidované slovo"><i class="fa fa-angle-double-left"></i></a>'+
+										'<a href="#" class="btn" onclick="next_valid_word(this);" title="Nasledujúce nezvalidované slovo"><i class="fa fa-angle-double-right"></i></a>'+
+										'<a href="#" class="btn" onclick="next_word(this);" title="Nasledujúce slovo"><i class="fa fa-angle-right"></i></a>'+
+										'<el class="setting-accept_word"></el>'+
+									'</div>'+
+									'<div>'+
+										
+									'</div>'+
+								'</span>'+
+							'</span>');
+		}	
+		
         var tbar = [];
 
         if (!toolbar){
@@ -1177,5 +1281,11 @@ $(selector).select2({
 			$(this).parent().parent().find('.dropdown-menu').removeClass('show');
 			$(this).parent().find('.dropdown-menu').toggleClass('show');
 		});
+		
+		ChybaAkNepodporovanyBrowser();
+		$('#ContextForm').formValidation();
+		
+		initCKEditorInstance('txtContext',300, 'kontext', '');
 	});
 })(jQuery);
+

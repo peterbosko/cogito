@@ -598,3 +598,23 @@ table.tabulka_slov thead th, table.tabulka_filtra thead th{
 .select2-container--default .select2-selection--single .select2-selection__placeholder {
     color:#6d757d;
 }
+.legend {
+	display: none; 
+    position: absolute;
+    background: white;
+    width: 480px;
+    right: 100px;
+    top: -4px;
+    z-index: 10000;
+    padding: 10px;
+    border: 1px solid;
+}	
+.legend span {
+	margin-bottom: 2px;
+}
+
+#setting-legend:hover {
+	cursor: pointer;
+}
+
+#setting-legend:hover .legend { display: block; }
