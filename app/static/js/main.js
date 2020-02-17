@@ -238,7 +238,7 @@ function add_word(that, is_new, add_new_meaning){
         else if (sd=="PREDLOZKA"){
             modal_title = 'Pridať predložku';
         }
-		loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', modal_title,'/zmenit_sd/'+param);
+		loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', modal_title,'/zmenit_sd/'+param, null, null, true);
 	}
 	
 }
@@ -281,7 +281,7 @@ function edit_sd(that){
     else if (sd=="PREDLOZKA"){
             modal_title = 'Zmeniť predložku';
     }
-	loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', modal_title,'/zmenit_sd/'+param);
+	loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', modal_title,'/zmenit_sd/'+param, null, null, true);
 }
 
 function setProgressBar(){
@@ -333,6 +333,47 @@ function setProgressBar(){
 			}
 		);
 	}
+}
+
+function skontroluj_slova_znova() {
+	var data = {};
+	data.data = CKEDITOR.instances['txtContext'].getData();
+	
+	AjaxMethods.getDataFromAsyncPostRequest('/kontrola_slov/', "", data, function(r){
+		if (r.status==responseOK){//OK vetva
+			CKEDITOR.instances['txtContext'].setData(r.data.data + '&nbsp;');
+			
+			$('body', parent.document).find('#kontextProgress').css("width", r.data.uspesnost+"%");
+			$('body', parent.document).find('#kontextProgressText').html(r.data.uspesnost+" %");
+			$('body', parent.document).find('.cke_top.settings-disabled').addClass('settings-enabled').removeClass('settings-disabled');
+			
+			setTimeout(function(){
+				var all = CKEDITOR.instances['txtContext'].document.getElementsByTag( 'span' );
+
+				for (var i = 0, max = all.count(); i < max; i++) {
+					var el = all.$[i];
+					
+					el.setAttribute('ondblclick','load_slovo(this);');
+				}
+				
+				
+				
+				CKEDITOR.instances['txtContext'].focus();
+				var range = CKEDITOR.instances['txtContext'].createRange();
+				range.moveToElementEditEnd( range.root );
+				CKEDITOR.instances['txtContext'].getSelection().selectRanges( [ range ] );
+				
+				$('body', parent.document).find('#setting-new-validation').hide();
+				$("iframe.cke_wysiwyg_frame").contents().find('span.m, span.n').first().dblclick();
+			}, 200)	
+		} else {
+			swal({ buttons: {},
+				title  :  "Chyba",
+				text   :  r.error_text,
+				icon   :  "error"});
+
+		}
+	})
 }
 
 function load_slovo(that){
@@ -493,7 +534,7 @@ function load_slovo(that){
 
 }
 
-function loadTemplateIntoModal(modalSelector, title, controlPath, fireMethod, methodParams) {
+function loadTemplateIntoModal(modalSelector, title, controlPath, fireMethod, methodParams, recontrol) {
 
     var modalObj = $(modalSelector);
     modalObj.find('.modal-title').html(title);
@@ -518,10 +559,16 @@ function loadTemplateIntoModal(modalSelector, title, controlPath, fireMethod, me
     });
 
     modalObj.modal('show');
+	
+	if(recontrol == true) {
+		modalObj.on('hidden.bs.modal', function () {
+			skontroluj_slova_znova();
+		})
+	}
 }
 
-function loadTemplateIntoLargeScreenModal(modalSelector, cssClass, title, controlPath, fireMethod, methodParams) {
-    loadTemplateIntoModal(modalSelector, title, controlPath, fireMethod, methodParams);
+function loadTemplateIntoLargeScreenModal(modalSelector, cssClass, title, controlPath, fireMethod, methodParams, recontrol) {
+    loadTemplateIntoModal(modalSelector, title, controlPath, fireMethod, methodParams, recontrol);
     var modalObj = $(modalSelector);
     modalObj.addClass(cssClass);
     modalObj.find('.modal-dialog').removeClass('modal-lg');
@@ -835,12 +882,12 @@ function loadNeededScriptsAndStyles(script, style, callback) {
     }
 
     function initCKEditorInstance(ckeditorName, h, toolbar, settingsToolbar){
-
-		CKEDITOR.timestamp=Math.random();
+		
+		CKEDITOR.timestamp = Math.random();
         
 		CKEDITOR.addCss('.tooltip > .tooltip-inner { background-color: #000; color:#fff; }');
 		
-		CKEDITOR.addCss('span.no-select { -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }');
+		//CKEDITOR.addCss('span.no-select { -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }');
         
 		CKEDITOR.addCss('span.active { background-color: #afe5ff !important;  padding: 4px;}');
         
@@ -875,6 +922,11 @@ function loadNeededScriptsAndStyles(script, style, callback) {
 											'<a class="cke_button cke_button__source cke_button_disabled" href="#" title="">'+
 												'<span class="cke_button_label cke_button__source_label" style="height: 24px;">'+
 													'Gramatika pre tvar <i class="fa fa-long-arrow-alt-right"></i> <b><el class="setting-tvar"></el></b>'+
+												'</span>'+
+											'</a>'+
+											'<a class="cke_button cke_button__source cke_button_disabled" id="setting-new-validation" href="#" title="" onClick="skontroluj_slova_znova();" style="display: none;position: absolute; right: 200px;">'+
+												'<span class="cke_button_label cke_button__source_label" style="color: red;font-weight: bold;cursor: pointer;">'+
+													'Je potrebná nová validácia <i class="fa fa-redo-alt"></i>'+
 												'</span>'+
 											'</a>'+
 											'<a class="cke_button cke_button__source cke_button_disabled" id="setting-legend" href="#" title="" style="position: absolute; right: 30px;">'+
@@ -967,6 +1019,9 @@ function loadNeededScriptsAndStyles(script, style, callback) {
 				  
                 return this.outputTemplate.output(item);
               }
+				
+				
+				
             },
             contentDom : function(event) {
                 pripojJavascripty(ckeditorName);
@@ -982,9 +1037,9 @@ function loadNeededScriptsAndStyles(script, style, callback) {
 		
 		CKEDITOR.on('instanceReady',function(){
 			$('#cke_1_top').after(settingsToolbar);
+
+			
 		});
-		
-		
     }
 
 /********************* Manage ck editor *****************************/
@@ -1273,19 +1328,17 @@ $(selector).select2({
 
     }
 	
-(function($){
-	$(document).ready(function(){
-		$('ul.dropdown-menu [data-toggle=dropdown]').on('click', function(event) {
-			event.preventDefault(); 
-			event.stopPropagation(); 
-			$(this).parent().parent().find('.dropdown-menu').removeClass('show');
-			$(this).parent().find('.dropdown-menu').toggleClass('show');
-		});
-		
-		ChybaAkNepodporovanyBrowser();
-		$('#ContextForm').formValidation();
-		
-		initCKEditorInstance('txtContext',300, 'kontext', '');
+$(document).ready(function(){
+	$('ul.dropdown-menu [data-toggle=dropdown]').on('click', function(event) {
+		event.preventDefault(); 
+		event.stopPropagation(); 
+		$(this).parent().parent().find('.dropdown-menu').removeClass('show');
+		$(this).parent().find('.dropdown-menu').toggleClass('show');
 	});
-})(jQuery);
+	
+	ChybaAkNepodporovanyBrowser();
+	$('#ContextForm').formValidation();
+	
+	initCKEditorInstance('txtContext',300, 'kontext', '');
+});
 

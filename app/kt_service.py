@@ -196,13 +196,16 @@ def vrat_pole_slov_z_textu(html, parent_slovo_id=None):
             text = content.text()
             
             slova_to_check = re.split(r'\s', text)
-            
+
+            pocitadlo_v_slova_to_check = 0
             for s in slova_to_check:
                 if s:
-
-                    if pq(html).is_("span") and pq(html).hasClass("s") and pq(html).attr('sid').isdigit():
+                    pocitadlo_v_slova_to_check += 1
+                    if pq(html).is_("span") and pq(html).hasClass("s") and pq(html).attr('sid').isdigit() and pocitadlo_v_slova_to_check == 1:
                         parent_slovo_id = int(pq(html).attr("sid"))
-                    
+                    else:
+                        parent_slovo_id = None
+
                     posledny_znak = s[len(s)-1]
                     prvy_znak = s[0]
                     if posledny_znak in SPEC_ZNAKY and len(s) > 1:
@@ -373,70 +376,3 @@ def vrat_ciste_slova_s_anotaciou(data):
         vysledok += serializuj_pole_slov_do_anotacie(pole)+"\n"
 
     return vysledok
-
-
-def serializuj_pole_slov(pole):
-
-    vysledok = ""
-
-    i = 0
-
-    for slovo in pole:
-        cl = "s"
-
-        if not slovo.je_v_slovniku:
-            cl = "n ns"
-
-        if slovo.je_viacej_v_slovniku and not slovo.bolo_vybrate:
-            cl = "m ns"
-        
-        if slovo.je_cislo:
-            prilep = ""
-
-            if len(pole) > i + 1:
-                prilep = "&nbsp;"
-
-            vysledok += slovo.tvar+prilep
-        else:
-            prilep = ""
-
-            if len(pole) > i+1:
-                if not pole[i+1].neprekl_vyraz or pole[i+1].je_cislo:
-                    prilep = "&nbsp;"
-
-            vysledok += "<span class='{cl} no-select' sid='{id}'>{slovo}</span>".format(
-                slovo=slovo.tvar, id=slovo.id_slova, cl=cl)+prilep
-
-        i += 1
-
-    return vysledok
-
-
-def serializuj_pole_slov_do_anotacie(pole):
-    vysledok = ""
-
-    i = 0
-    for slovo in pole:
-        prilep = ""
-
-        if len(pole) > i + 1:
-            prilep = " "
-
-        if slovo.neprekl_vyraz:
-            if slovo.je_cislo:
-                vysledok += str(slovo.neprekl_vyraz) + prilep
-            else:
-                vysledok += slovo.neprekl_vyraz + prilep
-        else:
-            anot = ""
-
-            if slovo.anotacia:
-                anot = slovo.anotacia
-
-            vysledok += "{id}>{zak_tvar}>{slovo}/{anotacia}".format(slovo=slovo.tvar, anotacia=anot, id=i,
-                                                                    zak_tvar=slovo.zak_tvar)+prilep
-
-        i += 1
-    return vysledok
-
-

@@ -61,7 +61,7 @@
 							cut.disable();
 							copy.disable();
 							paste.disable();
-							cogito_check.disable();
+							//cogito_check.disable();
 							cogito_check_remove.enable();
 							cogito_ut.enable();
 							cogito_ut_list.enable();
@@ -69,6 +69,10 @@
 							cogito_rozbor.enable();
 							
 						} );
+						$('body', parent.document).find('#setting-new-validation').hide();
+						editor.on('key', function (e) { 
+							$('body', parent.document).find('#setting-new-validation').show();
+						});
 						$('#save-context').prop('disabled', true);
                     } else{
                         swal({ buttons: {},
