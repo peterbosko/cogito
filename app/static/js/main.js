@@ -300,7 +300,9 @@ function setProgressBar(){
 	
 	if(uspesnost == 100) {
 		var data = {};
-
+		
+		$('#txtContextStatus').val('V');
+		
 		data.id=$("#kt_id").val();
 		data.status = 'V';
 		data.nazov = $("#txtContextName").val();
@@ -332,6 +334,8 @@ function setProgressBar(){
 				}
 			}
 		);
+	} else {
+		$('#txtContextStatus').val('N');
 	}
 }
 

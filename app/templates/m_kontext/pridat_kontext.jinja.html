@@ -45,7 +45,8 @@
       {% if session['logged'] %}
         <div class="row button-row">
             <div class="col-sm-12">
-                <a class="btn btn-cogito" role="button" href="{{ url_for("kontext.moje_kontexty") }}">Zrušiť</a>
+                <input type="hidden" id="txtContextStatus" value="{% if kontext: %}{{kontext.status}}{% endif %}">
+				<a class="btn btn-cogito" role="button" href="{{ url_for("kontext.moje_kontexty") }}">Zrušiť</a>
                 <button id="save-context" type="button" class="btn btn-primary" onclick="ZmenKontext(true);return false;">{% if kontext: %}Zmeniť kontext{% else %}Pridať kontext{% endif %}</button>
             </div>
         </div>
@@ -66,6 +67,7 @@ function ZmenKontext(redirect){
 
             data.id=$("#kt_id").val();
             data.nazov=$("#txtContextName").val();
+            data.status=$("#txtContextStatus").val();
             data.obsah = CKEDITOR.instances['txtContext'].getData();
             data.text= CKEDITOR.instances['txtContext'].document.getBody().getText();
 
