@@ -37,6 +37,10 @@
 					cogito_rozbor.disable();
 					
 				} );
+				editor.on('key', function (e) { 
+					e.removeListener();
+					$('body', parent.document).find('#setting-new-validation').hide();
+				});
 				$('#save-context').prop('disabled', false);
 			}	
 			},
