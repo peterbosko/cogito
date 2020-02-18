@@ -57,7 +57,7 @@
 								cogito_rozbor = this.getCommand( 'cogito-rozbor' );
 
 							source.disable();
-							save.disable();
+							//save.disable();
 							cut.disable();
 							copy.disable();
 							paste.disable();
@@ -73,7 +73,7 @@
 						editor.on('key', function (e) { 
 							$('body', parent.document).find('#setting-new-validation').show();
 						});
-						$('#save-context').prop('disabled', true);
+						//$('#save-context').prop('disabled', true);
                     } else{
                         swal({ buttons: {},
                             title  :  "Chyba",

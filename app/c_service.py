@@ -146,7 +146,8 @@ def vrat_slovo2(bolo_vybrate, je_prve_upper, slovo, zoznam_nacitanych_slov, ids=
     vysledok_slovo = SlovoVKontexte()
 
     if slovo and obsahuje_cisla(slovo):
-        vysledok_slovo.neprekl_vyraz = daj_cislo(slovo)
+        #vysledok_slovo.neprekl_vyraz = daj_cislo(slovo)
+        vysledok_slovo.neprekl_vyraz = slovo
         vysledok_slovo.je_cislo = True
         vysledok_slovo.tvar = slovo
         return vysledok_slovo

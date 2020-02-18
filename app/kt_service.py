@@ -203,28 +203,36 @@ def daj_tokeny_slova(slovo):
     som_v_slove = False
     som_v_cisle = False
 
-    for i in range(len(slovo)):
-        if slovo[i] == "." or slovo[i] == ",":
+    i = 0
+    for letter in slovo:
+        i += 1
+
+        if letter == "." or letter == ",":
             if som_v_cisle:
-                text_cisla += slovo[i]
+                if i == len(slovo):
+                    ukonci_cislo()
+                    text_cisla = ""
+                    vysledok.append(letter)
+                else:
+                    text_cisla += letter
             else:
                 ukonci_cislo()
                 text_cisla = ""
                 ukonci_slovo()
                 text_slova = ""
-                vysledok.append(slovo[i])
-        elif slovo[i] in SPEC_ZNAKY:
+                vysledok.append(letter)
+        elif letter in SPEC_ZNAKY:
             ukonci_cislo()
             text_cisla = ""
             ukonci_slovo()
             text_slova = ""
-            vysledok.append(slovo[i])
-        elif slovo[i] in "0123456789":
+            vysledok.append(letter)
+        elif letter in "0123456789":
             som_v_cisle = True
-            text_cisla += slovo[i]
+            text_cisla += letter
         else:
             som_v_slove = True
-            text_slova += slovo[i]
+            text_slova += letter
 
     ukonci_cislo()
     text_cisla = ""
@@ -238,12 +246,14 @@ def parsuj_zoznam_slov_z_html(html, parent_slovo_id=None):
     obsah_p = pq(html).contents()
 
     vysledok = []
-
     for content in obsah_p.items():
         if len(content.children()) > 0:
             s_id = None
 
             html_spanu = content.outerHtml()
+
+            text = content.text()
+            slova = re.split(r'\s', text)
 
             if content.hasClass("s") and content.attr('sid').isdigit():
                 s_id = int(content.attr('sid'))
@@ -251,24 +261,33 @@ def parsuj_zoznam_slov_z_html(html, parent_slovo_id=None):
             vysledok.extend(parsuj_zoznam_slov_z_html(html_spanu, s_id))
 
         else:
-
-            if content.is_("span") and content.attr('sid').isdigit():
-                parent_slovo_id = int(content.attr('sid'))
-
+            text = content.text()
+            slova = re.split(r'\s', text)
             bolo_vybrate = False
 
-            if content.is_("span") and content.hasClass("s") and content.attr('sid').isdigit():
-                bolo_vybrate = True
+            if content.is_("span") and content.attr('sid'):
+                if content.attr('sid').isdigit() and content.hasClass("s"):
+                    bolo_vybrate = True
 
-            text = content.text()
+                if content.attr('sid').isdigit():
+                    parent_slovo_id = int(content.attr('sid'))
 
-            slova = re.split(r'\s', text)
+            i = 0
+            if len(slova) > 1:
+                for s in slova:
+                    if s:
+                        if i > 0:
+                            bolo_vybrate = False
+                            parent_slovo_id = None
 
-            for s in slova:
-                if s:
-                    tokeny_slova = daj_tokeny_slova(s)
-                    for token in tokeny_slova:
-                        vysledok.extend(vyrob_slovo_pole(token, parent_slovo_id, bolo_vybrate))
+                        tokeny_slova = daj_tokeny_slova(s)
+                        for token in tokeny_slova:
+                            vysledok.extend(vyrob_slovo_pole(token, parent_slovo_id, bolo_vybrate))
+                        i += 1
+            else:
+                tokeny_slova = daj_tokeny_slova(slova[0])
+                for token in tokeny_slova:
+                    vysledok.extend(vyrob_slovo_pole(token, parent_slovo_id, bolo_vybrate))
 
     return vysledok
 
@@ -347,7 +366,7 @@ def serializuj_pole_slov(pole):
                 if not pole[i+1].neprekl_vyraz or pole[i+1].je_cislo:
                     prilep = "&nbsp;"
 
-            vysledok += "<span class='{cl}' sid='{id}'>{slovo}</span>".format(
+            vysledok += "<span class='{cl} no-select' sid='{id}'>{slovo}</span>".format(
                 slovo=slovo.tvar, id=slovo.id_slova, cl=cl)+prilep
 
         i += 1

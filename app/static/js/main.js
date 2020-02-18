@@ -205,7 +205,7 @@ function add_word(that, is_new, add_new_meaning){
 		slovo = main.find('.active').html();
 		param = '?slovo='+slovo+'&slovnyDruh='+sd;
 
-		loadTemplateIntoModal('#defaultModal', 'Pridanie slova','/pridaj_slovo_vyber_sd/'+param);
+		loadTemplateIntoModal('#defaultModal', 'Pridanie slova','/pridaj_slovo_vyber_sd/'+param, null, null, true);
 	} else {
 		sdid = main.find('.active').attr('sdid');
 		param = '?sd_id='+sdid+'&slovnyDruh='+sd;
@@ -343,8 +343,19 @@ function skontroluj_slova_znova() {
 	var data = {};
 	data.data = CKEDITOR.instances['txtContext'].getData();
 	
+	swal({ buttons: {},
+		   title  :  "Kontrola",
+		   text   :  'Prebieha kontrola textu...',
+		   icon   :  "info",
+		   closeOnClickOutside : false,
+		   closeModal : false,
+		   closeOnEsc : false,
+		   // <div class="fa-3x"><i class="fas fa-spinner fa-spin"></i></div>
+		   // not working now html : true
+		   });
 	AjaxMethods.getDataFromAsyncPostRequest('/kontrola_slov/', "", data, function(r){
 		if (r.status==responseOK){//OK vetva
+			
 			CKEDITOR.instances['txtContext'].setData(r.data.data + '&nbsp;');
 			
 			$('body', parent.document).find('#kontextProgress').css("width", r.data.uspesnost+"%");
@@ -369,6 +380,7 @@ function skontroluj_slova_znova() {
 				
 				$('body', parent.document).find('#setting-new-validation').hide();
 				$("iframe.cke_wysiwyg_frame").contents().find('span.m, span.n').first().dblclick();
+				swal.close();
 			}, 200)	
 		} else {
 			swal({ buttons: {},
@@ -891,7 +903,7 @@ function loadNeededScriptsAndStyles(script, style, callback) {
         
 		CKEDITOR.addCss('.tooltip > .tooltip-inner { background-color: #000; color:#fff; }');
 		
-		//CKEDITOR.addCss('span.no-select { -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }');
+		CKEDITOR.addCss('span.no-select { -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }');
         
 		CKEDITOR.addCss('span.active { background-color: #afe5ff !important;  padding: 4px;}');
         
@@ -1011,7 +1023,7 @@ function loadNeededScriptsAndStyles(script, style, callback) {
                 '</li>',
                 outputTemplate = '<span class="s" sid="{id}">{tvar}</span>&nbsp;';
 
-              var autocomplete = new CKEDITOR.plugins.autocomplete(evt.editor, {
+              /*var autocomplete = new CKEDITOR.plugins.autocomplete(evt.editor, {
                 textTestCallback: textTestCallback,
                 dataCallback: dataCallback,
                 itemTemplate: itemTemplate,
@@ -1022,7 +1034,7 @@ function loadNeededScriptsAndStyles(script, style, callback) {
               autocomplete.getHtmlToInsert = function(item) {
 				  
                 return this.outputTemplate.output(item);
-              }
+              }*/
 				
 				
 				

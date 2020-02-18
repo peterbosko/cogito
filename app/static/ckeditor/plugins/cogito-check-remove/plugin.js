@@ -28,7 +28,7 @@
 						cogito_rozbor = this.getCommand( 'cogito-rozbor' );
 
 					source.enable();
-					save.enable();
+					//save.enable();
 					cogito_check.enable();
 					cogito_check_remove.disable();
 					cogito_ut.disable();
