@@ -139,3 +139,61 @@ def vrat_slovo(slovo, ids=None):
         vysledok_slovo.anotacia = vysledok_slovo.slovo.anotacia
 
     return vysledok_slovo
+
+
+def vrat_slovo2(bolo_vybrate, je_prve_upper, slovo, zoznam_nacitanych_slov, ids=None):
+
+    vysledok_slovo = SlovoVKontexte()
+
+    if slovo and obsahuje_cisla(slovo):
+        vysledok_slovo.neprekl_vyraz = daj_cislo(slovo)
+        vysledok_slovo.je_cislo = True
+        vysledok_slovo.tvar = slovo
+        return vysledok_slovo
+
+    lower_sl = slovo[0].lower()
+
+    if len(slovo) > 1:
+        lower_sl += slovo[1:]
+
+    sl = []
+
+    for s in zoznam_nacitanych_slov:
+        if s.tvar == slovo or (je_prve_upper and s.tvar == lower_sl) and (not ids or s.id == ids):
+            sl.append(s)
+
+    if len(sl) == 0:
+        vysledok_slovo.id_slova = None
+        vysledok_slovo.je_v_slovniku = False
+        vysledok_slovo.je_viacej_v_slovniku = False
+        vysledok_slovo.slovo = None
+        vysledok_slovo.tvar = slovo
+        vysledok_slovo.popis = None
+        vysledok_slovo.cely_popis_slova = None
+        vysledok_slovo.anotacia = "???????"
+    elif len(sl) == 1:
+        vysledok_slovo.id_slova = sl[0].id
+        vysledok_slovo.je_v_slovniku = True
+        vysledok_slovo.je_viacej_v_slovniku = False
+        vysledok_slovo.slovo = sl[0].tvar
+        vysledok_slovo.tvar = slovo
+        vysledok_slovo.zak_tvar = sl[0].zak_tvar
+        vysledok_slovo.popis = ""
+        vysledok_slovo.cely_popis_slova = ""
+        vysledok_slovo.anotacia = sl[0].anotacia
+        vysledok_slovo.bolo_vybrate = bolo_vybrate
+    else:
+        vysledok_slovo.id_slova = sl[0].id
+        vysledok_slovo.je_v_slovniku = True
+        vysledok_slovo.je_viacej_v_slovniku = True
+        vysledok_slovo.slovo = sl[0].tvar
+        vysledok_slovo.tvar = slovo
+        vysledok_slovo.popis = ""
+        vysledok_slovo.zak_tvar = sl[0].zak_tvar
+        vysledok_slovo.cely_popis_slova = ""
+        vysledok_slovo.anotacia = sl[0].anotacia
+        vysledok_slovo.bolo_vybrate = bolo_vybrate
+
+    return vysledok_slovo
+
+

@@ -16,6 +16,7 @@ class SlovoVKontexte(object):
     bolo_vybrate = False
     cely_popis_slova = None
     anotacia = None
+    je_prve_upper = None
 
     def __str__(self):
         return "***************************\n" + \
@@ -27,5 +28,4 @@ class SlovoVKontexte(object):
                 "je_v_slovniku:"+str(self.je_v_slovniku)+"|\n" + \
                 "je_viacej_v_slovniku:"+str(self.je_viacej_v_slovniku)+"|\n" + \
                 "****************************"
-
 

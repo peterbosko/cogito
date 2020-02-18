@@ -220,6 +220,7 @@ def daj_tvar_l_pricastia(vzor_deklinacia, vzor, koren, rod, podrod, cislo, osoba
     morfo_res_obj.podrod = podrod
     morfo_res_obj.cislo = cislo
     morfo_res_obj.osoba = osoba
+    morfo_res_obj.sposob = "O"
     morfo_res_obj.cas = "M"
     morfo_res_obj.anotacia = daj_anotaciu_l_tvaru(rod, podrod, cislo, osoba, afirmacia, vid)
 

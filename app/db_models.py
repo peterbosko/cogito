@@ -413,9 +413,6 @@ class Slovo(db.Model):
 
         elif export.slovny_druh == "ZAMENO":
             zam = Zameno.query.get(self.sd_id)
-            export.rod = zam.rod
-            export.podrod = zam.podrod
-            export.cislo = zam.cislo
 
         elif export.slovny_druh == "SLOVESO":
             s = Sloveso.query.get(self.sd_id)
@@ -432,9 +429,6 @@ class Slovo(db.Model):
 
         elif export.slovny_druh == "CISLOVKA":
             cis = Cislovka.query.get(self.sd_id)
-            export.rod = cis.rod
-            export.podrod = cis.podrod
-            export.cislo = cis.cislo
             export.hodnota = cis.hodnota
 
         return export

@@ -344,7 +344,7 @@ function load_slovo(that){
 	var settings_row_buttons = $('body', parent.document).find('#settings-rows-buttons');
 	
 	settings_row.find('el').html('');
-	var cislo = {'J': 'Jednotné', 'M': 'Množné', 'P': 'Podmnožné'};
+	var cislo = {'J': 'Jednotné', 'M': 'Množné', 'P': 'Pomnožné'};
 	var class_type = 's';
 	
 	

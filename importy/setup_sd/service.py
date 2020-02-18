@@ -331,7 +331,7 @@ def zjednot_zamena():
 
                     db.session.add(nove_slovo)
 
-                chyba = zmaz_cely_slovny_druh(rovnake_zameno.id)
+                chyba = zmaz_cely_s_druh(rovnake_zameno.id)
 
                 print(f"Pokusil som sa zmazat slovny druh id:{rovnake_zameno.id} chyba bola:{chyba}")
 
@@ -365,7 +365,7 @@ def zjednot_cislovky():
 
                     db.session.add(nove_slovo)
 
-                chyba = zmaz_cely_slovny_druh(rovnake_cis.id)
+                chyba = zmaz_cely_s_druh(rovnake_cis.id)
 
                 print(f"Pokusil som sa zmazat slovny druh id:{rovnake_cis.id} chyba bola:{chyba}")
 
@@ -550,4 +550,145 @@ def anotuj_prid_m(start):
                     pocet_zaznamov = 0
 
         db.session.commit()
+
+
+def vyhod_duplicitne_slova():
+    with flask_app.app_context():
+        for s in db.session.query(Slovo.tvar, Slovo.sd_id, Slovo.anotacia, func.min(Slovo.id)).\
+                group_by(Slovo.tvar, Slovo.sd_id, Slovo.anotacia).having(func.count(Slovo.tvar) > 1).all():
+
+            if s[2].startswith("VL"):
+                print(f"Sloveso L tvar : SD_ID:{s[1]} Tvar:{s[0]} Anotacia:{s[2]} Min:{s[3]}")
+                Slovo.query.filter(Slovo.sd_id == s[1]).filter(Slovo.tvar == s[0]).\
+                    filter(Slovo.anotacia == s[2]).filter(Slovo.id != s[3]).delete()
+
+                slovo = Slovo.query.get(s[3])
+
+                slovo.sposob = "O"
+                osoba = s[2][-3:-2]
+                slovo.osoba = daj_osobu_z_anotacie(osoba)
+                slovo.user_id = 1
+                slovo.zmenene = datetime.datetime.now()
+
+                db.session.add(slovo)
+            elif s[2].startswith("VK"):
+                print(f"Sloveso indikativ : SD_ID:{s[1]} Tvar:{s[0]} Anotacia:{s[2]} Min:{s[3]}")
+                Slovo.query.filter(Slovo.sd_id == s[1]).filter(Slovo.tvar == s[0]).\
+                    filter(Slovo.anotacia == s[2]).filter(Slovo.id != s[3]).delete()
+
+                slovo = Slovo.query.get(s[3])
+
+                slovo.sposob = "O"
+                slovo.user_id = 1
+                slovo.zmenene = datetime.datetime.now()
+
+                db.session.add(slovo)
+            elif s[2].startswith("S"):
+                print(f"Podstatne meno: SD_ID:{s[1]} Tvar:{s[0]} Anotacia:{s[2]} Min:{s[3]}")
+                sid = s[3]
+
+                s_pomnozne = Slovo.query.filter(Slovo.sd_id == s[1]).filter(Slovo.tvar == s[0]).\
+                    filter(Slovo.anotacia == s[2]).filter(Slovo.cislo == "P").first()
+
+                if s_pomnozne:
+                    sid = s_pomnozne.id
+
+                Slovo.query.filter(Slovo.sd_id == s[1]).filter(Slovo.tvar == s[0]).\
+                    filter(Slovo.anotacia == s[2]).filter(Slovo.id != sid).delete()
+
+                slovo = Slovo.query.get(sid)
+
+                slovo.user_id = 1
+                slovo.zmenene = datetime.datetime.now()
+
+                db.session.add(slovo)
+
+            elif s[2].startswith("VI"):
+                print(f"Neurcitok: SD_ID:{s[1]} Tvar:{s[0]} Anotacia:{s[2]} Min:{s[3]}")
+
+                Slovo.query.filter(Slovo.sd_id == s[1]).filter(Slovo.tvar == s[0]).\
+                    filter(Slovo.anotacia == s[2]).filter(Slovo.id != s[3]).delete()
+
+                slovo = Slovo.query.get(s[3])
+
+                slovo.user_id = 1
+                slovo.zmenene = datetime.datetime.now()
+
+                db.session.add(slovo)
+
+            elif s[2].startswith("VH") or s[2].startswith("VM"):
+                print(f"prechodnik: SD_ID:{s[1]} Tvar:{s[0]} Anotacia:{s[2]} Min:{s[3]}")
+
+                Slovo.query.filter(Slovo.sd_id == s[1]).filter(Slovo.tvar == s[0]).\
+                    filter(Slovo.anotacia == s[2]).filter(Slovo.id != s[3]).delete()
+
+                slovo = Slovo.query.get(s[3])
+
+                slovo.user_id = 1
+                slovo.zmenene = datetime.datetime.now()
+
+                db.session.add(slovo)
+
+            elif s[2].startswith("P"):
+                print(f"zameno: SD_ID:{s[1]} Tvar:{s[0]} Anotacia:{s[2]} Min:{s[3]}")
+
+                Slovo.query.filter(Slovo.sd_id == s[1]).filter(Slovo.tvar == s[0]).\
+                    filter(Slovo.anotacia == s[2]).filter(Slovo.id != s[3]).delete()
+
+                slovo = Slovo.query.get(s[3])
+
+                slovo.user_id = 1
+                slovo.zmenene = datetime.datetime.now()
+
+                db.session.add(slovo)
+
+            elif s[2].startswith("G"):
+                print(f"Pricastie: SD_ID:{s[1]} Tvar:{s[0]} Anotacia:{s[2]} Min:{s[3]}")
+
+                if Slovo.query.filter(Slovo.sd_id == s[1]).filter(Slovo.tvar == s[0]).\
+                        filter(Slovo.anotacia == s[2]).filter(Slovo.rod.is_(None)).count() > 0:
+                    Slovo.query.filter(Slovo.sd_id == s[1]).filter(Slovo.tvar == s[0]). \
+                        filter(Slovo.anotacia == s[2]).filter(Slovo.rod.is_(None)).delete()
+                else:
+                    print(f"Pricastie UNKNWN: SD_ID:{s[1]} Tvar:{s[0]} Anotacia:{s[2]} Min:{s[3]}")
+                    Slovo.query.filter(Slovo.sd_id == s[1]).filter(Slovo.tvar == s[0]).\
+                        filter(Slovo.anotacia == s[2]).filter(Slovo.id != s[3]).delete()
+
+                    slovo = Slovo.query.get(s[3])
+
+                    slovo.user_id = 1
+                    slovo.zmenene = datetime.datetime.now()
+
+                    db.session.add(slovo)
+
+            elif s[2].startswith("N"):
+                print(f"cislovka: SD_ID:{s[1]} Tvar:{s[0]} Anotacia:{s[2]} Min:{s[3]}")
+
+                Slovo.query.filter(Slovo.sd_id == s[1]).filter(Slovo.tvar == s[0]).\
+                    filter(Slovo.anotacia == s[2]).filter(Slovo.id != s[3]).delete()
+
+                slovo = Slovo.query.get(s[3])
+
+                slovo.user_id = 1
+                slovo.zmenene = datetime.datetime.now()
+
+                db.session.add(slovo)
+
+            elif s[2].startswith("A"):
+                print(f"prid meno: SD_ID:{s[1]} Tvar:{s[0]} Anotacia:{s[2]} Min:{s[3]}")
+
+                Slovo.query.filter(Slovo.sd_id == s[1]).filter(Slovo.tvar == s[0]).\
+                    filter(Slovo.anotacia == s[2]).filter(Slovo.id != s[3]).delete()
+
+                slovo = Slovo.query.get(s[3])
+
+                slovo.user_id = 1
+                slovo.zmenene = datetime.datetime.now()
+
+                db.session.add(slovo)
+
+            else:
+                print(f"NEZNAME : SD_ID:{s[1]} Tvar:{s[0]} Anotacia:{s[2]} Min:{s[3]}")
+
+            db.session.commit()
 

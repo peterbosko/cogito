@@ -36,6 +36,8 @@ if __name__ == "__main__":
             anotuj_pod_m(start)
         elif command == "anotuj_prid_m":
             anotuj_prid_m(start)
+        elif command == "vyhod_duplicitne_slova":
+            vyhod_duplicitne_slova()
 
     else:
         print("usage:\n\n\trun_setup.py updatuj_slovesa | checkni_vyplnene_slovesa | generuj_a_porovnaj_slovesa "

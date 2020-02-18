@@ -25,6 +25,18 @@ def daj_anotaciu_osoby(osoba):
     return anot_osoba
 
 
+def daj_osobu_z_anotacie(anot):
+
+    if anot == "a":
+        return "1"
+    elif anot == "b":
+        return "2"
+    elif anot == "c":
+        return "3"
+
+    return "?"
+
+
 def daj_anotaciu_stupna(stupen):
     anot_stupen = "x"
 

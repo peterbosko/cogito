@@ -60,6 +60,8 @@ class SlovnyDruhHierExport(object):
 class slovo_data(object):
     data = []
     cisla = []
+
     def __init__(self):
         self.data = []
         self.cisla = []
+

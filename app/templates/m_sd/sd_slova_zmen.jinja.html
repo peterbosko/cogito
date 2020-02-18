@@ -1268,10 +1268,10 @@ function ZmenSlovaSD(closeScreen){
         var typ = '{{request.args.get("slovnyDruh")}}';
         data.typ = typ;
         data.koren = $('#ddlKorenSlova').val();
-        data.vzor = $('#ddlVzor').val();
-        data.prefix = $('#ddlPrefix').val();
-        data.sufix = $('#ddlSufix').val();
-        data.pzkmen = $('#txtPzkmen').val();
+        data.vzor = $('#ddlVzor').val()||'';
+        data.prefix = $('#ddlPrefix').val()||'';
+        data.sufix = $('#ddlSufix').val()||'';
+        data.pzkmen = $('#txtPzkmen').val()||'';
 
         data.zmazaneSlova = zmazaneSlova;
 
@@ -1291,18 +1291,15 @@ function ZmenSlovaSD(closeScreen){
                 data.je_privlastnovacie = 'N';
         }
         else if (typ == "ZAMENO"){
-            data.rod = $('#ddlZAMENO_ROD').val();
-            data.cislo = $('#ddlZAMENO_CISLO').val();
+            data.paradigma = $('#ddlParadigma_ZAMENO').val();
         }
         else if (typ == "SLOVESO"){
-            data.vid = $('#ddlVid').val();
+            data.vid = $('#ddlVid').val()||'';
         }
         else if (typ == "PREDLOZKA"){
             data.pady = $('#ddlPREDLOZKA_Pady').val().join(';');
         }
         else if (typ=="CISLOVKA"){
-            data.rod=$('#ddlCISLOVKA_ROD').val();
-            data.cislo=$('#ddlFormCISLOVKA_Cislo').val();
             data.hodnota=$('#txtFormCISLOVKA_HODNOTA').val();
         }
 

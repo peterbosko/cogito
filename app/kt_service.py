@@ -166,92 +166,152 @@ def vrat_sem_pad(sid):
         return None
 
 
-def vrat_pole_slov_z_textu(html, parent_slovo_id=None):
-    pole = []
+def vyrob_slovo_pole(slovo, s_id, bolo_vybrate):
+    vysledok = []
 
-    celkom_slov = 0
-    jednoznacnych_slov = 0
+    slovoVK = SlovoVKontexte()
 
-    # html = vyrob_korektne_html_z_editora(html)
+    slovoVK.tvar = slovo
 
+    slovoVK.id_slova = s_id
+
+    slovoVK.je_prve_upper = slovo[0] == slovo[0].upper() and slovo[0].lower() != slovo[0].upper()
+
+    slovoVK.bolo_vybrate = bolo_vybrate
+
+    vysledok.append(slovoVK)
+
+    return vysledok
+
+
+def daj_tokeny_slova(slovo):
+    text_slova = ""
+    text_cisla = ""
+
+    def ukonci_slovo():
+        if text_slova != "":
+            vysledok.append(text_slova)
+        som_v_slove = False
+
+    def ukonci_cislo():
+        if text_cisla != "":
+            vysledok.append(text_cisla)
+        som_v_cisle = False
+
+    vysledok = []
+
+    som_v_slove = False
+    som_v_cisle = False
+
+    for i in range(len(slovo)):
+        if slovo[i] == "." or slovo[i] == ",":
+            if som_v_cisle:
+                text_cisla += slovo[i]
+            else:
+                ukonci_cislo()
+                text_cisla = ""
+                ukonci_slovo()
+                text_slova = ""
+                vysledok.append(slovo[i])
+        elif slovo[i] in SPEC_ZNAKY:
+            ukonci_cislo()
+            text_cisla = ""
+            ukonci_slovo()
+            text_slova = ""
+            vysledok.append(slovo[i])
+        elif slovo[i] in "0123456789":
+            som_v_cisle = True
+            text_cisla += slovo[i]
+        else:
+            som_v_slove = True
+            text_slova += slovo[i]
+
+    ukonci_cislo()
+    text_cisla = ""
+    ukonci_slovo()
+    text_slova = ""
+
+    return vysledok
+
+
+def parsuj_zoznam_slov_z_html(html, parent_slovo_id=None):
     obsah_p = pq(html).contents()
 
+    vysledok = []
+
     for content in obsah_p.items():
-        # print("ide horny loop:"+content.outerHtml())
-        if content.is_("span"):
-            # print("Kontent je span:" + str(content.hasClass("slovnik"))+"|")
+        if len(content.children()) > 0:
             s_id = None
+
+            html_spanu = content.outerHtml()
 
             if content.hasClass("s") and content.attr('sid').isdigit():
                 s_id = int(content.attr('sid'))
 
-            s, u, p = vrat_pole_slov_z_textu(content.outerHtml(), s_id)
-            celkom_slov += s
-            jednoznacnych_slov += u
-            pole.extend(p)
+            vysledok.extend(parsuj_zoznam_slov_z_html(html_spanu, s_id))
+
         else:
-            # print("Kontent je text:" + content.text()+"|")
-            # oprava - najprv kontrola cisla potom pridavanie medzery pred spec. znaky
-            #text = daj_medzery_pred_specialne_znaky(content.text())
+
+            if content.is_("span") and content.attr('sid').isdigit():
+                parent_slovo_id = int(content.attr('sid'))
+
+            bolo_vybrate = False
+
+            if content.is_("span") and content.hasClass("s") and content.attr('sid').isdigit():
+                bolo_vybrate = True
+
             text = content.text()
-            
-            slova_to_check = re.split(r'\s', text)
-            
-            for s in slova_to_check:
+
+            slova = re.split(r'\s', text)
+
+            for s in slova:
                 if s:
+                    tokeny_slova = daj_tokeny_slova(s)
+                    for token in tokeny_slova:
+                        vysledok.extend(vyrob_slovo_pole(token, parent_slovo_id, bolo_vybrate))
 
-                    if pq(html).is_("span") and pq(html).hasClass("s") and pq(html).attr('sid').isdigit():
-                        parent_slovo_id = int(pq(html).attr("sid"))
-                    
-                    posledny_znak = s[len(s)-1]
-                    prvy_znak = s[0]
-                    if posledny_znak in SPEC_ZNAKY and len(s) > 1:
-                        cslov, js, v_slovo = vrat_slovo_po_kontrole_znakov(s, parent_slovo_id)
-                        pole = pole + v_slovo
-                        celkom_slov += cslov
-                        jednoznacnych_slov += js
-                    else:
-                        v_slovo = vrat_slovo(s, parent_slovo_id)
-                    
-                        if not v_slovo.neprekl_vyraz and not v_slovo.je_cislo:
-                            celkom_slov += 1
-
-                        if parent_slovo_id and parent_slovo_id == v_slovo.id_slova:
-                            v_slovo.bolo_vybrate = True
-
-                        if ((not v_slovo.je_viacej_v_slovniku) and v_slovo.je_v_slovniku
-                                and not v_slovo.neprekl_vyraz) or v_slovo.bolo_vybrate:
-                            jednoznacnych_slov += 1
-
-                        pole.append(v_slovo)
-
-    return celkom_slov, jednoznacnych_slov, pole
+    return vysledok
 
 
-def vrat_slovo_po_kontrole_znakov(slova, parent_slovo_id):
+def nacitaj_naparsovane_slova(naparsovane):
+    vysledok = []
+
+    slova = [slovo.tvar for slovo in naparsovane]
+
+    for p in naparsovane:
+        if p.je_prve_upper:
+            lws = p.tvar[0].lower()
+            if len(p.tvar) > 1:
+                lws += p.tvar[1:]
+            slova.append(lws)
+
+    for sl in Slovo.query.filter(Slovo.tvar.in_(slova)):
+        vysledok.append(sl.exportuj(False))
+
+    return vysledok
+
+
+def vrat_pole_slov_z_textu(html, zoznam_nacitanych_slov):
     pole = []
+
     celkom_slov = 0
     jednoznacnych_slov = 0
-    
-    slova = daj_medzery_pred_specialne_znaky(slova)
-    slova_to_check = re.split(r'\s', slova)
-    if len(slova_to_check) > 1:
-        for s in slova_to_check:
-            if s:
-                v_slovo = vrat_slovo(s, parent_slovo_id)
-                    
-                if not v_slovo.neprekl_vyraz and not v_slovo.je_cislo:
-                    celkom_slov += 1
 
-                if parent_slovo_id and parent_slovo_id == v_slovo.id_slova:
-                    v_slovo.bolo_vybrate = True
+    vyparsovane_slova = parsuj_zoznam_slov_z_html(html)
 
-                if ((not v_slovo.je_viacej_v_slovniku) and v_slovo.je_v_slovniku
-                        and not v_slovo.neprekl_vyraz) or v_slovo.bolo_vybrate:
-                    jednoznacnych_slov += 1
-                
-                pole.append(v_slovo)
-                
+    for p_slovo in vyparsovane_slova:
+
+        v_slovo = vrat_slovo2(p_slovo.bolo_vybrate, p_slovo.je_prve_upper, p_slovo.tvar, zoznam_nacitanych_slov, p_slovo.id_slova)
+
+        if not v_slovo.neprekl_vyraz and not v_slovo.je_cislo:
+            celkom_slov += 1
+
+        if ((not v_slovo.je_viacej_v_slovniku) and v_slovo.je_v_slovniku and not v_slovo.neprekl_vyraz) \
+                or v_slovo.bolo_vybrate:
+            jednoznacnych_slov += 1
+
+        pole.append(v_slovo)
+
     return celkom_slov, jednoznacnych_slov, pole
 
 
@@ -335,13 +395,17 @@ def kontrola_slov_v_kontexte(data):
     
     result.data = ""
 
+    vyparsovane_slova = parsuj_zoznam_slov_z_html(data)
+
+    zoznam_nacitanych_slov = nacitaj_naparsovane_slova(vyparsovane_slova)
+
     for p in doc("p"):
 
         pole_slov = []
 
         obsah_p = pq(p).html()
         if obsah_p:
-            slov, jednoznacnych, pole = vrat_pole_slov_z_textu(obsah_p)
+            slov, jednoznacnych, pole = vrat_pole_slov_z_textu(obsah_p, zoznam_nacitanych_slov)
 
         celkom_slov += slov
 
@@ -352,7 +416,10 @@ def kontrola_slov_v_kontexte(data):
         if pole_slov:
 
             result.data += "<p>%s</p>" % (serializuj_pole_slov(pole_slov))
-        
+
+    if celkom_slov == 0:
+        celkom_slov = 1
+
     result.uspesnost = round(jednoznacnych_slov/celkom_slov * 100, 2)
 
     return result
@@ -364,11 +431,15 @@ def vrat_ciste_slova_s_anotaciou(data):
 
     doc = pq(data)
 
+    vyparsovane_slova = parsuj_zoznam_slov_z_html(data)
+
+    zoznam_nacitanych_slov = nacitaj_naparsovane_slova(vyparsovane_slova)
+
     for p in doc("p"):
 
         obsah_p = pq(p).html()
 
-        slov, jednoznacnych, pole = vrat_pole_slov_z_textu(obsah_p)
+        slov, jednoznacnych, pole = vrat_pole_slov_z_textu(obsah_p, zoznam_nacitanych_slov)
 
         vysledok += serializuj_pole_slov_do_anotacie(pole)+"\n"
 

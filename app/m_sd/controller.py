@@ -601,8 +601,12 @@ def zmenit_sd_post():
             zam.user_id = int(session["logged"])
             zam.zmenene = datetime.datetime.now()
 
-            zam.zak_tvar = export.zak_tvar
-            zam.popis = export.popis
+            if export.tab == "zakladne":
+                zam.zak_tvar = export.zak_tvar
+                zam.popis = export.popis
+            elif export.tab == "slova":
+                zam.koren = export.koren
+                zam.paradigma = export.paradigma
 
             db.session.add(zam)
             db.session.commit()
