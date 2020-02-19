@@ -160,10 +160,13 @@ def vrat_slovo2(bolo_vybrate, je_prve_upper, slovo, zoznam_nacitanych_slov, ids=
         lower_sl += slovo[1:]
 
     sl = []
+    sid = None
 
     for s in zoznam_nacitanych_slov:
-        if s.tvar == slovo or (je_prve_upper and s.tvar == lower_sl) and (not ids or s.id == ids):
+        if s.tvar == slovo or (je_prve_upper and s.tvar == lower_sl):
             sl.append(s)
+            if s.id == ids:
+                sid = s.id
 
     if len(sl) == 0:
         vysledok_slovo.id_slova = None
@@ -175,7 +178,9 @@ def vrat_slovo2(bolo_vybrate, je_prve_upper, slovo, zoznam_nacitanych_slov, ids=
         vysledok_slovo.cely_popis_slova = None
         vysledok_slovo.anotacia = "???????"
     elif len(sl) == 1:
-        vysledok_slovo.id_slova = sl[0].id
+        if not sid:
+            sid = sl[0].id
+        vysledok_slovo.id_slova = sid
         vysledok_slovo.je_v_slovniku = True
         vysledok_slovo.je_viacej_v_slovniku = False
         vysledok_slovo.slovo = sl[0].tvar
@@ -186,7 +191,9 @@ def vrat_slovo2(bolo_vybrate, je_prve_upper, slovo, zoznam_nacitanych_slov, ids=
         vysledok_slovo.anotacia = sl[0].anotacia
         vysledok_slovo.bolo_vybrate = bolo_vybrate
     else:
-        vysledok_slovo.id_slova = sl[0].id
+        if not sid:
+            sid = sl[0].id
+        vysledok_slovo.id_slova = sid
         vysledok_slovo.je_v_slovniku = True
         vysledok_slovo.je_viacej_v_slovniku = True
         vysledok_slovo.slovo = sl[0].tvar

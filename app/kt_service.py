@@ -222,9 +222,6 @@ def parsuj_zoznam_slov_z_html(html, parent_slovo_id=None):
 
             html_spanu = content.outerHtml()
 
-            text = content.text()
-            slova = re.split(r'\s', text)
-
             if content.hasClass("s") and content.attr('sid').isdigit():
                 s_id = int(content.attr('sid'))
 
@@ -235,13 +232,6 @@ def parsuj_zoznam_slov_z_html(html, parent_slovo_id=None):
             slova = re.split(r'\s', text)
             bolo_vybrate = False
 
-            if content.is_("span") and content.attr('sid'):
-                if content.attr('sid').isdigit() and content.hasClass("s"):
-                    bolo_vybrate = True
-
-                if content.attr('sid').isdigit():
-                    parent_slovo_id = int(content.attr('sid'))
-
             i = 0
             if len(slova) > 1:
                 for s in slova:
@@ -249,12 +239,26 @@ def parsuj_zoznam_slov_z_html(html, parent_slovo_id=None):
                         if i > 0:
                             bolo_vybrate = False
                             parent_slovo_id = None
+                        else:
+                            if content.is_("span") and content.attr('sid'):
+                                if content.attr('sid').isdigit() and content.hasClass("s"):
+                                    bolo_vybrate = True
+
+                                if content.attr('sid').isdigit():
+                                    parent_slovo_id = int(content.attr('sid'))
 
                         tokeny_slova = daj_tokeny_slova(s)
                         for token in tokeny_slova:
                             vysledok.extend(vyrob_slovo_pole(token, parent_slovo_id, bolo_vybrate))
                         i += 1
             else:
+                if content.is_("span") and content.attr('sid'):
+                    if content.attr('sid').isdigit() and content.hasClass("s"):
+                        bolo_vybrate = True
+
+                    if content.attr('sid').isdigit():
+                        parent_slovo_id = int(content.attr('sid'))
+
                 tokeny_slova = daj_tokeny_slova(slova[0])
                 for token in tokeny_slova:
                     vysledok.extend(vyrob_slovo_pole(token, parent_slovo_id, bolo_vybrate))
@@ -427,4 +431,3 @@ def vrat_ciste_slova_s_anotaciou(data):
         vysledok += serializuj_pole_slov_do_anotacie(pole)+"\n"
 
     return vysledok
-
