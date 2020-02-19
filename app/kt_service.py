@@ -463,3 +463,4 @@ def vrat_ciste_slova_s_anotaciou(data):
         vysledok += serializuj_pole_slov_do_anotacie(pole)+"\n"
 
     return vysledok
+
