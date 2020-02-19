@@ -17,9 +17,9 @@ def vrat_slovo_komplet(sid, vyraz):
     prvy_znak_upper = False
 
     if sid or vyraz:
-        if sid:
+        if sid and je_cislo(sid):
             data = Slovo.query.filter(Slovo.id == sid)
-        elif len(vyraz) > 0 and not sid:
+        elif len(vyraz) > 0:
             prvy_znak = vyraz[0]
 
             if prvy_znak == prvy_znak.upper():
