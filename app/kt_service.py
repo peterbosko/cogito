@@ -34,21 +34,6 @@ def vrat_slovo_komplet(sid, vyraz):
         for row in data:
             slovo_data.data = {key: value for (key, value) in row.exportuj_komplet(prvy_znak_upper).__dict__.items()}
 
-        # VSEOBECNE
-
-        #v_slovne_druhy = SlovnyDruh.query.filter(SlovnyDruh.zak_tvar == slovo_data.data['zak_tvar'])
-        #slovo_data.vsetky_slovne_druhy = [{key: value for (key, value) in row.exportuj().__dict__.items()} for row in
-        #                                  v_slovne_druhy]
-
-        #pady = Slovo.query.filter(Slovo.sd_id == slovo_data.data['sd_id']).filter(
-        #    Slovo.cislo == slovo_data.data['cislo']).filter(Slovo.rod == slovo_data.data['rod']).filter(
-        #    Slovo.podrod == slovo_data.data['podrod'])
-        #slovo_data.pady = [{key: value for (key, value) in row.exportuj(False).__dict__.items()} for row
-        #                                  in pady]
-
-        #cisla = Slovo.query.filter(Slovo.sd_id == slovo_data.data['sd_id']).filter(Slovo.pad == slovo_data.data['pad'])
-        #slovo_data.cisla = [{key: value for (key, value) in row.exportuj(False).__dict__.items()} for row in cisla]
-
         if slovo_data.data:
             slova = Slovo.query.filter(Slovo.tvar == slovo_data.data['tvar']).filter(Slovo.anotacia.isnot(None))
             slovo_data.vsetky_slova = [{key: value for (key, value) in row.exportuj_komplet(prvy_znak_upper).__dict__.items()} for row in
@@ -58,20 +43,7 @@ def vrat_slovo_komplet(sid, vyraz):
             slovo_data.odvodene = [{key: value for (key, value) in row.exportuj().__dict__.items()} for row in
                                        odvodene_slova]
 
-        #if slovo_data.data['slovny_druh'] == "PRID_M":
-            # PRID_M
-        #    stupne = Slovo.query.filter(Slovo.sd_id == slovo_data.data['sd_id']).group_by(Slovo.stupen).group_by(
-        #        Slovo.cislo)
-        #    slovo_data.stupne = [{key: value for (key, value) in row.exportuj(False).__dict__.items()} for row in
-        #                        stupne]
-
-        #if slovo_data.data['slovny_druh'] == "SLOVESO":
-            # SLOVESO
-        #    tvary_slovies = Slovo.query.get(slovo_data.data['sd_id'])
-        #    slovo_data.tvary_slovies = [{key: value for (key, value) in row.exportuj(False).__dict__.items()} for row in
-        #                                tvary_slovies]
-
-        print("--- %s seconds ---" % (time.time() - start_time))
+        print("--- %s seconds ---" % (time.time() - start_time)) # KONTROLA RYCHLOSTI SKRIPTU
         return slovo_data
     else:
         return None
@@ -120,8 +92,6 @@ def vrat_slovne_druhy_slova_zacinajuce_na(vyraz):
             pole_slov = SlovnyDruh.query.filter(or_(SlovnyDruh.zak_tvar == vyraz, SlovnyDruh.zak_tvar == vyraz.lower()))
         else:
             pole_slov = SlovnyDruh.query.filter(SlovnyDruh.zak_tvar == vyraz)
-
-        #pole_slov = pole_slov.filter(SlovnyDruh.anotacia.isnot(None)) #slovny druh nema anotaciu
 
         if pole_slov.count() == 0:
             if prvy_znak_upper:
@@ -322,10 +292,10 @@ def vrat_pole_slov_z_textu(html, zoznam_nacitanych_slov):
 
         v_slovo = vrat_slovo2(p_slovo.bolo_vybrate, p_slovo.je_prve_upper, p_slovo.tvar, zoznam_nacitanych_slov, p_slovo.id_slova)
 
-        if not v_slovo.neprekl_vyraz and not v_slovo.je_cislo:
+        if not v_slovo.je_cislo:
             celkom_slov += 1
 
-        if ((not v_slovo.je_viacej_v_slovniku) and v_slovo.je_v_slovniku and not v_slovo.neprekl_vyraz) \
+        if ((not v_slovo.je_viacej_v_slovniku) and v_slovo.je_v_slovniku and not v_slovo.je_cislo) \
                 or v_slovo.bolo_vybrate:
             jednoznacnych_slov += 1
 
@@ -349,22 +319,19 @@ def serializuj_pole_slov(pole):
         if slovo.je_viacej_v_slovniku and not slovo.bolo_vybrate:
             cl = "m ns"
 
-        if slovo.neprekl_vyraz:
+        if slovo.je_cislo:
             prilep = ""
 
             if len(pole) > i + 1:
                 prilep = "&nbsp;"
 
-            if slovo.je_cislo:
-                vysledok += str(slovo.neprekl_vyraz) + prilep
-            else:
-                vysledok += slovo.neprekl_vyraz+prilep
+            vysledok += str(slovo.tvar) + prilep
+
         else:
             prilep = ""
 
             if len(pole) > i+1:
-                if not pole[i+1].neprekl_vyraz or pole[i+1].je_cislo:
-                    prilep = "&nbsp;"
+                prilep = "&nbsp;"
 
             vysledok += "<span class='{cl} no-select' sid='{id}'>{slovo}</span>".format(
                 slovo=slovo.tvar, id=slovo.id_slova, cl=cl)+prilep
@@ -384,11 +351,8 @@ def serializuj_pole_slov_do_anotacie(pole):
         if len(pole) > i + 1:
             prilep = " "
 
-        if slovo.neprekl_vyraz:
-            if slovo.je_cislo:
-                vysledok += str(slovo.neprekl_vyraz) + prilep
-            else:
-                vysledok += slovo.neprekl_vyraz + prilep
+        if slovo.je_cislo:
+            vysledok += str(slovo.tvar) + prilep
         else:
             anot = ""
 

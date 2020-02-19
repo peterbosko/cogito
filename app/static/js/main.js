@@ -1,5 +1,6 @@
 var responseOK=1;
 var responseERROR=2;
+var revalidacia_modal = true;
 
 var AjaxMethods = {
     getDataFromGetRequest: function getDataFromGetRequest(dataFrom, params, data, callback) {
@@ -205,7 +206,7 @@ function add_word(that, is_new, add_new_meaning){
 		slovo = main.find('.active').html();
 		param = '?slovo='+slovo+'&slovnyDruh='+sd;
 
-		loadTemplateIntoModal('#defaultModal', 'Pridanie slova','/pridaj_slovo_vyber_sd/'+param, null, null, true);
+		loadTemplateIntoModal('#defaultModal', 'Pridanie slova','/pridaj_slovo_vyber_sd/'+param, null, null, revalidacia_modal);
 	} else {
 		sdid = main.find('.active').attr('sdid');
 		param = '?sd_id='+sdid+'&slovnyDruh='+sd;
@@ -238,7 +239,7 @@ function add_word(that, is_new, add_new_meaning){
         else if (sd=="PREDLOZKA"){
             modal_title = 'Pridať predložku';
         }
-		loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', modal_title,'/zmenit_sd/'+param, null, null, true);
+		loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', modal_title,'/zmenit_sd/'+param, null, null, revalidacia_modal);
 	}
 	
 }
@@ -281,7 +282,7 @@ function edit_sd(that){
     else if (sd=="PREDLOZKA"){
             modal_title = 'Zmeniť predložku';
     }
-	loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', modal_title,'/zmenit_sd/'+param, null, null, true);
+	loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', modal_title,'/zmenit_sd/'+param, null, null, revalidacia_modal);
 }
 
 function setProgressBar(){
@@ -350,8 +351,6 @@ function skontroluj_slova_znova() {
 		   closeOnClickOutside : false,
 		   closeModal : false,
 		   closeOnEsc : false,
-		   // <div class="fa-3x"><i class="fas fa-spinner fa-spin"></i></div>
-		   // not working now html : true
 		   });
 	AjaxMethods.getDataFromAsyncPostRequest('/kontrola_slov/', "", data, function(r){
 		if (r.status==responseOK){//OK vetva
@@ -392,7 +391,11 @@ function skontroluj_slova_znova() {
 	})
 }
 
-function load_slovo(that){
+function load_slovo(that, active = false){
+	if(active == true) {
+		var main = $("iframe.cke_wysiwyg_frame").contents();
+		that = main.find('.active');
+	}
 	var sid = $(that).attr('sid');
 	var slovo = $(that).text();
 	var data = {};
@@ -403,7 +406,7 @@ function load_slovo(that){
 	settings_row.find('el').html('');
 	var cislo = {'J': 'Jednotné', 'M': 'Množné', 'P': 'Pomnožné'};
 	var class_type = 's';
-	
+	var slovo_sa_v_db_nenachadza = 0;
 	
 	
 	if($(that).hasClass('m')) {
@@ -421,7 +424,6 @@ function load_slovo(that){
 	/*** NACITAJ SLOVO DO OBJEKTU ***/
 	
 	AjaxMethods.getDataFromGetRequest('/daj_komplet?sid=', sid+'&vyraz='+slovo, '', function(response){
-		//console.log(response);
 		var obj = response;
 		if (obj.data){
 			/*** NACITAJ VSETKY SLOVA PRE DANE SLOVO ***/
@@ -529,28 +531,42 @@ function load_slovo(that){
 			}
 			$(that).attr('sdid', obj.data.sd_id);
 			$(that).attr('sd', obj.data.slovny_druh);
+		} else {
+			slovo_sa_v_db_nenachadza = 1;
 		}
 	});
 	
-	var save_name = 'Potvrdiť slovo v kontexte <i class="fa fa-check-double"></i>';
+	if(slovo_sa_v_db_nenachadza == 1 && active == true) {
+		swal({ buttons: {},
+				title  :  "Chyba",
+				text   :  "Slovo sa v databáze nenachádza.",
+				icon   :  "error"});
+	}
 
 	var editovat_sd = '<a href="#" onclick="edit_sd(this);" class="btn" style="position: absolute; right: 240px;">Editovať v slovníku <i class="fa fa-edit"></i></a>';
+	var save_name = '';
+	var func = 'accept_word(this);';
 
 	if(class_type == 's') {
 		save_name = 'Upraviť slovo v kontexte <i class="fa fa-edit"></i>';
+	} else if(class_type == 'm') {
+		save_name = 'Potvrdiť slovo v kontexte <i class="fa fa-check-double"></i>';
+	} else {
+		save_name = 'Znovu načítaj slovo v kontexte <i class="fa fa-edit"></i>';
+		func = 'load_slovo(null, true);';
 	}
+	
+	settings_row_buttons.find('.setting-accept_word').html('<a href="#" onclick="'+func+'" class="btn" style="position: absolute; right: 20px;">'+save_name+'</a>');
+	
 	if(class_type != 'n') {
-		settings_row_buttons.find('.setting-accept_word').html('<a href="#" onclick="accept_word(this);" class="btn" style="position: absolute; right: 20px;">'+save_name+'</a>');
 		settings_row_buttons.find('.setting-accept_word').append(editovat_sd);
 		settings_row_buttons.find('.setting-accept_word').append('<a href="#" onclick="add_word(this, false, true);" class="btn" style="position: absolute; left: 20px;"><i class="fa fa-plus"></i> Pridať nový význam slova <i class="fa fa-info-circle"></i></a>');
 	} else {
-		settings_row_buttons.find('.setting-accept_word').html('<a href="#" onclick="add_word(this, true);" class="btn" style="position: absolute; left: 20px;"><i class="fa fa-plus"></i> Pridať nové slovo</a>');
+		settings_row_buttons.find('.setting-accept_word').append('<a href="#" onclick="add_word(this, true);" class="btn" style="position: absolute; left: 20px;"><i class="fa fa-plus"></i> Pridať nové slovo</a>');
 	}
-	//$('select').niceSelect();
-
 }
 
-function loadTemplateIntoModal(modalSelector, title, controlPath, fireMethod, methodParams, recontrol) {
+function loadTemplateIntoModal(modalSelector, title, controlPath, fireMethod, methodParams, revalidate) {
 
     var modalObj = $(modalSelector);
     modalObj.find('.modal-title').html(title);
@@ -576,15 +592,15 @@ function loadTemplateIntoModal(modalSelector, title, controlPath, fireMethod, me
 
     modalObj.modal('show');
 	
-	if(recontrol == true) {
+	if(revalidate == true && modalSelector === "#defaultModal2") {
 		modalObj.on('hidden.bs.modal', function () {
 			skontroluj_slova_znova();
 		})
 	}
 }
 
-function loadTemplateIntoLargeScreenModal(modalSelector, cssClass, title, controlPath, fireMethod, methodParams, recontrol) {
-    loadTemplateIntoModal(modalSelector, title, controlPath, fireMethod, methodParams, recontrol);
+function loadTemplateIntoLargeScreenModal(modalSelector, cssClass, title, controlPath, fireMethod, methodParams, revalidate) {
+    loadTemplateIntoModal(modalSelector, title, controlPath, fireMethod, methodParams, revalidate);
     var modalObj = $(modalSelector);
     modalObj.addClass(cssClass);
     modalObj.find('.modal-dialog').removeClass('modal-lg');
@@ -841,10 +857,6 @@ function loadNeededScriptsAndStyles(script, style, callback) {
             var all = CKEDITOR.instances[ckeditorName].document.getElementsByTag( 'span' );
             for (var i = 0, max = all.count(); i < max; i++) {
                 var el = all.$[i];
-				//el.setAttribute('onmouseover','t(this);');
-				//el.classList.remove("m");
-				//el.classList.remove("n");
-				//el.classList.remove("active");
             }
 	}
 	
