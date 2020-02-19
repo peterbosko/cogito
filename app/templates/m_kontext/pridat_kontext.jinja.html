@@ -69,7 +69,12 @@ function ZmenKontext(redirect){
             data.nazov=$("#txtContextName").val();
             data.status=$("#txtContextStatus").val();
             data.obsah = CKEDITOR.instances['txtContext'].getData();
-            data.text= CKEDITOR.instances['txtContext'].document.getBody().getText();
+            
+			var wrapped = $("<div>" + data.obsah + "</div>");
+			wrapped.find('span').removeClass('active m n ns no-select').removeAttr('ondblclick onselectstart sdid sd');
+			data.obsah = wrapped.html();
+			
+			data.text= CKEDITOR.instances['txtContext'].document.getBody().getText();
 
             AjaxMethods.getDataFromPostRequest('{{url_for("kontext.pridat_kontext")}}', "", data, function(r){
                 if (r.status==responseOK){//OK vetva
