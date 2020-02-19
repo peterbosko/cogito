@@ -1,6 +1,6 @@
 var responseOK=1;
 var responseERROR=2;
-var revalidacia_modal = true;
+var revalidacia_modal = false;
 
 var AjaxMethods = {
     getDataFromGetRequest: function getDataFromGetRequest(dataFrom, params, data, callback) {
@@ -206,7 +206,7 @@ function add_word(that, is_new, add_new_meaning){
 		slovo = main.find('.active').html();
 		param = '?slovo='+slovo+'&slovnyDruh='+sd;
 
-		loadTemplateIntoModal('#defaultModal', 'Pridanie slova','/pridaj_slovo_vyber_sd/'+param, null, null, revalidacia_modal);
+		loadTemplateIntoModal('#defaultModal', 'Pridanie slova','/pridaj_slovo_vyber_sd/'+param);
 	} else {
 		sdid = main.find('.active').attr('sdid');
 		param = '?sd_id='+sdid+'&slovnyDruh='+sd;
@@ -239,7 +239,7 @@ function add_word(that, is_new, add_new_meaning){
         else if (sd=="PREDLOZKA"){
             modal_title = 'Pridať predložku';
         }
-		loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', modal_title,'/zmenit_sd/'+param, null, null, revalidacia_modal);
+		loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', modal_title,'/zmenit_sd/'+param);
 	}
 	
 }
@@ -282,7 +282,7 @@ function edit_sd(that){
     else if (sd=="PREDLOZKA"){
             modal_title = 'Zmeniť predložku';
     }
-	loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', modal_title,'/zmenit_sd/'+param, null, null, revalidacia_modal);
+	loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', modal_title,'/zmenit_sd/'+param);
 }
 
 function setProgressBar(){
@@ -400,6 +400,8 @@ function load_slovo(that, active = false){
 	var slovo = $(that).text();
 	var data = {};
 	
+	console.log(slovo);
+	
 	var settings_row = $('body', parent.document).find('#settings-rows');
 	var settings_row_buttons = $('body', parent.document).find('#settings-rows-buttons');
 	
@@ -426,6 +428,18 @@ function load_slovo(that, active = false){
 	AjaxMethods.getDataFromGetRequest('/daj_komplet?sid=', sid+'&vyraz='+slovo, '', function(response){
 		var obj = response;
 		if (obj.data){
+			/*** AKTUALIZUJ PRIDANE SLOVO ***/
+			if(obj.vsetky_slova.length > 0 && class_type == 'n') {
+				if(obj.vsetky_slova.length > 1) {
+					$(that).removeClass('n').addClass('m');
+					class_type = 'm';
+				} else {
+					$(that).removeClass('n').addClass('s');
+					class_type = 's';
+					$(that).attr('sid', obj.data.id);
+				}
+			}
+			
 			/*** NACITAJ VSETKY SLOVA PRE DANE SLOVO ***/
 			if(class_type == 's') {
 				var slovo_data = '';
@@ -566,7 +580,7 @@ function load_slovo(that, active = false){
 	}
 }
 
-function loadTemplateIntoModal(modalSelector, title, controlPath, fireMethod, methodParams, revalidate) {
+function loadTemplateIntoModal(modalSelector, title, controlPath, fireMethod, methodParams) {
 
     var modalObj = $(modalSelector);
     modalObj.find('.modal-title').html(title);
@@ -592,15 +606,15 @@ function loadTemplateIntoModal(modalSelector, title, controlPath, fireMethod, me
 
     modalObj.modal('show');
 	
-	if(revalidate == true && modalSelector === "#defaultModal2") {
+	if(revalidacia_modal == true && modalSelector === "#defaultModal2") {
 		modalObj.on('hidden.bs.modal', function () {
 			skontroluj_slova_znova();
 		})
 	}
 }
 
-function loadTemplateIntoLargeScreenModal(modalSelector, cssClass, title, controlPath, fireMethod, methodParams, revalidate) {
-    loadTemplateIntoModal(modalSelector, title, controlPath, fireMethod, methodParams, revalidate);
+function loadTemplateIntoLargeScreenModal(modalSelector, cssClass, title, controlPath, fireMethod, methodParams) {
+    loadTemplateIntoModal(modalSelector, title, controlPath, fireMethod, methodParams);
     var modalObj = $(modalSelector);
     modalObj.addClass(cssClass);
     modalObj.find('.modal-dialog').removeClass('modal-lg');
