@@ -31,10 +31,10 @@
 					//save.enable();
 					cogito_check.enable();
 					cogito_check_remove.disable();
-					cogito_ut.disable();
-					cogito_ut_list.disable();
-					cogito_anotacia.disable();
-					cogito_rozbor.disable();
+					//cogito_ut.disable();
+					//cogito_ut_list.disable();
+					//cogito_anotacia.disable();
+					//cogito_rozbor.disable();
 					
 				} );
 				editor.on('key', function (e) { 

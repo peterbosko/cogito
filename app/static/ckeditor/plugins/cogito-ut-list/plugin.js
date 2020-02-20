@@ -17,7 +17,7 @@
 			    }
 			}
 		},
-		startDisabled: true	
+		startDisabled: false	
 	};
 
 	var pluginName = 'cogito-ut-list';

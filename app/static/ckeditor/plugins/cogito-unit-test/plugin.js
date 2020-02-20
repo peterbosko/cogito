@@ -18,7 +18,7 @@
 			    }
 			}
 		},
-		startDisabled: true	
+		startDisabled: false	
 	};
 
 	var pluginName = 'cogito-unit-test';

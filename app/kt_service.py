@@ -228,6 +228,9 @@ def parsuj_zoznam_slov_z_html(html, parent_slovo_id=None):
             vysledok.extend(parsuj_zoznam_slov_z_html(html_spanu, s_id))
 
         else:
+            if len(obsah_p) == 1:
+                content = pq(html)
+
             text = content.text()
             slova = re.split(r'\s', text)
             bolo_vybrate = False

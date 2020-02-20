@@ -63,10 +63,10 @@
 							paste.disable();
 							//cogito_check.disable();
 							cogito_check_remove.enable();
-							cogito_ut.enable();
-							cogito_ut_list.enable();
-							cogito_anotacia.enable();
-							cogito_rozbor.enable();
+							//cogito_ut.enable();
+							//cogito_ut_list.enable();
+							//cogito_anotacia.enable();
+							//cogito_rozbor.enable();
 							
 						} );
 						$('body', parent.document).find('#setting-new-validation').hide();

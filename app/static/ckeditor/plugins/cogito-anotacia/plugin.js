@@ -34,7 +34,7 @@ function copyToClipboard(text){
 
 			}
 		},
-		startDisabled: true	
+		startDisabled: false	
 	};
 
 	var pluginName = 'cogito-anotacia';
