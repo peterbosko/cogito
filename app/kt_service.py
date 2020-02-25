@@ -35,8 +35,16 @@ def vrat_slovo_komplet(sid, vyraz):
             slovo_data.data = {key: value for (key, value) in row.exportuj_komplet(prvy_znak_upper).__dict__.items()}
 
         if slovo_data.data:
-            slova = Slovo.query.filter(Slovo.tvar == slovo_data.data['tvar']).filter(Slovo.anotacia.isnot(None))
-            slovo_data.vsetky_slova = [{key: value for (key, value) in row.exportuj_komplet(prvy_znak_upper).__dict__.items()} for row in
+
+            first_lower = slovo_data.data['tvar'][0].lower()
+
+            if len(slovo_data.data['tvar']) > 1:
+                first_lower += slovo_data.data['tvar'][1:]
+
+            slova = Slovo.query.filter(or_(Slovo.tvar == slovo_data.data['tvar'], Slovo.tvar == first_lower)).\
+                filter(Slovo.anotacia.isnot(None))
+            slovo_data.vsetky_slova = [{key: value for (key, value) in
+                                        row.exportuj_komplet(prvy_znak_upper).__dict__.items()} for row in
                                        slova]
 
             odvodene_slova = HierarchiaSD.query.filter(HierarchiaSD.sd_id == slovo_data.data['sd_id'])
@@ -434,3 +442,4 @@ def vrat_ciste_slova_s_anotaciou(data):
         vysledok += serializuj_pole_slov_do_anotacie(pole)+"\n"
 
     return vysledok
+

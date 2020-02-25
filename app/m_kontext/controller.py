@@ -12,6 +12,7 @@ import json
 from flask import redirect, url_for
 import urllib.parse
 from app.sd_service import *
+from flask import current_app
 
 kontext_blueprint = Blueprint("kontext", __name__)
 
@@ -483,6 +484,13 @@ def rozbor_viet_kontextu():
     kt_id = request.args.get("kontext_id")
 
     k = Kontext.query.get(kt_id)
+
+    model = current_app.udpipe_model
+
+    sentences = model.tokenize("Vedci pozorovali lode z vesmíru .")
+    for s in sentences:
+        t = model.tag(s)
+        p = model.parse(s)
 
     return render_template("m_kontext/rozbor_viet_kontextu.jinja.html", kontext=k, stromy_body="aaa\nbbb")
 

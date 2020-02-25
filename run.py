@@ -2,14 +2,21 @@ from app.app import flask_app
 from app.db_models import *
 from app.sd_service import *
 import sys
+from udpipe.model import Model
 
 db.init_app(flask_app)
+
+
+def read_udpipe_model():
+    model = Model('udpipe\\data\\slovak-snk-ud-2.5-191206.udpipe')
+    return model
 
 
 def start():
     debug = False
     host = "0.0.0.0"
     port = 80
+    flask_app.udpipe_model = read_udpipe_model()
     flask_app.run(host, debug=debug, port=port)
 
 
