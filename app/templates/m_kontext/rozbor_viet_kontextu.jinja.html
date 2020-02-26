@@ -1,13 +1,33 @@
+<link rel="stylesheet" href="{{url_for('static', filename='js/jstree/themes/default/style.min.css')}}" />
+<script src='{{url_for("static", filename="js/jstree/jstree.min.js")}}'></script>
+
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
-            <div class="form-horizontal">
-                <form id="RozborForm" data-fv-framework="bootstrap" method="post">
-                    <div class="col-sm-12">
-                         <textarea rows="10" placeholder="" cols="20" id="taStromy" name="taStromy" class="form-control" data-fv-row=".col-sm-12">{{stromy_body}}</textarea>
-                    </div>
-                </form>
-            </div>
+            <div id="jsTree"></div>
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        var data = {};
+
+        data.kontext = CKEDITOR.instances['txtContext'].getData();
+
+        AjaxMethods.getDataFromPostRequest('{{url_for("kontext.vyrob_stromy_viet")}}', "", data, function(r){
+            if (r.status==responseOK){//OK vetva
+                $('#jsTree').jstree({ 'core' : {
+                    'data' : r.data
+                    }
+                });
+            } else{
+                swal({ buttons: {},
+                   title  :  "Chyba",
+                   text   :  r.error_text,
+                   icon   :  "error"});
+            }
+        });
+
+    });
+
+</script>

@@ -5,8 +5,7 @@
 
 		exec: function( editor ) {
 			if ( editor.fire( 'cogito-rozbor' ) ) {
-                var kt_id=$('#kt_id').val();
-                loadTemplateIntoModal('#defaultModal','Rozbor viet kontextu', '/rozbor_viet_kontextu/?kontext_id='+kt_id);
+                loadTemplateIntoModal('#defaultModal','Rozbor viet kontextu', '/rozbor_viet_kontextu/');
 			}
 		},
 		startDisabled: false	

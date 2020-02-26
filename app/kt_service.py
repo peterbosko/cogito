@@ -10,6 +10,8 @@ import jsonpickle
 import html
 import datetime
 import time
+from nltk.tokenize import sent_tokenize
+from nltk.tokenize import word_tokenize
 
 
 def vrat_slovo_komplet(sid, vyraz):
@@ -442,4 +444,68 @@ def vrat_ciste_slova_s_anotaciou(data):
         vysledok += serializuj_pole_slov_do_anotacie(pole)+"\n"
 
     return vysledok
+
+
+def vyrob_kontext_vety(html):
+    text = ""
+
+    vyparsovane_slova = parsuj_zoznam_slov_z_html(html)
+
+    for slovo in vyparsovane_slova:
+        if text:
+            text += " "
+        text += slovo.tvar
+
+    kontext_vety = []
+
+    i = 0
+
+    for sentence in sent_tokenize(text):
+        veta_obj = Veta()
+        veta_obj.text_celej_vety = ""
+        for word in word_tokenize(sentence):
+            if word != vyparsovane_slova[i].tvar:
+                raise Exception(f"Nesedi tokenizacia!!! {word}->{vyparsovane_slova[i].tvar}")
+            if veta_obj.text_celej_vety:
+                veta_obj.text_celej_vety += " "
+            veta_obj.text_celej_vety += word
+            veta_obj.slova_vety.append(vyparsovane_slova[i])
+            i += 1
+        kontext_vety.append(veta_obj)
+
+    return kontext_vety
+
+
+def vyrob_strom_z_conllu(text_vety, poradie_vety, conllu):
+
+    strom = []
+
+    root = StromVety()
+    root.text = text_vety
+    root.parent = "#"
+    root.id = f"veta_{poradie_vety}"
+
+    strom.append(root)
+
+    rows = conllu.split("\n")
+
+    for r in rows:
+        if not r or r.startswith("#"):
+            continue
+
+        columns = r.split("\t")
+
+        vetva = StromVety()
+
+        vetva.text = columns[1]
+        vetva.id = f"veta_{poradie_vety}_{columns[0]}"
+
+        if columns[6] == "0":
+            vetva.parent = f"veta_{poradie_vety}"
+        else:
+            vetva.parent = f"veta_{poradie_vety}_{columns[6]}"
+
+        strom.append(vetva)
+
+    return strom
 

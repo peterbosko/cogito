@@ -13,6 +13,8 @@ from flask import redirect, url_for
 import urllib.parse
 from app.sd_service import *
 from flask import current_app
+from ufal._udpipe import Model, Pipeline, ProcessingError
+import nltk
 
 kontext_blueprint = Blueprint("kontext", __name__)
 
@@ -481,16 +483,36 @@ def vrat_kontext():
 @kontext_blueprint.route("/rozbor_viet_kontextu/", methods=["GET"])
 def rozbor_viet_kontextu():
     loguj(request)
-    kt_id = request.args.get("kontext_id")
 
-    k = Kontext.query.get(kt_id)
+    response = CommonResponse()
+
+    return render_template("m_kontext/rozbor_viet_kontextu.jinja.html")
+
+
+@kontext_blueprint.route("/vyrob_stromy_viet/", methods=["POST"])
+def vyrob_stromy_viet():
+    loguj(request)
+
+    response = CommonResponse()
+
+    data = request.json["kontext"]
+
+    kontext_vety = vyrob_kontext_vety(data)
 
     model = current_app.udpipe_model
+    pipeline = Pipeline(model, "horizontal", Pipeline.DEFAULT, Pipeline.DEFAULT, "conllu")
+    error = ProcessingError()
 
-    sentences = model.tokenize("Vedci pozorovali lode z vesmíru .")
-    for s in sentences:
-        t = model.tag(s)
-        p = model.parse(s)
+    stromy = []
 
-    return render_template("m_kontext/rozbor_viet_kontextu.jinja.html", kontext=k, stromy_body="aaa\nbbb")
+    for i in range(len(kontext_vety)):
+        processed = pipeline.process(kontext_vety[i].text_celej_vety, error)
+        if error.occurred():
+            response.status = ResponseStatus.ERROR
+            response.error_text = error.message
+        stromy.extend(vyrob_strom_z_conllu(kontext_vety[i].text_celej_vety, i, processed))
+
+    response.data = stromy
+
+    return jsonpickle.encode(response)
 

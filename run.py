@@ -2,13 +2,17 @@ from app.app import flask_app
 from app.db_models import *
 from app.sd_service import *
 import sys
-from udpipe.model import Model
+from ufal._udpipe import Model
+import nltk
 
 db.init_app(flask_app)
 
 
 def read_udpipe_model():
-    model = Model('udpipe\\data\\slovak-snk-ud-2.5-191206.udpipe')
+    print("Loading udpipe model...")
+    model = Model.load('udpipe\\data\\slovak-snk-ud-2.5-191206.udpipe')
+    print("Downloading nltk punkt...")
+    nltk.download('punkt')
     return model
 
 
@@ -17,6 +21,8 @@ def start():
     host = "0.0.0.0"
     port = 80
     flask_app.udpipe_model = read_udpipe_model()
+    if flask_app.udpipe_model:
+        print("Model loaded...")
     flask_app.run(host, debug=debug, port=port)
 
 

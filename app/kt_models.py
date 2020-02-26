@@ -29,3 +29,13 @@ class SlovoVKontexte(object):
                 "je_viacej_v_slovniku:"+str(self.je_viacej_v_slovniku)+"|\n" + \
                 "****************************"
 
+
+class StromVety(object):
+    id = None
+    parent = None
+    text = None
+
+
+class Veta(object):
+    text_celej_vety = None
+    slova_vety = []
