@@ -181,7 +181,8 @@ function accept_word(that){
 		if(next.length) {
 			next.dblclick();
 		} else {
-			parent.next().find('span.ns').first().dblclick();
+			//parent.next().find('span.ns').first().dblclick();
+			next_word(that);
 		}
 	}
 	setProgressBar();
@@ -873,32 +874,6 @@ function loadNeededScriptsAndStyles(script, style, callback) {
                 var el = all.$[i];
             }
 	}
-	
-	function load_sematicke_pady(ckeditorName) {
-		/*** NACITAJ SEMANTICKY PAD PRE DANE SLOVO ***/
-		var all = CKEDITOR.instances[ckeditorName].document.getElementsByTag( 'span' );
-		for (var i = 0, max = all.count(); i < max; i++) {
-			var el = all.$[i];
-			var sid = el.getAttribute('sid');
-			if(sid) {
-				AjaxMethods.getDataFromAsyncGetRequest('/daj_sem_pad?sid='+sid, '', "", function(r){
-					if (r.status==responseOK){
-						var data = r.data;
-						console.log(sid);
-						console.log(data);
-						/*if(data.kod) {
-							$(el).tooltip({
-								placement: "top",
-								title: data.kod,
-								selector: true,
-								html : true,
-							});
-						}*/
-					}
-				});
-			}		
-		}		
-	}
 
     function pripojJavascripty(ckeditorName){
         var head = CKEDITOR.instances[ckeditorName].document.getHead();
@@ -951,7 +926,8 @@ function loadNeededScriptsAndStyles(script, style, callback) {
 					
 					'<i class="fa fa-angle-left"></i><i class="fa fa-angle-right"></i> - Skok na nasledujúce / predchádzajúce slovo<br>'+
 					'<i class="fa fa-angle-double-left"></i><i class="fa fa-angle-double-right"></i> - Skok na nasledujúce / predchádzajúce nepotvrdené slovo<br> '+
-					'dvojklik - Výber slova '+
+					'dvojklik v texte - Výber slova<br>'+
+					'Prejdite všetky farebné slová a jednoznačne ich určite'+
 				'</div>';
 	
 			var settingsToolbar = $('<span id="settings-rows" class="cke_top settings-disabled" style="height: 80px; user-select: none;padding: 6px 8px 20px;">'+

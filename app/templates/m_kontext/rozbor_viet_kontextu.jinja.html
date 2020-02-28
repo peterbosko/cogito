@@ -6,6 +6,10 @@
         <div class="col-sm-12">
             <div id="jsTree"></div>
         </div>
+        <div id="strukturaVety" class="col-sm-12 nodisplay">
+            <textarea id="taStrukturaVety" class="form-control" style="white-space: nowrap;" cols="60" rows="10">
+            </textarea>
+        </div>
     </div>
 </div>
 <script>
@@ -18,6 +22,27 @@
             if (r.status==responseOK){//OK vetva
                 $('#jsTree').jstree({ 'core' : {
                     'data' : r.data
+                    }
+                });
+                $('#jsTree').on("dblclick.jstree", function (e) {
+                    var instance = $.jstree.reference(this),
+                    node = instance.get_node(e.target);
+                    var poradieVety = node.id.replace('veta_','');
+                    if (!poradieVety.includes('_')){
+                            d = {};
+                            d.kontext = CKEDITOR.instances['txtContext'].getData();
+                            d.veta = poradieVety;
+                            AjaxMethods.getDataFromPostRequest('{{url_for("kontext.vyrob_popis_struktury_vety")}}', "", d, function(r){
+                                if (r.status==responseOK){//OK vetva
+                                    $('#strukturaVety').removeClass('nodisplay');
+                                    $('#taStrukturaVety').val(r.data);
+                                } else{
+                                    swal({ buttons: {},
+                                       title  :  "Chyba",
+                                       text   :  r.error_text,
+                                       icon   :  "error"});
+                                }
+                            });
                     }
                 });
             } else{

@@ -516,3 +516,29 @@ def vyrob_stromy_viet():
 
     return jsonpickle.encode(response)
 
+
+@kontext_blueprint.route("/vyrob_popis_struktury_vety/", methods=["POST"])
+def vyrob_popis_struktury_vety():
+    loguj(request)
+
+    response = CommonResponse()
+
+    data = request.json["kontext"]
+
+    veta = int(request.json["veta"])
+
+    kontext_vety = vyrob_kontext_vety(data)
+
+    model = current_app.udpipe_model
+    pipeline = Pipeline(model, "horizontal", Pipeline.DEFAULT, Pipeline.DEFAULT, "conllu")
+    error = ProcessingError()
+
+    processed = pipeline.process(kontext_vety[veta].text_celej_vety, error)
+    if error.occurred():
+        response.status = ResponseStatus.ERROR
+        response.error_text = error.message
+
+    response.data = processed
+
+    return jsonpickle.encode(response)
+

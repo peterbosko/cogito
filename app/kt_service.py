@@ -164,6 +164,7 @@ def vyrob_slovo_pole(slovo, s_id, bolo_vybrate):
     return vysledok
 
 
+# obsolete. nepouzivat. na vyhodenie. miesto toho pouzit nltk.word_tokenize
 def daj_tokeny_slova(slovo):
     text_slova = ""
     text_cisla = ""
@@ -260,7 +261,8 @@ def parsuj_zoznam_slov_z_html(html, parent_slovo_id=None):
                                 if content.attr('sid').isdigit():
                                     parent_slovo_id = int(content.attr('sid'))
 
-                        tokeny_slova = daj_tokeny_slova(s)
+                        tokeny_slova = word_tokenize(s)
+
                         for token in tokeny_slova:
                             vysledok.extend(vyrob_slovo_pole(token, parent_slovo_id, bolo_vybrate))
                         i += 1
@@ -272,7 +274,8 @@ def parsuj_zoznam_slov_z_html(html, parent_slovo_id=None):
                     if content.attr('sid').isdigit():
                         parent_slovo_id = int(content.attr('sid'))
 
-                tokeny_slova = daj_tokeny_slova(slova[0])
+                tokeny_slova = word_tokenize(slova[0])
+
                 for token in tokeny_slova:
                     vysledok.extend(vyrob_slovo_pole(token, parent_slovo_id, bolo_vybrate))
 
