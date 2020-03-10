@@ -8,6 +8,8 @@
                 var data = {};
                 data.data = editor.getData();
 				
+				var ckeditorName = editor.name;
+				
                 swal({ buttons: {},
                        title  :  "Kontrola",
                        text   :  'Prebieha kontrola textu...',
@@ -27,9 +29,9 @@
                             icon   :  "success"});
                         editor.setData(r.data.data);
 						
-						$('body', parent.document).find('#kontextProgress').css("width", r.data.uspesnost+"%");
-						$('body', parent.document).find('#kontextProgressText').html(r.data.uspesnost+" %");
-						$('body', parent.document).find('.cke_top.settings-disabled').addClass('settings-enabled').removeClass('settings-disabled');
+						$('body', parent.document).find('#'+ckeditorName+'-kontextProgress').css("width", r.data.uspesnost+"%");
+						$('body', parent.document).find('#'+ckeditorName+'-kontextProgressText').html(r.data.uspesnost+" %");
+						$('body', parent.document).find('#cke_'+ckeditorName+' .cke_top.settings-disabled').addClass('settings-enabled').removeClass('settings-disabled');
 						
 						setTimeout(function(){
 							var all = editor.document.getElementsByTag( 'span' );
@@ -37,10 +39,10 @@
 							for (var i = 0, max = all.count(); i < max; i++) {
 								var el = all.$[i];
 								
-								el.setAttribute('ondblclick','load_slovo(this);');
+								el.setAttribute('ondblclick','load_slovo(this, false, \''+ckeditorName+'\');');
 								el.setAttribute('onselectstart','return false;');
 							}	
-							$("iframe.cke_wysiwyg_frame").contents().find('span.m, span.n').first().dblclick();
+							$('#cke_'+ckeditorName+" iframe.cke_wysiwyg_frame").contents().find('span.m, span.n').first().dblclick();
 						}, 200)	
 						
 						editor.on( 'selectionChange', function( evt ) {
@@ -69,9 +71,9 @@
 							//cogito_rozbor.enable();
 							
 						} );
-						$('body', parent.document).find('#setting-new-validation').hide();
+						$('body', parent.document).find('#'+ckeditorName+'-setting-new-validation').hide();
 						editor.on('key', function (e) { 
-							$('body', parent.document).find('#setting-new-validation').show();
+							$('body', parent.document).find('#'+ckeditorName+'-setting-new-validation').show();
 						});
 						//$('#save-context').prop('disabled', true);
                     } else{

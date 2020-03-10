@@ -35,7 +35,7 @@ CKEDITOR.editorConfig = function( config ) {
 	];
 
 /*
-    tool bar sa nastavuje v main.js!
+    tool bar sa nastavuje v editor.js!
 	config.toolbar = [
 		{ name: 'document', items: [ 'Source' , '-' ,'Save'] },
 		{ name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo', '-', 'cogito-word-check', '-' ,'cogito-unit-test' , 'cogito-ut-list', 'cogito-anotacia'] },

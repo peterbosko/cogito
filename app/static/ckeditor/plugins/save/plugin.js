@@ -15,12 +15,13 @@
 		exec: function( editor ) {
 			if ( editor.fire( 'save' ) ) {
 				var $form = editor.element.$.form;
-
+				var ckeditorName = editor.name;
+				
 				if ( $form ) {
                         if (editor.CogitoEditorType=="kontext")
-    					    ZmenKontext(false);
+    					    ZmenKontext(false, ckeditorName);
     					 else
-				            ZmenUnitTest(false);
+				            ZmenUnitTest(false, ckeditorName);
 				}
 			}
 		}
