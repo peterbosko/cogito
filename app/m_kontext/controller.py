@@ -13,8 +13,7 @@ from flask import redirect, url_for
 import urllib.parse
 from app.sd_service import *
 from flask import current_app
-from ufal._udpipe import Model, Pipeline, ProcessingError
-import nltk
+from ufal.udpipe import Model, Pipeline, ProcessingError
 
 kontext_blueprint = Blueprint("kontext", __name__)
 
