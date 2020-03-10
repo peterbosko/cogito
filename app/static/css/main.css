@@ -613,8 +613,8 @@ table.tabulka_slov thead th, table.tabulka_filtra thead th{
 	margin-bottom: 2px;
 }
 
-#setting-legend:hover {
+a[id*=setting-legend]:hover {
 	cursor: pointer;
 }
 
-#setting-legend:hover .legend { display: block; }
+a[id*=setting-legend]:hover .legend { display: block; }

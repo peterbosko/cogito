@@ -18,6 +18,16 @@ from ufal.udpipe import Model, Pipeline, ProcessingError
 kontext_blueprint = Blueprint("kontext", __name__)
 
 
+@kontext_blueprint.route("/ckeditor/", methods=["GET"])
+def ckeditor():
+    loguj(request)
+
+    if 'logged' not in session.keys():
+        return redirect(url_for("main.potrebne_prihlasenie")+"?redirect="+urllib.parse.quote_plus(
+            url_for("kontext.ckeditor")))
+
+    return render_template("m_kontext/ckeditor.jinja.html", pocty_sd=daj_pocty_sd_a_sl())
+
 @kontext_blueprint.route("/pridat_kontext/", methods=["GET"])
 def pridat_kontext():
     loguj(request)

@@ -9,13 +9,15 @@
 				var output = '';
 				data.data = editor.getData();
 				
+				var ckeditorName = editor.name;
+				
 				var wrapped = $("<div>" + data.data + "</div>");
 				wrapped.find('span').removeClass('active m n ns no-select').removeAttr('ondblclick onselectstart sdid sd');
 				output = wrapped.html();
 				
 				editor.setData(output);
 				
-				$('body', parent.document).find('.cke_top.settings-enabled').addClass('settings-disabled').removeClass('settings-enabled');
+				$('body', parent.document).find('#cke_'+ckeditorName+' .cke_top.settings-enabled').addClass('settings-disabled').removeClass('settings-enabled');
 				
 				editor.on( 'selectionChange', function( evt ) {
 					var source = this.getCommand( 'source' ),
@@ -39,7 +41,7 @@
 				} );
 				editor.on('key', function (e) { 
 					e.removeListener();
-					$('body', parent.document).find('#setting-new-validation').hide();
+					$('body', parent.document).find('#'+ckeditorName+'-setting-new-validation').hide();
 				});
 				$('#save-context').prop('disabled', false);
 			}	

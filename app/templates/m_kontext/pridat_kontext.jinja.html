@@ -47,7 +47,7 @@
             <div class="col-sm-12">
                 <input type="hidden" id="txtContextStatus" value="{% if kontext: %}{{kontext.status}}{% endif %}">
 				<a class="btn btn-cogito" role="button" href="{{ url_for("kontext.moje_kontexty") }}">Zrušiť</a>
-                <button id="save-context" type="button" class="btn btn-primary" onclick="ZmenKontext(true);return false;">{% if kontext: %}Zmeniť kontext{% else %}Pridať kontext{% endif %}</button>
+                <button id="save-context" type="button" class="btn btn-primary" onclick="ZmenKontext(true, 'txtContext');return false;">{% if kontext: %}Zmeniť kontext{% else %}Pridať kontext{% endif %}</button>
             </div>
         </div>
       {% endif %}
@@ -56,7 +56,7 @@
 </div>
 <script>
 
-function ZmenKontext(redirect){
+function ZmenKontext(redirect, ckeditorName){
         var formSelector="#ContextForm";
 
         $(formSelector).data('formValidation').validate();
@@ -68,13 +68,13 @@ function ZmenKontext(redirect){
             data.id=$("#kt_id").val();
             data.nazov=$("#txtContextName").val();
             data.status=$("#txtContextStatus").val();
-            data.obsah = CKEDITOR.instances['txtContext'].getData();
+            data.obsah = CKEDITOR.instances[ckeditorName].getData();
             
 			var wrapped = $("<div>" + data.obsah + "</div>");
 			wrapped.find('span').removeClass('active m n ns no-select').removeAttr('ondblclick onselectstart sdid sd');
 			data.obsah = wrapped.html();
 			
-			data.text= CKEDITOR.instances['txtContext'].document.getBody().getText();
+			data.text= CKEDITOR.instances[ckeditorName].document.getBody().getText();
 
             AjaxMethods.getDataFromPostRequest('{{url_for("kontext.pridat_kontext")}}', "", data, function(r){
                 if (r.status==responseOK){//OK vetva
