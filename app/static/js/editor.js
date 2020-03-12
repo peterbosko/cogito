@@ -250,7 +250,7 @@ function getToolbar(ckeditorName, type) {
 										'<a href="#" class="btn" onclick="return prev_valid_word(this, \''+ckeditorName+'\');" title="Predchádzajúce nezvalidované slovo"><i class="fa fa-angle-double-left"></i></a>'+
 										'<a href="#" class="btn" onclick="return next_valid_word(this, \''+ckeditorName+'\');" title="Nasledujúce nezvalidované slovo"><i class="fa fa-angle-double-right"></i></a>'+
 										'<a href="#" class="btn" onclick="return next_word(this, \''+ckeditorName+'\');" title="Nasledujúce slovo"><i class="fa fa-angle-right"></i></a>'+
-										'<a href="#" onclick="return edit_meaning(this, \''+ckeditorName+'\');" class="btn" style="position: absolute; right: 240px;">Upraviť popis slova <i class="fa fa-edit"></i></a>'+
+										'<a href="#" onclick="return edit_meaning(this, \''+ckeditorName+'\');" class="btn" style="position: absolute; right: 20px;">Upraviť popis slova <i class="fa fa-edit"></i></a>'+
 									'</div>'+
 									'<div>'+
 										
@@ -525,11 +525,11 @@ function setProgressBar(ckeditorName){
 	if(uspesnost == 100) {
 		var data = {};
 		
-		$('#txtContextStatus').val('V');
+		$('#'+ckeditorName+'Status').val('V');
 		
-		data.id=$("#kt_id").val();
+		data.id=$("#"+ckeditorName+"_kt_id").val();
 		data.status = 'V';
-		data.nazov = $("#txtContextName").val();
+		data.nazov = $("#"+ckeditorName+"Name").val();
 		data.obsah = CKEDITOR.instances[ckeditorName].getData();
 		data.text= CKEDITOR.instances[ckeditorName].document.getBody().getText();
 		
@@ -556,7 +556,7 @@ function setProgressBar(ckeditorName){
 			}
 		);
 	} else {
-		$('#txtContextStatus').val('N');
+		$('#'+ckeditorName+'Status').val('N');
 	}
 	return false;
 }
@@ -804,4 +804,51 @@ function load_slovo(that, active = false, ckeditorName){
 	}
 	
 	return false;
+}
+
+function ZmenKontext(redirect, ckeditorName){
+        var formSelector="#"+ckeditorName+"Form";
+
+        $(formSelector).data('formValidation').validate();
+        var formIsVald = $(formSelector).data('formValidation').isValid();
+
+        if (formIsVald) {
+            data = {};
+
+            data.id=$("#"+ckeditorName+"_kt_id").val();
+            data.nazov=$("#"+ckeditorName+"Name").val();
+            data.status=$("#"+ckeditorName+"Status").val();
+            data.obsah = CKEDITOR.instances[ckeditorName].getData();
+            
+			var wrapped = $("<div>" + data.obsah + "</div>");
+			wrapped.find('span').removeClass('active m n ns no-select').removeAttr('ondblclick onselectstart sdid sd');
+			data.obsah = wrapped.html();
+			
+			data.text= CKEDITOR.instances[ckeditorName].document.getBody().getText();
+
+            AjaxMethods.getDataFromPostRequest('/pridat_kontext/', "", data, function(r){
+                if (r.status==responseOK){//OK vetva
+                    swal({ buttons: {},
+                       title  :  "Úspech",
+                       text   :  "Kontext bol úspešne pridaný/zmenený",
+                       icon   :  "success"}).then(function(result) {
+                                                    $("#"+ckeditorName+"_kt_id").val(r.data);
+                                                    if (redirect)
+                                                        window.location.replace("/moje_kontexty/");
+                                                  });
+                } else{
+                    swal({ buttons: {},
+                       title  :  "Chyba",
+                       text   :  r.error_text,
+                       icon   :  "error"});
+
+                }
+            });
+        }
+        else{
+            swal({ buttons: {},
+                       title  :  "Chyba",
+                       text   :  "Chyba validácie. Skontrolujte červené položky",
+                       icon   :  "error"});
+        }
 }

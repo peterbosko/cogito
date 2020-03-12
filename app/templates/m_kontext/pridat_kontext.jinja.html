@@ -6,8 +6,8 @@
     <h1>Pridanie/zmena kontextu:</h1>
     <br/>
     <div class="form-horizontal">
-    <form id="ContextForm" data-fv-framework="bootstrap" method="post">
-        <input type="hidden" name="kt_id" id="kt_id" value="{% if kontext: %}{{kontext.id}}{% else %}0{% endif %}"/>
+    <form id="txtContextForm" data-fv-framework="bootstrap" method="post">
+        <input type="hidden" name="kt_id" id="txtContext_kt_id" value="{% if kontext: %}{{kontext.id}}{% else %}0{% endif %}"/>
         <div class="row">
             <div class="col-sm-12">
                 <span class="col-xs-12">
@@ -55,53 +55,12 @@
 </div>
 </div>
 <script>
-
-function ZmenKontext(redirect, ckeditorName){
-        var formSelector="#ContextForm";
-
-        $(formSelector).data('formValidation').validate();
-        var formIsVald = $(formSelector).data('formValidation').isValid();
-
-        if (formIsVald) {
-            data = {};
-
-            data.id=$("#kt_id").val();
-            data.nazov=$("#txtContextName").val();
-            data.status=$("#txtContextStatus").val();
-            data.obsah = CKEDITOR.instances[ckeditorName].getData();
-            
-			var wrapped = $("<div>" + data.obsah + "</div>");
-			wrapped.find('span').removeClass('active m n ns no-select').removeAttr('ondblclick onselectstart sdid sd');
-			data.obsah = wrapped.html();
-			
-			data.text= CKEDITOR.instances[ckeditorName].document.getBody().getText();
-
-            AjaxMethods.getDataFromPostRequest('{{url_for("kontext.pridat_kontext")}}', "", data, function(r){
-                if (r.status==responseOK){//OK vetva
-                    swal({ buttons: {},
-                       title  :  "Úspech",
-                       text   :  "Kontext bol úspešne pridaný/zmenený",
-                       icon   :  "success"}).then(function(result) {
-                                                    $("#kt_id").val(r.data);
-                                                    if (redirect)
-                                                        window.location.replace("{{ url_for("kontext.moje_kontexty") }}");
-                                                  });
-                } else{
-                    swal({ buttons: {},
-                       title  :  "Chyba",
-                       text   :  r.error_text,
-                       icon   :  "error"});
-
-                }
-            });
-        }
-        else{
-            swal({ buttons: {},
-                       title  :  "Chyba",
-                       text   :  "Chyba validácie. Skontrolujte červené položky",
-                       icon   :  "error"});
-        }
-}
+	
+	$(document).ready(function() {
+		$('#txtContextForm').formValidation();
+		initCKEditorInstance('txtContext',300, 'kontext', '');
+	})
+	
     function ChybaAkNepodporovanyBrowser(){
 
         var isOpera=false;

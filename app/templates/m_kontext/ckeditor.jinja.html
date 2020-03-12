@@ -13,6 +13,20 @@
 					initCKEditorInstance(editorName, height, type, settingsToolbar);
 					
 					type moze byt 'kontext' alebo '' - do buducna moze byt variantov viac
+					
+					form id = %editorName%Form			("txtContextForm")
+					kontext id = %editorName%_kt_id		("txtContext_kt_id")
+					input nazov = %editorName%Name		("txtContextName")
+					input status = %editorName%Status	("txtContextStatus")
+					
+					priklad: 
+					
+					&lt;form id="txtContextForm" method="post"&gt;
+						&lt;input type="text" 	name="txtContextName" 	id="txtContextName" value="Editor kontextu:"&gt;
+						&lt;input type="hidden" name="txtContextStatus" id="txtContextStatus" value="N"&gt;
+						&lt;input type="hidden" name="txtContext_kt_id" id="txtContext_kt_id" /&gt;
+						&lt;textarea id="txtContext1" name="txtContext1"&gt;&lt;/textarea&gt;
+					&lt;/form&gt;
 				</pre>
 			</div>
 		</div>
@@ -21,11 +35,11 @@
         
         <div class="row">
             <div class="col-sm-12">
-				<form data-fv-framework="bootstrap" method="post">
+				<form id="txtContext1Form" data-fv-framework="bootstrap" method="post">
 					Editor kontextu:
 					 <textarea rows="14" placeholder="Sem vložte slová - obsah kontextu" id="txtContext1" name="txtContext1" class="form-control" data-fv-row=".col-sm-12"
 					 data-fv-notempty="true" data-fv-notempty-message="Slová kontextu sú povinné"
-					 >{% if kontext: %}{{kontext.obsah}}{% endif %}
+					 >
 					 
 						V prípade je obvinená väčšia skupina ľudí , traja z nich už sedia vo vyšetrovacej väzbe . Policajtov nezaujímal iba telefón šéfa platobnej agentúry ministerstva pôdohospodárstva Juraja Kožucha , ale aj ďalšej štátnej úradníčky .
 					 
@@ -34,13 +48,15 @@
             </div>
         </div>
 		
+		
+		
 		<div class="row">
             <div class="col-sm-12">
-				<form data-fv-framework="bootstrap" method="post">
+				<form id="txtContext4Form" data-fv-framework="bootstrap" method="post">
 					Editor popisu slova:
 					 <textarea rows="14" placeholder="Sem vložte slová - obsah kontextu" id="txtContext4" name="txtContext4" class="form-control" data-fv-row=".col-sm-12"
 					 data-fv-notempty="true" data-fv-notempty-message="Slová kontextu sú povinné"
-					 >{% if kontext: %}{{kontext.obsah}}{% endif %}
+					 >
 						
 						Podľa zistení Aktuality.sk vyšetrovatelia obvinili až osem ľudí a tri právnické osoby. 
 						
@@ -54,10 +70,10 @@
 </div>
 <script>
 	
+	$('#txtContext1Form').formValidation();
+	$('#txtContext4Form').formValidation();
 	initCKEditorInstance('txtContext1',300, 'kontext', '');
-	initCKEditorInstance('txtContext2',300, 'kontext', '');
-	initCKEditorInstance('txtContext3',300, 'kontext', '');
-	initCKEditorInstance('txtContext4',300, '', '');
+	initCKEditorInstance('txtContext4',300, 'word-description', '');
 
 </script>
 {% endblock %}

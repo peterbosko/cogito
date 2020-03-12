@@ -571,10 +571,5 @@ $(document).ready(function(){
 	});
 	
 	ChybaAkNepodporovanyBrowser();
-	$('#ContextForm').formValidation();
-	
-	initCKEditorInstance('txtContext',300, 'kontext', '');
-	
-	
 });
 
