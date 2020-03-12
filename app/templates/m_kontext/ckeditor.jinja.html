@@ -10,58 +10,42 @@
             <div class="col-sm-12">
 				volanie CK Editora
 				<pre>
-					initCKEditorInstance(editorName, height, toolbar, settingsToolbar, options);
+					initCKEditorInstance(editorName, height, type, settingsToolbar);
+					
+					type moze byt 'kontext' alebo '' - do buducna moze byt variantov viac
 				</pre>
 			</div>
 		</div>
 	</div>
-    <form id="ContextForm" data-fv-framework="bootstrap" method="post">
+    
         
         <div class="row">
             <div class="col-sm-12">
-                 <textarea rows="14" placeholder="Sem vložte slová - obsah kontextu" id="txtContext1" name="txtContext1" class="form-control" data-fv-row=".col-sm-12"
-                 data-fv-notempty="true" data-fv-notempty-message="Slová kontextu sú povinné"
-                 >{% if kontext: %}{{kontext.obsah}}{% endif %}
-				 
-					V prípade je obvinená väčšia skupina ľudí , traja z nich už sedia vo vyšetrovacej väzbe . Policajtov nezaujímal iba telefón šéfa platobnej agentúry ministerstva pôdohospodárstva Juraja Kožucha , ale aj ďalšej štátnej úradníčky .
-				 
-				 </textarea>
+				<form data-fv-framework="bootstrap" method="post">
+					Editor kontextu:
+					 <textarea rows="14" placeholder="Sem vložte slová - obsah kontextu" id="txtContext1" name="txtContext1" class="form-control" data-fv-row=".col-sm-12"
+					 data-fv-notempty="true" data-fv-notempty-message="Slová kontextu sú povinné"
+					 >{% if kontext: %}{{kontext.obsah}}{% endif %}
+					 
+						V prípade je obvinená väčšia skupina ľudí , traja z nich už sedia vo vyšetrovacej väzbe . Policajtov nezaujímal iba telefón šéfa platobnej agentúry ministerstva pôdohospodárstva Juraja Kožucha , ale aj ďalšej štátnej úradníčky .
+					 
+					 </textarea>
+				 </form>
             </div>
         </div>
 		
 		<div class="row">
             <div class="col-sm-12">
-                 <textarea rows="14" placeholder="Sem vložte slová - obsah kontextu" id="txtContext2" name="txtContext2" class="form-control" data-fv-row=".col-sm-12"
-                 data-fv-notempty="true" data-fv-notempty-message="Slová kontextu sú povinné"
-                 >{% if kontext: %}{{kontext.obsah}}{% endif %}
-				 
-					Keď Národná kriminálna agentúra rozbehla po celom Slovensku veľkú akciu s názvom Dobytkár , policajti narazili na nezvyčajný úlovok . Okrem 100-tisíc eur totiž zadržali aj množstvo umeleckých diel v hodnote približne milión eur . Obrazov bolo tak veľa , že zaplnili jednu miestnosť .
-					
-				 </textarea>
-            </div>
-        </div>
-		
-		<div class="row">
-            <div class="col-sm-12">
-                 <textarea rows="14" placeholder="Sem vložte slová - obsah kontextu" id="txtContext3" name="txtContext3" class="form-control" data-fv-row=".col-sm-12"
-                 data-fv-notempty="true" data-fv-notempty-message="Slová kontextu sú povinné"
-                 >{% if kontext: %}{{kontext.obsah}}{% endif %}
-					
-					Razia súvisela s podozrením z korupcie a prania špinavých peňazí v prostredí Pôdohospodárskej platobnej agentúry.
-					
-				 </textarea>
-            </div>
-        </div>
-		
-		<div class="row">
-            <div class="col-sm-12">
-                 <textarea rows="14" placeholder="Sem vložte slová - obsah kontextu" id="txtContext4" name="txtContext4" class="form-control" data-fv-row=".col-sm-12"
-                 data-fv-notempty="true" data-fv-notempty-message="Slová kontextu sú povinné"
-                 >{% if kontext: %}{{kontext.obsah}}{% endif %}
-					
-					Podľa zistení Aktuality.sk vyšetrovatelia obvinili až osem ľudí a tri právnické osoby. 
-					
-				 </textarea>
+				<form data-fv-framework="bootstrap" method="post">
+					Editor popisu slova:
+					 <textarea rows="14" placeholder="Sem vložte slová - obsah kontextu" id="txtContext4" name="txtContext4" class="form-control" data-fv-row=".col-sm-12"
+					 data-fv-notempty="true" data-fv-notempty-message="Slová kontextu sú povinné"
+					 >{% if kontext: %}{{kontext.obsah}}{% endif %}
+						
+						Podľa zistení Aktuality.sk vyšetrovatelia obvinili až osem ľudí a tri právnické osoby. 
+						
+					 </textarea>
+				 </form>
             </div>
         </div>
      
@@ -73,7 +57,7 @@
 	initCKEditorInstance('txtContext1',300, 'kontext', '');
 	initCKEditorInstance('txtContext2',300, 'kontext', '');
 	initCKEditorInstance('txtContext3',300, 'kontext', '');
-	initCKEditorInstance('txtContext4',300, 'kontext', '');
+	initCKEditorInstance('txtContext4',300, '', '');
 
 </script>
 {% endblock %}

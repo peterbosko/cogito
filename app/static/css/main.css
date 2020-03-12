@@ -29,6 +29,10 @@ li.kontext{
     display: block;
 }
 
+.row {
+	padding-bottom: 10px;
+}
+
 .kontext h2 a {
     color:#112599;
 }

@@ -2,7 +2,7 @@
 /********************* Manage ck editor *****************************/
 /********************* Manage ck editor *****************************/
 /********************* Manage ck editor *****************************/
-function initCKEditorInstance(ckeditorName, h, toolbar, settingsToolbar, options = {}){
+function initCKEditorInstance(ckeditorName, h, type, settingsToolbar){
 	
 	CKEDITOR.timestamp = Math.random();
 	
@@ -23,92 +23,19 @@ function initCKEditorInstance(ckeditorName, h, toolbar, settingsToolbar, options
 	if(settingsToolbar.length > 0) {
 		settingsToolbar = settingsToolbar;
 	} else {	
-		var legend = '<div class="legend">'+
-						'<span style="background-color: #ffeec2;">slovo</span> - nepotvrdené slovo<br />'+
-						'<span style="background-color: #ffaab2;">slovo</span> - slovo sa nenachádza v databáze<br />'+
-						'<span style="background-color: #afe5ff;">slovo</span> - aktuálne vybraté slovo<br /><br />'+
-						
-						'<i class="fa fa-angle-left"></i><i class="fa fa-angle-right"></i> - Skok na nasledujúce / predchádzajúce slovo<br>'+
-						'<i class="fa fa-angle-double-left"></i><i class="fa fa-angle-double-right"></i> - Skok na nasledujúce / predchádzajúce nepotvrdené slovo<br> '+
-						'dvojklik v texte - Výber slova<br>'+
-						'Prejdite všetky farebné slová a jednoznačne ich určite'+
-					'</div>';
-
-		var settingsToolbar = $('<span id="'+ckeditorName+'-settings-rows" class="cke_top settings-disabled" style="height: 80px; user-select: none;padding: 6px 8px 20px;">'+
-							'<span class="cke_voice_label">Settings row</span>'+
-							'<span class="cke_toolbox">'+
-								'<span class="cke_toolbar cke_toolbar_last">'+
-									'<span class="cke_voice_label"></span>'+
-									'<span class="cke_toolbar_start"></span>'+
-									'<span class="cke_toolgroup">'+
-										'<a class="cke_button cke_button__source cke_button_disabled" href="#" title="">'+
-											'<span class="cke_button_label cke_button__source_label" style="height: 24px;">'+
-												'Gramatika pre tvar <i class="fa fa-long-arrow-alt-right"></i> <b><el class="setting-tvar"></el></b>'+
-											'</span>'+
-										'</a>'+
-										'<a class="cke_button cke_button__source cke_button_disabled" id="'+ckeditorName+'-setting-new-validation" href="#" title="" onClick="return skontroluj_slova_znova(this, \''+ckeditorName+'\');" style="display: none;position: absolute; right: 200px;">'+
-											'<span class="cke_button_label cke_button__source_label" style="color: red;font-weight: bold;cursor: pointer;">'+
-												'Je potrebná nová validácia <i class="fa fa-redo-alt"></i>'+
-											'</span>'+
-										'</a>'+
-										'<a class="cke_button cke_button__source cke_button_disabled" id="'+ckeditorName+'-setting-legend" href="#" title="" style="position: absolute; right: 30px;">'+
-											'<span class="cke_button_label cke_button__source_label" >'+
-												'Legenda <i class="fa fa-bars"></i>'+legend+
-											'</span>'+
-										'</a><br />'+
-										
-										'<a class="cke_button cke_button__source cke_button_disabled" href="#" title="">'+
-											'<span class="cke_button_label cke_button__source_label">'+
-												'<el class="setting-slovny_druh"></el>'+
-											'</span>'+
-										'</a><br />'+
-										'<a class="cke_button cke_button__source cke_button_disabled" href="#" title="">'+
-											'<span class="cke_button_label cke_button__source_label">'+
-												'<el class="setting-odvodene"></el>'+
-											'</span>'+
-										'</a>'+
-									'</span>'+
-									'<span class="cke_toolbar_end"></span>'+
-								'</span>'+
-								'<span class="cke_toolbar_break"></span>'+
-							'</span>'+
-						'</span>'+
-						'<span  id="'+ckeditorName+'-settings-rows-buttons" class="cke_top settings-disabled" style="height: auto; user-select: none;">'+
-							'<span class="cke_voice_label">Progress Bar</span>'+
-							'<span class="cke_toolbox">'+
-								'<div class="progress">'+
-									'<div id="'+ckeditorName+'-kontextProgressText" class="progress-bar-text"></div> '+                      
-									'<div id="'+ckeditorName+'-kontextProgress" class="progress-bar"></div> '+                      
-								'</div>'+
-								'<div style="text-align: center;">'+
-									'<a href="#" class="btn" onclick="return prev_word(this, \''+ckeditorName+'\');" title="Predchádzajúce slovo"><i class="fa fa-angle-left"></i></a>'+
-									'<a href="#" class="btn" onclick="return prev_valid_word(this, \''+ckeditorName+'\');" title="Predchádzajúce nezvalidované slovo"><i class="fa fa-angle-double-left"></i></a>'+
-									'<a href="#" class="btn" onclick="return next_valid_word(this, \''+ckeditorName+'\');" title="Nasledujúce nezvalidované slovo"><i class="fa fa-angle-double-right"></i></a>'+
-									'<a href="#" class="btn" onclick="return next_word(this, \''+ckeditorName+'\');" title="Nasledujúce slovo"><i class="fa fa-angle-right"></i></a>'+
-									'<el class="setting-accept_word"></el>'+
-								'</div>'+
-								'<div>'+
-									
-								'</div>'+
-							'</span>'+
-						'</span>');
+		settingsToolbar = getToolbar(ckeditorName, type);
 	}	
 	
 	var tbar = [];
 
-	if (!toolbar){
-		toolbar = "kontext";
-	}
-
-	if (toolbar==="kontext"){
+	if (type==="kontext"){
 		tbar = [
 			{ name: 'document', items: [ 'Source' , '-' ,'Save'] },
 			{ name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'cogito-word-check', 'cogito-check-remove', '-' ,'cogito-unit-test' , 'cogito-ut-list' , '-' , 'cogito-anotacia', '-' , 'cogito-rozbor'] },
 			'/',
 			{ name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
 		]
-	}
-	else {
+	} else {
 		tbar = [
 			{ name: 'document', items: [ 'Source' , '-' ,'Save'] },
 			{ name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'cogito-word-check', 'cogito-check-remove', '-' ] },
@@ -138,7 +65,7 @@ function initCKEditorInstance(ckeditorName, h, toolbar, settingsToolbar, options
 	  extraAllowedContent: '*[*]{*}(*)',
 	});
 
-	CKEDITOR.instances[ckeditorName].CogitoEditorType = toolbar;
+	CKEDITOR.instances[ckeditorName].CogitoEditorType = type;
 	
 	CKEDITOR.on('instanceReady',function(){
 		$('#cke_'+ckeditorName+' .cke_top').after(settingsToolbar);
@@ -224,6 +151,115 @@ function GetCKEditorHtml(ckeditorName){
 	return CKEDITOR.instances[ckeditorName].getData();
 }
 
+
+function getToolbar(ckeditorName, type) {
+	var settingsToolbar = '';
+	
+	if(type == 'kontext'){
+		settingsToolbar = $('<span id="'+ckeditorName+'-settings-rows" class="cke_top settings-disabled" style="height: 80px; user-select: none;padding: 6px 8px 20px;">'+
+							'<span class="cke_voice_label">Settings row</span>'+
+							'<span class="cke_toolbox">'+
+								'<span class="cke_toolbar cke_toolbar_last">'+
+									'<span class="cke_voice_label"></span>'+
+									'<span class="cke_toolbar_start"></span>'+
+									'<span class="cke_toolgroup">'+
+										'<a class="cke_button cke_button__source cke_button_disabled" href="#" title="">'+
+											'<span class="cke_button_label cke_button__source_label" style="height: 24px;">'+
+												'Gramatika pre tvar <i class="fa fa-long-arrow-alt-right"></i> <b><el class="setting-tvar"></el></b>'+
+											'</span>'+
+										'</a>'+
+										'<a class="cke_button cke_button__source cke_button_disabled" id="'+ckeditorName+'-setting-new-validation" href="#" title="" onClick="return skontroluj_slova_znova(this, \''+ckeditorName+'\');" style="display: none;position: absolute; right: 200px;">'+
+											'<span class="cke_button_label cke_button__source_label" style="color: red;font-weight: bold;cursor: pointer;">'+
+												'Je potrebná nová validácia <i class="fa fa-redo-alt"></i>'+
+											'</span>'+
+										'</a>'+
+										'<a class="cke_button cke_button__source cke_button_disabled" id="'+ckeditorName+'-setting-legend" href="#" title="" style="position: absolute; right: 30px;">'+
+											'<span class="cke_button_label cke_button__source_label" >'+
+												'Legenda <i class="fa fa-bars"></i>'+
+												'<div class="legend">'+
+													'<span style="background-color: #ffeec2;">slovo</span> - nepotvrdené slovo<br />'+
+													'<span style="background-color: #ffaab2;">slovo</span> - slovo sa nenachádza v databáze<br />'+
+													'<span style="background-color: #afe5ff;">slovo</span> - aktuálne vybraté slovo<br /><br />'+
+													
+													'<i class="fa fa-angle-left"></i><i class="fa fa-angle-right"></i> - Skok na nasledujúce / predchádzajúce slovo<br>'+
+													'<i class="fa fa-angle-double-left"></i><i class="fa fa-angle-double-right"></i> - Skok na nasledujúce / predchádzajúce nepotvrdené slovo<br> '+
+													'dvojklik v texte - Výber slova<br>'+
+													'Prejdite všetky farebné slová a jednoznačne ich určite'+
+												'</div>'+
+											'</span>'+
+										'</a><br />'+
+										
+										'<a class="cke_button cke_button__source cke_button_disabled" href="#" title="">'+
+											'<span class="cke_button_label cke_button__source_label">'+
+												'<el class="setting-slovny_druh"></el>'+
+											'</span>'+
+										'</a><br />'+
+										'<a class="cke_button cke_button__source cke_button_disabled" href="#" title="">'+
+											'<span class="cke_button_label cke_button__source_label">'+
+												'<el class="setting-odvodene"></el>'+
+											'</span>'+
+										'</a>'+
+									'</span>'+
+									'<span class="cke_toolbar_end"></span>'+
+								'</span>'+
+								'<span class="cke_toolbar_break"></span>'+
+							'</span>'+
+						'</span>'+
+						'<span  id="'+ckeditorName+'-settings-rows-buttons" class="cke_top settings-disabled" style="height: auto; user-select: none;">'+
+							'<span class="cke_voice_label">Progress Bar</span>'+
+							'<span class="cke_toolbox">'+
+								'<div class="progress">'+
+									'<div id="'+ckeditorName+'-kontextProgressText" class="progress-bar-text"></div> '+                      
+									'<div id="'+ckeditorName+'-kontextProgress" class="progress-bar"></div> '+                      
+								'</div>'+
+								'<div style="text-align: center;">'+
+									'<a href="#" class="btn" onclick="return prev_word(this, \''+ckeditorName+'\');" title="Predchádzajúce slovo"><i class="fa fa-angle-left"></i></a>'+
+									'<a href="#" class="btn" onclick="return prev_valid_word(this, \''+ckeditorName+'\');" title="Predchádzajúce nezvalidované slovo"><i class="fa fa-angle-double-left"></i></a>'+
+									'<a href="#" class="btn" onclick="return next_valid_word(this, \''+ckeditorName+'\');" title="Nasledujúce nezvalidované slovo"><i class="fa fa-angle-double-right"></i></a>'+
+									'<a href="#" class="btn" onclick="return next_word(this, \''+ckeditorName+'\');" title="Nasledujúce slovo"><i class="fa fa-angle-right"></i></a>'+
+									'<el class="setting-accept_word"></el>'+
+								'</div>'+
+								'<div>'+
+									
+								'</div>'+
+							'</span>'+
+						'</span>');
+	} else {
+		settingsToolbar = $('<span id="'+ckeditorName+'-settings-rows" class="cke_top settings-disabled" style="height: 80px; user-select: none;padding: 6px 8px 20px;">'+
+								'<span class="cke_voice_label">Settings row</span>'+
+								'<span class="cke_toolbox">'+
+									'<span class="cke_toolbar cke_toolbar_last">'+
+										'<span class="cke_voice_label"></span>'+
+										'<span class="cke_toolbar_start"></span>'+
+										'<span class="cke_toolgroup">'+
+											'<a class="cke_button cke_button__source cke_button_disabled" href="#" title="">'+
+												'<span class="cke_button_label cke_button__source_label" style="height: 24px;">'+
+													'Popis slova <i class="fa fa-long-arrow-alt-right"></i> <b><el class="setting-popis_slova"></el></b>'+
+												'</span>'+
+											'</a>'+
+										'</span>'+	
+										'<span class="cke_toolbar_end"></span>'+
+									'</span>'+
+									'<span class="cke_toolbar_break"></span>'+
+								'</span>'+
+							'</span>'+
+							'<span  id="'+ckeditorName+'-settings-rows-buttons" class="cke_top settings-disabled" style="height: auto; user-select: none;">'+
+								'<span class="cke_toolbox">'+
+									'<div style="text-align: center;">'+
+										'<a href="#" class="btn" onclick="return prev_word(this, \''+ckeditorName+'\');" title="Predchádzajúce slovo"><i class="fa fa-angle-left"></i></a>'+
+										'<a href="#" class="btn" onclick="return prev_valid_word(this, \''+ckeditorName+'\');" title="Predchádzajúce nezvalidované slovo"><i class="fa fa-angle-double-left"></i></a>'+
+										'<a href="#" class="btn" onclick="return next_valid_word(this, \''+ckeditorName+'\');" title="Nasledujúce nezvalidované slovo"><i class="fa fa-angle-double-right"></i></a>'+
+										'<a href="#" class="btn" onclick="return next_word(this, \''+ckeditorName+'\');" title="Nasledujúce slovo"><i class="fa fa-angle-right"></i></a>'+
+										'<a href="#" onclick="return edit_meaning(this, \''+ckeditorName+'\');" class="btn" style="position: absolute; right: 240px;">Upraviť popis slova <i class="fa fa-edit"></i></a>'+
+									'</div>'+
+									'<div>'+
+										
+									'</div>'+
+								'</span>'+
+							'</span>');
+	}
+	return settingsToolbar;
+}
     
 
 /********************* Manage ck editor *****************************/
@@ -451,6 +487,25 @@ function edit_sd(that, ckeditorName){
 	return false;
 }
 
+function edit_meaning(that, ckeditorName){
+	var main = $("#cke_"+ckeditorName+" iframe.cke_wysiwyg_frame").contents();
+	var slovo = '';
+	var sdid = '';
+	var sd = '';
+	var param = '';
+	var modal_title = '';
+
+    sd = main.find('.active').attr('sd');
+
+	sdid = main.find('.active').attr('sdid');
+	param = '?sd_id='+sdid+'&slovnyDruh='+sd;
+	
+	modal_title = 'Upraviť popis slova';
+	
+	loadTemplateIntoLargeScreenModal('#defaultModal2', 'largescreen', modal_title,'/zmenit_popis/'+param);
+	return false;
+}
+
 ///////////// END WORD FUNCTIONS /////////////
 
 function setProgressBar(ckeditorName){
@@ -595,6 +650,8 @@ function load_slovo(that, active = false, ckeditorName){
 	AjaxMethods.getDataFromGetRequest('/daj_komplet?sid=', sid+'&vyraz='+slovo, '', function(response){
 		var obj = response;
 		if (obj.data){
+			settings_row.find('.setting-popis_slova').html(obj.data.popis);
+			
 			/*** AKTUALIZUJ PRIDANE SLOVO ***/
 			if(obj.vsetky_slova.length > 0 && class_type == 'n') {
 				if(obj.vsetky_slova.length > 1) {
