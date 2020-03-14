@@ -10,6 +10,7 @@ class SlovoVKontexte(object):
     je_viacej_v_slovniku = False
     slovo = None
     tvar = None
+    tvar_lower = None
     zak_tvar = None
     neprekl_vyraz = None
     je_cislo = False

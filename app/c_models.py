@@ -12,6 +12,7 @@ class SlovoExport(object):
     id = None
     zak_tvar = None
     tvar = None
+    tvar_lower = None
     rod = None
     podrod = None
     pad = None

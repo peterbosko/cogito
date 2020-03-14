@@ -94,26 +94,6 @@ function matchCallback(text, offset) {
   };
 }
 
-function dataCallback(matchInfo, callback) {
-  var data = {};
-
-  var vyraz=matchInfo.query;
-
-  var presna_zhoda="N";
-
-  if (vyraz.endsWith("#")){
-	  //presna_zhoda = "A";
-	  vyraz = vyraz.substr(0,vyraz.length-1);
-  }
-
-  AjaxMethods.getDataFromAsyncGetRequest('/daj_tvary_slova?', "vyraz="+vyraz+"&presna_zhoda="+presna_zhoda, "", function(r){
-		if (r.status==responseOK){//OK vetva
-			data = r.data;
-			callback(data);
-		}
-  });
-}
-
 function binduj_tooltip(ckeditorName){
 		var all = CKEDITOR.instances[ckeditorName].document.getElementsByTag( 'span' );
 		for (var i = 0, max = all.count(); i < max; i++) {

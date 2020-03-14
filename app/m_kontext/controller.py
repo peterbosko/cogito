@@ -149,32 +149,6 @@ def daj_komplet():
     return jsonpickle.encode(vrat_slovo_komplet(sid, vyraz))
 
 
-@kontext_blueprint.route("/daj_vsetky_slova/", methods=["GET"])
-def daj_vsetky_slova():
-    loguj(request)
-    vyraz = request.args.get("vyraz", "")
-
-    response = CommonResponse()
-
-    response.data = vrat_vsetky_slova(vyraz)
-
-    return jsonpickle.encode(response)
-
-
-@kontext_blueprint.route("/daj_tvary_slova/", methods=["GET"])
-def daj_tvary_slova():
-    loguj(request)
-    vyraz = request.args.get("vyraz", "")
-
-    presna_zhoda = request.args.get("presna_zhoda", "N")
-
-    response = CommonResponse()
-
-    response.data = vrat_slova_zacinajuce_na(vyraz, presna_zhoda)
-
-    return jsonpickle.encode(response)
-
-
 @kontext_blueprint.route("/kontrola_slov/", methods=["POST"])
 def kontroluj_slova():
     loguj(request)

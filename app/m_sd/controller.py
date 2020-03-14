@@ -34,7 +34,7 @@ def daj_slova():
         filtered = filtered.filter(Slovo.sd_id == sd_id)
 
     if tvar:
-        filtered = filtered.filter(Slovo.tvar.like(tvar))
+        filtered = filtered.filter(Slovo.tvar_lower.like(tvar.lower()))
 
     if ztvar:
         sd_a = alias(SlovnyDruh, name="slov_d")
@@ -655,10 +655,12 @@ def zmenit_sd_post():
             pr.user_id = int(session["logged"])
             pr.zmenene = datetime.datetime.now()
 
-            pr.zak_tvar = export.zak_tvar
-            pr.popis = export.popis
-
-            pr.pady = export.pady
+            if export.tab == "zakladne":
+                pr.zak_tvar = export.zak_tvar
+                pr.popis = export.popis
+                pr.pady = export.pady
+            elif export.tab == "slova":
+                pr.koren = export.koren
 
             db.session.add(pr)
             db.session.commit()
@@ -696,8 +698,12 @@ def zmenit_sd_post():
             cit.user_id = int(session["logged"])
             cit.zmenene = datetime.datetime.now()
 
-            cit.zak_tvar = export.zak_tvar
-            cit.popis = export.popis
+            if export.tab == "zakladne":
+                cit.zak_tvar = export.zak_tvar
+                cit.popis = export.popis
+            elif export.tab == "slova":
+                cit.koren = export.koren
+
             db.session.add(cit)
             db.session.commit()
             sd_id = cit.id
@@ -710,8 +716,12 @@ def zmenit_sd_post():
             castica.user_id = int(session["logged"])
             castica.zmenene = datetime.datetime.now()
 
-            castica.zak_tvar = export.zak_tvar
-            castica.popis = export.popis
+            if export.tab == "zakladne":
+                castica.zak_tvar = export.zak_tvar
+                castica.popis = export.popis
+            elif export.tab == "slova":
+                castica.koren = export.koren
+
             db.session.add(castica)
             db.session.commit()
             sd_id = castica.id
@@ -724,8 +734,11 @@ def zmenit_sd_post():
             ostatne.user_id = int(session["logged"])
             ostatne.zmenene = datetime.datetime.now()
 
-            ostatne.zak_tvar = export.zak_tvar
-            ostatne.popis = export.popis
+            if export.tab == "zakladne":
+                ostatne.zak_tvar = export.zak_tvar
+                ostatne.popis = export.popis
+            elif export.tab == "slova":
+                ostatne.koren = export.koren
 
             db.session.add(ostatne)
             db.session.commit()
@@ -739,8 +752,11 @@ def zmenit_sd_post():
             prislovka.user_id = int(session["logged"])
             prislovka.zmenene = datetime.datetime.now()
 
-            prislovka.zak_tvar = export.zak_tvar
-            prislovka.popis = export.popis
+            if export.tab == "zakladne":
+                prislovka.zak_tvar = export.zak_tvar
+                prislovka.popis = export.popis
+            elif export.tab == "slova":
+                prislovka.koren = export.koren
 
             db.session.add(prislovka)
             db.session.commit()
@@ -754,8 +770,11 @@ def zmenit_sd_post():
             spojka.user_id = int(session["logged"])
             spojka.zmenene = datetime.datetime.now()
 
-            spojka.zak_tvar = export.zak_tvar
-            spojka.popis = export.popis
+            if export.tab == "zakladne":
+                spojka.zak_tvar = export.zak_tvar
+                spojka.popis = export.popis
+            elif export.tab == "slova":
+                spojka.koren = export.koren
 
             db.session.add(spojka)
             db.session.commit()
@@ -770,6 +789,8 @@ def zmenit_sd_post():
                     slovo = Slovo()
 
                 slovo.tvar = sl['tvar']
+
+                slovo.tvar_lower = slovo.tvar.lower()
 
                 if sl['rod']:
                     slovo.rod = sl['rod'][0]
@@ -938,7 +959,7 @@ def vrat_sd_id():
     else:
         if slovo and slovo != "None":
             sd_al = alias(SlovnyDruh, name="slov_d_al")
-            sl = db.session.query(Slovo).filter(Slovo.tvar == slovo)
+            sl = db.session.query(Slovo).filter(Slovo.tvar_lower == slovo.lower())
             sl = sl.join(sd_al).filter(Slovo.sd_id == SlovnyDruh.id).filter(SlovnyDruh.typ == sdruh)
 
             if sl.count() >= 1:

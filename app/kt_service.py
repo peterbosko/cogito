@@ -24,13 +24,10 @@ def vrat_slovo_komplet(sid, vyraz):
         elif len(vyraz) > 0:
             prvy_znak = vyraz[0]
 
-            if prvy_znak == prvy_znak.upper():
+            if prvy_znak != prvy_znak.lower():
                 prvy_znak_upper = True
 
-            if prvy_znak_upper:
-                data = Slovo.query.filter(or_(Slovo.tvar == vyraz, Slovo.tvar == vyraz.lower()))
-            else:
-                data = Slovo.query.filter(Slovo.tvar == vyraz)
+            data = Slovo.query.filter(Slovo.tvar_lower == vyraz.lower())
 
         slovo_data = CommonObj()
         for row in data:
@@ -38,13 +35,8 @@ def vrat_slovo_komplet(sid, vyraz):
 
         if slovo_data.data:
 
-            first_lower = slovo_data.data['tvar'][0].lower()
+            slova = Slovo.query.filter(Slovo.tvar_lower == vyraz.lower())
 
-            if len(slovo_data.data['tvar']) > 1:
-                first_lower += slovo_data.data['tvar'][1:]
-
-            slova = Slovo.query.filter(or_(Slovo.tvar == slovo_data.data['tvar'], Slovo.tvar == first_lower)).\
-                filter(Slovo.anotacia.isnot(None))
             slovo_data.vsetky_slova = [{key: value for (key, value) in
                                         row.exportuj_komplet(prvy_znak_upper).__dict__.items()} for row in
                                        slova]
@@ -55,36 +47,6 @@ def vrat_slovo_komplet(sid, vyraz):
 
         print("--- %s seconds ---" % (time.time() - start_time)) # KONTROLA RYCHLOSTI SKRIPTU
         return slovo_data
-    else:
-        return None
-
-
-def vrat_slova_zacinajuce_na(vyraz, presna_zhoda):
-    if len(vyraz) > 0:
-        prvy_znak = vyraz[0]
-
-        prvy_znak_upper = False
-
-        if prvy_znak == prvy_znak.upper():
-            prvy_znak_upper = True
-
-        if prvy_znak_upper:
-            pole_slov = Slovo.query.filter(or_(Slovo.tvar == vyraz, Slovo.tvar == vyraz.lower()))
-        else:
-            pole_slov = Slovo.query.filter(Slovo.tvar == vyraz)
-
-        pole_slov = pole_slov.filter(Slovo.anotacia.isnot(None))
-
-        if pole_slov.count() == 0:
-            if prvy_znak_upper:
-                pole_slov = Slovo.query.filter(or_(Slovo.tvar.like(vyraz + "%"), Slovo.tvar.like(vyraz.lower()+"%")))\
-                    .filter(Slovo.anotacia.isnot(None))\
-                    .paginate(1, 15, False).items
-            else:
-                pole_slov = Slovo.query.filter(Slovo.tvar.like(vyraz + "%")).filter(Slovo.anotacia.isnot(None))\
-                    .paginate(1, 15, False).items
-
-        return [{key: value for (key, value) in row.exportuj(prvy_znak_upper).__dict__.items()} for row in pole_slov]
     else:
         return None
 
@@ -112,15 +74,6 @@ def vrat_slovne_druhy_slova_zacinajuce_na(vyraz):
                     .paginate(1, 15, False).items
 
         return [{key: value for (key, value) in row.exportuj().__dict__.items()} for row in pole_slov]
-    else:
-        return None
-
-
-def vrat_vsetky_slova(vyraz):
-    if vyraz:
-        pole_slov = Slovo.query.filter(Slovo.tvar == vyraz).filter(Slovo.anotacia.isnot(None))
-        
-        return [{key: value for (key, value) in row.exportuj(False).__dict__.items()} for row in pole_slov]
     else:
         return None
 
@@ -153,6 +106,8 @@ def vyrob_slovo_pole(slovo, s_id, bolo_vybrate):
 
     slovoVK.tvar = slovo
 
+    slovoVK.tvar_lower = slovo.lower()
+
     slovoVK.id_slova = s_id
 
     slovoVK.je_prve_upper = slovo[0] == slovo[0].upper() and slovo[0].lower() != slovo[0].upper()
@@ -160,65 +115,6 @@ def vyrob_slovo_pole(slovo, s_id, bolo_vybrate):
     slovoVK.bolo_vybrate = bolo_vybrate
 
     vysledok.append(slovoVK)
-
-    return vysledok
-
-
-# obsolete. nepouzivat. na vyhodenie. miesto toho pouzit nltk.word_tokenize
-def daj_tokeny_slova(slovo):
-    text_slova = ""
-    text_cisla = ""
-
-    def ukonci_slovo():
-        if text_slova != "":
-            vysledok.append(text_slova)
-        som_v_slove = False
-
-    def ukonci_cislo():
-        if text_cisla != "":
-            vysledok.append(text_cisla)
-        som_v_cisle = False
-
-    vysledok = []
-
-    som_v_slove = False
-    som_v_cisle = False
-
-    i = 0
-    for letter in slovo:
-        i += 1
-
-        if letter == "." or letter == ",":
-            if som_v_cisle:
-                if i == len(slovo):
-                    ukonci_cislo()
-                    text_cisla = ""
-                    vysledok.append(letter)
-                else:
-                    text_cisla += letter
-            else:
-                ukonci_cislo()
-                text_cisla = ""
-                ukonci_slovo()
-                text_slova = ""
-                vysledok.append(letter)
-        elif letter in SPEC_ZNAKY:
-            ukonci_cislo()
-            text_cisla = ""
-            ukonci_slovo()
-            text_slova = ""
-            vysledok.append(letter)
-        elif letter in "0123456789":
-            som_v_cisle = True
-            text_cisla += letter
-        else:
-            som_v_slove = True
-            text_slova += letter
-
-    ukonci_cislo()
-    text_cisla = ""
-    ukonci_slovo()
-    text_slova = ""
 
     return vysledok
 
@@ -285,16 +181,9 @@ def parsuj_zoznam_slov_z_html(html, parent_slovo_id=None):
 def nacitaj_naparsovane_slova(naparsovane):
     vysledok = []
 
-    slova = [slovo.tvar for slovo in naparsovane]
+    slova = [slovo.tvar_lower for slovo in naparsovane]
 
-    for p in naparsovane:
-        if p.je_prve_upper:
-            lws = p.tvar[0].lower()
-            if len(p.tvar) > 1:
-                lws += p.tvar[1:]
-            slova.append(lws)
-
-    for sl in Slovo.query.filter(Slovo.tvar.in_(slova)):
+    for sl in Slovo.query.filter(Slovo.tvar_lower.in_(slova)):
         vysledok.append(sl.exportuj(False))
 
     return vysledok
@@ -310,7 +199,8 @@ def vrat_pole_slov_z_textu(html, zoznam_nacitanych_slov):
 
     for p_slovo in vyparsovane_slova:
 
-        v_slovo = vrat_slovo2(p_slovo.bolo_vybrate, p_slovo.je_prve_upper, p_slovo.tvar, zoznam_nacitanych_slov, p_slovo.id_slova)
+        v_slovo = vrat_slovo2(p_slovo.bolo_vybrate, p_slovo.je_prve_upper, p_slovo.tvar, zoznam_nacitanych_slov,
+                              p_slovo. id_slova)
 
         if not v_slovo.je_cislo:
             celkom_slov += 1

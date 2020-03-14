@@ -76,37 +76,18 @@ def vrat_slovo(slovo, ids=None):
     vysledok_slovo = SlovoVKontexte()
 
     if slovo and obsahuje_cisla(slovo):
-        #vysledok_slovo.neprekl_vyraz = daj_cislo(slovo)
         vysledok_slovo.je_cislo = True
         vysledok_slovo.tvar = slovo
         return vysledok_slovo
 
-    je_upper = slovo[0] == slovo[0].upper()
+    je_upper = slovo[0] != slovo[0].lower()
 
-    lower_sl = slovo[0].lower()
+    lower_sl = slovo.lower()
 
-    if len(slovo) > 1:
-        lower_sl += slovo[1:]
-
-    if je_upper:
-        if ids:
-            sl = Slovo.query.filter(Slovo.id == ids).filter(Slovo.tvar == slovo).filter(Slovo.anotacia.isnot(None)).\
-                filter(Slovo.anotacia != "")
-        else:
-            sl = Slovo.query.filter(Slovo.tvar == slovo).filter(Slovo.anotacia.isnot(None)).filter(Slovo.anotacia != "")
-        if sl.count() == 0:
-            if ids:
-                sl = Slovo.query.filter(Slovo.id == ids).filter(Slovo.tvar == lower_sl)\
-                    .filter(Slovo.anotacia.isnot(None)).filter(Slovo.anotacia != "")
-            else:
-                sl = Slovo.query.filter(Slovo.tvar == lower_sl).filter(Slovo.anotacia.isnot(None)).\
-                    filter(Slovo.anotacia != "")
+    if ids:
+        sl = Slovo.query.filter(Slovo.id == ids).filter(Slovo.tvar_lower == lower_sl)
     else:
-        if ids:
-            sl = Slovo.query.filter(Slovo.id == ids).filter(Slovo.tvar == slovo).filter(Slovo.anotacia.isnot(None)).\
-                filter(Slovo.anotacia != "")
-        else:
-            sl = Slovo.query.filter(Slovo.tvar == slovo).filter(Slovo.anotacia.isnot(None)).filter(Slovo.anotacia != "")
+        sl = Slovo.query.filter(Slovo.tvar_lower == lower_sl)
 
     if sl.count() == 0:
         vysledok_slovo.id_slova = None
@@ -146,25 +127,18 @@ def vrat_slovo2(bolo_vybrate, je_prve_upper, slovo, zoznam_nacitanych_slov, ids=
     vysledok_slovo = SlovoVKontexte()
 
     if slovo and obsahuje_cisla(slovo):
-        #vysledok_slovo.neprekl_vyraz = daj_cislo(slovo)
-        #vysledok_slovo.neprekl_vyraz = slovo
-        # VYUZITIE mozne v pripade rozlisovania slov ako su napriklad hesla, matematicke vzorce atd.
-
         vysledok_slovo.je_cislo = True
         vysledok_slovo.tvar = slovo
         return vysledok_slovo
 
-    lower_sl = slovo[0].lower()
-
-    if len(slovo) > 1:
-        lower_sl += slovo[1:]
+    lower_sl = slovo.lower()
 
     sl = []
     sid = None
     vybrate_slovo = None
 
     for s in zoznam_nacitanych_slov:
-        if s.tvar == slovo or (je_prve_upper and s.tvar == lower_sl):
+        if s.tvar_lower == lower_sl:
             sl.append(s)
             if s.id == ids:
                 vybrate_slovo = s

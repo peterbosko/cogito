@@ -319,7 +319,8 @@ class Slovo(db.Model):
     __tablename__ = 'sl'
     __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8mb4', 'mysql_collate': 'utf8mb4_bin'}
     id = db.Column(db.Integer, primary_key=True)
-    tvar = db.Column(db.String(500, collation='utf8mb4_bin'), nullable=False, index=True)
+    tvar = db.Column(db.String(500, collation='utf8mb4_bin'), nullable=False)
+    tvar_lower = db.Column(db.String(500, collation='utf8mb4_bin'), nullable=False, index=True)
     rod = db.Column(db.String(1), nullable=True)
     podrod = db.Column(db.String(1), nullable=True)
     pad = db.Column(db.String(3), nullable=True)
@@ -347,6 +348,7 @@ class Slovo(db.Model):
         export = SlovoExport()
         export.id = self.id
         export.tvar = self.tvar
+        export.tvar_lower = self.tvar_lower
         export.zak_tvar = self.SlovnyDruh.zak_tvar
         export.popis = self.SlovnyDruh.popis
         if prvy_znak_upper:

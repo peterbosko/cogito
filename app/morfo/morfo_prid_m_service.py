@@ -389,7 +389,7 @@ def vrat_slovo_prid_m(sd_id, rod, podrod, cislo, pad, pricastie, koncovka=None):
         filter(Slovo.cislo == cislo).filter(Slovo.pricastie == pricastie).filter(Slovo.pad == pad)
 
     if koncovka:
-        slovo = slovo.filter(Slovo.tvar.like("%"+koncovka))
+        slovo = slovo.filter(Slovo.tvar_lower.like("%"+koncovka.lower()))
 
     slovo = slovo.first()
 
