@@ -1,4 +1,5 @@
 ( function() {
+
 	var cogitoCmd = {
 		readOnly: 1,
 		modes: { wysiwyg: 1,source: 0 },
@@ -6,47 +7,7 @@
 		exec: function( editor ) {
 			var ckeditorName = editor.name;
 			if ( editor.fire( 'cogito-rozbor' ) ) {
-                loadTemplateIntoModal('#defaultModal','Rozbor viet kontextu', '/rozbor_viet_kontextu/');
-				$('#strukturaVety').data('editor-id', ckeditorName);
-				
-				var data = {};
-				
-				data.kontext = CKEDITOR.instances[ckeditorName].getData();
-
-				AjaxMethods.getDataFromPostRequest('/vyrob_stromy_viet/', "", data, function(r){
-					if (r.status==responseOK){//OK vetva
-						$('#jsTree').jstree({ 'core' : {
-							'data' : r.data
-							}
-						});
-						$('#jsTree').on("dblclick.jstree", function (e) {
-							var instance = $.jstree.reference(this),
-							node = instance.get_node(e.target);
-							var poradieVety = node.id.replace('veta_','');
-							if (!poradieVety.includes('_')){
-									d = {};
-									d.kontext = CKEDITOR.instances[ckeditorName].getData();
-									d.veta = poradieVety;
-									AjaxMethods.getDataFromPostRequest('/vyrob_popis_struktury_vety/', "", d, function(r){
-										if (r.status==responseOK){//OK vetva
-											$('#strukturaVety').removeClass('nodisplay');
-											$('#taStrukturaVety').val(r.data);
-										} else{
-											swal({ buttons: {},
-											   title  :  "Chyba",
-											   text   :  r.error_text,
-											   icon   :  "error"});
-										}
-									});
-							}
-						});
-					} else{
-						swal({ buttons: {},
-						   title  :  "Chyba",
-						   text   :  r.error_text,
-						   icon   :  "error"});
-					}
-				});
+                loadTemplateIntoModal('#defaultModal','Rozbor viet kontextu', '/rozbor_viet_kontextu/', 'spustiPoNacitaniOknaRozboru', editor);
 			}
 		},
 		startDisabled: false	
