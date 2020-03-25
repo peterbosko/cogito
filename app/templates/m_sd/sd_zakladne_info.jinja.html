@@ -17,22 +17,14 @@
                          value="">
                     </div>
                     <label class="col-sm-2" for="prepend">
-                         Popis slova:
+                         Koncept slova:
                     </label>
                     <div class="col-sm-4">
-                        <input type="text" id="txtFormPopis" name="txtFormPopis" class="form-control zmenaZakInfo">
+                        <select id="ddlKoncept" name="ddlKoncept" class="zmenaZakInfo">
+                            <option></option>
+                        </select>
                     </div>
                 </div>
-                <!--
-                <div class="row marginbottomDetailSD">
-                    <label class="col-sm-2" for="prepend">
-                         Tag významu:
-                    </label>
-                    <div class="col-sm-4">
-                        <input type="text" id="txtTagVyznamu" name="txtTagVyznamu" class="form-control">
-                    </div>
-                </div>
-                -->
                 <div class="row POD_M marginbottomDetailSD nodisplay">
                     <label class="col-sm-2" for="prepend">
                          Rod:
@@ -58,7 +50,7 @@
                          Nav. na sloveso:
                     </label>
                     <div class="col-sm-3">
-                        <select id="ddlPOD_M_Sloveso" name="ddlPOD_M_Sloveso zmenaZakInfo">
+                        <select id="ddlPOD_M_Sloveso" name="ddlPOD_M_Sloveso" class="zmenaZakInfo">
                             <option></option>
                         </select>
                     </div>
@@ -202,12 +194,18 @@ function NastavSloveso(itemid, id_slovesa, text_slovesa){
         $(itemid).append("<option selected value='"+id_slovesa+"'>"+text_slovesa+"</option>");
 }
 
+function NastavKoncept(itemid, id_konceptu, text_konceptu){
+    if (id_konceptu)
+        $(itemid).append("<option selected value='"+id_konceptu+"'>"+text_konceptu+"</option>");
+}
+
 function NacitajZakladneInfoSD(sd_id){
         AjaxMethods.getDataFromGetRequest('{{url_for("sd.vrat_zakladne_info_sd")}}', "",
         "?sd_id="+sd_id, function(r){
             if (r.status==responseOK){//OK vetva
                 $('#txtFormZakTvar').val(r.data.zak_tvar);
                 $('#txtFormPopis').val(r.data.popis);
+                NastavKoncept('#ddlKoncept',r.data.koncept_id,r.data.koncept_nazov);
 
                 if (r.data.sem_priznak_id)
                     $('#ddlSEM_PRIZ').val(r.data.sem_priznak_id);
@@ -273,6 +271,8 @@ function ZmenSDZakladneInfo(){
         data.popis = $('#txtFormPopis').val();
         data.typ = typ;
         data.tab = $(currentTab).attr('id');
+
+        data.koncept_id = $('#ddlKoncept').val();
 
         if (typ == "POD_M"){
             data.rod = $('#txtPOD_M_ROD').val();
@@ -395,6 +395,7 @@ $(document).ready(function() {
     bindSlovesoAutocomplete('#ddlPOD_M_Sloveso');
     bindSlovesoAutocomplete('#ddlSLOVESO_Sloveso');
     bindSlovesoAutocomplete('#ddlPRID_M_Sloveso');
+    bindKonceptAutocomplete('#ddlKoncept');
 
     setupD(slovDruh);
 

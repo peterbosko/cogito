@@ -22,6 +22,8 @@ class SDExport(object):
     sufix = None
     vzor_stup = None
     paradigma = None
+    koncept_id = None
+    koncept_nazov = None
 
     tab = None
 

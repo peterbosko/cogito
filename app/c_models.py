@@ -48,6 +48,8 @@ class SlovnyDruhExport(object):
     id = None
     zak_tvar = None
     druh = None
+    koncept_id = None
+    koncept_nazov = None
 
 
 class SlovnyDruhHierExport(object):

@@ -168,6 +168,7 @@ def daj_pm():
     rod = request.args.get("hladaj_rod", "")
     zo_slovesa = request.args.get("hladaj_zo_slovesa", "")
     vzor = request.args.get("vzor", "")
+    koncept = request.args.get("koncept", "")
 
     filtered = db.session.query(PodstatneMeno)
 
@@ -195,11 +196,25 @@ def daj_pm():
 
         filtered = filtered.filter(PodstatneMeno.id.in_(pole_idciek))
 
+    if koncept:
+        filtered_tmp2 = db.session.query(PodstatneMeno)
+
+        filtered_tmp2 = filtered_tmp2.join(Koncept, Koncept.id == PodstatneMeno.koncept_id)
+
+        filtered_tmp2 = filtered_tmp2.filter(Koncept.nazov.like(koncept)).all()
+
+        pole_idciek = []
+
+        for f in filtered_tmp2:
+            pole_idciek.append(f.id)
+
+        filtered = filtered.filter(PodstatneMeno.id.in_(pole_idciek))
+
     table = DataTable(request.args, PodstatneMeno, filtered, [
             "id",
             "id",
             "zak_tvar",
-            "popis",
+            ("koncept", lambda i: daj_nazov_konceptu(i.koncept_id)),
             "rod",
             "podrod",
             ("sloveso_id", lambda i: daj_zakladny_tvar_sd(i.sloveso_id)),
@@ -530,6 +545,12 @@ def zmenit_sd_post():
                 pm.rod = export.rod
                 pm.podrod = export.podrod
 
+                if pm.koncept_id and not export.koncept_id:
+                    pm.koncept_id = None
+
+                if export.koncept_id:
+                    pm.koncept_id = export.koncept_id
+
                 if pm.sloveso_id and not export.sloveso_id:
                     pm.sloveso_id = None
 
@@ -579,6 +600,12 @@ def zmenit_sd_post():
 
                 prm.je_privlastnovacie = export.je_privlastnovacie
 
+                if prm.koncept_id and not export.koncept_id:
+                    prm.koncept_id = None
+
+                if export.koncept_id:
+                    prm.koncept_id = export.koncept_id
+
             elif export.tab == "slova":
                 prm.koren = export.koren
                 prm.vzor = export.vzor
@@ -604,6 +631,13 @@ def zmenit_sd_post():
             if export.tab == "zakladne":
                 zam.zak_tvar = export.zak_tvar
                 zam.popis = export.popis
+
+                if zam.koncept_id and not export.koncept_id:
+                    zam.koncept_id = None
+
+                if export.koncept_id:
+                    zam.koncept_id = export.koncept_id
+
             elif export.tab == "slova":
                 zam.koren = export.koren
                 zam.paradigma = export.paradigma
@@ -634,6 +668,13 @@ def zmenit_sd_post():
 
                 if export.sloveso_id:
                     s.pozitivne_sloveso_id = export.sloveso_id
+
+                if s.koncept_id and not export.koncept_id:
+                    s.koncept_id = None
+
+                if export.koncept_id:
+                    s.koncept_id = export.koncept_id
+
             elif export.tab == "slova":
                 s.vid = export.vid
                 s.koren = export.koren
@@ -659,6 +700,13 @@ def zmenit_sd_post():
                 pr.zak_tvar = export.zak_tvar
                 pr.popis = export.popis
                 pr.pady = export.pady
+
+                if pr.koncept_id and not export.koncept_id:
+                    pr.koncept_id = None
+
+                if export.koncept_id:
+                    pr.koncept_id = export.koncept_id
+
             elif export.tab == "slova":
                 pr.koren = export.koren
 
@@ -679,6 +727,13 @@ def zmenit_sd_post():
                 cis.zak_tvar = export.zak_tvar
                 cis.popis = export.popis
                 cis.hodnota = export.hodnota
+
+                if cis.koncept_id and not export.koncept_id:
+                    cis.koncept_id = None
+
+                if export.koncept_id:
+                    cis.koncept_id = export.koncept_id
+
             elif export.tab == "slova":
                 cis.prefix = export.prefix
                 cis.sufix = export.sufix
@@ -701,6 +756,13 @@ def zmenit_sd_post():
             if export.tab == "zakladne":
                 cit.zak_tvar = export.zak_tvar
                 cit.popis = export.popis
+
+                if cit.koncept_id and not export.koncept_id:
+                    cit.koncept_id = None
+
+                if export.koncept_id:
+                    cit.koncept_id = export.koncept_id
+
             elif export.tab == "slova":
                 cit.koren = export.koren
 
@@ -719,6 +781,13 @@ def zmenit_sd_post():
             if export.tab == "zakladne":
                 castica.zak_tvar = export.zak_tvar
                 castica.popis = export.popis
+
+                if castica.koncept_id and not export.koncept_id:
+                    castica.koncept_id = None
+
+                if export.koncept_id:
+                    castica.koncept_id = export.koncept_id
+
             elif export.tab == "slova":
                 castica.koren = export.koren
 
@@ -737,6 +806,13 @@ def zmenit_sd_post():
             if export.tab == "zakladne":
                 ostatne.zak_tvar = export.zak_tvar
                 ostatne.popis = export.popis
+
+                if ostatne.koncept_id and not export.koncept_id:
+                    ostatne.koncept_id = None
+
+                if export.koncept_id:
+                    ostatne.koncept_id = export.koncept_id
+
             elif export.tab == "slova":
                 ostatne.koren = export.koren
 
@@ -755,6 +831,13 @@ def zmenit_sd_post():
             if export.tab == "zakladne":
                 prislovka.zak_tvar = export.zak_tvar
                 prislovka.popis = export.popis
+
+                if prislovka.koncept_id and not export.koncept_id:
+                    prislovka.koncept_id = None
+
+                if export.koncept_id:
+                    prislovka.koncept_id = export.koncept_id
+
             elif export.tab == "slova":
                 prislovka.koren = export.koren
 
@@ -773,6 +856,13 @@ def zmenit_sd_post():
             if export.tab == "zakladne":
                 spojka.zak_tvar = export.zak_tvar
                 spojka.popis = export.popis
+
+                if spojka.koncept_id and not export.koncept_id:
+                    spojka.koncept_id = None
+
+                if export.koncept_id:
+                    spojka.koncept_id = export.koncept_id
+
             elif export.tab == "slova":
                 spojka.koren = export.koren
 

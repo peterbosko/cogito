@@ -9,6 +9,33 @@ from app.sd_service import *
 koncept_blueprint = Blueprint("koncept", __name__)
 
 
+@koncept_blueprint.route("/daj_autocomplete_konceptov/", methods=["GET"])
+def daj_autocomplete_konceptov():
+    loguj(request)
+    term = request.args.get("term", "")
+
+    filtered = Koncept.query.filter(Koncept.nazov == term)
+
+    if filtered.count() == 0:
+        filtered = Koncept.query.filter(Koncept.nazov.like(term + "%"))
+
+    autoc = []
+
+    for koncept in filtered:
+        rr = AutocompleteSingleResponse()
+        rr.id = koncept.id
+        rr.text = koncept.nazov
+        autoc.append(rr)
+
+    response = CommonResponse()
+
+    response.status = ResponseStatus.OK
+
+    response.data = autoc
+
+    return jsonpickle.encode(response)
+
+
 @koncept_blueprint.route("/kc_zakladne_info/", methods=["GET"])
 def kc_zakladne_info():
     loguj(request)

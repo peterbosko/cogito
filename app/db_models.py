@@ -71,6 +71,35 @@ class Kontext(db.Model):
             return False
 
 
+class Koncept(db.Model):
+    __tablename__ = 'kc'
+    __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8mb4', 'mysql_collate': 'utf8mb4_bin'}
+    id = db.Column(db.Integer, primary_key=True)
+    nazov = db.Column(db.String(20), nullable=False, index=True)
+    popis_obsah = db.Column(db.Text(4000000000))
+    silny_popis = db.Column(db.Text(4000000000))
+
+
+class KonceptAtribut(db.Model):
+    __tablename__ = 'kc_at'
+    __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8mb4', 'mysql_collate': 'utf8mb4_bin'}
+    id = db.Column(db.Integer, primary_key=True)
+    kc_id = db.Column('kc_id', db.Integer, db.ForeignKey('kc.id'))
+    typ = db.Column(db.String(20), nullable=False)
+    dlzka = db.Column('dlzka', db.Integer, nullable=True)
+    kardinalita = db.Column(db.String(1), nullable=False)
+    vlastnost_koncept_id = db.Column('at_kc_id', db.Integer, db.ForeignKey('kc.id'))
+
+
+class KonceptHierarchia(db.Model):
+    __tablename__ = 'kc_hier'
+    __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8mb4', 'mysql_collate': 'utf8mb4_bin'}
+    id = db.Column(db.Integer, primary_key=True)
+    kc_id = db.Column('kc_id', db.Integer, db.ForeignKey('kc.id'))
+    rodic_kc_id = db.Column('rodic_kc_id', db.Integer, db.ForeignKey('kc.id'))
+    poradie = db.Column('poradie', db.Integer, nullable=True)
+
+
 class SlovnyDruh(db.Model):
     __tablename__ = 'sd'
     __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8mb4', 'mysql_collate': 'utf8mb4_bin'}
@@ -92,6 +121,7 @@ class SlovnyDruh(db.Model):
     vzor_temp = db.Column(db.String(500, collation='utf8mb4_bin'), nullable=True)
     zmenene = db.Column(db.DateTime(), nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey("u.id"), nullable=True)
+    koncept_id = db.Column(db.Integer, db.ForeignKey("kc.id"), nullable=True)
     # sd_hier = relationship("HierarchiaSD", primaryjoin="(SlovnyDruh.id==HierarchiaSD.sd_id)")
 
     __mapper_args__ = {
@@ -118,6 +148,11 @@ class SlovnyDruh(db.Model):
         export.sufix = self.sufix
         export.koren = self.koren
         export.vzor_stup = self.vzor_stup
+        export.koncept_id = self.koncept_id
+        if export.koncept_id:
+            export.koncept_nazov = Koncept.query.get(export.koncept_id).nazov
+        else:
+            export.koncept_nazov = ""
 
         if self.typ == "POD_M":
             pm = PodstatneMeno.query.get(self.id)
@@ -775,33 +810,4 @@ class SlovnyDruhStat(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     typ = db.Column(db.String(20), nullable=False, index=True)
     pocet = db.Column(db.Integer, nullable=True)
-
-
-class Koncept(db.Model):
-    __tablename__ = 'kc'
-    __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8mb4', 'mysql_collate': 'utf8mb4_bin'}
-    id = db.Column(db.Integer, primary_key=True)
-    nazov = db.Column(db.String(20), nullable=False, index=True)
-    popis_obsah = db.Column(db.Text(4000000000))
-    silny_popis = db.Column(db.Text(4000000000))
-
-
-class KonceptAtribut(db.Model):
-    __tablename__ = 'kc_at'
-    __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8mb4', 'mysql_collate': 'utf8mb4_bin'}
-    id = db.Column(db.Integer, primary_key=True)
-    kc_id = db.Column('kc_id', db.Integer, db.ForeignKey('kc.id'))
-    typ = db.Column(db.String(20), nullable=False)
-    dlzka = db.Column('dlzka', db.Integer, nullable=True)
-    kardinalita = db.Column(db.String(1), nullable=False)
-    vlastnost_koncept_id = db.Column('at_kc_id', db.Integer, db.ForeignKey('kc.id'))
-
-
-class KonceptHierarchia(db.Model):
-    __tablename__ = 'kc_hier'
-    __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8mb4', 'mysql_collate': 'utf8mb4_bin'}
-    id = db.Column(db.Integer, primary_key=True)
-    kc_id = db.Column('kc_id', db.Integer, db.ForeignKey('kc.id'))
-    rodic_kc_id = db.Column('rodic_kc_id', db.Integer, db.ForeignKey('kc.id'))
-    poradie = db.Column('poradie', db.Integer, nullable=True)
 

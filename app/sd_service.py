@@ -149,6 +149,15 @@ def daj_zakladny_tvar_sd(idsd):
         return sd.zak_tvar + zvrat
 
 
+def daj_nazov_konceptu(idkonceptu):
+    if not idkonceptu:
+        return ""
+    else:
+        k = Koncept.query.get(idkonceptu)
+
+        return k.nazov
+
+
 def daj_slovesne_vzory():
     vysledok = []
 
