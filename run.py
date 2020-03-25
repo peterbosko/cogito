@@ -2,7 +2,7 @@ from app.app import flask_app
 from app.db_models import *
 from app.sd_service import *
 import sys
-from ufal._udpipe import Model
+from ufal.udpipe import Model
 import nltk
 
 db.init_app(flask_app)
@@ -16,13 +16,18 @@ def read_udpipe_model():
     return model
 
 
-def start():
+def start(load_pipe):
     debug = False
     host = "0.0.0.0"
     port = 80
-    flask_app.udpipe_model = read_udpipe_model()
-    if flask_app.udpipe_model:
-        print("Model loaded...")
+
+    if load_pipe:
+        flask_app.udpipe_model = read_udpipe_model()
+        if flask_app.udpipe_model:
+            print("Model loaded...")
+    else:
+        print("Not loading pipe...")
+
     flask_app.run(host, debug=debug, port=port)
 
 
@@ -63,7 +68,12 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         command = sys.argv[1]
         if command == "start":
-            start()
+            load_pipe = True
+
+            if len(sys.argv) > 2:
+                load_pipe = sys.argv[2] != "nopipe"
+
+            start(load_pipe)
         elif command == "init_db":
             init_db(flask_app)
     else:

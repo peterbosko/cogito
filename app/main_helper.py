@@ -38,6 +38,18 @@ def som_admin_slov():
         return False
 
 
+def som_admin_konceptov():
+    if "logged" in session.keys():
+        usr = int(session["logged"])
+        ja = User.query.get(usr)
+        if ja.je_admin_konceptov == "A":
+            return True
+        else:
+            return False
+    else:
+        return False
+
+
 def daj_typ_z_poctov_sd(rows, typ):
     pocet = 0
     for r in rows:

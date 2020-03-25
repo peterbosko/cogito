@@ -1,0 +1,49 @@
+<div id="zakladne_loader" class="row">
+    <div class="col-sm-12">
+        <i class="fa fa-spinner fa-spin fa-lg"></i>
+    </div>
+</div>
+<div id="zakladne_div" class="row nodisplay" >
+    <div class="col-sm-12">
+        <form id="KCForm" data-fv-framework="bootstrap" method="post">
+                <div class="row marginbottomDetailSD">
+                    <label class="col-sm-12" for="prepend">
+                         Názov konceptu:
+                    </label>
+                    <div class="col-sm-12">
+                        <input type="text" id="txtNazovKonceptu" name="txtNazovKonceptu" class="form-control zmenaZakInfo" data-fv-row=".col-sm-9"
+                         data-fv-notempty="true" data-fv-notempty-message="Názov je povinný"
+                         value="">
+                    </div>
+                </div>
+                <div class="row marginbottomDetailSD">
+                    <div class="col-sm-12">
+                        Krátky popis konceptu:
+                    </div>
+                    <div class="col-sm-12">
+                         <textarea rows="14" id="taKonceptPopis" name="taKonceptPopis" class="form-control" data-fv-row=".col-sm-12"
+                         data-fv-notempty="true" data-fv-notempty-message="Popis konceptu je povinný"></textarea>
+                    </div>
+                </div>
+        </form>
+    </div>
+</div>
+<script>
+
+$(document).ready(function() {
+
+    $('#KCForm').formValidation();
+
+    $('.zmenaZakInfo').change(function(){
+        zmenaVZakladneInfo = true;
+    });
+
+    $('#zakladne_div').fadeIn( "slow", function() {
+                                }).removeClass('nodisplay');
+    $('#zakladne_loader').addClass('nodisplay');
+
+	initCKEditorInstance('taKonceptPopis',300, 'koncept', '');
+
+});
+
+</script>

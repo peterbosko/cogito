@@ -856,7 +856,7 @@ def zmenit_sd_post():
 @sd_blueprint.route("/zmenit_sd/", methods=["GET"])
 def zmenit_sd():
     loguj(request)
-    return render_template("m_sd/zmenit_sd2.jinja.html")
+    return render_template("m_sd/zmenit_sd.jinja.html")
 
 
 @sd_blueprint.route("/sd_zakladne_info/", methods=["GET"])

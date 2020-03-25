@@ -3,28 +3,28 @@
         <div class="col-sm-2">
             <div class="nav flex-column nav-pills" id="nav-tab" role="tablist" aria-orientation="vertical">
                 <a class="nav-link zakladne-tab active" id="zakladne-tab" data-toggle="pill" href="#zakladne" role="tab" aria-controls="v-pills-home" aria-selected="true">Základné údaje</a>
-                <a class="nav-link rodicia-tab" id="rodicia-tab" data-toggle="pill" href="#rodicia" role="tab" aria-controls="v-pills-profile" aria-selected="false">Rodičia slova</a>
-                <a class="nav-link slova-tab" id="slova-tab" data-toggle="pill" href="#slova" role="tab" aria-controls="v-pills-messages" aria-selected="false">Slová druhu</a>
+                <a class="nav-link slova-tab" id="rodicia-tab" data-toggle="pill" href="#rodicia" role="tab" aria-controls="v-pills-messages" aria-selected="false">Rodičia</a>
+                <a class="nav-link slova-tab" id="atributy-tab" data-toggle="pill" href="#atributy" role="tab" aria-controls="v-pills-messages" aria-selected="false">Atribúty</a>
             </div>
         </div>
         <div class="col-sm-10">
             <div class="tab-content" id="nav-tabContent">
                   <div class="tab-pane fade active show" id="zakladne" role="tabpanel" aria-labelledby="zakladne-tab"
-                       data-target="{{url_for('sd.sd_zakladne_info')}}?slovo={{request.args.get('slovo')}}&slovnyDruh={{request.args.get('slovnyDruh')}}&ulozAkoNoveSlovo={{request.args.get('ulozAkoNoveSlovo')}}&sd_id=">
+                       data-target="{{url_for('koncept.kc_zakladne_info')}}?kc_id=">
                   </div>
                   <div class="tab-pane fade" id="rodicia" role="tabpanel" aria-labelledby="rodicia-tab"
-                       data-target="{{url_for('sd.sd_rodicia')}}?slovo={{request.args.get('slovo')}}&slovnyDruh={{request.args.get('slovnyDruh')}}&ulozAkoNoveSlovo={{request.args.get('ulozAkoNoveSlovo')}}&sd_id=">
+                       data-target="{{url_for('koncept.kc_rodicia_konceptu')}}?kc_id=">
                   </div>
-                  <div class="tab-pane fade" id="slova" role="tabpanel" aria-labelledby="slova-tab"
-                       data-target="{{url_for('sd.sd_slova_zmen')}}?slovo={{request.args.get('slovo')}}&slovnyDruh={{request.args.get('slovnyDruh')}}&ulozAkoNoveSlovo={{request.args.get('ulozAkoNoveSlovo')}}&sd_id=">
+                  <div class="tab-pane fade" id="atributy" role="tabpanel" aria-labelledby="atributy-tab"
+                       data-target="{{url_for('koncept.kc_atributy')}}?kc_id=">
                   </div>
             </div>
         </div>
     </div>
 </div>
 </div>
-<input type="hidden" id="hdn_SD_ID" value="0"/>
-<input type="hidden" id="hdn_Povodne_SD_ID" value="0"/>
+<input type="hidden" id="hdn_KC_ID" value="0"/>
+<input type="hidden" id="hdn_Povodne_KC_ID" value="0"/>
 <script>
 
     var loadnuteTaby = {};
@@ -32,7 +32,7 @@
     function NastavUlozButton(tab){
             var $modal =  $('#nav-tab').parents('.modal');
 
-            if (tab == "slova"){
+            if (tab == "atributy"){
                 var $btnSave = $modal.find('.btnSave').removeClass('nodisplay').html("<i class='fa fa-save'></i>&nbsp;Uložiť");
             }
             else{
@@ -40,20 +40,20 @@
             }
     }
 
-    function setPovodneSD_ID(id){
-        $('#hdn_Povodne_SD_ID').val(id);
+    function setPovodneKC_ID(id){
+        $('#hdn_Povodne_KC_ID').val(id);
     }
 
-    function getPovodneSD_ID(){
-        return $('#hdn_Povodne_SD_ID').val();
+    function getPovodneKC_ID(){
+        return $('#hdn_Povodne_KC_ID').val();
     }
 
-    function setSD_ID(id){
-        $('#hdn_SD_ID').val(id);
+    function setKC_ID(id){
+        $('#hdn_KC_ID').val(id);
     }
 
-    function getSD_ID(){
-        return $('#hdn_SD_ID').val();
+    function getKC_ID(){
+        return $('#hdn_KC_ID').val();
     }
 
     var currentTab = {};
@@ -75,7 +75,7 @@
         if (selected=="zakladne"){
             if (loadnuteTaby["zakladne"]){
 
-                if (!ZmenSDZakladneInfo()){
+                if (!ZmenKCZakladneInfo()){
                     return;
                 }
             }
@@ -87,7 +87,7 @@
         else{
             loadnuteTaby[$(tab).attr('id')] = true;
             tab.html('<i class="fa fa-spinner fa-spin fa-lg"></i>');
-            tab.load(tab.attr('data-target')+getSD_ID());
+            tab.load(tab.attr('data-target')+getKC_ID());
 
             NastavUlozButton($(tab).attr('id'));
         }
@@ -117,7 +117,7 @@
             });
      }
 
-    function load_sd_id(){
+    function load_kc_id(){
         AjaxMethods.getDataFromGetRequest('{{url_for("sd.vrat_sd_id")}}', "",
             '?sd_id={{request.args.get("sd_id")}}&slovo={{request.args.get("slovo")}}&slovnyDruh={{request.args.get("slovnyDruh")}}', function(r){
             if (r.status==responseOK){//OK vetva
@@ -145,13 +145,13 @@ $(document).ready(function() {
         DalsiTab();
     });
 
-    if ('{{request.args.get("sd_id")}}'!="None"){
-        if ('{{request.args.get("ulozAkoNoveSlovo")}}' == 'true'){
-            setPovodneSD_ID('{{request.args.get("sd_id")}}');
-            setSD_ID(0);
+    if ('{{request.args.get("kc_id")}}'!="None"){
+        if ('{{request.args.get("ulozAkoNovyKoncept")}}' == 'true'){
+            setPovodneKC_ID('{{request.args.get("kc_id")}}');
+            setKC_ID(0);
         }
         else
-            setSD_ID('{{request.args.get("sd_id")}}');
+            setKC_ID('{{request.args.get("kc_id")}}');
     } else if ('{{request.args.get("slovo")}}'!="None"){
         load_sd_id();
     }

@@ -28,6 +28,7 @@ def ckeditor():
 
     return render_template("m_kontext/ckeditor.jinja.html", pocty_sd=daj_pocty_sd_a_sl())
 
+
 @kontext_blueprint.route("/pridat_kontext/", methods=["GET"])
 def pridat_kontext():
     loguj(request)

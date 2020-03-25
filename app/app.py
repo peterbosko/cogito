@@ -5,6 +5,7 @@ from .m_user import user_blueprint
 from .m_chatbot import chatbot_blueprint
 from .m_sd import sd_blueprint
 from .m_metadata import metadata_blueprint
+from .m_koncept import koncept_blueprint
 from flask_fontawesome import FontAwesome
 from app.main_helper import *
 
@@ -21,9 +22,11 @@ flask_app.register_blueprint(user_blueprint)
 flask_app.register_blueprint(chatbot_blueprint)
 flask_app.register_blueprint(sd_blueprint)
 flask_app.register_blueprint(metadata_blueprint)
+flask_app.register_blueprint(koncept_blueprint)
 
 flask_app.jinja_env.globals.update(som_admin=som_admin)
 flask_app.jinja_env.globals.update(som_metadata_admin=som_metadata_admin)
 flask_app.jinja_env.globals.update(som_admin_slov=som_admin_slov)
+flask_app.jinja_env.globals.update(som_admin_konceptov=som_admin_konceptov)
 flask_app.jinja_env.globals.update(daj_typ_z_poctov_sd=daj_typ_z_poctov_sd)
 
