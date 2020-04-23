@@ -1,4 +1,4 @@
-{% extends "_main.jinja.html" %}
+{% extends "_main_uvod.jinja.html" %}
 {% block title %}Vítaj v Cogite, mysliacej platforme{% endblock %}
 {% block main %}
       <div class="jumbotron" style="background-color:#e9ecef">
@@ -64,6 +64,18 @@
     function DopytujKontext(id){
         window.location.replace("{{url_for("kontext.dopytuj_kontext")}}"+"?kontext_id="+id);
     }
+
+    $(document).ready(function(){
+        $('ul.dropdown-menu [data-toggle=dropdown]').on('click', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            $(this).parent().parent().find('.dropdown-menu').removeClass('show');
+            $(this).parent().find('.dropdown-menu').toggleClass('show');
+        });
+
+        ChybaAkNepodporovanyBrowser();
+    });
+
 
 </script>
 {% endblock %}

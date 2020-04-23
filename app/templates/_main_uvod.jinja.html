@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="sk">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/allCss.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/fontawesome.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/solid.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/main.css')}}?v=7">
+
+    <script src="{{url_for('static', filename='js/allJS.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/main_uvod.js')}}?v=15"></script>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
+
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <div id="defaultModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"></h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btnCancel nodisplay" data-dismiss="modal">Zrušiť</button>
+                    <button type="button" class="btn btn-primary btnSave nodisplay">Uložiť</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="defaultModal2" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"></h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btnCancel nodisplay" data-dismiss="modal">Zrušiť</button>
+                    <button type="button" class="btn btn-primary btnSave nodisplay">Uložiť</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {%- include "_nav.jinja.html" -%}
+    {% block main %} {% endblock %}
+    {%- include "_footer.jinja.html" -%}
+</body>
+</html>

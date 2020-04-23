@@ -405,6 +405,11 @@ class Slovo(db.Model):
         export.sd_id = self.sd_id
         export.slovny_druh = self.SlovnyDruh.typ
         export.anotacia = self.anotacia
+        export.koncept_id = self.SlovnyDruh.koncept_id
+
+        if export.koncept_id:
+            export.koncept = Koncept.query.get(export.koncept_id).nazov
+
         export.sem_id = self.SlovnyDruh.sem_priznak_id
         if export.sem_id:
             export.sem_priznak = Semantika.query.get(export.sem_id)
@@ -810,4 +815,5 @@ class SlovnyDruhStat(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     typ = db.Column(db.String(20), nullable=False, index=True)
     pocet = db.Column(db.Integer, nullable=True)
+
 

@@ -583,54 +583,6 @@ function ZmazSlovnyDruhBezOtazky(id, func){
 	});
 }
 
-function ChybaAkNepodporovanyBrowser(){
-
-	var isOpera=false;
-	var isChrome=false;
-	var isSafari=false;
-	var isFirefox=false;
-	var isEdge=false;
-	var isIE=false;
-	var isUnknown=false;
-
-	if((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) != -1 )
-	{
-		isOpera = true;
-	}
-	else if(navigator.userAgent.indexOf("Edge") != -1 )
-	{
-		isEdge = true;
-	}
-	else if(navigator.userAgent.indexOf("Chrome") != -1 )
-	{
-		isChrome = true;
-	}
-	else if(navigator.userAgent.indexOf("Safari") != -1)
-	{
-		isSafari = true;
-	}
-	else if(navigator.userAgent.indexOf("Firefox") != -1 )
-	{
-		isFirefox = true;
-	}
-	else if((navigator.userAgent.indexOf("MSIE") != -1 ) || (!!document.documentMode == true )) //IF IE > 10
-	{
-		isIE = true;
-	}
-	else
-	{
-		isUnknown = true;
-	}
-
-	if (!isFirefox&&!isEdge&&!isChrome){
-		  swal({ buttons: {},
-				  title  :  "Chyba",
-				  text   :  'Používate nepodporovaný prehliadač. Niektoré časti stránky nemusia korektne fungovať. Podporované sú Google Chrome, Mozilla Firefox a Microsoft Edge',
-				  icon   :  "error"})
-	}
-
-}
-
 function getCKeditorInstance() {
 	var docTitle = document.title;
 	var editorInstance = docTitle.split(" ,")[1];

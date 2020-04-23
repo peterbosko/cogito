@@ -36,6 +36,8 @@ class SlovoExport(object):
     prefix = None
     vzor = None
     pocitatelnost = None
+    koncept_id = None
+    koncept = None
 
     def daj_popis(self):
         return "{slovny_druh} Pád: {pad} Číslo: {cislo} Osoba:{osoba}".format(slovny_druh=self.slovny_druh,

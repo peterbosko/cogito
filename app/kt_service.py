@@ -269,8 +269,18 @@ def serializuj_pole_slov_do_anotacie(pole):
             if slovo.anotacia:
                 anot = slovo.anotacia
 
-            vysledok += "{id}>{zak_tvar}>{slovo}/{anotacia}".format(slovo=slovo.tvar, anotacia=anot, id=i,
-                                                                    zak_tvar=slovo.zak_tvar)+prilep
+            koncept_nazov = slovo.koncept
+
+            if not koncept_nazov:
+                koncept_nazov = ""
+
+            vysledok += "{id}>{slovny_druh}>{sid}>{koncept}>{zak_tvar}>{slovo}/{anotacia}".\
+                        format(slovo=slovo.tvar,
+                               koncept=koncept_nazov,
+                               anotacia=anot, id=i,
+                               zak_tvar=slovo.zak_tvar,
+                               slovny_druh=slovo.slovny_druh,
+                               sid=slovo.id_slova) + prilep
 
         i += 1
     return vysledok

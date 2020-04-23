@@ -152,17 +152,23 @@ def vrat_slovo2(bolo_vybrate, je_prve_upper, slovo, zoznam_nacitanych_slov, ids=
         vysledok_slovo.popis = None
         vysledok_slovo.cely_popis_slova = None
         vysledok_slovo.anotacia = "???????"
+        vysledok_slovo.slovny_druh = None
+        vysledok_slovo.koncept = None
     elif len(sl) == 1:
         if vybrate_slovo:
             sid = vybrate_slovo.id
             tvar = vybrate_slovo.tvar
             zak_tvar = vybrate_slovo.zak_tvar
             anotacia = vybrate_slovo.anotacia
+            slovny_druh = vybrate_slovo.slovny_druh
+            koncept = vybrate_slovo.koncept
         else:
             sid = sl[0].id
             tvar = sl[0].tvar
             zak_tvar = sl[0].zak_tvar
             anotacia = sl[0].anotacia
+            slovny_druh = sl[0].slovny_druh
+            koncept = sl[0].koncept
 
         vysledok_slovo.id_slova = sid
         vysledok_slovo.je_v_slovniku = True
@@ -174,17 +180,23 @@ def vrat_slovo2(bolo_vybrate, je_prve_upper, slovo, zoznam_nacitanych_slov, ids=
         vysledok_slovo.cely_popis_slova = ""
         vysledok_slovo.anotacia = anotacia
         vysledok_slovo.bolo_vybrate = bolo_vybrate
+        vysledok_slovo.slovny_druh = slovny_druh
+        vysledok_slovo.koncept = koncept
     else:
         if vybrate_slovo:
             sid = vybrate_slovo.id
             tvar = vybrate_slovo.tvar
             zak_tvar = vybrate_slovo.zak_tvar
             anotacia = vybrate_slovo.anotacia
+            slovny_druh = vybrate_slovo.slovny_druh
+            koncept = vybrate_slovo.koncept
         else:
             sid = sl[0].id
             tvar = sl[0].tvar
             zak_tvar = sl[0].zak_tvar
             anotacia = sl[0].anotacia
+            slovny_druh = sl[0].slovny_druh
+            koncept = sl[0].koncept
 
         vysledok_slovo.id_slova = sid
         vysledok_slovo.je_v_slovniku = True
@@ -196,6 +208,8 @@ def vrat_slovo2(bolo_vybrate, je_prve_upper, slovo, zoznam_nacitanych_slov, ids=
         vysledok_slovo.cely_popis_slova = ""
         vysledok_slovo.anotacia = anotacia
         vysledok_slovo.bolo_vybrate = bolo_vybrate
+        vysledok_slovo.slovny_druh = slovny_druh
+        vysledok_slovo.koncept = koncept
 
     return vysledok_slovo
 

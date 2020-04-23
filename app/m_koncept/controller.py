@@ -73,7 +73,12 @@ def zmenit_koncept():
 def daj_koncepty():
     loguj(request)
 
+    koncept = request.args.get("koncept", "")
+
     filtered = db.session.query(Koncept)
+
+    if koncept:
+        filtered = filtered.filter(Koncept.nazov.like(koncept))
 
     table = DataTable(request.args, Koncept, filtered, [
             "id",

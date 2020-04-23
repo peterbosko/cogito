@@ -18,6 +18,8 @@ class SlovoVKontexte(object):
     cely_popis_slova = None
     anotacia = None
     je_prve_upper = None
+    slovny_druh = None
+    koncept = None
 
     def __str__(self):
         return "***************************\n" + \
