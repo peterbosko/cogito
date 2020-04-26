@@ -727,7 +727,6 @@ function load_slovo(that, active = false, ckeditorName){
 
 function ZmenKontext(redirect, ckeditorName){
         var formSelector="#"+ckeditorName+"Form";
-
         $(formSelector).data('formValidation').validate();
         var formIsVald = $(formSelector).data('formValidation').isValid();
 

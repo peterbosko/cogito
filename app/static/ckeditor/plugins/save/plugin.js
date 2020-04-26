@@ -18,11 +18,11 @@
 				var ckeditorName = editor.name;
 				
 				if ( $form ) {
-                        if (editor.CogitoEditorType=="kontext") {
+                        if (editor.CogitoEditorType==="kontext") {
     					    ZmenKontext(false, ckeditorName);
-    					} else if(editor.CogitoEditorType=="word-description") {
+    					} else if (editor.CogitoEditorType==="koncept") {
 							
-						} else {
+						} else if (editor.CogitoEditorType==="unit-test"){
 				            ZmenUnitTest(false, ckeditorName);
 						}	
 				}

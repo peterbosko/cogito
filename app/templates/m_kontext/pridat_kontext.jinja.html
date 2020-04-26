@@ -7,31 +7,19 @@
     <br/>
     <div class="form-horizontal">
     <form id="txtContextForm" data-fv-framework="bootstrap" method="post">
-        <input type="hidden" name="kt_id" id="txtContext_kt_id" value="{% if kontext: %}{{kontext.id}}{% else %}0{% endif %}"/>
+        <input type="hidden" name="txtContext_kt_id" id="txtContext_kt_id" value="{% if kontext: %}{{kontext.id}}{% else %}0{% endif %}"/>
         <div class="row">
             <div class="col-sm-12">
-                <span class="col-xs-12">
-                    Zadajte názov kontextu:
-                </span>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                 <input type="text" placeholder="Názov, pomocou ktorého kontext identifikujete" id="txtContextName" name="txtContextName" class="form-control" data-fv-row=".col-sm-12"
-                 data-fv-notempty="true" data-fv-notempty-message="Názov kontextu je povinný"
-                 value="{% if kontext: %}{{kontext.nazov}}{% endif %}">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                &nbsp;
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <span class="col-xs-12">
-                    Obsah kontextu:
-                </span>
+                <div class="row">
+                    <div class="col-sm-2">
+                       <label>Zadajte názov :</label>
+                    </div>
+                    <div class="col-sm-10">
+                         <input type="text" placeholder="Názov, pomocou ktorého kontext identifikujete" id="txtContextName" name="txtContextName" class="form-control" data-fv-row=".col-sm-12"
+                         data-fv-notempty="true" data-fv-notempty-message="Názov kontextu je povinný"
+                         value="{% if kontext: %}{{kontext.nazov}}{% endif %}">
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row">

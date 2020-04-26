@@ -5,8 +5,8 @@
 
 		exec: function( editor ) {
 			if ( editor.fire( 'cogito-unit-test' ) ) {
-
-                var kt_id=$('#kt_id').val();
+			    var editorName = editor.name;
+                var kt_id=$('#'+editorName+'_kt_id').val();
                 if (!kt_id || kt_id == 0){
                     swal({ buttons: {},
                         title  :  "Chyba",

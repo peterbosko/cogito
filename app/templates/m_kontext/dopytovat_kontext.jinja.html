@@ -8,32 +8,17 @@
             <h1>Kladenie otázok na kontext:</h1>
             <br/>
             <div class="form-horizontal">
-            <form id="ContextForm" data-fv-framework="bootstrap" method="post">
-                <input type="hidden" name="kt_id" id="kt_id" value="{% if kontext: %}{{kontext.id}}{% else %}0{% endif %}"/>
+            <form id="txtContextForm" data-fv-framework="bootstrap" method="post">
+                <input type="hidden" name="txtContext_kt_id" id="txtContext_kt_id" value="{% if kontext: %}{{kontext.id}}{% else %}0{% endif %}"/>
+
                 <div class="row">
-                    <div class="col-sm-12">
-                        <span class="col-xs-12">
-                            Názov kontextu:
-                        </span>
+                    <div class="col-sm-2">
+                        <label>Názov :</label>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-sm-10">
                          <input type="text" placeholder="Názov, pomocou ktorého kontext identifikujete" id="txtContextName" name="txtContextName" class="form-control" data-fv-row=".col-sm-12"
                          data-fv-notempty="true" data-fv-notempty-message="Názov kontextu je povinný"
                          value="{% if kontext: %}{{kontext.nazov}}{% endif %}">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        &nbsp;
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <span class="col-xs-12">
-                            Obsah kontextu:
-                        </span>
                     </div>
                 </div>
                 <div class="row">
@@ -79,48 +64,8 @@
 </style>
 <script>
 
-function ZmenKontext(redirect){
-
-    $('#ContextForm').data('formValidation').validate();
-    var formIsVald = $('#ContextForm').data('formValidation').isValid();
-
-    if (formIsVald) {
-        var data={};
-        data.id=$("#kt_id").val();
-        data.nazov=$("#txtContextName").val();
-        data.obsah = CKEDITOR.instances['txtContext'].getData();
-        data.text= CKEDITOR.instances['txtContext'].document.getBody().getText();
-
-        AjaxMethods.getDataFromPostRequest('{{url_for("kontext.pridat_kontext")}}', "", data, function(r){
-            if (r.status==responseOK){//OK vetva
-                swal({ buttons: {},
-                   title  :  "Úspech",
-                   text   :  "Kontext bol úspešne pridaný/zmenený",
-                   icon   :  "success"}).then(function(result) {
-                                                $("#kt_id").val(r.data);
-                                                if (redirect)
-                                                    window.location.replace("{{ url_for("kontext.moje_kontexty") }}");
-                                              });
-            } else{
-                swal({ buttons: {},
-                   title  :  "Chyba",
-                   text   :  r.error_text,
-                   icon   :  "error"});
-
-            }
-        });
-    }
-    else{
-        swal({ buttons: {},
-                   title  :  "Chyba",
-                   text   :  "Chyba validácie. Skontrolujte červené položky",
-                   icon   :  "error"});
-    }
-}
-
-
 	$(document).ready(function() {
-		$('#ContextForm').formValidation();
+		$('#txtContextForm').formValidation();
 		initCKEditorInstance('txtContext',350, 'kontext', '');
 	})
 </script>
