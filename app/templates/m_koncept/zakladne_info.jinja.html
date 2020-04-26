@@ -25,6 +25,10 @@
                          data-fv-notempty="true" data-fv-notempty-message="Popis konceptu je povinný"></textarea>
                     </div>
                 </div>
+                <div class="row">
+                    <button type="button" onclick="CKEDITOR.instances['taKonceptPopis'].destroy();">ZMAZ MA</button>
+                </div>
+
         </form>
     </div>
 </div>
@@ -43,6 +47,13 @@ $(document).ready(function() {
     $('#zakladne_loader').addClass('nodisplay');
 
 	initCKEditorInstance('taKonceptPopis',300, 'koncept', '');
+
+    var $modal =  $('#txtNazovKonceptu').parents('.modal');
+
+    $modal.on('hidden.bs.modal', function (e) {
+        destroyCKEDITOR('taKonceptPopis');
+        $(this).off('hidden.bs.modal');
+    });
 
 });
 

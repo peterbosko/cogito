@@ -290,6 +290,9 @@ def kontrola_slov_v_kontexte(data):
 
     result = KontrolaSlovResponse()
 
+    if not data:
+        return result
+
     doc = pq(data)
 
     celkom_slov = 0

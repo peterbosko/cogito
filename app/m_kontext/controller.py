@@ -159,6 +159,10 @@ def kontroluj_slova():
 
     response.data = kontrola_slov_v_kontexte(data)
 
+    if not response.data.data:
+        response.error_text = "Text je prázdny !!!"
+        response.status = ResponseStatus.ERROR
+
     return jsonpickle.encode(response)
 
 

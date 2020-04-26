@@ -597,7 +597,5 @@ $(document).ready(function(){
 		$(this).parent().parent().find('.dropdown-menu').removeClass('show');
 		$(this).parent().find('.dropdown-menu').toggleClass('show');
 	});
-	
-	ChybaAkNepodporovanyBrowser();
 });
 

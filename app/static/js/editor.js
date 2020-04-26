@@ -5,9 +5,7 @@
 function initCKEditorInstance(ckeditorName, h, type, settingsToolbar){
 	
 	CKEDITOR.timestamp = Math.random();
-	
-	CKEDITOR.addCss('.tooltip > .tooltip-inner { background-color: #000; color:#fff; }');
-	
+
 	CKEDITOR.addCss('span.no-select { -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }');
 	
 	CKEDITOR.addCss('span.active { background-color: #afe5ff !important;  padding: 4px;}');
@@ -19,7 +17,7 @@ function initCKEditorInstance(ckeditorName, h, type, settingsToolbar){
 	CKEDITOR.addCss('span.n { background-color: #ffaab2; }');
 
 	CKEDITOR.addCss('span.s { background-color: #ffffff; }');
-	
+
 	if(settingsToolbar.length > 0) {
 		settingsToolbar = settingsToolbar;
 	} else {	
@@ -35,30 +33,18 @@ function initCKEditorInstance(ckeditorName, h, type, settingsToolbar){
 			'/',
 			{ name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
 		]
-	} else {
+	} else if (type==="koncept"){
 		tbar = [
-			{ name: 'document', items: [ 'Source' , '-' ,'Save'] },
-			{ name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'cogito-word-check', 'cogito-check-remove', '-' ] },
+			{ name: 'document', items: [ 'Source' ] },
+			{ name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'cogito-word-check', 'cogito-check-remove'] },
 		]
 	}
-	var info = '<p style="color:red">Pre určenie slova kliknite na jeden zaznam zo zoznamu:</p>';
+	var info = '<p style="color:red">Pre určenie slova kliknite na jeden záznam zo zoznamu:</p>';
 	CKEDITOR.replace(ckeditorName, {
 	  height: h,
 	  on: {
-		instanceReady: function(evt) {
-		  var itemTemplate = '<li data-id="{id}"><span>Pre určenie slova kliknite na jeden zaznam zo zoznamu:</span>' +
-			'<div><strong class="item-title">{tvar} - {slovny_druh} ({zak_tvar})</strong></div>' +
-			'<div><i>Pád: {pad} Číslo: {cislo} Osoba:{osoba}</i></div>' +
-			'<div><i>Stupeň: {stupen} Čas: {cas} Rod:{rod} Podrod:{podrod}</i></div>' +
-			'<div><i>Spôsob: {sposob} Zvratnosť: {zvratnost}</i></div>' +
-			'<div><i>Anotácia: {anotacia}</i></div>' +
-			'<div><i>Popis: {popis}</i></div>' +
-			'</li>',
-			outputTemplate = '<span class="s" sid="{id}">{tvar}</span>&nbsp;';
-		},
 		contentDom : function(event) {
 			pripojJavascripty(ckeditorName);
-			binduj_tooltip(ckeditorName);
 		},
 	  },
 	  toolbar: tbar,
@@ -66,39 +52,10 @@ function initCKEditorInstance(ckeditorName, h, type, settingsToolbar){
 	});
 
 	CKEDITOR.instances[ckeditorName].CogitoEditorType = type;
-	
-	CKEDITOR.on('instanceReady',function(){
+
+	CKEDITOR.instances[ckeditorName].on('instanceReady', function(){
 		$('#cke_'+ckeditorName+' .cke_top').after(settingsToolbar);
 	});
-}
-
-function textTestCallback(range) {
-  if (!range.collapsed) {
-	return null;
-  }
-	return CKEDITOR.plugins.textMatch.match(range, matchCallback);
-}
-
-function matchCallback(text, offset) {
-  var pattern = /([a-zA-Z\u00C0-\u024F\u1E00-\u1EFF])*$/,
-	match = text.slice(0, offset)
-	.match(pattern);
-
-  if (!match) {
-	return null;
-  }
-
-  return {
-	start: match.index,
-	end: offset
-  };
-}
-
-function binduj_tooltip(ckeditorName){
-		var all = CKEDITOR.instances[ckeditorName].document.getElementsByTag( 'span' );
-		for (var i = 0, max = all.count(); i < max; i++) {
-			var el = all.$[i];
-		}
 }
 
 function pripojJavascripty(ckeditorName){
@@ -131,12 +88,11 @@ function GetCKEditorHtml(ckeditorName){
 	return CKEDITOR.instances[ckeditorName].getData();
 }
 
-
 function getToolbar(ckeditorName, type) {
+
 	var settingsToolbar = '';
-	
-	if(type == 'kontext'){
-		settingsToolbar = $('<span id="'+ckeditorName+'-settings-rows" class="cke_top settings-disabled" style="height: 80px; user-select: none;padding: 6px 8px 20px;">'+
+
+		settingsToolbar =  '<span id="'+ckeditorName+'-settings-rows" class="cke_top settings-disabled" style="height: 80px; user-select: none;padding: 6px 8px 20px;">'+
 							'<span class="cke_voice_label">Settings row</span>'+
 							'<span class="cke_toolbox">'+
 								'<span class="cke_toolbar cke_toolbar_last">'+
@@ -203,41 +159,7 @@ function getToolbar(ckeditorName, type) {
 									
 								'</div>'+
 							'</span>'+
-						'</span>');
-	} else {
-		settingsToolbar = $('<span id="'+ckeditorName+'-settings-rows" class="cke_top settings-disabled" style="height: 80px; user-select: none;padding: 6px 8px 20px;">'+
-								'<span class="cke_voice_label">Settings row</span>'+
-								'<span class="cke_toolbox">'+
-									'<span class="cke_toolbar cke_toolbar_last">'+
-										'<span class="cke_voice_label"></span>'+
-										'<span class="cke_toolbar_start"></span>'+
-										'<span class="cke_toolgroup">'+
-											'<a class="cke_button cke_button__source cke_button_disabled" href="#" title="">'+
-												'<span class="cke_button_label cke_button__source_label" style="height: 24px;">'+
-													'Popis slova <i class="fa fa-long-arrow-alt-right"></i> <b><el class="setting-popis_slova"></el></b>'+
-												'</span>'+
-											'</a>'+
-										'</span>'+	
-										'<span class="cke_toolbar_end"></span>'+
-									'</span>'+
-									'<span class="cke_toolbar_break"></span>'+
-								'</span>'+
-							'</span>'+
-							'<span  id="'+ckeditorName+'-settings-rows-buttons" class="cke_top settings-disabled" style="height: auto; user-select: none;">'+
-								'<span class="cke_toolbox">'+
-									'<div style="text-align: center;">'+
-										'<a href="#" class="btn" onclick="return prev_word(this, \''+ckeditorName+'\');" title="Predchádzajúce slovo"><i class="fa fa-angle-left"></i></a>'+
-										'<a href="#" class="btn" onclick="return prev_valid_word(this, \''+ckeditorName+'\');" title="Predchádzajúce nezvalidované slovo"><i class="fa fa-angle-double-left"></i></a>'+
-										'<a href="#" class="btn" onclick="return next_valid_word(this, \''+ckeditorName+'\');" title="Nasledujúce nezvalidované slovo"><i class="fa fa-angle-double-right"></i></a>'+
-										'<a href="#" class="btn" onclick="return next_word(this, \''+ckeditorName+'\');" title="Nasledujúce slovo"><i class="fa fa-angle-right"></i></a>'+
-										'<a href="#" onclick="return edit_meaning(this, \''+ckeditorName+'\');" class="btn" style="position: absolute; right: 20px;">Upraviť popis slova <i class="fa fa-edit"></i></a>'+
-									'</div>'+
-									'<div>'+
-										
-									'</div>'+
-								'</span>'+
-							'</span>');
-	}
+						'</span>';
 	return settingsToolbar;
 }
     
@@ -298,7 +220,7 @@ function next_valid_word(that, ckeditorName){
 		next.dblclick();
 	} else {
 		var nextp = parent.nextAll('p');
-		for (i = 0; i < nextp.length; i++) {      
+		for (i = 0; i < nextp.length; i++) {
 			 if (nextp.eq(i).find('span.ns').first().length) {
 				  nextp.eq(i).find('span.ns').first().dblclick();
 				  break;
@@ -334,7 +256,8 @@ function next_word(that, ckeditorName){
 		next.dblclick();
 	} else {
 		var nextp = parent.nextAll('p');
-		for (i = 0; i < nextp.length; i++) {      
+
+		for (i = 0; i < nextp.length; i++) {
 			 if (nextp.eq(i).find('span').first().length) {
 				  nextp.eq(i).find('span').first().dblclick();
 				  break;
@@ -361,8 +284,7 @@ function accept_word(that, ckeditorName){
 		if(next.length) {
 			next.dblclick();
 		} else {
-			//parent.next().find('span.ns').first().dblclick();
-			next_word(that);
+			next_valid_word(that, ckeditorName);
 		}
 	}
 	setProgressBar(ckeditorName);
@@ -568,7 +490,7 @@ function skontroluj_slova_znova(that, ckeditorName) {
 				for (var i = 0, max = all.count(); i < max; i++) {
 					var el = all.$[i];
 					
-					el.setAttribute('ondblclick','load_slovo(this, \''+ckeditorName+'\');');
+					el.setAttribute('ondblclick','load_slovo(this, false, \''+ckeditorName+'\');');
 				}
 				
 				
@@ -595,7 +517,14 @@ function skontroluj_slova_znova(that, ckeditorName) {
 }
 
 function load_slovo(that, active = false, ckeditorName){
-	
+	var cked = parent.CKEDITOR.instances[ckeditorName];
+
+	var prechod_do_slovnika = true;
+
+	if (cked.CogitoEditorType === "koncept"){
+	    prechod_do_slovnika = false;
+	}
+
 	if(active == true) {
 		var main = $("#cke_"+ckeditorName+" iframe.cke_wysiwyg_frame").contents();
 		that = main.find('.active');
@@ -624,9 +553,9 @@ function load_slovo(that, active = false, ckeditorName){
 	
 	var options;
 	settings_row.find('.setting-tvar').html(slovo);
-	
+
 	/*** NACITAJ SLOVO DO OBJEKTU ***/
-	
+
 	AjaxMethods.getDataFromGetRequest('/daj_komplet?sid=', sid+'&vyraz='+slovo, '', function(response){
 		var obj = response;
 		if (obj.data){
@@ -761,26 +690,36 @@ function load_slovo(that, active = false, ckeditorName){
 				icon   :  "error"});
 	}
 
-	var editovat_sd = '<a href="#" onclick="return edit_sd(this, \''+ckeditorName+'\');" class="btn" style="position: absolute; right: 240px;">Editovať v slovníku <i class="fa fa-edit"></i></a>';
+	var editovat_sd = '<a href="#" onclick="return edit_sd(this, \''+ckeditorName+'\');" class="btn" style="position: absolute; right: 110px;">Edit. v slovníku <i class="fa fa-edit"></i></a>';
 	var save_name = '';
 	var func = 'accept_word(this, \''+ckeditorName+'\');';
 
+
 	if(class_type == 's') {
-		save_name = 'Upraviť slovo v kontexte <i class="fa fa-edit"></i>';
+		save_name = 'Upraviť <i class="fa fa-edit"></i>';
 	} else if(class_type == 'm') {
-		save_name = 'Potvrdiť slovo v kontexte <i class="fa fa-check-double"></i>';
+		save_name = 'Potvrdiť <i class="fa fa-check-double"></i>';
 	} else {
-		save_name = 'Znovu načítaj slovo v kontexte <i class="fa fa-edit"></i>';
+		save_name = 'Znovu načítaj <i class="fa fa-redo-alt"></i>';
 		func = 'load_slovo(null, true, \''+ckeditorName+'\');';
 	}
-	
+
 	settings_row_buttons.find('.setting-accept_word').html('<a href="#" onclick="return '+func+'" class="btn" style="position: absolute; right: 20px;">'+save_name+'</a>');
-	
+
+    var pridat_novy_vyznam_slova = '<a href="#" onclick="return add_word(this, false, true, \''+ckeditorName+'\');" class="btn" style="position: absolute; left: 20px;"><i class="fa fa-plus"></i> Pridať nový význam slova <i class="fa fa-info-circle"></i></a>';
+    var pridat_nove_slovo = '<a href="#" onclick="return add_word(this, true, false, \''+ckeditorName+'\');" class="btn" style="position: absolute; left: 20px;"><i class="fa fa-plus"></i> Pridať nové slovo</a>';
+
+    if (!prechod_do_slovnika) {
+        editovat_sd = "";
+        pridat_novy_vyznam_slova = "";
+        pridat_nove_slovo = "";
+    }
+
 	if(class_type != 'n') {
 		settings_row_buttons.find('.setting-accept_word').append(editovat_sd);
-		settings_row_buttons.find('.setting-accept_word').append('<a href="#" onclick="return add_word(this, false, true, \''+ckeditorName+'\');" class="btn" style="position: absolute; left: 20px;"><i class="fa fa-plus"></i> Pridať nový význam slova <i class="fa fa-info-circle"></i></a>');
+		settings_row_buttons.find('.setting-accept_word').append(pridat_novy_vyznam_slova);
 	} else {
-		settings_row_buttons.find('.setting-accept_word').append('<a href="#" onclick="return add_word(this, true, false, \''+ckeditorName+'\');" class="btn" style="position: absolute; left: 20px;"><i class="fa fa-plus"></i> Pridať nové slovo</a>');
+		settings_row_buttons.find('.setting-accept_word').append(pridat_nove_slovo);
 	}
 	
 	return false;
@@ -877,3 +816,8 @@ function spustiPoNacitaniOknaRozboru(editor){
 					}
 				});
     }
+
+function destroyCKEDITOR(editorName){
+    CKEDITOR.instances[editorName].removeAllListeners();
+    CKEDITOR.instances[editorName].destroy();
+}
