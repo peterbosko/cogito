@@ -70,3 +70,9 @@ class slovo_data(object):
         self.data = []
         self.cisla = []
 
+
+class reCAPTCHA(object):
+    success = False
+    challenge_ts = None
+    hostname = None
+

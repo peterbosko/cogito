@@ -9,6 +9,7 @@ from app.c_service import *
 from sqlalchemy import and_
 import json
 from app.sd_service import *
+from app.main_helper import *
 
 user_blueprint = Blueprint("user", __name__)
 
@@ -29,25 +30,30 @@ def prihlas_ma():
     loguj(request)
     email = request.json["email"]
     heslo = request.json["heslo"]
+    captcha = request.json["captcha"]
 
     red = ""
-    if request.json["redirect"]:
+    if "redirect" in request.json:
         red = request.json["redirect"]
 
     permanent = bool(request.json["permanent"])
 
     response = CommonResponse()
 
-    user = User.query.filter_by(email=email).first()
-    if user and user.skontroluj_heslo(heslo):
-        session["logged"] = user.id
-        session.permanent = permanent
-        response.status = ResponseStatus.OK
-        response.redirect = red
-
-    else:
+    if not over_captcha(captcha):
         response.status = ResponseStatus.ERROR
-        response.error_text = "Zlé prihlasovacie údaje"
+        response.error_text = "Zlá captcha!!!"
+    else:
+        user = User.query.filter_by(email=email).first()
+        if user and user.skontroluj_heslo(heslo):
+            session["logged"] = user.id
+            session.permanent = permanent
+            response.status = ResponseStatus.OK
+            response.redirect = red
+
+        else:
+            response.status = ResponseStatus.ERROR
+            response.error_text = "Zlé prihlasovacie údaje"
 
     return json.dumps(response.__dict__)
 
@@ -61,60 +67,65 @@ def user_pridaj_zmen():
     email = request.json["email"]
     heslo = request.json["heslo"]
     nove_heslo = request.json["nove_heslo"]
+    captcha = request.json["captcha"]
 
     red = ""
-    if request.json["redirect"]:
+    if "redirect" in request.json:
         red = request.json["redirect"]
 
     response = CommonResponse()
 
-    if nove_heslo and not heslo:
+    if not over_captcha(captcha):
         response.status = ResponseStatus.ERROR
-        response.error_text = "Pri zmene hesla musí byť zadané staré heslo"
-        return json.dumps(response.__dict__)
-
-    if id == 0:
-        if User.query.filter(User.email == email).first():
-            response.status = ResponseStatus.ERROR
-            response.error_text = "Email už používa iný používateľ"
-        else:
-            user = User()
-            user.meno = meno
-            user.priezvisko = priezvisko
-            user.email = email
-            user.nastav_heslo(heslo)
-            user.status = "N"
-            db.session.add(user)
-            db.session.commit()
-            session["logged"] = user.id
-            session.permanent = False
-            response.status = ResponseStatus.OK
-            response.redirect = red
+        response.error_text = "Zlá captcha!!!"
     else:
-        user = User.query.get(id)
-
-        if nove_heslo and user.skontroluj_heslo(heslo):
-            if User.query.filter(and_(User.email == email, User.id != id)).first():
-                response.status = ResponseStatus.ERROR
-                response.error_text = "Email už používa iný používateľ"
-            else:
-                user.meno = meno
-                user.priezvisko = priezvisko
-                user.email = email
-                user.nastav_heslo(nove_heslo)
-                db.session.commit()
-        elif not nove_heslo:
-            if User.query.filter(and_(User.email == email, User.id != id)).first():
-                response.status = ResponseStatus.ERROR
-                response.error_text = "Email už používa iný používateľ"
-            else:
-                user.meno = meno
-                user.priezvisko = priezvisko
-                user.email = email
-                db.session.commit()
-        else:
+        if nove_heslo and not heslo:
             response.status = ResponseStatus.ERROR
-            response.error_text = "Zlé staré heslo"
+            response.error_text = "Pri zmene hesla musí byť zadané staré heslo"
+            return json.dumps(response.__dict__)
+
+        if id == 0:
+            if User.query.filter(User.email == email).first():
+                response.status = ResponseStatus.ERROR
+                response.error_text = "Email už používa iný používateľ"
+            else:
+                user = User()
+                user.meno = meno
+                user.priezvisko = priezvisko
+                user.email = email
+                user.nastav_heslo(heslo)
+                user.status = "N"
+                db.session.add(user)
+                db.session.commit()
+                session["logged"] = user.id
+                session.permanent = False
+                response.status = ResponseStatus.OK
+                response.redirect = red
+        else:
+            user = User.query.get(id)
+
+            if nove_heslo and user.skontroluj_heslo(heslo):
+                if User.query.filter(and_(User.email == email, User.id != id)).first():
+                    response.status = ResponseStatus.ERROR
+                    response.error_text = "Email už používa iný používateľ"
+                else:
+                    user.meno = meno
+                    user.priezvisko = priezvisko
+                    user.email = email
+                    user.nastav_heslo(nove_heslo)
+                    db.session.commit()
+            elif not nove_heslo:
+                if User.query.filter(and_(User.email == email, User.id != id)).first():
+                    response.status = ResponseStatus.ERROR
+                    response.error_text = "Email už používa iný používateľ"
+                else:
+                    user.meno = meno
+                    user.priezvisko = priezvisko
+                    user.email = email
+                    db.session.commit()
+            else:
+                response.status = ResponseStatus.ERROR
+                response.error_text = "Zlé staré heslo"
 
     return json.dumps(response.__dict__)
 

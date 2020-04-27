@@ -1,6 +1,8 @@
 {% extends "_main.jinja.html" %}
 {% block title %}Ste prihlásený ako : {{user.meno }} {{user.priezvisko}}{% endblock %}
 {% block main %}
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
 <div class="container padding-topCogito-Menu" style="max-width:400px">
 <form id="ChangeRegForm" class="text-center" data-fv-framework="bootstrap" method="post">
 
@@ -52,8 +54,11 @@
         data-fv-row=".col-xs-12"
         data-fv-identical="true" data-fv-identical-field="password" data-fv-identical-message="Heslo a zopakovanie hesla musia byť zhodné">
     </div>
-    <br>
+    <br/>
 
+    <div class="g-recaptcha" data-sitekey="{{config['RECAPTCHA_PUBLIC_KEY']}}"></div>
+
+    <br/>
     <!-- Sign up button -->
     <button class="btn btn-primary btn-block" type="button" onclick="ZmenUsera(); return false;">Zmeniť údaje</button>
     <br>
@@ -78,6 +83,7 @@ function ZmenUsera(){
         data.email=$("#defaultRegisterFormEmail").val();
         data.heslo=$("#defaultRegisterOldPassword").val();
         data.nove_heslo=$("#defaultRegisterFormPassword").val();
+        data.captcha = grecaptcha.getResponse();
 
         data.permanent=false;
 

@@ -2,7 +2,7 @@
 {% block title %}Kladenie otázok na kontext{% endblock %}
 {% block main %}
 
-<div class="container padding-topCogito-Menu odsadeny-container">
+<div class="container padding-topCogito-Menu odsadeny-container nodisplay">
     <div class="row">
         <div class="col-sm-9">
             <h1>Kladenie otázok na kontext:</h1>
@@ -44,10 +44,11 @@
     overflow: hidden;
     width: 100%;
     border: 1px solid #ccc;
-    margin-top:100px;
+    margin-top:80px;
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(0,0,0,0.3);
     z-index: 1000;
+    height : 442px;
 }
 
 #chat-content iframe {
@@ -67,6 +68,7 @@
 	$(document).ready(function() {
 		$('#txtContextForm').formValidation();
 		initCKEditorInstance('txtContext',350, 'kontext', '');
+		$('.container').removeClass('nodisplay');
 	})
 </script>
 {% endblock %}

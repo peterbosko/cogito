@@ -1,5 +1,8 @@
 from app.db_models import *
 from app.c_helper import *
+from flask import current_app as app
+import requests
+from requests.exceptions import HTTPError
 
 
 def som_admin():
@@ -59,3 +62,23 @@ def daj_typ_z_poctov_sd(rows, typ):
     return formatuj_cislo(pocet)
 
 
+def over_captcha(captcha):
+
+    url = f"https://www.google.com/recaptcha/api/siteverify?secret={app.config['RECAPTCHA_PRIVATE_KEY']}" \
+        f"&response={captcha}"
+
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+
+        json = response.json()
+
+        if json['success']:
+            return True
+
+        return False
+
+    except HTTPError as http_err:
+        print(f'HTTP error occurred: {http_err}')
+    except Exception as err:
+        print(f'Other error occurred: {err}')
