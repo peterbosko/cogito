@@ -30,7 +30,11 @@ def prihlas_ma():
     loguj(request)
     email = request.json["email"]
     heslo = request.json["heslo"]
-    captcha = request.json["captcha"]
+
+    captcha = ""
+
+    if "captcha" in request.json:
+        captcha = request.json["captcha"]
 
     red = ""
     if "redirect" in request.json:
@@ -67,7 +71,10 @@ def user_pridaj_zmen():
     email = request.json["email"]
     heslo = request.json["heslo"]
     nove_heslo = request.json["nove_heslo"]
-    captcha = request.json["captcha"]
+    captcha = ""
+
+    if "captcha" in request.json:
+        captcha = request.json["captcha"]
 
     red = ""
     if "redirect" in request.json:

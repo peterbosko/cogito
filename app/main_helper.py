@@ -64,6 +64,9 @@ def daj_typ_z_poctov_sd(rows, typ):
 
 def over_captcha(captcha):
 
+    if not app.config['RECAPTCHA_ACTIVE']:
+        return True
+
     url = f"https://www.google.com/recaptcha/api/siteverify?secret={app.config['RECAPTCHA_PRIVATE_KEY']}" \
         f"&response={captcha}"
 

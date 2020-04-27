@@ -1,7 +1,9 @@
 {% extends "_main.jinja.html" %}
 {% block title %}Prihlásenie do systému{% endblock %}
 {% block main %}
+{% if config['RECAPTCHA_ACTIVE']: %}
 <script src='https://www.google.com/recaptcha/api.js'></script>
+{% endif %}
 
 <div class="container padding-topCogito-Menu" style="max-width:400px">
 <form id="RegForm" class="text-center" data-fv-framework="bootstrap">
@@ -49,8 +51,9 @@
         >
     </div>
     <br>
-
-    <div class="g-recaptcha" data-sitekey="{{config['RECAPTCHA_PUBLIC_KEY']}}"></div>
+    {% if config['RECAPTCHA_ACTIVE']: %}
+        <div class="g-recaptcha" data-sitekey="{{config['RECAPTCHA_PUBLIC_KEY']}}"></div>
+    {% endif %}
 
     <!-- Sign up button -->
     <button class="btn btn-primary my-4 btn-block" type="submit" onclick="register(); return false;">Registrovať</button>
@@ -72,7 +75,9 @@ function register(){
     data.heslo=$("#defaultRegisterFormPassword").val();
     data.nove_heslo=data.heslo;
     data.permanent=false;
-    data.captcha = grecaptcha.getResponse();
+    {% if config['RECAPTCHA_ACTIVE']: %}
+        data.captcha = grecaptcha.getResponse();
+    {% endif %}
 
 
     if ('{{request.args.get("redirect")}}'!="None")

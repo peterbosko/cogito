@@ -2,7 +2,9 @@
 {% block title %}Prihlásenie do systému{% endblock %}
 {% block main %}
 
+{% if config['RECAPTCHA_ACTIVE']: %}
 <script src='https://www.google.com/recaptcha/api.js'></script>
+{% endif %}
 
 <div class="container padding-topCogito-Menu" style="max-width:400px">
 <form id="LoginForm" class="text-center"  method="post">
@@ -42,9 +44,10 @@
         </div>
     </div>
 
-    <br/>
-
-    <div class="g-recaptcha" data-sitekey="{{config['RECAPTCHA_PUBLIC_KEY']}}"></div>
+    {% if config['RECAPTCHA_ACTIVE']: %}
+        <br/>
+        <div class="g-recaptcha" data-sitekey="{{config['RECAPTCHA_PUBLIC_KEY']}}"></div>
+    {% endif %}
 
     <!-- Sign in button -->
     <button class="btn btn-primary btn-block my-4" type="button" onclick="login(); return false;">Prihlásiť</button>
@@ -71,7 +74,9 @@ function login(){
     else
         data.redirect = '';
 
-    data.captcha = grecaptcha.getResponse();
+    {% if config['RECAPTCHA_ACTIVE']: %}
+       data.captcha = grecaptcha.getResponse();
+    {% endif %}
 
     AjaxMethods.getDataFromPostRequest('{{url_for("user.login")}}', "", data, function(r){
         if (r.status==responseOK){//OK vetva
