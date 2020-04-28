@@ -62,7 +62,7 @@ def daj_typ_z_poctov_sd(rows, typ):
     return formatuj_cislo(pocet)
 
 
-def over_captcha(captcha):
+def over_recaptcha(captcha):
 
     if not app.config['RECAPTCHA_ACTIVE']:
         return True
@@ -85,3 +85,5 @@ def over_captcha(captcha):
         print(f'HTTP error occurred: {http_err}')
     except Exception as err:
         print(f'Other error occurred: {err}')
+
+    return False

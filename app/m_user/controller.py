@@ -44,7 +44,7 @@ def prihlas_ma():
 
     response = CommonResponse()
 
-    if not over_captcha(captcha):
+    if not over_recaptcha(captcha):
         response.status = ResponseStatus.ERROR
         response.error_text = "Zlá captcha!!!"
     else:
@@ -82,7 +82,7 @@ def user_pridaj_zmen():
 
     response = CommonResponse()
 
-    if not over_captcha(captcha):
+    if not over_recaptcha(captcha):
         response.status = ResponseStatus.ERROR
         response.error_text = "Zlá captcha!!!"
     else:
