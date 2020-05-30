@@ -991,7 +991,10 @@ def sd_slova_zmen():
         stupnovacie_vzory = daj_prid_m_stup_vzory()
     elif slovny_druh == "POD_M":
         pm = PodstatneMeno.query.get(request.args.get("sd_id", ""))
-        vzory = daj_pm_vzory(pm.rod)
+        if pm:
+            vzory = daj_pm_vzory(pm.rod)
+        else:
+            vzory = daj_pm_vzory("M")
     elif slovny_druh == "CISLOVKA":
         vzory = daj_cislovka_vzory()
     elif slovny_druh == "PRISLOVKA":

@@ -228,7 +228,8 @@ function NacitajZakladneInfoSD(sd_id){
 function ZmenSDZakladneInfo(){
     var res=false;
 
-    if (!zmenaVZakladneInfo && '{{request.args.get("ulozAkoNoveSlovo")}}' != 'true' && getSD_ID() != -1){
+    if (!zmenaVZakladneInfo && '{{request.args.get("ulozAkoNoveSlovo")}}' != 'true' &&
+        getSD_ID() != -1 && getSD_ID() != 0){
         return true;
     }
 
