@@ -34,231 +34,16 @@ def sem_priznaky():
     return render_template("m_metadata/sem_priznaky.jinja.html", pocty_sd=daj_pocty_sd_a_sl())
 
 
-@metadata_blueprint.route("/intencne_ramce/")
-def intencne_ramce():
-    loguj(request)
-    return render_template("m_metadata/intencne_ramce.jinja.html", pocty_sd=daj_pocty_sd_a_sl())
-
-
-@metadata_blueprint.route("/slovesa_ir/")
-def slovesa_ir():
-    loguj(request)
-    return render_template("m_metadata/slovesa_ir.jinja.html", pocty_sd=daj_pocty_sd_a_sl())
-
-
-@metadata_blueprint.route("/slovesa_sp/")
-def slovesa_sp():
-    loguj(request)
-    return render_template("m_metadata/slovesa_sp.jinja.html", pocty_sd=daj_pocty_sd_a_sl())
-
-
-@metadata_blueprint.route("/intencie_sp/")
-def intencie_sp():
-    loguj(request)
-    return render_template("m_metadata/intencie_sp.jinja.html", pocty_sd=daj_pocty_sd_a_sl())
-
-
-@metadata_blueprint.route("/intencie_ir/")
-def intencie_ir():
-    loguj(request)
-    return render_template("m_metadata/intencie_ir.jinja.html", pocty_sd=daj_pocty_sd_a_sl())
-
-
-@metadata_blueprint.route("/sp/")
-def sp():
-    loguj(request)
-    return render_template("m_metadata/sp.jinja.html", pocty_sd=daj_pocty_sd_a_sl())
-
-
 @metadata_blueprint.route("/vzory/")
 def vzory():
     loguj(request)
     return render_template("m_metadata/vzory.jinja.html", pocty_sd=daj_pocty_sd_a_sl())
 
 
-@metadata_blueprint.route("/daj_sp/", methods=["GET"])
-def daj_sp():
-    loguj(request)
-
-    nazov = request.args.get("hladaj_nazov", "")
-    kod = request.args.get("hladaj_kod", "")
-
-    filtered = db.session.query(SemantickyPadView)
-
-    if nazov:
-        filtered = filtered.filter(SemantickyPadView.nazov.like(nazov))
-
-    if kod:
-        filtered = filtered.filter(SemantickyPadView.kod.like(kod))
-
-    table = DataTable(request.args, SemantickyPadView, filtered, [
-            "id",
-            "kod",
-            "nazov",
-            "pocet_intencii",
-            "pocet_slovies",
-    ])
-
-    return json.dumps(table.json())
-
-
-@metadata_blueprint.route("/daj_ir/", methods=["GET"])
-def daj_ir():
-    loguj(request)
-
-    nazov = request.args.get("hladaj_nazov", "")
-    kod = request.args.get("hladaj_kod", "")
-
-    filtered = db.session.query(IntencnyRamecView)
-
-    if nazov:
-        filtered = filtered.filter(IntencnyRamecView.nazov.like(nazov))
-
-    if kod:
-        filtered = filtered.filter(IntencnyRamecView.kod.like(kod))
-
-    table = DataTable(request.args, IntencnyRamecView, filtered, [
-            "id",
-            "kod",
-            "nazov",
-            "pocet_intencii",
-            "pocet_slovies",
-    ])
-
-    return json.dumps(table.json())
-
-
 def obstaraj_null_string_sem(s):
     if s:
         return s.kod
     return ""
-
-
-@metadata_blueprint.route("/daj_intencie_sp/", methods=["GET"])
-def daj_intencie_sp():
-    loguj(request)
-
-    semp = int(request.args.get("sp", ""))
-
-    filtered = db.session.query(Intencia)
-
-    filtered = filtered.filter(Intencia.sem_pad_id == semp)
-
-    table = DataTable(request.args, Intencia, filtered, [
-            "typ",
-            ("int_ramec", "int_ramec.nazov"),
-            "predlozka",
-            "pad",
-            ("sem_priznak", "sem_priznak", lambda j: obstaraj_null_string_sem(j.sem_priznak)),
-            "fl",
-    ])
-
-    return json.dumps(table.json())
-
-
-@metadata_blueprint.route("/daj_intencie_ramca/", methods=["GET"])
-def daj_intencie_ramca():
-    loguj(request)
-
-    ir = int(request.args.get("ramec_id", ""))
-
-    filtered = db.session.query(Intencia)
-
-    filtered = filtered.filter(Intencia.int_ramec_id == ir)
-
-    table = DataTable(request.args, Intencia, filtered, [
-            "id",
-            "typ",
-            "predlozka",
-            "pad",
-            ("sem_priznak", "sem_priznak", lambda j: obstaraj_null_string_sem(j.sem_priznak)),
-            ("sem_pad", "sem_pad.nazov"),
-            "fl",
-    ])
-
-    return json.dumps(table.json())
-
-
-@metadata_blueprint.route("/daj_slovesa_ir/", methods=["GET"])
-def daj_slovesa_ir():
-    loguj(request)
-
-    ir = int(request.args.get("ramec_id", ""))
-
-    filtered = db.session.query(IntencieSlovesaView)
-
-    filtered = filtered.filter(IntencieSlovesaView.int_ramec_id == ir)
-
-    sloveso = request.args.get("sloveso", "")
-
-    if sloveso:
-        filtered = filtered.filter(IntencieSlovesaView.zak_tvar.like(sloveso))
-
-    predlozka = request.args.get("predlozka", "")
-
-    if predlozka:
-        filtered = filtered.filter(IntencieSlovesaView.predlozka.like(predlozka))
-
-    gpad = request.args.get("pad", "")
-
-    if gpad:
-        filtered = filtered.filter(IntencieSlovesaView.pad == gpad)
-
-    table = DataTable(request.args, IntencieSlovesaView, filtered, [
-            "zak_tvar",
-            "zvratnost",
-            "vid",
-            "popis",
-            "typ",
-            "predlozka",
-            "pad",
-            "sem_kod",
-            "sp_nazov",
-            "fl"
-    ])
-
-    return json.dumps(table.json())
-
-
-@metadata_blueprint.route("/daj_slovesa_sp/", methods=["GET"])
-def daj_slovesa_sp():
-    loguj(request)
-
-    sp = int(request.args.get("sp", ""))
-
-    filtered = db.session.query(IntencieSlovesaView)
-
-    filtered = filtered.filter(IntencieSlovesaView.sem_pad_id == sp)
-
-    sloveso = request.args.get("sloveso", "")
-
-    if sloveso:
-        filtered = filtered.filter(IntencieSlovesaView.zak_tvar.like(sloveso))
-
-    predlozka = request.args.get("predlozka", "")
-
-    if predlozka:
-        filtered = filtered.filter(IntencieSlovesaView.predlozka.like(predlozka))
-
-    gpad = request.args.get("pad", "")
-
-    if gpad:
-        filtered = filtered.filter(IntencieSlovesaView.pad == gpad)
-
-    table = DataTable(request.args, IntencieSlovesaView, filtered, [
-        "zak_tvar",
-        "zvratnost",
-        "vid",
-        "popis",
-        "typ",
-        "predlozka",
-        "pad",
-        "sem_kod",
-        "ir_nazov",
-        "fl"
-        ])
-
-    return json.dumps(table.json())
 
 
 @metadata_blueprint.route("/daj_sem_priznaky/", methods=["GET"])
@@ -297,7 +82,8 @@ def daj_slova_sem_priz():
 
     sem_priznak = request.args.get("sem_priznak", "")
 
-    filtered = db.session.query(SlovnyDruh).filter(SlovnyDruh.sem_priznak_id == sem_priznak)
+    filtered = db.session.query(SlovnyDruh).join(SlovnyDruhSemantika).filter(SlovnyDruhSemantika.sem_priznak_id ==
+                                                                             int(sem_priznak))
 
     table = DataTable(request.args, SlovnyDruh, filtered, [
             "typ",

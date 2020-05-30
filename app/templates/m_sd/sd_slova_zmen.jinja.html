@@ -244,11 +244,7 @@
                                 <input type="hidden" id="hdn_changed_f" value="false"/>
                             </td>
                             <td>
-                                <div class="row">
-                                <div class="col-sm-12">
-                                    <input class="form-control slovo_tvar changed_f" type="text" id="tvar_f" name="tvar_f" value="%"/>
-                                </div>
-                                </div>
+                                <input class="form-control slovo_tvar changed_f" type="text" id="tvar_f" name="tvar_f" value="%"/>
                             </td>
                             <td class="c_rod">
                                 <select class="form-control slovo_ddl changed_f" id="rod_f" name="rod_f">
@@ -384,6 +380,8 @@
                                 </div>
                             </td>
                             <td class="c_rod">
+                                <div class="row">
+                                <div class="col-sm-12">
                                 <select class="form-control slovo_ddl changed_sl" id="rod_0" name="rod_0">
                                     <option value="" selected>Žiad.</option>
                                     <option value="M/Z">M/Z</option>
@@ -393,8 +391,12 @@
                                     <option value="h">h</option>
                                     <option value="o">o</option>
                                 </select>
+                                </div>
+                                </div>
                             </td>
                             <td class="c_pad">
+                                <div class="row">
+                                <div class="col-sm-12">
                                 <select id="pad_0" class="form-control slovo_ddl changed_sl">
                                     <option value="" selected>Žiad.</option>
                                     <option value="Nom">Nom</option>
@@ -405,59 +407,93 @@
                                     <option value="Lok">Lok</option>
                                     <option value="Ins">Ins</option>
                                 </select>
+                                </div>
+                                </div>
                             </td>
                             <td class="c_cislo">
+                                <div class="row">
+                                <div class="col-sm-12">
                                 <select id="cislo_0" class="form-control slovo_ddl changed_sl">
                                     <option value="" selected>Žiad.</option>
                                     <option value="J">J</option>
                                     <option value="M">M</option>
                                     <option value="P">P</option>
                                 </select>
+                                </div>
+                                </div>
                             </td>
                             <td class="c_osoba">
+                                <div class="row">
+                                <div class="col-sm-12">
                                 <select id="osoba_0" class="form-control slovo_ddl changed_sl">
                                     <option value="" selected>Žiad.</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                 </select>
+                                </div>
+                                </div>
                             </td>
                             <td class="c_cas">
+                                <div class="row">
+                                <div class="col-sm-12">
                                 <select id="cas_0" class="form-control slovo_ddl changed_sl">
                                     <option value="" selected>Žiad.</option>
                                     <option value="P">P</option>
                                     <option value="M">M</option>
                                     <option value="B">B</option>
                                 </select>
+                                </div>
+                                </div>
                             </td>
                             <td class="c_sposob">
-                                <select id="sposob_0" class="form-control slovo_ddl changed_sl">
+                                <div class="row">
+                                <div class="col-sm-12">
+\                                <select id="sposob_0" class="form-control slovo_ddl changed_sl">
                                     <option value="" selected>Žiad.</option>
                                     <option value="O">O</option>
                                     <option value="R">R</option>
                                 </select>
+                                </div>
+                                </div>
                             </td>
                             <td class="c_stupen">
+                                <div class="row">
+                                <div class="col-sm-12">
                                 <select id="stupen_0" class="form-control slovo_ddl changed_sl">
                                     <option value="" selected>Žiad.</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                 </select>
+                                </div>
+                                </div>
                             </td>
                             <td class="c_pricastie">
+                                <div class="row">
+                                <div class="col-sm-12">
                                 <select id="pricastie_0" class="form-control slovo_ddl changed_sl">
                                     <option value="" selected>Žiad.</option>
                                     <option value="T">T</option>
                                     <option value="C">C</option>
                                     <option value="M">M</option>
                                 </select>
+                                </div>
+                                </div>
                             </td>
                             <td>
+                                <div class="row">
+                                <div class="col-sm-12">
                                 <input class="form-control anotacia changed_sl" type="text" id="anotacia_0" name="anotacia_0" value=""/>
+                                </div>
+                                </div>
                             </td>
                             <td>
+                                <div class="row">
+                                <div class="col-sm-12">
                                 <button id="btnZmazSlovo_0" type='button' class="btn btn-primary" title="Odstrániť slovo" onclick="ZmazSlovo(0);"><i class="fa fa-trash"></i></button>
+                                </div>
+                                </div>
                             </td>
                         </tr>
                         </tbody>
@@ -821,7 +857,17 @@ function PridajNoveSlovo(nastavAkoZmenene){
             }
         };
 
+   var mandatoryValidatorAnotacia = {
+            row: '.col-sm-12',
+            validators: {
+                notEmpty: {
+                    message: 'A. je povinná'
+                }
+            }
+        };
+
    $('#SDSlovaForm').formValidation('addField', 'tvar_' + pocet_slov, mandatoryValidator);
+   $('#SDSlovaForm').formValidation('addField', 'anotacia_' + pocet_slov, mandatoryValidatorAnotacia);
 
    $("#divSTabulkou tr[id='zaznam_"+pocet_slov+"'] .changed_sl").change(function (){
         var id_stlpca=$(this).attr('id');
@@ -1257,6 +1303,7 @@ function VratZoznamZmenenychSlov(vratAjNezmeneneZaznamy){
 }
 
 function ZmenSlovaSD(closeScreen){
+    $('#SDSlovaForm').data('formValidation').resetForm();
     $('#SDSlovaForm').data('formValidation').validate();
     var formIsVald = $('#SDSlovaForm').data('formValidation').isValid();
 

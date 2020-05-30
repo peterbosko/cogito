@@ -1,4 +1,4 @@
-from app.db_models.user import *
+from app.db.user import *
 from app.c_helper import *
 from flask import current_app as app
 import requests

@@ -51,7 +51,7 @@
         </div>
       </li>
       <li class="nav-item dropdown
-        {% if url_for("metadata.sp") == request.path or url_for("metadata.intencne_ramce") == request.path: %}
+        {% if url_for("metadata.vzory") == request.path or url_for("metadata.sem_priznaky") == request.path: %}
             active
         {% endif %}">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Metadáta</a>
@@ -65,8 +65,6 @@
 		  <li class="dropdown dropdown-submenu">
 				<a class="dropdown-item dropdown-toggle" href="#" data-toggle="dropdown">Sémantika</a>
 				<ul class="dropdown-menu">
-					<li><a class="dropdown-item" href="{{ url_for("metadata.sp") }}">Sémantické pády</a></li>
-					<li><a class="dropdown-item" href="{{ url_for("metadata.intencne_ramce") }}">Intenčné rámce</a></li>
 					<li><a class="dropdown-item" href="{{ url_for("metadata.sem_priznaky") }}">Sémantické príznaky</a></li>
 				</ul>
 		  </li>

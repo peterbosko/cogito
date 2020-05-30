@@ -74,13 +74,11 @@
 
         if (selected=="zakladne"){
             if (loadnuteTaby["zakladne"]){
-
                 if (!ZmenSDZakladneInfo()){
                     return;
                 }
             }
         }
-
         if (loadnuteTaby[$(tab).attr('id')]){
             NastavUlozButton($(tab).attr('id'));
         }
@@ -91,7 +89,9 @@
 
             NastavUlozButton($(tab).attr('id'));
         }
-
+        const id = '#'+$(tab).attr('id');
+        const navTab = $("[href='"+id+"']");
+        navTab.tab('show');
         currentTab = tab;
     }
 
@@ -108,12 +108,11 @@
 
      function init_click() {
          $('#nav-tab a').click(function (e) {
-             e.preventDefault();
              var id = $(this).attr('href').substr(1);
              var tabObj = $(this);
-             tabObj.tab('show');
              var tab = $('#' + id);
              show_tab(tab);
+             return false;
             });
      }
 

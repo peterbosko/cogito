@@ -1,5 +1,5 @@
 from app.app import flask_app
-from app.db_models import *
+from app.db.user import *
 from app.sd_service import *
 import sys
 from ufal.udpipe import Model
@@ -37,11 +37,8 @@ def drop_view(view):
 
 
 def drop_views():
-    drop_view('int_ramec_v')
     drop_view('sem_hier_v')
-    drop_view('sem_pad_v')
     drop_view('sd_sloveso_v')
-    drop_view('int_slovesa_v')
 
 
 def init_db(app):

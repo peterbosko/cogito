@@ -1,4 +1,4 @@
-from app.db_models import *
+from app.db import *
 from sqlalchemy import or_
 from pyquery import PyQuery as pq
 from app.c_helper import *
@@ -83,18 +83,6 @@ def vrat_sem_priznak(sem_id):
         sem = Semantika.query.get(sem_id)
         
         return sem
-    else:
-        return None
-
-
-def vrat_sem_pad(sid):
-    if sid:
-        druh = Slovo.query.get(sid)
-        if druh.sem_id:
-            intencia = Intencia.query.filter(Intencia.sem == druh.sem_id)
-            sem_pad = intencia.sem_pad
-        
-        return sem_pad
     else:
         return None
 

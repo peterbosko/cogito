@@ -976,27 +976,29 @@ def sd_zakladne_info():
 def sd_slova_zmen():
     loguj(request)
 
-    slovny_druh = SlovnyDruh.query.get(request.args.get("sd_id", ""))
+    slovny_druh_obj = SlovnyDruh.query.get(request.args.get("sd_id", ""))
+
+    slovny_druh = request.args.get("slovnyDruh", "")
 
     vzory = []
 
     stupnovacie_vzory = []
 
-    if slovny_druh.typ == "SLOVESO":
+    if slovny_druh == "SLOVESO":
         vzory = daj_slovesne_vzory()
-    elif slovny_druh.typ == "PRID_M":
+    elif slovny_druh == "PRID_M":
         vzory = daj_prid_m_vzory()
         stupnovacie_vzory = daj_prid_m_stup_vzory()
-    elif slovny_druh.typ == "POD_M":
+    elif slovny_druh == "POD_M":
         pm = PodstatneMeno.query.get(request.args.get("sd_id", ""))
         vzory = daj_pm_vzory(pm.rod)
-    elif slovny_druh.typ == "CISLOVKA":
+    elif slovny_druh == "CISLOVKA":
         vzory = daj_cislovka_vzory()
-    elif slovny_druh.typ == "PRISLOVKA":
+    elif slovny_druh == "PRISLOVKA":
         stupnovacie_vzory = daj_prislovka_stup_vzory()
 
-    prefixy = daj_prefixy_sufixy(slovny_druh.typ, "P")
-    sufixy = daj_prefixy_sufixy(slovny_druh.typ, "S")
+    prefixy = daj_prefixy_sufixy(slovny_druh, "P")
+    sufixy = daj_prefixy_sufixy(slovny_druh, "S")
 
     return render_template("m_sd/sd_slova_zmen.jinja.html", vzory=vzory, stupnovacie_vzory=stupnovacie_vzory,
                            prefixy=prefixy, sufixy=sufixy)

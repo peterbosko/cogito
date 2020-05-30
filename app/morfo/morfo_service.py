@@ -1,4 +1,4 @@
-from app.db_models import *
+from app.db.slovny_druh import *
 from sqlalchemy.sql.expression import func
 from sqlalchemy import or_
 from app.c_helper import *

@@ -1,14 +1,5 @@
-from app.db_models.main import *
-from app.db_models.slovny_druh import *
-
-
-class SemantickyPad(db.Model):
-    __tablename__ = 'sem_pad'
-    __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8mb4', 'mysql_collate': 'utf8mb4_bin'}
-    id = db.Column(db.Integer, primary_key=True)
-    kod = db.Column(db.String(20, collation='utf8mb4_bin'), nullable=False)
-    nazov = db.Column(db.String(500, collation='utf8mb4_bin'), nullable=False)
-    popis = db.Column(db.String(500, collation='utf8mb4_bin'), nullable=True)
+from app.db.main import *
+from app.db.slovny_druh import *
 
 
 class Semantika(db.Model):

@@ -1,6 +1,6 @@
-from app.db_models.main import *
-from app.db_models.koncept import *
-from app.db_models.metadata import *
+from app.db.main import *
+from app.db.koncept import *
+from app.db.metadata import *
 
 
 class SlovnyDruh(db.Model):
@@ -136,8 +136,6 @@ class Sloveso(SlovnyDruh):
     pozitivne_sloveso_id = db.Column('pozitivne_sloveso_id', db.Integer, db.ForeignKey('sd_sloveso.id'), nullable=True)
     zvratnost = db.Column(db.String(20), nullable=True)
     vid = db.Column(db.String(10), nullable=True)
-    int_ramec_id = db.Column(db.Integer, db.ForeignKey("int_ramec.id"), nullable=True, index=True)
-    int_ramec = relationship("IntencnyRamec", foreign_keys=[int_ramec_id])
     pzkmen = db.Column(db.String(20), nullable=True)
 
     __mapper_args__ = {
@@ -188,7 +186,6 @@ class Prislovka(SlovnyDruh):
     __tablename__ = 'sd_prislovka'
     __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8mb4', 'mysql_collate': 'utf8mb4_bin'}
     prislovka_id = db.Column('id', db.Integer, db.ForeignKey('sd.id'), primary_key=True)
-    sem_pad_id = db.Column('sem_pad', db.Integer, db.ForeignKey('sem_pad.id'))
     koncovka = db.Column(db.String(50), nullable=True)
 
     __mapper_args__ = {
@@ -374,30 +371,6 @@ class Slovo(db.Model):
         return export
 
 
-class IntencnyRamec(db.Model):
-    __tablename__ = 'int_ramec'
-    __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8mb4', 'mysql_collate': 'utf8mb4_bin'}
-    id = db.Column(db.Integer, primary_key=True)
-    kod = db.Column(db.String(20), nullable=True)
-    nazov = db.Column(db.String(500, collation='utf8mb4_bin'), nullable=False)
-
-
-class Intencia(db.Model):
-    __tablename__ = 'int'
-    __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8mb4', 'mysql_collate': 'utf8mb4_bin'}
-    id = db.Column(db.Integer, primary_key=True)
-    typ = db.Column(db.String(20), nullable=False)
-    int_ramec_id = db.Column('int_ramec_id', db.Integer, db.ForeignKey('int_ramec.id'))
-    int_ramec = relationship("IntencnyRamec", uselist=False, lazy='joined')
-    predlozka = db.Column(db.String(50), nullable=True)
-    pad = db.Column(db.String(3), nullable=True)
-    sem_priznak_id = db.Column('sem', db.Integer, db.ForeignKey('sem.id'))
-    sem_pad = relationship("SemantickyPad", uselist=False, lazy='joined')
-    sem_priznak = relationship("Semantika", uselist=False, lazy='joined')
-    sem_pad_id = db.Column('sem_pad', db.Integer, db.ForeignKey('sem_pad.id'))
-    fl = db.Column('fl', db.Integer, nullable=True)
-
-
 class HierarchiaSD(db.Model):
     __tablename__ = 'sd_hier'
     __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8mb4', 'mysql_collate': 'utf8mb4_bin'}
@@ -431,53 +404,12 @@ class SlovesoView(db.Model):
                 Sloveso.popis,
                 Sloveso.zvratnost,
                 Sloveso.vid,
-                Sloveso.int_ramec_id,
-                sa.select([IntencnyRamec.kod], from_obj=IntencnyRamec).where(IntencnyRamec.id == Sloveso.int_ramec_id)
-                    .label('int_ramec_kod'),
-                sa.select([IntencnyRamec.nazov], from_obj=IntencnyRamec).where(IntencnyRamec.id == Sloveso.int_ramec_id)
-                    .label('int_ramec_nazov'),
                 Sloveso.je_negacia,
                 Sloveso.pozitivne_sloveso_id,
                 Sloveso.zmenene,
                 Sloveso.user_id,
             ],
             from_obj=Sloveso.__table__.join(SlovnyDruh, SlovnyDruh.id == Sloveso.sd_id)
-        ),
-        metadata=db.Model.metadata
-    )
-
-
-class IntencieSlovesaView(db.Model):
-    __table__ = create_view(
-        name='int_slovesa_v',
-        selectable=sa.select(
-            [
-                Intencia.id.label('id'),
-                # sa.func.row_number().over(order_by=[Sloveso.sd_id]).label('id'),
-                # Sloveso.sd_id.label('id'),
-                Sloveso.sd_id.label('sd_id'),
-                SlovnyDruh.zak_tvar.label('zak_tvar'),
-                Sloveso.zvratnost,
-                Sloveso.popis,
-                Sloveso.vid,
-                Sloveso.int_ramec_id,
-                Intencia.typ,
-                Intencia.predlozka,
-                Intencia.pad,
-                Intencia.sem_priznak_id.label('sem_priznak_id'),
-                sa.select([Semantika.kod], from_obj=Semantika).where(Semantika.id == Intencia.sem_priznak_id)
-                    .label('sem_kod'),
-                Intencia.sem_pad_id.label('sem_pad_id'),
-                sa.select([SemantickyPad.nazov], from_obj=SemantickyPad).where(SemantickyPad.id == Intencia.sem_pad_id)
-                    .label('sp_nazov'),
-                sa.select([IntencnyRamec.kod], from_obj=IntencnyRamec).where(Intencia.int_ramec_id == IntencnyRamec.id)
-                    .label('ir_kod'),
-                sa.select([IntencnyRamec.nazov], from_obj=IntencnyRamec).where(Intencia.int_ramec_id == IntencnyRamec.id)
-                    .label('ir_nazov'),
-                Intencia.fl.label('fl'),
-            ],
-            from_obj=Sloveso.__table__.join(SlovnyDruh, SlovnyDruh.id == Sloveso.sd_id).
-                join(Intencia, Intencia.int_ramec_id == Sloveso.int_ramec_id)
         ),
         metadata=db.Model.metadata
     )
@@ -598,47 +530,6 @@ class SemHierarchiaView(db.Model):
             from_obj=(
                 SemHierarchia.__table__.join(sem1, sem1.id == SemHierarchia.sem_id)
                 .outerjoin(sem2, sem2.id == SemHierarchia.rodic_id)
-            )
-        ),
-        metadata=db.Model.metadata
-    )
-
-
-class SemantickyPadView(db.Model):
-    __table__ = create_view(
-        name='sem_pad_v',
-        selectable=sa.select(
-            [
-                SemantickyPad.id,
-                SemantickyPad.kod,
-                SemantickyPad.nazov,
-                sa.select([sa.func.count()], from_obj=Intencia).where(Intencia.sem_pad_id == SemantickyPad.id)
-                    .label('pocet_intencii'),
-                sa.select([sa.func.count(sa.distinct(Sloveso.sd_id))], from_obj=Sloveso.__table__.
-                          join(Intencia, Intencia.int_ramec_id == Sloveso.int_ramec_id)).
-                    where(Intencia.sem_pad_id == SemantickyPad.id).label('pocet_slovies'),
-            ],
-            from_obj=SemantickyPad.__table__
-        ),
-        metadata=db.Model.metadata
-    )
-
-
-class IntencnyRamecView(db.Model):
-    __table__ = create_view(
-        name='int_ramec_v',
-        selectable=sa.select(
-            [
-                IntencnyRamec.id,
-                IntencnyRamec.kod,
-                IntencnyRamec.nazov,
-                sa.select([sa.func.count()], from_obj=Intencia).where(Intencia.int_ramec_id == IntencnyRamec.id)
-                    .label('pocet_intencii'),
-                sa.select([sa.func.count()], from_obj=Sloveso).where(Sloveso.int_ramec_id == IntencnyRamec.id)
-                    .label('pocet_slovies'),
-            ],
-            from_obj=(
-                IntencnyRamec.__table__
             )
         ),
         metadata=db.Model.metadata

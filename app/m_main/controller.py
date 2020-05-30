@@ -1,7 +1,7 @@
 from flask import Blueprint
 from flask import render_template
 from flask import request
-from app.db_models.kontext import *
+from app.db.kontext import *
 from app.c_service import *
 from app.sd_service import *
 

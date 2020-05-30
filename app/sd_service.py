@@ -3,32 +3,8 @@ from sqlalchemy import and_
 from sqlalchemy.sql.expression import func
 import operator
 from sqlalchemy import or_
-from app.db_models.metadata import *
-from app.db_models.slovny_druh import *
-
-
-def daj_pocet_intencii_sp(id):
-    return db.session.query(Intencia).filter(Intencia.sem_pad_id == id).count()
-
-
-def daj_pocet_slovies_sp(id):
-    zoznam_ir = db.session.query(Intencia.int_ramec_id).filter(Intencia.sem_pad_id == id).distinct()
-
-    q = db.session.query(Sloveso).filter(Sloveso.int_ramec_id.in_(zoznam_ir))
-
-    # q = db.session.query(Sloveso.id).\
-    #    join(Intencia, and_(Intencia.sp == id, Sloveso.int_ramec_id == Intencia.int_ramec_id)).\
-    #    join(IntencnyRamec, IntencnyRamec.id == Intencia.int_ramec_id).distinct()
-
-    return q.count()
-
-
-def daj_pocet_intencii_ramca(id):
-    return db.session.query(Intencia).filter(Intencia.int_ramec_id == id).count()
-
-
-def daj_pocet_slovies_ramca(id):
-    return db.session.query(Sloveso).filter(Sloveso.int_ramec_id == id).count()
+from app.db.metadata import *
+from app.db.slovny_druh import *
 
 
 def vrat_polozku_sem_stromu_nadol(id, parent):

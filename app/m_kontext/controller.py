@@ -14,8 +14,8 @@ import urllib.parse
 from app.sd_service import *
 from flask import current_app
 from ufal.udpipe import Model, Pipeline, ProcessingError
-from app.db_models.kontext import *
-from app.db_models.unit_test import *
+from app.db.kontext import *
+from app.db.unit_test import *
 
 kontext_blueprint = Blueprint("kontext", __name__)
 

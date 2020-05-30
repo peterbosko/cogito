@@ -1,4 +1,4 @@
-from app.db_models.main import *
+from app.db.main import *
 
 
 class Koncept(db.Model):

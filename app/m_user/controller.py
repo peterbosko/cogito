@@ -3,7 +3,7 @@ from flask import render_template
 from flask import request
 from flask import redirect, url_for
 from flask import session
-from app.db_models import *
+from app.db.user import *
 from app.c_helper import *
 from app.c_service import *
 from sqlalchemy import and_

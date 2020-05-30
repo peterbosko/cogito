@@ -1,5 +1,5 @@
-from app.db_models.main import *
-from app.db_models.user import *
+from app.db.main import *
+from app.db.user import *
 
 
 class UnitTest(db.Model):

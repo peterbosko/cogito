@@ -104,7 +104,7 @@
                     </label>
                     <div class="col-sm-4">
                         <input type="text" id="txtFormCISLOVKA_HODNOTA" name="txtFormCISLOVKA_HODNOTA"
-                               class="form-control zmenaZakInfo" data-fv-row=".col-sm-3"
+                               class="form-control zmenaZakInfo" data-fv-row=".col-sm-4"
                          data-fv-notempty="true" data-fv-notempty-message="Hodnora je povinná"
                          value="">
                     </div>
@@ -226,11 +226,13 @@ function NacitajZakladneInfoSD(sd_id){
 }
 
 function ZmenSDZakladneInfo(){
+    var res=false;
 
     if (!zmenaVZakladneInfo && '{{request.args.get("ulozAkoNoveSlovo")}}' != 'true' && getSD_ID() != -1){
         return true;
     }
 
+    $('#SDForm').data('formValidation').resetForm();
     $('#SDForm').data('formValidation').validate();
     var formIsVald = $('#SDForm').data('formValidation').isValid();
 
@@ -283,8 +285,6 @@ function ZmenSDZakladneInfo(){
             data.hodnota=$('#txtFormCISLOVKA_HODNOTA').val();
         }
 
-        var res=false;
-
         AjaxMethods.getDataFromPostRequest('{{url_for("sd.zmenit_sd")}}', "", data, function(r){
             if (r.status==responseOK){//OK vetva
                 res=true;
@@ -304,6 +304,8 @@ function ZmenSDZakladneInfo(){
                    title  :  "Chyba",
                    text   :  "Chyba validácie. Skontrolujte červené položky",
                    icon   :  "error"});
+
+        return false;
     }
 
     return res;

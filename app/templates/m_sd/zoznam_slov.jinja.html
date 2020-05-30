@@ -48,6 +48,7 @@
                                         </select>
                                     </div>
                                 </div>
+                                <!--
                                 <div class="form-group">
                                     <div class="col-md-12">
                                         <label>Iba slová s anotáciou&nbsp;<input id="cbAnotovane" class="SearchOnChange SearchOnEnter" type="checkbox" checked="checked"></label>
@@ -58,6 +59,7 @@
                                         <input id="txtFAnotacia" class="form-control SearchOnChange SearchOnEnter" type="text" placeholder="Vložte anotáciu slova">
                                     </div>
                                 </div>
+                                -->
                             </fieldset>
                        </div>
                   </div>
@@ -157,7 +159,7 @@
                 d.hladaj_tvar = $('#txtFTvar').val();
                 d.hladaj_zak_tvar = $('#txtFZakTvar').val();
                 d.hladaj_druh = $('#ddlFDruh').val();
-                d.hladaj_iba_anotovane = $('#cbAnotovane').prop('checked');
+                d.hladaj_iba_anotovane = false;//$('#cbAnotovane').prop('checked');
                 d.hladaj_anotaciu = $('#txtFAnotacia').val();
                 d.hladaj_slovo_id = $('#txtFId').val();
                 d.hladaj_sd_id = $('#txtFSD_ID').val();
