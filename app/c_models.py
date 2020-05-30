@@ -52,6 +52,7 @@ class SlovnyDruhExport(object):
     druh = None
     koncept_id = None
     koncept_nazov = None
+    sem_priznaky = None
 
 
 class SlovnyDruhHierExport(object):
@@ -69,10 +70,4 @@ class slovo_data(object):
     def __init__(self):
         self.data = []
         self.cisla = []
-
-
-class reCAPTCHA(object):
-    success = False
-    challenge_ts = None
-    hostname = None
 

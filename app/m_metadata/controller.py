@@ -277,23 +277,13 @@ def daj_sem_priznaky():
     if rodic_priznak:
         filtered = filtered.filter(SemHierarchiaView.rodic_kod.like(rodic_priznak))
 
-    if t == "PRID_M":
-        table = DataTable(request.args, SemHierarchiaView, filtered, [
-                "sem_priznak_id",
-                "kod",
-                "nazov",
-                "rodic_kod",
-                "rodic_nazov",
-                ("pocet_slov", "pocet_slov_prid_m"),
-        ])
-    else:
-        table = DataTable(request.args, SemHierarchiaView, filtered, [
-                "sem_priznak_id",
-                "kod",
-                "nazov",
-                "rodic_kod",
-                "rodic_nazov",
-                "pocet_slov"
+    table = DataTable(request.args, SemHierarchiaView, filtered, [
+            "sem_priznak_id",
+            "kod",
+            "nazov",
+            "rodic_kod",
+            "rodic_nazov",
+            "pocet_slov"
         ])
 
     return json.dumps(table.json())
@@ -304,22 +294,15 @@ def daj_slova_sem_priz():
     loguj(request)
 
     t = request.args.get("typ", "")
+
     sem_priznak = request.args.get("sem_priznak", "")
 
-    if t == "PRID_M":
-        filtered = db.session.query(PridavneMeno).filter(PridavneMeno.sem_priznak_prid_m_id == sem_priznak)
+    filtered = db.session.query(SlovnyDruh).filter(SlovnyDruh.sem_priznak_id == sem_priznak)
 
-        table = DataTable(request.args, PridavneMeno, filtered, [
+    table = DataTable(request.args, SlovnyDruh, filtered, [
             "typ",
             "zak_tvar",
-        ])
-    else:
-        filtered = db.session.query(SlovnyDruh).filter(SlovnyDruh.sem_priznak_id == sem_priznak)
-
-        table = DataTable(request.args, SlovnyDruh, filtered, [
-            "typ",
-            "zak_tvar",
-        ])
+    ])
 
     return json.dumps(table.json())
 

@@ -1,9 +1,10 @@
 from sqlalchemy import exc
-from app.db_models import *
 from sqlalchemy import and_
 from sqlalchemy.sql.expression import func
 import operator
 from sqlalchemy import or_
+from app.db_models.metadata import *
+from app.db_models.slovny_druh import *
 
 
 def daj_pocet_intencii_sp(id):
@@ -30,13 +31,6 @@ def daj_pocet_slovies_ramca(id):
     return db.session.query(Sloveso).filter(Sloveso.int_ramec_id == id).count()
 
 
-def daj_pocet_slov_sem_priznaku(typ, id):
-    if typ == "PRID_M":
-        return db.session.query(PridavneMeno).filter(PridavneMeno.sem_priznak_prid_m_id == id).count()
-    else:
-        return db.session.query(SlovnyDruh).filter(SlovnyDruh.sem_priznak_id == id).count()
-
-
 def vrat_polozku_sem_stromu_nadol(id, parent):
     leaf = db.session.query(SemHierarchiaView).filter(SemHierarchiaView.id == id).first()
 
@@ -47,12 +41,7 @@ def vrat_polozku_sem_stromu_nadol(id, parent):
 
         data.parent = parent
 
-        pocet_slov = 0
-
-        if leaf.typ == "PRID_M":
-            pocet_slov = leaf.pocet_slov_prid_m
-        else:
-            pocet_slov = leaf.pocet_slov
+        pocet_slov = leaf.pocet_slov
 
         data.text = f"({leaf.kod}) - {leaf.nazov} : Počet slov: {pocet_slov}"
 
@@ -74,12 +63,7 @@ def vrat_polozku_sem_stromu_nahor(id, parent, rodic_id):
 
         data.parent = parent
 
-        pocet_slov = 0
-
-        if leaf.typ == "PRID_M":
-            pocet_slov = leaf.pocet_slov_prid_m
-        else:
-            pocet_slov = leaf.pocet_slov
+        pocet_slov = leaf.pocet_slov
 
         data.text = f"({leaf.kod}) - {leaf.nazov} : Počet slov: {pocet_slov}"
 
@@ -479,11 +463,25 @@ def prepocitaj_sd_stat():
     db.session.commit()
 
 
+def zmaz_sem_priznaky(sd_id):
+    SlovnyDruhSemantika.query.filter(SlovnyDruhSemantika.sd_id == sd_id).delete()
+
+
+def zaloz_sem_priznaky(slov_druh, priznaky):
+    for p in priznaky.split(";"):
+        sem = SlovnyDruhSemantika()
+        sem.SlovnyDruh = slov_druh
+        sem.sem_priznak = Semantika.query.get(int(p))
+        db.session.add(sem)
+
+
 def zmaz_cely_s_druh(sd_id):
 
     chyba = ""
 
     Slovo.query.filter(Slovo.sd_id == sd_id).delete()
+
+    zmaz_sem_priznaky(sd_id)
 
     sd = SlovnyDruh.query.get(sd_id)
 
@@ -524,8 +522,10 @@ def zmaz_cely_s_druh(sd_id):
     try:
         db.session.commit()
     except exc.IntegrityError as e:
-        chyba = "Chyba integrity. Na slovo existuje cudzí kľúč ! V prípade slovesa " \
+        chyba = "Chyba integrity. Na slovo existuje cudzí kľúč ! " \
+                "V prípade slovesa " \
                 "skontroluje prídavné, podstatné mená a slovesá !"
 
     return chyba
+
 

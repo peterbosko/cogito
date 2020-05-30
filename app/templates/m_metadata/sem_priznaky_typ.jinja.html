@@ -86,6 +86,8 @@
             $('#h1Span').html("prídavné mená");
         else if ('{{request.args.get("typ")}}'=="CISLOVKA")
             $('#h1Span').html("číslovky");
+        else if ('{{request.args.get("typ")}}'=="SLOVESO")
+            $('#h1Span').html("slovesá");
     });
 
     function btnHladaj(){

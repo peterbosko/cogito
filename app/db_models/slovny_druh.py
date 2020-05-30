@@ -1,103 +1,6 @@
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.orm import relationship
-from werkzeug.security import generate_password_hash
-from werkzeug.security import check_password_hash
-from flask import session
-from app.c_models import *
-from app.sd_models import *
-from sqlalchemy.orm import aliased
-import sqlalchemy as sa
-from sqlalchemy_utils import (
-    create_view,
-)
-
-
-db = SQLAlchemy()
-
-
-class Log(db.Model):
-    __tablename__ = 'l'
-    __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8mb4', 'mysql_collate': 'utf8mb4_bin'}
-    id = db.Column(db.Integer, primary_key=True)
-    IP = db.Column(db.String(50), nullable=False)
-    url = db.Column(db.String(2000), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey("u.id"), nullable=True)
-    cas = db.Column(db.DateTime(), nullable=False)
-    user_agent = db.Column(db.String(100), nullable=True)
-
-
-class User(db.Model):
-    __tablename__ = 'u'
-    __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8mb4', 'mysql_collate': 'utf8mb4_bin'}
-    id = db.Column(db.Integer, primary_key=True)
-    meno = db.Column(db.String(255), nullable=False)
-    priezvisko = db.Column(db.String(255), nullable=False)
-    email = db.Column(db.String(255), nullable=False)
-    password = db.Column(db.String(2000), nullable=False)
-    status = db.Column(db.String(2), nullable=False)
-    je_admin = db.Column(db.String(1), nullable=True)
-    je_metadata_admin = db.Column(db.String(1), nullable=True)
-    je_admin_slov = db.Column(db.String(1), nullable=True)
-    je_admin_konceptov = db.Column(db.String(1), nullable=True)
-
-    def nastav_heslo(self, password):
-        self.password = generate_password_hash(password)
-
-    def skontroluj_heslo(self, password):
-        return check_password_hash(self.password, password)
-
-
-class Kontext(db.Model):
-    __tablename__ = 'kt'
-    __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8mb4', 'mysql_collate': 'utf8mb4_bin'}
-    id = db.Column(db.Integer, primary_key=True)
-    nazov = db.Column(db.String(255), nullable=False)
-    obsah = db.Column(db.Text(4000000000), nullable=False)
-    text = db.Column(db.Text(4000000000))
-    status = db.Column(db.String(2), nullable=False)
-    zoznam_slov = db.Column(db.Text, nullable=True)
-    autor_id = db.Column(db.Integer, db.ForeignKey("u.id"), nullable=False)
-    autor = relationship("User")
-
-    def mam_prava(self):
-        if "logged" in session.keys():
-            usr = int(session["logged"])
-            ja = User.query.get(usr)
-            if usr == self.autor_id or ja.je_admin == "A":
-                return True
-            else:
-                return False
-        else:
-            return False
-
-
-class Koncept(db.Model):
-    __tablename__ = 'kc'
-    __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8mb4', 'mysql_collate': 'utf8mb4_bin'}
-    id = db.Column(db.Integer, primary_key=True)
-    nazov = db.Column(db.String(20), nullable=False, index=True)
-    popis_obsah = db.Column(db.Text(4000000000))
-    silny_popis = db.Column(db.Text(4000000000))
-
-
-class KonceptAtribut(db.Model):
-    __tablename__ = 'kc_at'
-    __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8mb4', 'mysql_collate': 'utf8mb4_bin'}
-    id = db.Column(db.Integer, primary_key=True)
-    kc_id = db.Column('kc_id', db.Integer, db.ForeignKey('kc.id'))
-    typ = db.Column(db.String(20), nullable=False)
-    dlzka = db.Column('dlzka', db.Integer, nullable=True)
-    kardinalita = db.Column(db.String(1), nullable=False)
-    vlastnost_koncept_id = db.Column('at_kc_id', db.Integer, db.ForeignKey('kc.id'))
-
-
-class KonceptHierarchia(db.Model):
-    __tablename__ = 'kc_hier'
-    __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8mb4', 'mysql_collate': 'utf8mb4_bin'}
-    id = db.Column(db.Integer, primary_key=True)
-    kc_id = db.Column('kc_id', db.Integer, db.ForeignKey('kc.id'))
-    rodic_kc_id = db.Column('rodic_kc_id', db.Integer, db.ForeignKey('kc.id'))
-    poradie = db.Column('poradie', db.Integer, nullable=True)
+from app.db_models.main import *
+from app.db_models.koncept import *
+from app.db_models.metadata import *
 
 
 class SlovnyDruh(db.Model):
@@ -112,8 +15,9 @@ class SlovnyDruh(db.Model):
     vzor = db.Column(db.String(500, collation='utf8mb4_bin'), nullable=True, index=True)
     prefix = db.Column(db.String(20, collation='utf8mb4_bin'), nullable=True)
     sufix = db.Column(db.String(20, collation='utf8mb4_bin'), nullable=True)
-    sem_priznak_id = db.Column(db.Integer, db.ForeignKey("sem.id"), nullable=True, index=True)
-    sem_priznak = relationship("Semantika", foreign_keys=[sem_priznak_id])
+    # sem_priznak_id = db.Column(db.Integer, db.ForeignKey("sem.id"), nullable=True, index=True)
+    # sem_priznak = relationship("Semantika", foreign_keys=[sem_priznak_id])
+    sem_priznaky = relationship("SlovnyDruhSemantika", back_populates="SlovnyDruh")
     paradigma = db.Column(db.String(1), nullable=True)
     vzor_stup = db.Column(db.String(500), nullable=True)
     status = db.Column(db.String(2), nullable=True)
@@ -129,12 +33,20 @@ class SlovnyDruh(db.Model):
         'polymorphic_on': typ
     }
 
+    def daj_export_sem_priznaky(self):
+        vysledok = ""
+        for sem in self.sem_priznaky:
+            if vysledok:
+                vysledok += ";"
+            vysledok += str(sem.sem_priznak_id)
+
+        return vysledok
+
     def exportuj(self):
         export = SlovnyDruhExport()
         export.id = self.id
         export.zak_tvar = self.zak_tvar
         export.typ = self.typ
-        #export.parent_sd_id = self.parent_sd_id
         return export
 
     def exportuj_zak_info(self):
@@ -142,7 +54,7 @@ class SlovnyDruh(db.Model):
         export.zak_tvar = self.zak_tvar
         export.popis = self.popis
         export.typ = self.typ
-        export.sem_priznak_id = self.sem_priznak_id
+        export.sem_priznaky = self.daj_export_sem_priznaky()
         export.vzor = self.vzor
         export.prefix = self.prefix
         export.sufix = self.sufix
@@ -208,16 +120,6 @@ class SlovnyDruh(db.Model):
 
         return export
 
-    def exportujSem(self):
-        export = SlovnyDruhExport()
-        export.id = self.id
-        export.zak_tvar = self.zak_tvar
-        export.typ = self.typ
-        if self.sem_priznak.id:
-            odvodene = SemHierarchia.query.filter(SemHierarchia.sem_id == sem_priznak.id)
-        
-        return export
-
     def exportuj_plny_sd(self):
         export = self.exportuj_zak_info()
 
@@ -266,8 +168,8 @@ class PridavneMeno(SlovnyDruh):
     sloveso = relationship("Sloveso", foreign_keys=[sloveso_id])
     je_privlastnovacie = db.Column(db.String(1), nullable=False)
     je_negacia = db.Column(db.String(1), nullable=True)
-    sem_priznak_prid_m_id = db.Column(db.Integer, db.ForeignKey("sem.id"), nullable=True, index=True)
-    sem_priznak_prid_m = relationship("Semantika", foreign_keys=[sem_priznak_prid_m_id])
+    # sem_priznak_prid_m_id = db.Column(db.Integer, db.ForeignKey("sem.id"), nullable=True, index=True)
+    # sem_priznak_prid_m = relationship("Semantika", foreign_keys=[sem_priznak_prid_m_id])
     __mapper_args__ = {
         'polymorphic_identity': 'PRID_M',
     }
@@ -410,9 +312,6 @@ class Slovo(db.Model):
         if export.koncept_id:
             export.koncept = Koncept.query.get(export.koncept_id).nazov
 
-        export.sem_id = self.SlovnyDruh.sem_priznak_id
-        if export.sem_id:
-            export.sem_priznak = Semantika.query.get(export.sem_id)
         export.sufix = self.SlovnyDruh.sufix
         export.prefix = self.SlovnyDruh.prefix
         export.vzor = self.SlovnyDruh.vzor
@@ -442,8 +341,6 @@ class Slovo(db.Model):
         elif export.slovny_druh == "PRID_M":
             prm = PridavneMeno.query.get(self.sd_id)
             export.sloveso_id = prm.sloveso_id
-            if prm.sem_priznak_prid_m:
-                export.sem_priznak_prid_m = prm.sem_priznak_prid_m.kod
 
             if prm.sloveso_id:
                 slov = Sloveso.query.get(prm.sloveso_id)
@@ -475,74 +372,6 @@ class Slovo(db.Model):
             export.hodnota = cis.hodnota
 
         return export
-        
-        
-class UnitTest(db.Model):
-    __tablename__ = 'kt_ut'
-    __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8mb4', 'mysql_collate': 'utf8mb4_bin'}
-    id = db.Column(db.Integer, primary_key=True)
-    kontext_id = db.Column('kt_id', db.Integer, db.ForeignKey('kt.id'))
-    kontext = relationship("Kontext", uselist=False)
-    poradie = db.Column(db.Integer, nullable=False)
-    funkcia = db.Column(db.String(255), nullable=False)
-    nazov = db.Column(db.String(255), nullable=False)
-    status = db.Column(db.String(1), nullable=False)
-    datum_posledneho_behu = db.Column(db.DateTime(), nullable=True)
-    spustac_posledneho_behu = db.Column(db.Integer, db.ForeignKey("u.id"), nullable=True)
-    zadanie = db.Column(db.Text, nullable=True)
-    ocakavany_vysledok = db.Column(db.Text, nullable=True)
-    skutocny_vysledok = db.Column(db.Text, nullable=True)
-    rozdiel = db.Column(db.Text, nullable=True)
-    autor_id = db.Column(db.Integer, db.ForeignKey("u.id"), nullable=False)
-
-    def exportuj(self):
-        export = UnitTestExport()
-        export.id = self.id
-        export.kontext_id = self.kontext_id
-        export.status = self.status
-        export.funkcia = self.funkcia
-        export.poradie = self.poradie
-
-        return export
-
-    def mam_prava(self):
-        if "logged" in session.keys():
-            usr = int(session["logged"])
-            ja = User.query.get(usr)
-            if usr == self.autor_id or ja.je_admin == "A":
-                return True
-            else:
-                return False
-        else:
-            return False
-
-
-class SemantickyPad(db.Model):
-    __tablename__ = 'sem_pad'
-    __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8mb4', 'mysql_collate': 'utf8mb4_bin'}
-    id = db.Column(db.Integer, primary_key=True)
-    kod = db.Column(db.String(20, collation='utf8mb4_bin'), nullable=False)
-    nazov = db.Column(db.String(500, collation='utf8mb4_bin'), nullable=False)
-    popis = db.Column(db.String(500, collation='utf8mb4_bin'), nullable=True)
-
-
-class Semantika(db.Model):
-    __tablename__ = 'sem'
-    __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8mb4', 'mysql_collate': 'utf8mb4_bin'}
-    id = db.Column(db.Integer, primary_key=True)
-    typ = db.Column(db.String(20), nullable=False)
-    kod = db.Column(db.String(20, collation='utf8mb4_bin'), nullable=False)
-    nazov = db.Column(db.String(500, collation='utf8mb4_bin'), nullable=False)
-
-
-class SemHierarchia(db.Model):
-    __tablename__ = 'sem_hier'
-    __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8mb4', 'mysql_collate': 'utf8mb4_bin'}
-    id = db.Column(db.Integer, primary_key=True)
-    sem_id = db.Column('sem_id', db.Integer, db.ForeignKey('sem.id'))
-    sem = relationship("Semantika", foreign_keys=[sem_id])
-    rodic_id = db.Column('rodic_id', db.Integer, db.ForeignKey('sem.id'), nullable=True)
-    rodic = relationship("Semantika", foreign_keys=[rodic_id])
 
 
 class IntencnyRamec(db.Model):
@@ -587,80 +416,6 @@ class HierarchiaSD(db.Model):
         export.parent_sd = self.parent_sd
 
         return export
-
-
-sem1 = aliased(Semantika, name='sem1')
-sem2 = aliased(Semantika, name='sem2')
-sd = aliased(SlovnyDruh, name='sd')
-pm = aliased(PridavneMeno, name='pm')
-
-
-class SemHierarchiaView(db.Model):
-    __table__ = create_view(
-        name='sem_hier_v',
-        selectable=sa.select(
-            [
-                SemHierarchia.id,
-                sem1.id.label('sem_priznak_id'),
-                sem1.typ,
-                sem1.kod,
-                sem1.nazov,
-                SemHierarchia.rodic_id,
-                sem2.kod.label('rodic_kod'),
-                sem2.nazov.label('rodic_nazov'),
-                sa.select([sa.func.count()], from_obj=sd).where(sd.sem_priznak_id == SemHierarchia.sem_id)
-                    .label('pocet_slov'),
-                sa.select([sa.func.count()], from_obj=pm).where(pm.sem_priznak_prid_m_id == SemHierarchia.sem_id)
-                    .label('pocet_slov_prid_m'),
-            ],
-            from_obj=(
-                SemHierarchia.__table__.join(sem1, sem1.id == SemHierarchia.sem_id)
-                .outerjoin(sem2, sem2.id == SemHierarchia.rodic_id)
-            )
-        ),
-        metadata=db.Model.metadata
-    )
-
-
-class IntencnyRamecView(db.Model):
-    __table__ = create_view(
-        name='int_ramec_v',
-        selectable=sa.select(
-            [
-                IntencnyRamec.id,
-                IntencnyRamec.kod,
-                IntencnyRamec.nazov,
-                sa.select([sa.func.count()], from_obj=Intencia).where(Intencia.int_ramec_id == IntencnyRamec.id)
-                    .label('pocet_intencii'),
-                sa.select([sa.func.count()], from_obj=Sloveso).where(Sloveso.int_ramec_id == IntencnyRamec.id)
-                    .label('pocet_slovies'),
-            ],
-            from_obj=(
-                IntencnyRamec.__table__
-            )
-        ),
-        metadata=db.Model.metadata
-    )
-
-
-class SemantickyPadView(db.Model):
-    __table__ = create_view(
-        name='sem_pad_v',
-        selectable=sa.select(
-            [
-                SemantickyPad.id,
-                SemantickyPad.kod,
-                SemantickyPad.nazov,
-                sa.select([sa.func.count()], from_obj=Intencia).where(Intencia.sem_pad_id == SemantickyPad.id)
-                    .label('pocet_intencii'),
-                sa.select([sa.func.count(sa.distinct(Sloveso.sd_id))], from_obj=Sloveso.__table__.
-                          join(Intencia, Intencia.int_ramec_id == Sloveso.int_ramec_id)).
-                    where(Intencia.sem_pad_id == SemantickyPad.id).label('pocet_slovies'),
-            ],
-            from_obj=SemantickyPad.__table__
-        ),
-        metadata=db.Model.metadata
-    )
 
 
 class SlovesoView(db.Model):
@@ -815,5 +570,78 @@ class SlovnyDruhStat(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     typ = db.Column(db.String(20), nullable=False, index=True)
     pocet = db.Column(db.Integer, nullable=True)
+
+
+sem1 = aliased(Semantika, name='sem1')
+sem2 = aliased(Semantika, name='sem2')
+sd = aliased(SlovnyDruh, name='sd')
+pm = aliased(PridavneMeno, name='pm')
+
+
+class SemHierarchiaView(db.Model):
+    __table__ = create_view(
+        name='sem_hier_v',
+        selectable=sa.select(
+            [
+                SemHierarchia.id,
+                sem1.id.label('sem_priznak_id'),
+                sem1.typ,
+                sem1.kod,
+                sem1.nazov,
+                SemHierarchia.rodic_id,
+                sem2.kod.label('rodic_kod'),
+                sem2.nazov.label('rodic_nazov'),
+                sa.select([sa.func.count()], from_obj=SlovnyDruhSemantika).where(SlovnyDruhSemantika.sem_priznak_id ==
+                                                                                 SemHierarchia.sem_id)
+                    .label('pocet_slov'),
+            ],
+            from_obj=(
+                SemHierarchia.__table__.join(sem1, sem1.id == SemHierarchia.sem_id)
+                .outerjoin(sem2, sem2.id == SemHierarchia.rodic_id)
+            )
+        ),
+        metadata=db.Model.metadata
+    )
+
+
+class SemantickyPadView(db.Model):
+    __table__ = create_view(
+        name='sem_pad_v',
+        selectable=sa.select(
+            [
+                SemantickyPad.id,
+                SemantickyPad.kod,
+                SemantickyPad.nazov,
+                sa.select([sa.func.count()], from_obj=Intencia).where(Intencia.sem_pad_id == SemantickyPad.id)
+                    .label('pocet_intencii'),
+                sa.select([sa.func.count(sa.distinct(Sloveso.sd_id))], from_obj=Sloveso.__table__.
+                          join(Intencia, Intencia.int_ramec_id == Sloveso.int_ramec_id)).
+                    where(Intencia.sem_pad_id == SemantickyPad.id).label('pocet_slovies'),
+            ],
+            from_obj=SemantickyPad.__table__
+        ),
+        metadata=db.Model.metadata
+    )
+
+
+class IntencnyRamecView(db.Model):
+    __table__ = create_view(
+        name='int_ramec_v',
+        selectable=sa.select(
+            [
+                IntencnyRamec.id,
+                IntencnyRamec.kod,
+                IntencnyRamec.nazov,
+                sa.select([sa.func.count()], from_obj=Intencia).where(Intencia.int_ramec_id == IntencnyRamec.id)
+                    .label('pocet_intencii'),
+                sa.select([sa.func.count()], from_obj=Sloveso).where(Sloveso.int_ramec_id == IntencnyRamec.id)
+                    .label('pocet_slovies'),
+            ],
+            from_obj=(
+                IntencnyRamec.__table__
+            )
+        ),
+        metadata=db.Model.metadata
+    )
 
 

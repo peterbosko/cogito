@@ -3,6 +3,8 @@ from sqlalchemy import or_
 from pyquery import PyQuery as pq
 from app.c_helper import *
 from app.kt_models import *
+from app.db_models.user import *
+from app.db_models.slovny_druh import *
 import re
 import json
 import jsonpickle

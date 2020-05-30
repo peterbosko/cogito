@@ -529,6 +529,9 @@ def zmenit_sd_post():
         strjson = str(js).replace("'", '"')
         export = jsonpickle.decode(strjson)
 
+        if export.id is not None and int(export.id) > 0:
+            zmaz_sem_priznaky(export.id)
+
         if export.typ == "POD_M":
             if export.id is not None and int(export.id) > 0:
                 pm = PodstatneMeno.query.get(export.id)
@@ -562,10 +565,8 @@ def zmenit_sd_post():
                 else:
                     pm.pocitatelnost = None
 
-                if export.sem_priznak_id:
-                    pm.sem_priznak_id = export.sem_priznak_id
-                else:
-                    pm.sem_priznak_id = None
+                if export.sem_priznaky:
+                    zaloz_sem_priznaky(pm, export.sem_priznaky)
 
             elif export.tab == "slova":
                 pm.koren = export.koren
@@ -605,6 +606,9 @@ def zmenit_sd_post():
 
                 if export.koncept_id:
                     prm.koncept_id = export.koncept_id
+
+                if export.sem_priznaky:
+                    zaloz_sem_priznaky(prm, export.sem_priznaky)
 
             elif export.tab == "slova":
                 prm.koren = export.koren
@@ -675,6 +679,9 @@ def zmenit_sd_post():
                 if export.koncept_id:
                     s.koncept_id = export.koncept_id
 
+                if export.sem_priznaky:
+                    zaloz_sem_priznaky(s, export.sem_priznaky)
+
             elif export.tab == "slova":
                 s.vid = export.vid
                 s.koren = export.koren
@@ -733,6 +740,9 @@ def zmenit_sd_post():
 
                 if export.koncept_id:
                     cis.koncept_id = export.koncept_id
+
+                if export.sem_priznaky:
+                    zaloz_sem_priznaky(cis, export.sem_priznaky)
 
             elif export.tab == "slova":
                 cis.prefix = export.prefix
@@ -952,16 +962,14 @@ def zmenit_sd():
 @sd_blueprint.route("/sd_zakladne_info/", methods=["GET"])
 def sd_zakladne_info():
     loguj(request)
-    kts = Kontext.query.order_by(Kontext.nazov)
 
-    sem_priz_pod_m = Semantika.query.filter(Semantika.typ == "POD_M").all()
+    sd_id = request.args.get("sd_id", "")
 
-    sem_priz_prid_m = Semantika.query.filter(Semantika.typ == "PRID_M").all()
+    slovdruh = request.args.get("slovnyDruh", "")
 
-    sem_priz_cislovka = Semantika.query.filter(Semantika.typ == "CISLOVKA").all()
+    sem_priz = Semantika.query.filter(Semantika.typ == slovdruh).all()
 
-    return render_template("m_sd/sd_zakladne_info.jinja.html", sem_priz_pod_m=sem_priz_pod_m,
-                           sem_priz_prid_m=sem_priz_prid_m, sem_priz_cislovka=sem_priz_cislovka)
+    return render_template("m_sd/sd_zakladne_info.jinja.html", sem_priz=sem_priz)
 
 
 @sd_blueprint.route("/sd_slova_zmen/", methods=["GET"])

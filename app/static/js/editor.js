@@ -595,7 +595,7 @@ function load_slovo(that, active = false, ckeditorName){
 					slovo_data += ", ROD: "+obj.data.rod;
 				}
 				if(obj.data.podrod) {
-					slovo_data += ", PODROD: "+obj.data.podrod;
+					slovo_data += " / "+obj.data.podrod;
 				}
 				if(obj.data.sposob) {
 					slovo_data += ", SPÔSOB: "+obj.data.sposob;
@@ -643,7 +643,7 @@ function load_slovo(that, active = false, ckeditorName){
 							slovo_data += ", ROD: "+obj.vsetky_slova[i].rod;
 						}
 						if(obj.vsetky_slova[i].podrod) {
-							slovo_data += ", PODROD: "+obj.vsetky_slova[i].podrod;
+							slovo_data += " / "+obj.vsetky_slova[i].podrod;
 						}
 						if(obj.vsetky_slova[i].sposob) {
 							slovo_data += ", SPÔSOB: "+obj.vsetky_slova[i].sposob;

@@ -15,7 +15,6 @@ class SDExport(object):
     sloveso_id = None
     sloveso_tvar = None
     pocitatelnost = None
-    sem_priznak_id = None
     vzor = None
     koren = None
     prefix = None

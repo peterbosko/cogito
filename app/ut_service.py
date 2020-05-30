@@ -1,4 +1,5 @@
 from app.c_service import *
+from app.db_models.unit_test import *
 
 
 def je_tag(slovo):
