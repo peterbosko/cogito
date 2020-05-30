@@ -123,10 +123,9 @@ def zoznam_prislovky():
 def zoznam_slovesa():
     loguj(request)
 
-    ir = IntencnyRamec.query.order_by(IntencnyRamec.kod)
     slovesne_vzory = daj_slovesne_vzory()
 
-    return render_template("m_sd/zoznam_slovesa.jinja.html", intencne_ramce=ir, slovesne_vzory=slovesne_vzory,
+    return render_template("m_sd/zoznam_slovesa.jinja.html", slovesne_vzory=slovesne_vzory,
                            pocty_sd=daj_pocty_sd_a_sl())
 
 
@@ -358,7 +357,6 @@ def daj_slovesa():
 
     tvar = request.args.get("hladaj_tvar", "")
     popis = request.args.get("hladaj_popis", "")
-    ir = request.args.get("hladaj_ir", "")
     koren = request.args.get("koren", "")
     pzkmen = request.args.get("pzkmen", "")
     vzor = request.args.get("vzor", "")
@@ -375,12 +373,6 @@ def daj_slovesa():
 
     if sd_id:
         filtered = filtered.filter(SlovesoView.id == sd_id)
-
-    if ir:
-        if ir == "-1":
-            filtered = filtered.filter(SlovesoView.int_ramec_id.isnot(None))
-        else:
-            filtered = filtered.filter(SlovesoView.int_ramec_id == int(ir))
 
     if koren:
         filtered = filtered.filter(SlovesoView.koren.like(koren))
@@ -403,8 +395,6 @@ def daj_slovesa():
             "zvratnost",
             "popis",
             "je_negacia",
-            "int_ramec_kod",
-            "int_ramec_nazov",
             "vzor",
             ("zmenene", "zmenene", lambda i: formatuj_datum(i.zmenene)),
     ])
@@ -529,7 +519,7 @@ def zmenit_sd_post():
         strjson = str(js).replace("'", '"')
         export = jsonpickle.decode(strjson)
 
-        if export.id is not None and int(export.id) > 0:
+        if export.id is not None and int(export.id) > 0 and export.tab == "zakladne":
             zmaz_sem_priznaky(export.id)
 
         if export.typ == "POD_M":

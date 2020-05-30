@@ -27,17 +27,6 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <select id="ddlFIntencnyRamec" class="SearchOnChange SearchOnEnter form-control">
-                                            <option value="" selected>Všetky intenčné rámce</option>
-                                            <option value="-1">S nastaveným intenčným rámcom</option>
-                                            {% for k in intencne_ramce %}
-                                            <option value="{{ k.id }}">{{ k.kod + ' - ' + k.nazov }}</option>
-                                            {% endfor %}
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-12">
                                         <input id="txtFKoren" class="form-control SearchOnChange SearchOnEnter" type="text" placeholder="Koreň slovesa">
                                     </div>
                                 </div>
@@ -78,8 +67,6 @@
                             <th>Zvratnosť</th>
                             <th>Popis</th>
                             <th>Je negácia</th>
-                            <th>Kód IR</th>
-                            <th>Názov intenčného rámca</th>
                             <th>Časovací vzor</th>
                             <th>Zmena</th>
                         </tr>
@@ -161,7 +148,6 @@
             data : function ( d ) {
                 d.hladaj_tvar = $('#txtFTvar').val();
                 d.hladaj_popis = $('#txtFPopis').val();
-                d.hladaj_ir = $('#ddlFIntencnyRamec').val();
                 d.koren = $('#txtFKoren').val();
                 d.pzkmen = $('#txtFpzkmen').val();
                 d.vzor = $('#ddlFVzor').val();
@@ -179,8 +165,6 @@
             { data: "zvratnost" },
             { data: "popis" },
             { data: "je_negacia" },
-            { data: "int_ramec_kod" },
-            { data: "int_ramec_nazov" },
             { data: "vzor" },
             { data: "zmenene" },
         ]

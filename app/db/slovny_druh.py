@@ -61,6 +61,7 @@ class SlovnyDruh(db.Model):
         export.koren = self.koren
         export.vzor_stup = self.vzor_stup
         export.koncept_id = self.koncept_id
+        export.paradigma = self.paradigma
         if export.koncept_id:
             export.koncept_nazov = Koncept.query.get(export.koncept_id).nazov
         else:

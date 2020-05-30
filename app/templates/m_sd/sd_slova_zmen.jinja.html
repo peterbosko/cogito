@@ -147,7 +147,7 @@
                         <select id="ddlParadigma_CISLOVKA" class="form-control">
                             <option value="" selected>Nenastavená</option>
                             <option value="S">S - substantívna - nula, milión, státisíce, raz</option>
-                            <option value="A">A - ajektívna - jediný, prvý, dvojitý, mnohonásobný, obojaký</option>
+                            <option value="A">A - adjektívna - jediný, prvý, dvojitý, mnohonásobný, obojaký</option>
                             <option value="N">N - číslovková - dva, dvaja, oba, obaja, obidva, tri, štyri</option>
                             <option value="F">F - zmiešaná - jeden, jedna, jedno</option>
                             <option value="U">U - Neúplná - sto, tisíc, päť, šesť, dvanásť, šesťdesiat, dvoje, tisícoro, byľu, veľa, plno, málo</option>
@@ -449,7 +449,7 @@
                             <td class="c_sposob">
                                 <div class="row">
                                 <div class="col-sm-12">
-\                                <select id="sposob_0" class="form-control slovo_ddl changed_sl">
+                                <select id="sposob_0" class="form-control slovo_ddl changed_sl">
                                     <option value="" selected>Žiad.</option>
                                     <option value="O">O</option>
                                     <option value="R">R</option>
@@ -1254,6 +1254,7 @@ function NacitajSDSlova(id){
                 else if (r.data.typ=="PREDLOZKA"){
                 }
                 else if (r.data.typ=="CISLOVKA"){
+                     $('#ddlParadigma_CISLOVKA').val(r.data.paradigma);
                 }
 
                 setupSlova(r.data.slova);
@@ -1347,6 +1348,7 @@ function ZmenSlovaSD(closeScreen){
             data.pady = $('#ddlPREDLOZKA_Pady').val().join(';');
         }
         else if (typ=="CISLOVKA"){
+            data.paradigma = $('#ddlParadigma_CISLOVKA').val();
             data.hodnota=$('#txtFormCISLOVKA_HODNOTA').val();
         }
 

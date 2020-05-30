@@ -53,6 +53,7 @@ class SlovnyDruhExport(object):
     koncept_id = None
     koncept_nazov = None
     sem_priznaky = None
+    paradigma = None
 
 
 class SlovnyDruhHierExport(object):
