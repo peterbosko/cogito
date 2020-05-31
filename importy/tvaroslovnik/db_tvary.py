@@ -1,5 +1,5 @@
 from app.app import flask_app
-from app.db_models import *
+from app.db.slovny_druh import *
 
 import pymysql.cursors
 from pyquery import PyQuery as pq

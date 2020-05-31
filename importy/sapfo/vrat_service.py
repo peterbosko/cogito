@@ -1,5 +1,5 @@
 from importy.sapfo.service import *
-from app.db_models import *
+from app.db.slovny_druh import *
 
 
 def vrat_pod_m(slovo, sufix):

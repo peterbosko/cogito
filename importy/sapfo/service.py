@@ -1,4 +1,4 @@
-from app.db_models import *
+from app.db.slovny_druh import *
 from app.app import flask_app
 from importy.sapfo.updatuj_service import *
 from importy.sapfo.vrat_service import *
