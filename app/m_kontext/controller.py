@@ -20,17 +20,6 @@ from app.db.unit_test import *
 kontext_blueprint = Blueprint("kontext", __name__)
 
 
-@kontext_blueprint.route("/ckeditor/", methods=["GET"])
-def ckeditor():
-    loguj(request)
-
-    if 'logged' not in session.keys():
-        return redirect(url_for("main.potrebne_prihlasenie")+"?redirect="+urllib.parse.quote_plus(
-            url_for("kontext.ckeditor")))
-
-    return render_template("m_kontext/ckeditor.jinja.html", pocty_sd=daj_pocty_sd_a_sl())
-
-
 @kontext_blueprint.route("/pridat_kontext/", methods=["GET"])
 def pridat_kontext():
     loguj(request)
@@ -470,24 +459,38 @@ def vrat_kontext():
     return jsonpickle.encode(response)
 
 
-@kontext_blueprint.route("/rozbor_viet_kontextu/", methods=["GET"])
+@kontext_blueprint.route("/rozbor_udpipe/", methods=["GET"])
 def rozbor_viet_kontextu():
     loguj(request)
 
     response = CommonResponse()
 
-    return render_template("m_kontext/rozbor_viet_kontextu.jinja.html")
+    return render_template("m_kontext/rozbor_udpipe.jinja.html")
 
 
-@kontext_blueprint.route("/vyrob_stromy_viet/", methods=["POST"])
-def vyrob_stromy_viet():
+@kontext_blueprint.route("/analyza_struktury/", methods=["GET"])
+def analyza_struktury():
+    loguj(request)
+
+    response = CommonResponse()
+
+    return render_template("m_kontext/analyza_struktury.jinja.html")
+
+
+@kontext_blueprint.route("/vyrob_udpipe_stromy_viet/", methods=["POST"])
+def vyrob_udpipe_stromy_viet():
     loguj(request)
 
     response = CommonResponse()
 
     data = request.json["kontext"]
 
-    kontext_vety = vyrob_kontext_vety(data)
+    chyba, kontext_vety = daj_vety_z_kontextu(data)
+
+    if chyba:
+        response.status = ResponseStatus.ERROR
+        response.error_text = chyba
+        return jsonpickle.encode(response)
 
     model = current_app.udpipe_model
     pipeline = Pipeline(model, "horizontal", Pipeline.DEFAULT, Pipeline.DEFAULT, "conllu")
@@ -507,8 +510,37 @@ def vyrob_stromy_viet():
     return jsonpickle.encode(response)
 
 
-@kontext_blueprint.route("/vyrob_popis_struktury_vety/", methods=["POST"])
-def vyrob_popis_struktury_vety():
+@kontext_blueprint.route("/vyrob_analyzu_struktury/", methods=["POST"])
+def vyrob_analyzu_struktury():
+    loguj(request)
+
+    response = CommonResponse()
+
+    data = request.json["kontext"]
+
+    chyba, kontext_vety = daj_vety_z_kontextu(data)
+
+    if chyba:
+        response.status = ResponseStatus.ERROR
+        response.error_text = chyba
+        return jsonpickle.encode(response)
+
+    kontext_vety = [kontext_vety[0]]
+
+    for i in range(len(kontext_vety)):
+        sablona = vyrob_sablonu_vety(kontext_vety[i].slova_vety)
+
+    return jsonpickle.encode(response)
+
+
+"""
+Sluzi na zobrazenie vystupu z tvorby struktury vety z UDPipe. Vracia co sa ma zobrazit na dvojklik na
+list konkretnej vety v zobrazeni stromoch viet kontextu. 
+"""
+
+
+@kontext_blueprint.route("/vyrob_udpipe_popis_struktury_vety/", methods=["POST"])
+def vyrob_udpipe_popis_struktury_vety():
     loguj(request)
 
     response = CommonResponse()
@@ -517,7 +549,12 @@ def vyrob_popis_struktury_vety():
 
     veta = int(request.json["veta"])
 
-    kontext_vety = vyrob_kontext_vety(data)
+    chyba, kontext_vety = daj_vety_z_kontextu(data)
+
+    if chyba:
+        response.status = ResponseStatus.ERROR
+        response.error_text = chyba
+        return jsonpickle.encode(response)
 
     model = current_app.udpipe_model
     pipeline = Pipeline(model, "horizontal", Pipeline.DEFAULT, Pipeline.DEFAULT, "conllu")
@@ -531,4 +568,5 @@ def vyrob_popis_struktury_vety():
     response.data = processed
 
     return jsonpickle.encode(response)
+
 

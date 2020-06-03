@@ -15,8 +15,6 @@ class SlovnyDruh(db.Model):
     vzor = db.Column(db.String(500, collation='utf8mb4_bin'), nullable=True, index=True)
     prefix = db.Column(db.String(20, collation='utf8mb4_bin'), nullable=True)
     sufix = db.Column(db.String(20, collation='utf8mb4_bin'), nullable=True)
-    # sem_priznak_id = db.Column(db.Integer, db.ForeignKey("sem.id"), nullable=True, index=True)
-    # sem_priznak = relationship("Semantika", foreign_keys=[sem_priznak_id])
     sem_priznaky = relationship("SlovnyDruhSemantika", back_populates="SlovnyDruh")
     paradigma = db.Column(db.String(1), nullable=True)
     vzor_stup = db.Column(db.String(500), nullable=True)
@@ -26,7 +24,6 @@ class SlovnyDruh(db.Model):
     zmenene = db.Column(db.DateTime(), nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey("u.id"), nullable=True)
     koncept_id = db.Column(db.Integer, db.ForeignKey("kc.id"), nullable=True)
-    # sd_hier = relationship("HierarchiaSD", primaryjoin="(SlovnyDruh.id==HierarchiaSD.sd_id)")
 
     __mapper_args__ = {
         'polymorphic_identity': 'sd',

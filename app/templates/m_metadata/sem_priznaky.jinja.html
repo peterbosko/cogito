@@ -12,6 +12,7 @@
                 <a class="nav-link" id="nav-PRID_M-tab" data-toggle="pill" href="#nav-PRID_M" role="tab" aria-controls="v-pills-profile" aria-selected="false">Prídavné mená</a>
                 <a class="nav-link" id="nav-CISLOVKA-tab" data-toggle="pill" href="#nav-CISLOVKA" role="tab" aria-controls="v-pills-messages" aria-selected="false">Číslovky</a>
                 <a class="nav-link" id="nav-SLOVESO-tab" data-toggle="pill" href="#nav-SLOVESO" role="tab" aria-controls="v-pills-messages" aria-selected="false">Slovesá</a>
+                <a class="nav-link" id="nav-OSTATNE-tab" data-toggle="pill" href="#nav-OSTATNE" role="tab" aria-controls="v-pills-messages" aria-selected="false">Ostatné</a>
             </div>
         </div>
         <div class="col-10">
@@ -23,6 +24,8 @@
             <div class="tab-pane fade" id="nav-CISLOVKA" role="tabpanel" aria-labelledby="nav-CISLOVKA-tab" data-target="{{url_for('metadata.sem_priznaky_typ')}}?typ=CISLOVKA">
             </div>
             <div class="tab-pane fade" id="nav-SLOVESO" role="tabpanel" aria-labelledby="nav-SLOVESO-tab" data-target="{{url_for('metadata.sem_priznaky_typ')}}?typ=SLOVESO">
+            </div>
+            <div class="tab-pane fade" id="nav-OSTATNE" role="tabpanel" aria-labelledby="nav-OSTATNE-tab" data-target="{{url_for('metadata.sem_priznaky_typ')}}?typ=OSTATNE">
             </div>
         </div>
     </div>

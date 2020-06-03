@@ -29,7 +29,8 @@ function initCKEditorInstance(ckeditorName, h, type, settingsToolbar){
 	if (type==="kontext"){
 		tbar = [
 			{ name: 'document', items: [ 'Source' , '-' ,'Save'] },
-			{ name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'cogito-word-check', 'cogito-check-remove', '-' ,'cogito-unit-test' , 'cogito-ut-list' , '-' , 'cogito-anotacia', '-' , 'cogito-rozbor'] },
+			{ name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'cogito-word-check', 'cogito-check-remove',
+			    '-' ,'cogito-unit-test' , 'cogito-ut-list' , '-' , 'cogito-anotacia', '-' , 'cogito-rozbor', 'cogito-as'] },
 			'/',
 			{ name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
 		]
@@ -39,7 +40,7 @@ function initCKEditorInstance(ckeditorName, h, type, settingsToolbar){
 			{ name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'cogito-word-check', 'cogito-check-remove'] },
 		]
 	}
-	var info = '<p style="color:red">Pre určenie slova kliknite na jeden záznam zo zoznamu:</p>';
+	// TDDO : remove this line? : var info = '<p style="color:red">Pre určenie slova kliknite na jeden záznam zo zoznamu:</p>';
 	CKEDITOR.replace(ckeditorName, {
 	  height: h,
 	  on: {
@@ -771,7 +772,7 @@ function ZmenKontext(redirect, ckeditorName){
         }
 }
 
-function spustiPoNacitaniOknaRozboru(editor){
+function spustiPoNacitaniOknaUDPipe(editor){
     var ckeditorName = editor.name;
 
 	$('#strukturaVety').data('editor-id', ckeditorName);
@@ -780,7 +781,7 @@ function spustiPoNacitaniOknaRozboru(editor){
 
 	data.kontext = CKEDITOR.instances[ckeditorName].getData();
 
-	AjaxMethods.getDataFromPostRequest('/vyrob_stromy_viet/', "", data, function(r){
+	AjaxMethods.getDataFromPostRequest('/vyrob_udpipe_stromy_viet/', "", data, function(r){
 					if (r.status==responseOK){//OK vetva
 						$('#jsTree').jstree({ 'core' : {
 							'data' : r.data
@@ -794,7 +795,7 @@ function spustiPoNacitaniOknaRozboru(editor){
 									d = {};
 									d.kontext = CKEDITOR.instances[ckeditorName].getData();
 									d.veta = poradieVety;
-									AjaxMethods.getDataFromPostRequest('/vyrob_popis_struktury_vety/', "", d, function(r){
+									AjaxMethods.getDataFromPostRequest('/vyrob_udpipe_popis_struktury_vety/', "", d, function(r){
 										if (r.status==responseOK){//OK vetva
 											$('#strukturaVety').removeClass('nodisplay');
 											$('#taStrukturaVety').val(r.data);
@@ -805,6 +806,28 @@ function spustiPoNacitaniOknaRozboru(editor){
 											   icon   :  "error"});
 										}
 									});
+							}
+						});
+					} else{
+						swal({ buttons: {},
+						   title  :  "Chyba",
+						   text   :  r.error_text,
+						   icon   :  "error"});
+					}
+				});
+    }
+
+function spustiPoNacitaniOknaAnalyzyStruktury(editor){
+    var ckeditorName = editor.name;
+
+	var data = {};
+
+	data.kontext = CKEDITOR.instances[ckeditorName].getData();
+
+	AjaxMethods.getDataFromPostRequest('/vyrob_analyzu_struktury/', "", data, function(r){
+					if (r.status==responseOK){//OK vetva
+						$('#jsTree').jstree({ 'core' : {
+							'data' : r.data
 							}
 						});
 					} else{

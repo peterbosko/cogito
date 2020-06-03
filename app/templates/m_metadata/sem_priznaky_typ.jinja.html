@@ -88,6 +88,8 @@
             $('#h1Span').html("číslovky");
         else if ('{{request.args.get("typ")}}'=="SLOVESO")
             $('#h1Span').html("slovesá");
+        else if ('{{request.args.get("typ")}}'=="OSTATNE")
+            $('#h1Span').html("ostatné");
     });
 
     function btnHladaj(){

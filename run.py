@@ -1,5 +1,12 @@
 from app.app import flask_app
+from app.db.koncept import *
+from app.db.kontext import *
+from app.db.kt2m import *
+from app.db.metadata import *
+from app.db.slovny_druh import *
+from app.db.unit_test import *
 from app.db.user import *
+
 from app.sd_service import *
 import sys
 from ufal.udpipe import Model

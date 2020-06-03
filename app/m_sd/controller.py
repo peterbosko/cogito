@@ -411,7 +411,7 @@ def daj_predlozky():
     filtered = db.session.query(Predlozka)
 
     if tvar:
-        filtered = filtered.filter(Predlozka.zak_tvar == tvar)
+        filtered = filtered.filter(Predlozka.zak_tvar.like(tvar))
 
     if pad:
         filtered = filtered.filter(Predlozka.pady.like('%'+pad+'%'))
@@ -434,7 +434,7 @@ def daj_spojky():
     filtered = db.session.query(Spojka)
 
     if tvar:
-        filtered = filtered.filter(Spojka.zak_tvar == tvar)
+        filtered = filtered.filter(Spojka.zak_tvar.like(tvar))
 
     table = DataTable(request.args, Spojka, filtered, [
             "id",
@@ -453,7 +453,7 @@ def daj_castice():
     filtered = db.session.query(Castica)
 
     if tvar:
-        filtered = filtered.filter(Castica.zak_tvar == tvar)
+        filtered = filtered.filter(Castica.zak_tvar.like(tvar))
 
     table = DataTable(request.args, Castica, filtered, [
             "id",
@@ -472,7 +472,7 @@ def daj_citoslovcia():
     filtered = db.session.query(Citoslovce)
 
     if tvar:
-        filtered = filtered.filter(Citoslovce.zak_tvar == tvar)
+        filtered = filtered.filter(Citoslovce.zak_tvar.like(tvar))
 
     table = DataTable(request.args, Citoslovce, filtered, [
             "id",
@@ -491,7 +491,7 @@ def daj_ostatne():
     filtered = db.session.query(Ostatne)
 
     if tvar:
-        filtered = filtered.filter(Ostatne.zak_tvar == tvar)
+        filtered = filtered.filter(Ostatne.zak_tvar.like(tvar))
 
     table = DataTable(request.args, Ostatne, filtered, [
             "id",
@@ -812,6 +812,9 @@ def zmenit_sd_post():
 
                 if export.koncept_id:
                     ostatne.koncept_id = export.koncept_id
+
+                if export.sem_priznaky:
+                    zaloz_sem_priznaky(ostatne, export.sem_priznaky)
 
             elif export.tab == "slova":
                 ostatne.koren = export.koren

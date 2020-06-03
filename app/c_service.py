@@ -80,6 +80,7 @@ def vrat_slovo(slovo, ids=None):
     if slovo and je_cislo(slovo):
         vysledok_slovo.je_cislo = True
         vysledok_slovo.tvar = slovo
+        vysledok_slovo.id_slova = -1
         return vysledok_slovo
 
     je_upper = slovo[0] != slovo[0].lower()
@@ -124,16 +125,29 @@ def vrat_slovo(slovo, ids=None):
     return vysledok_slovo
 
 
-def vrat_slovo2(bolo_vybrate, je_prve_upper, slovo, zoznam_nacitanych_slov, ids=None):
+def vrat_slovo2(bolo_vybrate, je_prve_upper, nasleduje_bodka, slovo, zoznam_nacitanych_slov, ids=None):
 
     vysledok_slovo = SlovoVKontexte()
 
-    if slovo and je_cislo(slovo):
+    if slovo != "" and je_cislo(slovo):
         vysledok_slovo.je_cislo = True
+        vysledok_slovo.bolo_vybrate = True
+        vysledok_slovo.zak_tvar = slovo
+        vysledok_slovo.slovny_druh = "CISLOVKA"
         vysledok_slovo.tvar = slovo
+        vysledok_slovo.id_slova = -1
+        vysledok_slovo.konci_bodkou = False
         return vysledok_slovo
 
     lower_sl = slovo.lower()
+
+    if nasleduje_bodka:
+        slovo_s_bodkou = f"{lower_sl}."
+        for s in zoznam_nacitanych_slov:
+            if s.tvar_lower == slovo_s_bodkou:
+                vysledok_slovo.konci_bodkou = True
+                lower_sl = slovo_s_bodkou
+                vysledok_slovo.tvar = slovo+"."
 
     sl = []
     sid = None
@@ -141,9 +155,9 @@ def vrat_slovo2(bolo_vybrate, je_prve_upper, slovo, zoznam_nacitanych_slov, ids=
 
     for s in zoznam_nacitanych_slov:
         if s.tvar_lower == lower_sl:
-            sl.append(s)
+            sl.append(s.exportuj(je_prve_upper))
             if s.id == ids:
-                vybrate_slovo = s
+                vybrate_slovo = s.exportuj(je_prve_upper)
 
     if len(sl) == 0:
         vysledok_slovo.id_slova = None
@@ -151,6 +165,7 @@ def vrat_slovo2(bolo_vybrate, je_prve_upper, slovo, zoznam_nacitanych_slov, ids=
         vysledok_slovo.je_viacej_v_slovniku = False
         vysledok_slovo.slovo = None
         vysledok_slovo.tvar = slovo
+        vysledok_slovo.tvar_lower = lower_sl
         vysledok_slovo.popis = None
         vysledok_slovo.cely_popis_slova = None
         vysledok_slovo.anotacia = "???????"
@@ -164,6 +179,7 @@ def vrat_slovo2(bolo_vybrate, je_prve_upper, slovo, zoznam_nacitanych_slov, ids=
             anotacia = vybrate_slovo.anotacia
             slovny_druh = vybrate_slovo.slovny_druh
             koncept = vybrate_slovo.koncept
+            tvar_lower = lower_sl
         else:
             sid = sl[0].id
             tvar = sl[0].tvar
@@ -171,12 +187,14 @@ def vrat_slovo2(bolo_vybrate, je_prve_upper, slovo, zoznam_nacitanych_slov, ids=
             anotacia = sl[0].anotacia
             slovny_druh = sl[0].slovny_druh
             koncept = sl[0].koncept
+            tvar_lower = lower_sl
 
         vysledok_slovo.id_slova = sid
         vysledok_slovo.je_v_slovniku = True
         vysledok_slovo.je_viacej_v_slovniku = False
         vysledok_slovo.slovo = tvar
-        vysledok_slovo.tvar = slovo
+        vysledok_slovo.tvar = tvar
+        vysledok_slovo.tvar_lower = tvar_lower
         vysledok_slovo.zak_tvar = zak_tvar
         vysledok_slovo.popis = ""
         vysledok_slovo.cely_popis_slova = ""
@@ -184,6 +202,7 @@ def vrat_slovo2(bolo_vybrate, je_prve_upper, slovo, zoznam_nacitanych_slov, ids=
         vysledok_slovo.bolo_vybrate = bolo_vybrate
         vysledok_slovo.slovny_druh = slovny_druh
         vysledok_slovo.koncept = koncept
+
     else:
         if vybrate_slovo:
             sid = vybrate_slovo.id
@@ -192,6 +211,7 @@ def vrat_slovo2(bolo_vybrate, je_prve_upper, slovo, zoznam_nacitanych_slov, ids=
             anotacia = vybrate_slovo.anotacia
             slovny_druh = vybrate_slovo.slovny_druh
             koncept = vybrate_slovo.koncept
+            tvar_lower = vybrate_slovo.tvar_lower
         else:
             sid = sl[0].id
             tvar = sl[0].tvar
@@ -199,12 +219,14 @@ def vrat_slovo2(bolo_vybrate, je_prve_upper, slovo, zoznam_nacitanych_slov, ids=
             anotacia = sl[0].anotacia
             slovny_druh = sl[0].slovny_druh
             koncept = sl[0].koncept
+            tvar_lower = sl[0].tvar_lower
 
         vysledok_slovo.id_slova = sid
         vysledok_slovo.je_v_slovniku = True
         vysledok_slovo.je_viacej_v_slovniku = True
         vysledok_slovo.slovo = tvar
         vysledok_slovo.tvar = slovo
+        vysledok_slovo.tvar_lower = tvar_lower
         vysledok_slovo.zak_tvar = zak_tvar
         vysledok_slovo.popis = ""
         vysledok_slovo.cely_popis_slova = ""

@@ -12,7 +12,6 @@ class SlovoVKontexte(object):
     tvar = None
     tvar_lower = None
     zak_tvar = None
-    neprekl_vyraz = None
     je_cislo = False
     bolo_vybrate = False
     cely_popis_slova = None
@@ -20,6 +19,8 @@ class SlovoVKontexte(object):
     je_prve_upper = None
     slovny_druh = None
     koncept = None
+    nasleduje_bodka = None
+    konci_bodkou = None
 
     def __str__(self):
         return "***************************\n" + \

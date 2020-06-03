@@ -143,7 +143,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="row POD_M PRID_M CISLOVKA SLOVESO marginbottomDetailSD nodisplay">
+                <div class="row POD_M PRID_M CISLOVKA SLOVESO OSTATNE marginbottomDetailSD nodisplay">
                     <label class="col-sm-2" for="prepend">
                          Sém. príznaky:
                     </label>
@@ -331,6 +331,9 @@ function setupD(pridavanyDruh){
     }
     else if (pridavanyDruh == "PREDLOZKA"){
         $(".PREDLOZKA").removeClass('nodisplay');
+    }
+    else if (pridavanyDruh == "OSTATNE"){
+        $(".OSTATNE").removeClass('nodisplay');
     }
 }
 

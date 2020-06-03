@@ -88,7 +88,6 @@ def vrat_sem_priznak(sem_id):
 
 
 def vyrob_slovo_pole(slovo, s_id, bolo_vybrate):
-    vysledok = []
 
     slovoVK = SlovoVKontexte()
 
@@ -96,15 +95,23 @@ def vyrob_slovo_pole(slovo, s_id, bolo_vybrate):
 
     slovoVK.tvar_lower = slovo.lower()
 
-    slovoVK.id_slova = s_id
+    if je_cislo(slovo):
+        slovoVK.je_cislo = True
+        slovoVK.id_slova = -1
+        slovoVK.bolo_vybrate = True
+        slovoVK.zak_tvar = slovo
+    else:
+        slovoVK.id_slova = s_id
+        slovoVK.bolo_vybrate = bolo_vybrate
 
-    slovoVK.je_prve_upper = slovo[0] == slovo[0].upper() and slovo[0].lower() != slovo[0].upper()
+    slovoVK.je_prve_upper = slovo[0] == slovo[0].upper()
 
-    slovoVK.bolo_vybrate = bolo_vybrate
+    return slovoVK
 
-    vysledok.append(slovoVK)
 
-    return vysledok
+def je_platne_cislo_sid(hodnota):
+    hodnota = hodnota.replace("-", "")
+    return hodnota.isdigit()
 
 
 def parsuj_zoznam_slov_z_html(html, parent_slovo_id=None):
@@ -117,7 +124,7 @@ def parsuj_zoznam_slov_z_html(html, parent_slovo_id=None):
 
             html_spanu = content.outerHtml()
 
-            if content.hasClass("s") and content.attr('sid').isdigit():
+            if content.hasClass("s") and je_platne_cislo_sid(content.attr('sid')):
                 s_id = int(content.attr('sid'))
 
             vysledok.extend(parsuj_zoznam_slov_z_html(html_spanu, s_id))
@@ -139,40 +146,52 @@ def parsuj_zoznam_slov_z_html(html, parent_slovo_id=None):
                             parent_slovo_id = None
                         else:
                             if content.is_("span") and content.attr('sid'):
-                                if content.attr('sid').isdigit() and content.hasClass("s"):
+                                if je_platne_cislo_sid(content.attr('sid')) and content.hasClass("s"):
                                     bolo_vybrate = True
 
-                                if content.attr('sid').isdigit():
+                                if je_platne_cislo_sid(content.attr('sid')):
                                     parent_slovo_id = int(content.attr('sid'))
 
                         tokeny_slova = word_tokenize(s)
 
                         for token in tokeny_slova:
-                            vysledok.extend(vyrob_slovo_pole(token, parent_slovo_id, bolo_vybrate))
+                            if token == "." and len(vysledok)>0:
+                                vysledok[len(vysledok)-1].nasleduje_bodka = True
+                            vysledok.append(vyrob_slovo_pole(token, parent_slovo_id, bolo_vybrate))
                         i += 1
             else:
                 if content.is_("span") and content.attr('sid'):
-                    if content.attr('sid').isdigit() and content.hasClass("s"):
+                    if je_platne_cislo_sid(content.attr('sid')) and content.hasClass("s"):
                         bolo_vybrate = True
 
-                    if content.attr('sid').isdigit():
+                    if je_platne_cislo_sid(content.attr('sid')):
                         parent_slovo_id = int(content.attr('sid'))
 
                 tokeny_slova = word_tokenize(slova[0])
 
                 for token in tokeny_slova:
-                    vysledok.extend(vyrob_slovo_pole(token, parent_slovo_id, bolo_vybrate))
+                    if token == "." and len(vysledok) > 0:
+                        vysledok[len(vysledok) - 1].nasleduje_bodka = True
+                    vysledok.append(vyrob_slovo_pole(token, parent_slovo_id, bolo_vybrate))
 
     return vysledok
 
 
-def nacitaj_naparsovane_slova(naparsovane):
+def nacitaj_naparsovane_slova(naparsovane, podla_stlpca="tvar"):
     vysledok = []
 
-    slova = [slovo.tvar_lower for slovo in naparsovane]
+    if podla_stlpca == "tvar":
+        slova = [slovo.tvar_lower for slovo in naparsovane]
 
-    for sl in Slovo.query.filter(Slovo.tvar_lower.in_(slova)):
-        vysledok.append(sl.exportuj(False))
+        for slovo in naparsovane:
+            if slovo.nasleduje_bodka:
+                slova.append(slovo.tvar_lower+".")
+
+        vysledok = Slovo.query.filter(Slovo.tvar_lower.in_(slova)).all()
+    else:
+        slova = [slovo.id_slova for slovo in naparsovane]
+
+        vysledok = Slovo.query.filter(Slovo.id.in_(slova)).all()
 
     return vysledok
 
@@ -185,19 +204,26 @@ def vrat_pole_slov_z_textu(html, zoznam_nacitanych_slov):
 
     vyparsovane_slova = parsuj_zoznam_slov_z_html(html)
 
+    posledne_slovo_malo_bodku_na_konci = False
+
     for p_slovo in vyparsovane_slova:
 
-        v_slovo = vrat_slovo2(p_slovo.bolo_vybrate, p_slovo.je_prve_upper, p_slovo.tvar, zoznam_nacitanych_slov,
-                              p_slovo. id_slova)
+        v_slovo = vrat_slovo2(p_slovo.bolo_vybrate, p_slovo.je_prve_upper, p_slovo.nasleduje_bodka,
+                              p_slovo.tvar, zoznam_nacitanych_slov,
+                              p_slovo.id_slova)
 
-        if not v_slovo.je_cislo:
+        if not (v_slovo.tvar_lower == "." and posledne_slovo_malo_bodku_na_konci):
             celkom_slov += 1
 
-        if ((not v_slovo.je_viacej_v_slovniku) and v_slovo.je_v_slovniku and not v_slovo.je_cislo) \
-                or v_slovo.bolo_vybrate:
-            jednoznacnych_slov += 1
+            if not v_slovo.je_viacej_v_slovniku or v_slovo.bolo_vybrate:
+                jednoznacnych_slov += 1
 
-        pole.append(v_slovo)
+            pole.append(v_slovo)
+
+        if v_slovo.konci_bodkou:
+            posledne_slovo_malo_bodku_na_konci = True
+        else:
+            posledne_slovo_malo_bodku_na_konci = False
 
     return celkom_slov, jednoznacnych_slov, pole
 
@@ -211,28 +237,19 @@ def serializuj_pole_slov(pole):
     for slovo in pole:
         cl = "s"
 
-        if not slovo.je_v_slovniku:
+        if not slovo.je_v_slovniku and not slovo.je_cislo:
             cl = "n ns"
 
         if slovo.je_viacej_v_slovniku and not slovo.bolo_vybrate:
             cl = "m ns"
 
-        if slovo.je_cislo:
-            prilep = ""
+        prilep = ""
 
-            if len(pole) > i + 1:
-                prilep = "&nbsp;"
+        if len(pole) > i+1:
+            prilep = "&nbsp;"
 
-            vysledok += str(slovo.tvar) + prilep
-
-        else:
-            prilep = ""
-
-            if len(pole) > i+1:
-                prilep = "&nbsp;"
-
-            vysledok += "<span class='{cl} no-select' sid='{id}'>{slovo}</span>".format(
-                slovo=slovo.tvar, id=slovo.id_slova, cl=cl)+prilep
+        vysledok += "<span class='{cl} no-select' sid='{id}'>{slovo}</span>".format(
+            slovo=slovo.tvar, id=slovo.id_slova, cl=cl)+prilep
 
         i += 1
 
@@ -340,34 +357,64 @@ def vrat_ciste_slova_s_anotaciou(data):
     return vysledok
 
 
-def vyrob_kontext_vety(html):
+def daj_slovo_z_db_podla_id(slova_z_db, id):
+    for slovo in slova_z_db:
+        if slovo.id == id:
+            return slovo
+
+    return None
+
+
+def daj_vety_z_kontextu(html):
     text = ""
+
+    chyba = ""
 
     vyparsovane_slova = parsuj_zoznam_slov_z_html(html)
 
-    for slovo in vyparsovane_slova:
+    vsetky_slova_z_db = nacitaj_naparsovane_slova(vyparsovane_slova, "id")
+
+    bodka_replace = "__BODKA__"
+
+    slov, jednoznacnych, pole = vrat_pole_slov_z_textu(html, vsetky_slova_z_db)
+
+    for slovo in pole:
         if text:
             text += " "
-        text += slovo.tvar
+        slovo_tvar = slovo.tvar
+        if len(slovo_tvar) > 1 and slovo_tvar.endswith("."):
+            slovo_tvar = slovo_tvar[:-1]+bodka_replace
 
-    kontext_vety = []
+        text += slovo_tvar
 
-    i = 0
+    vety_kontextu = []
+
+    i = -1
 
     for sentence in sent_tokenize(text):
         veta_obj = Veta()
         veta_obj.text_celej_vety = ""
+        veta_obj.slova_vety = []
+        zretazene_slova_word_tokenize = ""
+        zretazene_slova_pole = ""
         for word in word_tokenize(sentence):
-            if word != vyparsovane_slova[i].tvar:
-                raise Exception(f"Nesedi tokenizacia!!! {word}->{vyparsovane_slova[i].tvar}")
             if veta_obj.text_celej_vety:
                 veta_obj.text_celej_vety += " "
-            veta_obj.text_celej_vety += word
-            veta_obj.slova_vety.append(vyparsovane_slova[i])
-            i += 1
-        kontext_vety.append(veta_obj)
+            word = word.replace(bodka_replace, ".")
+            zretazene_slova_word_tokenize += word
+            while zretazene_slova_pole in zretazene_slova_word_tokenize \
+                    and len(zretazene_slova_pole) < len(zretazene_slova_word_tokenize):
+                i += 1
+                zretazene_slova_pole += pole[i].tvar
+                veta_obj.slova_vety.append(pole[i])
+                veta_obj.text_celej_vety += pole[i].tvar
 
-    return kontext_vety
+            if zretazene_slova_pole != zretazene_slova_word_tokenize:
+                chyba += f"Nesedi tokenizacia!!! {zretazene_slova_pole}->{zretazene_slova_word_tokenize}\n"
+
+        vety_kontextu.append(veta_obj)
+
+    return chyba, vety_kontextu
 
 
 def vyrob_strom_z_conllu(text_vety, poradie_vety, conllu):
@@ -403,3 +450,23 @@ def vyrob_strom_z_conllu(text_vety, poradie_vety, conllu):
 
     return strom
 
+
+def vyrob_sablonu_vety(slova_z_db):
+    vysledok = ""
+
+    for i in range(len(slova_z_db)):
+
+        export_slova = slova_z_db[i]
+
+        if vysledok:
+            vysledok += " "
+
+        if export_slova.tvar != ".":
+            koncept = ""
+            if export_slova.koncept:
+                koncept += f":{export_slova.koncept}"
+            vysledok += f"<{export_slova.slovny_druh}{koncept}>"
+        else:
+            vysledok += "."
+
+    return vysledok
