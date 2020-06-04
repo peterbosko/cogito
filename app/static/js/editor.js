@@ -533,7 +533,9 @@ function load_slovo(that, active = false, ckeditorName){
 	var sid = $(that).attr('sid');
 	var slovo = $(that).text();
 	var data = {};
-	
+
+    var neupravuje_sa = sid == -1;
+
 	var settings_row = $('body', parent.document).find('#'+ckeditorName+'-settings-rows');
 	var settings_row_buttons = $('body', parent.document).find('#'+ckeditorName+'-settings-rows-buttons');
 	
@@ -705,7 +707,8 @@ function load_slovo(that, active = false, ckeditorName){
 		func = 'load_slovo(null, true, \''+ckeditorName+'\');';
 	}
 
-	settings_row_buttons.find('.setting-accept_word').html('<a href="#" onclick="return '+func+'" class="btn" style="position: absolute; right: 20px;">'+save_name+'</a>');
+    if (!neupravuje_sa)
+    	settings_row_buttons.find('.setting-accept_word').html('<a href="#" onclick="return '+func+'" class="btn" style="position: absolute; right: 20px;">'+save_name+'</a>');
 
     var pridat_novy_vyznam_slova = '<a href="#" onclick="return add_word(this, false, true, \''+ckeditorName+'\');" class="btn" style="position: absolute; left: 20px;"><i class="fa fa-plus"></i> Pridať nový význam slova <i class="fa fa-info-circle"></i></a>';
     var pridat_nove_slovo = '<a href="#" onclick="return add_word(this, true, false, \''+ckeditorName+'\');" class="btn" style="position: absolute; left: 20px;"><i class="fa fa-plus"></i> Pridať nové slovo</a>';
@@ -716,13 +719,18 @@ function load_slovo(that, active = false, ckeditorName){
         pridat_nove_slovo = "";
     }
 
-	if(class_type != 'n') {
-		settings_row_buttons.find('.setting-accept_word').append(editovat_sd);
-		settings_row_buttons.find('.setting-accept_word').append(pridat_novy_vyznam_slova);
-	} else {
-		settings_row_buttons.find('.setting-accept_word').append(pridat_nove_slovo);
-	}
-	
+    if (neupravuje_sa){
+    	settings_row_buttons.find('.setting-accept_word').html('');
+    }
+    else{
+        if(class_type != 'n') {
+            settings_row_buttons.find('.setting-accept_word').append(editovat_sd);
+            settings_row_buttons.find('.setting-accept_word').append(pridat_novy_vyznam_slova);
+        } else {
+            settings_row_buttons.find('.setting-accept_word').append(pridat_nove_slovo);
+        }
+    }
+
 	return false;
 }
 
