@@ -1,5 +1,5 @@
 # cogito
-Projekt zameraný na porozumenie obsahu slovenského textu
+Projekt zameraný na porozumenie obsahu slovenského textu. Obsahuje kompletnú databázu slovenských slov vo všetkých tvaroch. cca 21mil záznamov. Vrátane gramatických kategórií.
 
 Inštalácia:
 1. Nainštalovať python min 3.7
