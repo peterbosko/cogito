@@ -1,0 +1,1 @@
+These files are splitted files of cogito_dump.zip file. Join them in Total Commander and unzip to get whole database backup

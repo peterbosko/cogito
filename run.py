@@ -26,7 +26,7 @@ def read_udpipe_model():
 def start(load_pipe):
     debug = False
     host = "0.0.0.0"
-    port = 80
+    port = 5000
 
     if load_pipe:
         flask_app.udpipe_model = read_udpipe_model()
